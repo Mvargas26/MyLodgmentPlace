@@ -7,7 +7,7 @@ include './templates/Header.php';
 
 <div class="d-flex justify-content-center">
     <div class="custom-divRegistro">
-        <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+        <form id="formRegistro" name="formRegistro" action="../Modules/Registro/registro_Negocios.php" method="post" role="form" class="php-email-form">
 
             <div class="row row-spacing">
                 <div class="col-md-12 form-group">
@@ -59,7 +59,7 @@ include './templates/Header.php';
             </div>
 
             <div class="text-center mt-3">
-                <button class="custom-button" type="submit">Registrarse</button>
+                <button id="btnRegistar" name="btnRegistar" class="custom-button" type="submit">Registrarse</button>
             </div>
         </form>
     </div>
