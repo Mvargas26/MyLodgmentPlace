@@ -30,6 +30,7 @@ $base_path = '../assets/';
 
   <!-- Template Main CSS File -->
   <link href="<?php echo $base_path; ?>css/style.css" rel="stylesheet">
+  <link href="<?php echo $base_path; ?>css/customStyle.css" rel="stylesheet">
   
 </head>
 
@@ -49,7 +50,7 @@ $base_path = '../assets/';
           <li><a class="nav-link scrollto" href="#about">Lugares</a></li>
           <li><a class="nav-link scrollto" href="#services">Publica tu Espacio</a></li>
           <li><a class="nav-link scrollto " href="Login_View.php">Iniciar Sesion</a></li>
-          <li><a class="nav-link scrollto" href="#team">Registrarse</a></li>
+          <li><a class="nav-link scrollto" href="registro_View.php">Registrarse</a></li>
           <li><a class="nav-link scrollto" href="#contact">Contactenos</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>

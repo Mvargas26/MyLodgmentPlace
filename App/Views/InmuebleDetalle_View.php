@@ -1,7 +1,7 @@
 <?php
 include './templates/Header.php';
 ?>
-
+   <!-- ==============================================Fin header ======= -->
   
   <main id="main">
 
@@ -66,8 +66,14 @@ include './templates/Header.php';
 
   </main><!-- End #main -->
 
+
+
+
+
+
+<!-- ==============================================Inicio Footer ======= -->
+   
 <?php
-
-
 include './templates/Footer.php';
 ?>
+<!-- ==============================================Fin Footer ======= -->

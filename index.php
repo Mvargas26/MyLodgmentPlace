@@ -48,7 +48,7 @@
           <li><a class="nav-link scrollto" href="#about">Lugares</a></li>
           <li><a class="nav-link scrollto" href="#services">Publica tu Espacio</a></li>
           <li><a class="nav-link scrollto " href="./App/Views/Login_View.php">Iniciar Sesion</a></li>
-          <li><a class="nav-link scrollto" href="#team">Registrarse</a></li>
+          <li><a class="nav-link scrollto" href="./App/Views/registro_View.php">Registrarse</a></li>
           <li><a class="nav-link scrollto" href="#contact">Contactenos</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>

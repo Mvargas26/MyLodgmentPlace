@@ -1,0 +1,31 @@
+/*##########################################################################################################################*/
+/*###################################  VISTA REGISTRO ###################################################################*/
+/*##########################################################################################################################*/
+
+/*######  DIV DEL FORMULARIO #######*/
+.custom-divRegistro {
+    background-color: #f4f4f4;
+    padding: 20px;
+    border: 1px solid #ccc;
+    margin-top: 30px; /* Espacio en blanco superior personalizado */
+    margin-bottom: 30px; /* Espacio en blanco inferior personalizado */
+    max-width: 800px;
+  }
+/*######  DIV DE cada fila #######*/
+
+  .row-spacing {
+    margin-bottom: 30px; /* Espacio entre filas personalizado */
+  }
+
+  /*######  BOTON REGISTRAR #######*/
+  .custom-button{
+    background-color: orangered; 
+  color: #fff; 
+  border-radius: 10px;
+  border-color: orange;
+  padding: 10px 20px;
+  }
+
+  .custom-button:hover {
+    background-color: rgb(179, 95, 0); /* Cambiar el color al pasar el ratón por encima */
+  }
