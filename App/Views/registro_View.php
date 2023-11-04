@@ -7,7 +7,7 @@ include './templates/Header.php';
 
 <div class="d-flex justify-content-center">
     <div class="custom-divRegistro">
-        <form id="formRegistro" name="formRegistro" action="../Modules/Registro/registro_Negocios.php" method="post" role="form" class="php-email-form">
+        <form id="formRegistro" name="formRegistro"  method="post" role="form" >
 
             <div class="row row-spacing">
                 <div class="col-md-12 form-group">
@@ -33,28 +33,28 @@ include './templates/Header.php';
             <div class="row row-spacing">
                 <div class="col-md-12 form-group">
                     <label for="segundoApellido">Segundo Apellido:</label>
-                    <input type="text" name="segundoApellido" class="form-control" id="segundoApellido" placeholder="Flores:" required>
+                    <input type="text" name="segundoApellido" class="form-control" id="segundoApellido" placeholder="Flores:" >
                 </div>
             </div>
 
             <div class="row row-spacing">
                 <div class="col-md-12 form-group">
                     <label for="email">Correo Electrónico:</label>
-                    <input type="email" name="email" class="form-control" id="email" placeholder="correo@example.com" required>
+                    <input type="email" name="email" class="form-control" id="email" placeholder="correo@example.com" >
                 </div>
             </div>
 
             <div class="row row-spacing">
                 <div class="col-md-12 form-group">
                     <label for="telefono">Teléfono:</label>
-                    <input type="text" name="telefono" class ="form-control" id="telefono" placeholder="8888 8888" required>
+                    <input type="text" name="telefono" class ="form-control" id="telefono" placeholder="8888 8888" >
                 </div>
             </div>
 
             <div class="row row-spacing">
                 <div class="col-md-12 form-group">
                     <label for="fotoPerfil">Subir foto de Perfil:</label>
-                    <input type="file" class="form-control" name="fotoPerfil" id="fotoPerfil" required>
+                    <input type="file" class="form-control" name="fotoPerfil" id="fotoPerfil" >
                 </div>
             </div>
 
