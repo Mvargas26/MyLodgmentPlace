@@ -36,9 +36,9 @@ class Master_Class{
             $query ="INSERT INTO `tb_imagenes`(`nombre`,`imagenGuardar`) VALUES ('$nombre','$img')"; 
 
             if ($this->getConexion()->query($query)) {
-                echo json_encode(array('response' => true));
+               return true;
             } else {
-                echo json_encode(array('response' => false));
+                return false;
             }
         } //fin InsertarImagen
 

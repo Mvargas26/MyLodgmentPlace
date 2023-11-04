@@ -11,21 +11,21 @@ include './templates/Header.php';
 
             <div class="row row-spacing">
                 <div class="col-md-12 form-group">
-                    <label for="identificacion">Identificación:</label>
+                    <label for="identificacion">*Identificación:</label>
                     <input type="number" name="identificacion" class="form-control" id="identificacion" placeholder="301110222" required>
                 </div>
             </div>
 
             <div class="row row-spacing">
                 <div class="col-md-12 form-group">
-                    <label for="nombre">Nombre:</label>
+                    <label for="nombre">*Nombre:</label>
                     <input type="text" name="nombre" class="form-control" id="nombre" placeholder="Juan" required>
                 </div>
             </div>
 
             <div class="row row-spacing">
                 <div class="col-md-12 form-group">
-                    <label for="primerApellido">Primer Apellido:</label>
+                    <label for="primerApellido">*Primer Apellido:</label>
                     <input type="text" name="primerApellido" class="form-control" id="primerApellido" placeholder="Flores" required>
                 </div>
             </div>
@@ -33,7 +33,7 @@ include './templates/Header.php';
             <div class="row row-spacing">
                 <div class="col-md-12 form-group">
                     <label for="segundoApellido">Segundo Apellido:</label>
-                    <input type="text" name="segundoApellido" class="form-control" id="segundoApellido" placeholder="Flores:" >
+                    <input type="text" name="segundoApellido" class="form-control" id="segundoApellido" placeholder="Flores" >
                 </div>
             </div>
 

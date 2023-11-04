@@ -5,23 +5,23 @@ require_once('../Master_Class.php');
 $ObjMaster = new Master_Class();
 
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $data = json_decode(file_get_contents("php://input"), true);
+if (isset($_POST["imagenData"])) {
 
-    // sacamos lo que trae
-    $identificacion = $data["identificacion"];
-    $nombre = $data["nombre"];
-    $primerApellido = $data["primerApellido"];
-    $segundoApellido = $data["segundoApellido"];
-    $email = $data["email"];
-    $telefono = $data["telefono"];
-    $fotoPerfil =$data['fotoPerfil'];//$data["fotoPerfil"];
+    $img = $_POST['imagenData'];
+    $nombre = $_POST['formData']['nombre'];
 
-    // Aqui se manda a la db
-   $mensajeDB= $ObjMaster->InsertarImagen($fotoPerfil, $nombre);
+    try {
 
-    //Retorno el nombre para mostrarlo en el mensaje
-    $response = array("message" => "$mensajeDB", "nombre" => $fotoPerfil);
-    echo json_encode($response);
+        $mensajeDB = $ObjMaster->InsertarImagen($img, $nombre);
+
+        
+
+        $data = array("exito"=>$mensajeDB,"nombre" => $nombre);
+
+        echo json_encode($data);
+
+    } catch (\Throwable $th) {
+        $response = array("message" => "Error en Negocios");
+    }
 }
 ?>
