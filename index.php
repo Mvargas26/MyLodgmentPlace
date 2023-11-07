@@ -50,6 +50,7 @@
           <li><a class="nav-link scrollto " href="./App/Views/Login_View.php">Iniciar Sesion</a></li>
           <li><a class="nav-link scrollto" href="./App/Views/registro_View.php">Registrarse</a></li>
           <li><a class="nav-link scrollto" href="#contact">Contactenos</a></li>
+          <li><a class="nav-link scrollto" href="./App/Views/PanelUsuario_View.php">Usuario</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->

@@ -15,7 +15,7 @@
             const inputImagen = document.getElementById("fotoPerfil");
             var fotoPerfil = null;
 
-            const formData = {
+            const formData = {//lo que captura 
                 identificacion,
                 nombre,
                 primerApellido,
@@ -35,13 +35,13 @@
                         url: "../../App/Modules/Registro/registro_Negocios.php",
                         type: "POST",
                         data: {
-                            imagenData: imagenData,
+                            imagenData: imagenData,// se envia la imagen y lo que captura con data 
                             formData:formData
                         },
-                        success: function(response) {
+                        success: function(response) { // catura respuesta 
                             var x = JSON.parse(response);
                             if (x.exito == true) {
-                                Swal.fire("Éxito", "Se guardaron los datos correctamente. " + x.nombre, "success");
+                                Swal.fire("Éxito", "Se guardaron los datos correctamente. " + x.nombre, "success");//mensaje bonito
                            
                             } else {
                                 console.log(x.response);

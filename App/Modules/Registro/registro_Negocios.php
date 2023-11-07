@@ -1,5 +1,8 @@
 <?php
 
+// logica metodos capa de negocios
+
+
 require_once('../Master_Class.php');
 
 $ObjMaster = new Master_Class();
@@ -25,3 +28,4 @@ if (isset($_POST["imagenData"])) {
     }
 }
 ?>
+

@@ -5,7 +5,7 @@ class Master_Class{
     private $server = "localhost";
     private $username = "root";
     private $password = "";
-    private $db = "pruebaimg";
+    private $db = "agenda";
     private $conn;
 
     function __construct()
@@ -33,7 +33,7 @@ class Master_Class{
             $img = $this->GetConexion()->real_escape_string($arry_Datos[0]);
             $nombre = $this->GetConexion()->real_escape_string($arry_Datos[1]);
 
-            $query ="INSERT INTO `tb_imagenes`(`nombre`,`imagenGuardar`) VALUES ('$nombre','$img')"; 
+            $query ="INSERT INTO `imagenes`(`Nombre`,`Imagen`) VALUES ('$nombre','$img')"; 
 
             if ($this->getConexion()->query($query)) {
                return true;
