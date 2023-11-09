@@ -2,10 +2,10 @@
 date_default_timezone_set("America/Costa_Rica");
 
 class Master_Class{
-    private $server = "localhost";
-    private $username = "root";
-    private $password = "";
-    private $db = "agenda";
+    private $server = "tiusr29pl.cuc-carrera-ti.ac.cr";
+    private $username = "sitios";
+    private $password = "Sitios2023*";
+    private $db = "mylodgmentplace";
     private $conn;
 
     function __construct()
@@ -27,6 +27,37 @@ class Master_Class{
         }
     
         /*-----------------------------------------------FUNCTIONS--------------------------------------------------*/
+        function InsertarUsuario() {
+            $arry_Datos = func_get_args();
+            
+            try {
+                $img = $this->GetConexion()->real_escape_string($arry_Datos[0]);
+                $identificacion = intval($this->GetConexion()->real_escape_string($arry_Datos[1]));
+                $Clave = $this->GetConexion()->real_escape_string($arry_Datos[2]);
+                $nombre = $this->GetConexion()->real_escape_string($arry_Datos[3]);
+                $primerApellido = $this->GetConexion()->real_escape_string($arry_Datos[4]);
+                $segundoApellido= $this->GetConexion()->real_escape_string($arry_Datos[5]);
+                $email= $this->GetConexion()->real_escape_string($arry_Datos[6]);
+                $telefono= intval($this->GetConexion()->real_escape_string($arry_Datos[7]));
+                $edad= intval($this->GetConexion()->real_escape_string($arry_Datos[8]));
+                $idRol= intval($this->GetConexion()->real_escape_string($arry_Datos[9]));
+                $direccion = $this->GetConexion()->real_escape_string($arry_Datos[10]);
+        
+                $query ="INSERT INTO `tbusuario` (`idUser`,`nombre`, `apellido1`, `apellido2`, `correo`, `fotoperfil`, `telefono`, `idRol`, `contrasenna`,
+                `edad`, `estado`, `direccion`)
+                 VALUES ($identificacion, '$nombre', '$primerApellido', '$segundoApellido', '$email', '$img', $telefono, $idRol, '$Clave', $edad, 1, '$direccion')"; 
+        
+                if ($this->getConexion()->query($query)) {
+                    return true;
+                } else {
+                    throw new Exception("Error en la inserción: " . $this->getConexion()->error);
+                }
+            } catch (Exception $e) {
+                error_log($e->getMessage());
+                return false;
+            }
+        }
+        
         function InsertarImagen(){
             $arry_Datos = func_get_args();
             

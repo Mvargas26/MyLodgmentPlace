@@ -12,23 +12,30 @@
 
             // Captura los valores del formulario
             const identificacion = document.getElementById("identificacion").value;
+            const Clave = document.getElementById("Clave").value;
             const nombre = document.getElementById("nombre").value;
             const primerApellido = document.getElementById("primerApellido").value;
             const segundoApellido = document.getElementById("segundoApellido").value;
             const email = document.getElementById("email").value;
             const telefono = document.getElementById("telefono").value;
             const inputImagen = document.getElementById("fotoPerfil");
+            const idRol = document.getElementById("idRol").value;
+            const edad = document.getElementById("edad").value;
+            const direccion = document.getElementById("direccion").value;
             var fotoPerfil = null;
 
-            const formData = {//lo que captura 
+            const formData = {
                 identificacion,
+                Clave,
                 nombre,
                 primerApellido,
                 segundoApellido,
                 email,
-                telefono
+                telefono,
+                edad,
+                direccion,
+                idRol
             };
-
             if (inputImagen.files && inputImagen.files[0]) {
 
                 var file = inputImagen.files[0];
