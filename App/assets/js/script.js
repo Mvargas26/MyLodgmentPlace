@@ -126,6 +126,9 @@
                     var x = JSON.parse(response);
                     if (x.exito == true) {
                         Swal.fire("Éxito", "Bienvenido " + x.nombre, "success");//mensaje bonito
+
+
+                        
                     } else {
                         console.log(x.response);
                         Swal.fire("Error", "Lo sentimos, ocurrió un error.", "error");
@@ -134,8 +137,82 @@
             });
         }
     };
-    
+  
+    const Servicios = {
+        init: function () {
+            // Realiza una solicitud GET al cargar la página
+            console.log("FUNCION Servicios")
+            const formData = {
+                a : "a"
+            };
+
+            $.ajax({
+                url: "../../App/Modules/Servicios/servicios_Negocios.php",
+                type: "POST",
+                success: function(response) 
+                {a 
+
+                    console.log("Si esta entrando")
+
+                    if (Array.isArray(response)) {
+                    
+                        for (var i = 0; i < response.length; i++) 
+                        {
+                            // Crea un nuevo label
+                            var nuevoLabel = document.createElement('label');
+                            nuevoLabel.className = 'container';
+
+                            // Crea un nuevo input tipo hidden
+                            var nuevoInputID = document.createElement('input');
+                            nuevoInputID.type = 'hidden';
+                            nuevoInputID.id = 'IDServicio';
+                            nuevoInputID.value = response[i].id;
+
+                            // Crea un nuevo input tipo checkbox
+                            var nuevoInputCheckbox = document.createElement('input');
+                            nuevoInputCheckbox.type = 'checkbox';
+                            nuevoInputCheckbox.checked = false;
+
+                            // Crea un nuevo span
+                            var nuevoSpan = document.createElement('span');
+                            nuevoSpan.className = 'checkmark';
+
+                            // Asigna el texto del label con el nombre del servicio
+                            nuevoLabel.innerText = "                   " + response[i].nombre;
+
+                            // Agrega los elementos al label
+                            nuevoLabel.appendChild(nuevoInputID);
+                            nuevoLabel.appendChild(nuevoInputCheckbox);
+                            nuevoLabel.appendChild(nuevoSpan);
+
+                            // Agrega el label al contenedor grid
+                            document.querySelector('.grid').appendChild(nuevoLabel);
+
+                        }                     
+                    } else {
+                        console.error('La respuesta no es un array:', x);
+                    }
+
+
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.error('Error en la solicitud AJAX:', textStatus, errorThrown);
+                }
+            });
+        }
+    };
+
+    const vistaActual = document.body.dataset.vista;
+
+    // Verifica si la vista actual es anunciosMultiples_View.php
+    // Carga los Servicios de la base
+    if (vistaActual === 'anunciosMultiples_View.php') {
+        window.addEventListener('load', function() {
+            Servicios.init();
+        });
+    }
     
     // AQUI SE INICIALIZA CADA METODO
      RegistroUsuarios.init();
      Login.init();
+     Servicios.init();
