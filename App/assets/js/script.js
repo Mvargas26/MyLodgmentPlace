@@ -150,7 +150,7 @@
                 url: "../../App/Modules/Servicios/servicios_Negocios.php",
                 type: "POST",
                 success: function(response) 
-                {a 
+                {
 
                     console.log("Si esta entrando")
 
@@ -190,7 +190,7 @@
 
                         }                     
                     } else {
-                        console.error('La respuesta no es un array:', x);
+                        console.error('La respuesta no es un array:', response);
                     }
 
 
