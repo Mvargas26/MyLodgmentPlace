@@ -31,7 +31,7 @@ $base_path = '../assets/';
   <!-- Template Main CSS File -->
   <link href="<?php echo $base_path; ?>css/style.css" rel="stylesheet">
   <link href="<?php echo $base_path; ?>css/customStyle.css" rel="stylesheet">
-  <!-- <link href="<?php echo $base_path; ?>css/login.css" rel="stylesheet"> -->
+  <link href="<?php echo $base_path; ?>css/login.css" rel="stylesheet">
   <link href="<?php echo $base_path; ?>css/panelusuario.css" rel="stylesheet">
 
 

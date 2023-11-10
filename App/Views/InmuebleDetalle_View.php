@@ -39,7 +39,7 @@ include './templates/Header.php';
               <div class="swiper-pagination"></div>
             </div>
             <div class="corazon">
-            <a href="#" class="btn-learn-more">Agregar a favoritos</a>
+            <a href="#" id="btnAgregarFavoritos" class="btn btn Primary">Agregar a favoritos</a>
             </div>
           </div>
 
