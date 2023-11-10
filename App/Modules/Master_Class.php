@@ -13,7 +13,9 @@ class Master_Class{
         try {
             
             $this->conn = new mysqli($this->server, $this->username, $this->password, $this->db);
-
+            if ($this->conn->connect_error) {
+                die("Error en la conexión a la base de datos: " . $this->conn->connect_error);
+            }
         } catch (Exception $e) {
             echo "connection failed" . $e->getMessage();
         }
@@ -108,6 +110,44 @@ class Master_Class{
                 return false;
             }
         }//cargarImagenes
+
+        function CargarServicios() {
+            try {
+                $query = "SELECT id, nombre FROM `tbservicio`;";
+                $this->conn->set_charset("utf8"); // Establecer la codificación a UTF-8
+                $result = $this->getConexion()->query($query);
+        
+                if ($result) {
+                    $data = array();
+        
+                    // Iterar sobre los resultados y construir el array asociativo
+                    while ($row = $result->fetch_assoc()) {
+                        $row['id'] = (int)$row['id'];
+                        $data[] = $row;
+                    }
+        
+                    return $data;
+                } else {
+                    throw new Exception("Error en la consulta: " . $this->getConexion()->error);
+                }
+            } catch (Exception $e) {
+                error_log($e->getMessage());
+                return null; // Retorna null en caso de error
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
 }//fn cl_masterClass
 
 $ObjMaster = new Master_Class();
