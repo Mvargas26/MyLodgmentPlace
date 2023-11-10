@@ -27,6 +27,28 @@ class Master_Class{
         }
     
         /*-----------------------------------------------FUNCTIONS--------------------------------------------------*/
+        function ConsultarUsuario() {
+            $arry_Datos = func_get_args();
+            
+            try {
+                $identificacion = intval($this->GetConexion()->real_escape_string($arry_Datos[0]));
+                $password = $this->GetConexion()->real_escape_string($arry_Datos[1]);
+        
+                $query = " SELECT * FROM `tbusuario` WHERE `idUser` = '$identificacion' AND `contrasenna` ='$password';";
+
+                $result = $this->getConexion()->query($query);
+
+                if ($result) {
+                    return $result;
+                } else {
+                    throw new Exception("Error en la consulta: " . $this->getConexion()->error);
+                }
+            } catch (Exception $e) {
+                error_log($e->getMessage());
+                return $e->getMessage();
+            }
+        }//fn ConsultarUsuario
+
         function InsertarUsuario() {
             $arry_Datos = func_get_args();
             

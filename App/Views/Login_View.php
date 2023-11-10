@@ -16,27 +16,25 @@ include './templates/Header.php';
         </div>
 
         <div class="register-info-box">
-            <h2>Don't have an account?</h2>
-            <p>Lorem ipsum dolor sit amet</p>
-            <label id="label-login" for="log-login-show">Register</label>
+            <h2>Aun no tienes una cuenta?</h2>
+            <label id="label-login" for="log-login-show">Registrate</label>
             <input type="radio" name="active-log-panel" id="log-login-show">
         </div>
 
         <div class="white-panel">
             <div class="login-show">
                 <h2>LOGIN</h2>
-                <input type="text" placeholder="Email">
-                <input type="password" placeholder="Password">
-                <input type="button" value="Login">
+                <input type="text" id="identificacion" placeholder="identificacion">
+                <input type="password" id="password" placeholder="Password">
+                <input type="button" id="btnLogin" value="Login">
                 <a href="">Forgot password?</a>
             </div>
             <div class="register-show">
-            <h2>LOGIN</h2>
-                <input type="text" placeholder="Email">
-                <input type="password" placeholder="Password">
-                <input type="button" value="Login">
-                <a href="">Forgot password?</a>
-            </div>
+            <h2>Registro</h2>
+            <a href="./registro_View.php">Ir a Registro</a>
+
+
+        </div>
         </div>
     </div>
 </body>

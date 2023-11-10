@@ -1,15 +1,16 @@
     //###############################################################################################################################
-    //###############################################################################################################################
     //Registro de usuarios
     //###############################################################################################################################
-    //###############################################################################################################################
-    document.addEventListener("DOMContentLoaded", function () {
-        
-        const form = document.getElementById("formRegistro");
-
-        form.addEventListener("submit", function (event) {
-            event.preventDefault(); // Evita que el formulario se envíe de forma predeterminada
-
+    const RegistroUsuarios = {
+        init: function () {
+            const form = document.getElementById("formRegistro");
+    
+            if (form) {
+                form.addEventListener("submit", RegistroUsuarios.onSubmit);
+            }
+        },
+        onSubmit: function (event) {
+            event.preventDefault();
             // Captura los valores del formulario
             const identificacion = document.getElementById("identificacion").value;
             const Clave = document.getElementById("Clave").value;
@@ -36,6 +37,7 @@
                 direccion,
                 idRol
             };
+
             if (inputImagen.files && inputImagen.files[0]) {
 
                 var file = inputImagen.files[0];
@@ -64,14 +66,11 @@
                 };
                 reader.readAsDataURL(file);
             }
-        });
-    });
-//###############################################################################################################################
+        }
+    };
     //###############################################################################################################################
        //FUNCIONAMIENTO DEL LOGIN interactivo
     //###############################################################################################################################
-    //###############################################################################################################################
-    
     $(document).ready(function(){
         $('.login-info-box').fadeOut();
         $('.login-show').addClass('show-log-panel');
@@ -96,21 +95,47 @@
             $('.register-show').removeClass('show-log-panel');
         }
     });
+    //###############################################################################################################################
+    //Login
+    //###############################################################################################################################
+    const Login = {
+        init: function () {
+            var btnLogin = document.getElementById('btnLogin');
+    
+            if (btnLogin) {
+                btnLogin.addEventListener('click', Login.onSubmit);
+            }
+        },
+    
+        onSubmit: function () {
+            var identificacion = document.getElementById('identificacion').value;
+            var password = document.getElementById('password').value;
+    
+            const formData = {
+                identificacion,
+                password
+            };
 
-    //###############################################################################################################################
-    //###############################################################################################################################
-    //Agregar A favoritos
-    //###############################################################################################################################
-    //###############################################################################################################################
-    var btnAgregarFavoritos = document.getElementById('btnAgregarFavoritos');
-
-    // Agrega un evento clic al botón
-    btnAgregarFavoritos.addEventListener('click', function() {
-        // Muestra el modal de SweetAlert
-        Swal.fire({
-            title: 'Agregado a Favoritos',
-            text: 'El elemento ha sido agregado a tus favoritos.',
-            icon: 'success',
-            confirmButtonText: 'Aceptar'
-        });
-    });
+            $.ajax({
+                url: "../../App/Modules/Login/login_Negocios.php",
+                type: "POST",
+                data: {
+                    formData:formData
+                },
+                success: function(response) { // catura respuesta 
+                    var x = JSON.parse(response);
+                    if (x.exito == true) {
+                        Swal.fire("Éxito", "Bienvenido " + x.nombre, "success");//mensaje bonito
+                    } else {
+                        console.log(x.response);
+                        Swal.fire("Error", "Lo sentimos, ocurrió un error.", "error");
+                    }
+                }
+            });
+        }
+    };
+    
+    
+    // AQUI SE INICIALIZA CADA METODO
+     RegistroUsuarios.init();
+     Login.init();
