@@ -53,6 +53,8 @@
           <li><a class="nav-link scrollto " href="./App/Views/codigoAutenticacion_view.php">Iniciar Sesion</a></li>
           <li><a class="nav-link scrollto " href="./App/Views/Login_View.php">Iniciar Sesion</a></li>
           <li><a class="nav-link scrollto" href="./App/Views/registro_View.php">Registrarse</a></li>
+          <li><a class="nav-link scrollto " href="./App/Views/PanelAnfitrion.php">Panel Anfitrion</a></li>
+          <li><a class="nav-link scrollto " href="./App/Views/calificarAnfitrion.php">Calificar Anfitrion</a></li>
           <li><a class="nav-link scrollto" href="#contact">Contactenos</a></li>
           <li><a class="nav-link scrollto" href="./App/Views/PanelUsuario_View.php">Usuario</a></li>
         </ul>
