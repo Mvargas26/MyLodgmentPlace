@@ -7,7 +7,7 @@ include './templates/Header.php';
 <body id="body">
 
 
-<p>aca va las notificaciones y las reseñas </p>
+<p>aca va las notificaciones </p>
 
 
 
