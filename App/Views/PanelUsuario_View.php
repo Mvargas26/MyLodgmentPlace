@@ -29,7 +29,7 @@ include './templates/Header.php';
             </div>
         <div class="cards-container">
             <div class="card">
-                <a href="admin_seguridad.php">Administración de Seguridad</a>
+                <a href="admin_seguridadHusped_View.php">Administración de Seguridad</a>
             </div>
             <div class="card">
                 <a href="cupones_tarjetas.php">Cupones y Tarjetas de Regalo</a>
