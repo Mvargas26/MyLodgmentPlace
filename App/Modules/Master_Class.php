@@ -20,14 +20,11 @@ class Master_Class{
             echo "connection failed" . $e->getMessage();
         }
     }//fin constructor
-
-
         /*-----------------------------------------------GETS--------------------------------------------------*/
         function GetConexion()
         {
             return $this->conn;
         }
-    
         /*-----------------------------------------------FUNCTIONS--------------------------------------------------*/
         function ConsultarUsuario() {
             $arry_Datos = func_get_args();
@@ -136,7 +133,71 @@ class Master_Class{
             }
         }
 
+//Funciones de prueba (inicio)
+function enviarCodigoAutenticacionCorreo($destinatario, $codigo_autenticacion) {
+    $asunto = "Código de autenticación";
+    $mensaje = "Su código de autenticación es: $codigo_autenticacion";
 
+    // Utiliza la función mail() para enviar correos (asegúrate de tener la configuración adecuada en tu servidor)
+    mail($destinatario, $asunto, $mensaje);
+}
+
+function verificarCredenciales($identificacion, $password) {
+    // Utiliza la instancia de la clase Master_Class
+    global $ObjMaster;
+
+    // Consulta la base de datos para verificar las credenciales
+    $result = $ObjMaster->ConsultarUsuario($identificacion, $password);
+
+    // Comprueba si se encontró un usuario con las credenciales proporcionadas
+    if ($result && $result->num_rows > 0) {
+        // Credenciales válidas
+        return true;
+    } else {
+        // Credenciales inválidas
+        return false;
+    }
+}
+
+function almacenarCodigoAutenticacion($identificacion, $codigo_autenticacion) {
+        // Utiliza la instancia de la clase Master_Class
+        global $ObjMaster;
+
+        try {
+            // Escapa los valores para prevenir SQL injection
+            $identificacion = $ObjMaster->GetConexion()->real_escape_string($identificacion);
+            $codigo_autenticacion = $ObjMaster->GetConexion()->real_escape_string($codigo_autenticacion);
+    
+            // Ejecuta la consulta SQL para actualizar el código de autenticación
+            $query = "UPDATE tbusuario SET codigoAutenticacion = '$codigo_autenticacion' WHERE idUser = '$identificacion'";
+            $ObjMaster->GetConexion()->query($query);
+    
+            // Verifica si la actualización fue exitosa
+            if ($ObjMaster->GetConexion()->affected_rows > 0) {
+                // Actualización exitosa
+                return true;
+            } else {
+                // No se realizó ninguna actualización
+                return false;
+            }
+        } catch (Exception $e) {
+            // Manejo de errores (puedes personalizar según tus necesidades)
+            error_log("Error al almacenar código de autenticación: " . $e->getMessage());
+            return false;
+        }
+}
+
+function generarCodigoAleatorio($longitud) {
+    $caracteres = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    $codigo = "";
+
+    for ($i = 0; $i < $longitud; $i++) {
+        $codigo .= $caracteres[rand(0, strlen($caracteres) - 1)];
+    }
+
+    return $codigo;
+}
+//Funciones de prueba(fin)
 
 
 

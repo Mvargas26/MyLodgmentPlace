@@ -50,7 +50,7 @@
 
           <li><a class="nav-link scrollto" href="./App/Views/anunciosMultiples_View.php">Publica tu Espacio</a></li>
 
-          
+          <li><a class="nav-link scrollto " href="./App/Views/codigoAutenticacion_view.php">Iniciar Sesion</a></li>
           <li><a class="nav-link scrollto " href="./App/Views/Login_View.php">Iniciar Sesion</a></li>
           <li><a class="nav-link scrollto" href="./App/Views/registro_View.php">Registrarse</a></li>
           <li><a class="nav-link scrollto" href="#contact">Contactenos</a></li>
