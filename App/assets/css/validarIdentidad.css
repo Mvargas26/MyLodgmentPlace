@@ -11,7 +11,7 @@ body {
 }
 
 h2 {
-    color: #007BFF;
+    color: #ff7f5d;
 }
 
 .modal-body {
@@ -23,13 +23,17 @@ h2 {
 }
 
 #uploadButton {
+    background-color: #524156;
+    border-color: #524156;
+ 
     cursor: pointer;
     margin-top: 20px;
 }
 
 /* Estilos para resaltar el botón de selección de archivo */
 #uploadButton:hover {
-    background-color: #0056b3;
+    background-color: #ff7f5d;
+    border-color: #ff7f5d;
 }
 
 /* Estilos para el mensaje de archivo seleccionado */
@@ -45,7 +49,7 @@ h2 {
 }
 
 .modal-header {
-    background-color: #007BFF;
+    background-color: #524156;
     color: #fff;
     border-bottom: none;
 }
@@ -55,18 +59,17 @@ h2 {
 }
 
 .btn-primary {
-    background-color: #007BFF;
-    border-color: #007BFF;
+    background-color: #524156;
+    border-color: #ff7f5d;
 }
 
-/* Cambia el color del borde de los campos de entrada de archivo */
 #fileInput {
-    border-color: #007BFF;
+    border-color: #ff7f5d;
 }
 
 /* Estilos para resaltar el campo de entrada de archivo al pasar el ratón */
 #fileInput:hover {
-    border-color: #0056b3;
+    border-color: #ff7f5d;
 }
 
 /* Estilos para el texto que muestra el nombre del archivo seleccionado */
@@ -78,7 +81,7 @@ h2 {
 
 /* Estilos para resaltar el nombre del archivo seleccionado */
 #uploadButton:hover:after {
-    color: #0056b3;
+    color: #ff7f5d;
 }
 
 /* Espaciado entre la cédula y el botón Subir Foto */
