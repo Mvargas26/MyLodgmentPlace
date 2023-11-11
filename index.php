@@ -603,9 +603,11 @@
   <script src="./App/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
   <script src="./App/assets/vendor/swiper/swiper-bundle.min.js"></script>
   <script src="./App/assets/vendor/php-email-form/validate.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
   <!-- Template Main JS File -->
   <script src="./App/assets/js/main.js"></script>
+  <script src="./App/assets/js/script_Index.js"></script>
 
 </body>
 

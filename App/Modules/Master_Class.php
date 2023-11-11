@@ -31,6 +31,9 @@ class Master_Class{
             return $this->conn;
         }
         /*-----------------------------------------------FUNCTIONS--------------------------------------------------*/
+        /*----------------------------------------------------------------------------------------------------------*/
+              /*-----------------------------------------------USUARIOS--------------------------------------------------*/
+
         function ConsultarUsuario() {
             $arry_Datos = func_get_args();
             
@@ -83,6 +86,9 @@ class Master_Class{
                 return false;
             }
         }
+
+                /*-----------------------------------------------IMAGENES--------------------------------------------------*/
+
         
         function InsertarImagen(){
             $arry_Datos = func_get_args();
@@ -99,10 +105,16 @@ class Master_Class{
             }
         } //fin InsertarImagen
 
-        function CargarImagenes()
+        function CargarImagenesInmuebles()
         {
+            $arry_Datos = func_get_args();
+
+            $idInmueble = $this->GetConexion()->real_escape_string($arry_Datos[0]);
+
             $data = null;
-            $query = "SELECT * FROM `tb_imagenes`";
+
+            $query = "SELECT * FROM `tbfotoinmueble` where idInmueble = $idInmueble;";
+            
             if ($sql = $this->conn->query($query)) {
                 while ($row = mysqli_fetch_assoc($sql)) {
                     $data[] = $row;
@@ -112,6 +124,7 @@ class Master_Class{
                 return false;
             }
         }//cargarImagenes
+        /*-----------------------------------------------sERVICIOS--------------------------------------------------*/
 
         function CargarServicios() {
             try {
@@ -137,6 +150,7 @@ class Master_Class{
                 return null; // Retorna null en caso de error
             }
         }
+        /*-----------------------------------------------AUNTETINTIFICACION--------------------------------------------------*/
 
 //Funciones de prueba (inicio)
 function enviarCodigoAutenticacionCorreo($destinatario, $codigo_autenticacion) {
@@ -203,8 +217,95 @@ function generarCodigoAleatorio($longitud) {
     return $codigo;
 }
 //Funciones de prueba(fin)
+        /*----------------------------------------------- INMUEBLES --------------------------------------------------*/
+
+        function ConsultarInmuebles() {
+
+            try {
+                $query = " SELECT 
+                mu.id, 
+                mu.nombre AS nombre_inmueble, 
+                mu.valorDiario, 
+                mu.capacidadPersonas, 
+                mu.costoPersonaExtra, 
+                mu.direccion, 
+                mu.disponibilidad, 
+                mu.estrellas, 
+                mu.fechaLimiteDisponibilidad, 
+               CONCAT(us.nombre, ' ', us.apellido1, ' ', us.apellido2) AS nombre_propietario
+            FROM tbinmueble mu
+            INNER JOIN tbusuario us ON mu.Propietario = us.idUser;";
+
+                $this->conn->set_charset("utf8"); 
+                $result = $this->getConexion()->query($query);
+        
+                if ($result) {
+                    $data = array();
+        
+                    while ($row = $result->fetch_assoc()) {
+                        $item = array(
+                            "id" => $row['id'],
+                            "Nombre_Inmueble" => $row["nombre_inmueble"],
+                            "valorDiario" => $row["valorDiario"],
+                            "capacidadPersonas" => $row["capacidadPersonas"],
+                            "costoPersonaExtra" => $row["costoPersonaExtra"],
+                            "direccion" => $row["direccion"],
+                            "disponibilidad" => $row["disponibilidad"],
+                            "estrellas" => $row["estrellas"],
+                            "fechaLimiteDisponibilidad" => $row["fechaLimiteDisponibilidad"],
+                            "nombre_propietario" => $row["nombre_propietario"],
+                        );
+                        $data[] = $item;
+                    }
+        
+                    return json_encode($data);
+
+                } else {
+                    throw new Exception("Error en la consulta: " . $this->getConexion()->error);
+                }
+            } catch (Exception $e) {
+                error_log($e->getMessage());
+                return null; // Retorna null en caso de error
+            }
 
 
+
+
+
+
+
+
+            // try {
+                        
+            //     $query = " SELECT 
+            //     mu.id, 
+            //     mu.nombre AS nombre_inmueble, 
+            //     mu.valorDiario, 
+            //     mu.capacidadPersonas, 
+            //     mu.costoPersonaExtra, 
+            //     mu.direccion, 
+            //     mu.disponibilidad, 
+            //     mu.estrellas, 
+            //     mu.fechaLimiteDisponibilidad, 
+            //    CONCAT(us.nombre, ' ', us.apellido1, ' ', us.apellido2) AS nombre_propietario,
+            //    fi.Fotografia   
+            // FROM tbinmueble mu
+            // INNER JOIN tbusuario us ON mu.Propietario = us.idUser
+            // INNER JOIN tbfotoinmueble fi ON mu.id = fi.idInmueble;";
+
+            //     $result = $this->getConexion()->query($query);
+            //     var_dump($result);
+
+            //     if ($result) {
+            //         return $result;
+            //     } else {
+            //         throw new Exception("Error en la consulta: " . $this->getConexion()->error);
+            //     }
+            // } catch (Exception $e) {
+            //     error_log($e->getMessage());
+            //     return $e->getMessage();
+            // }
+        }//fn ConsultarUsuario
 
 
 
