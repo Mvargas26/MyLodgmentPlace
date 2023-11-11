@@ -3,58 +3,41 @@ include './templates/Header.php';
 ?>
 <!-- ==============================================Fin header ======= -->
 <main id="main">
-
+<link href="../assets/css/panelHuesped.css" rel="stylesheet">
 <head>
-    <style>
-        .cards-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-
-        .card {
-            width: 200px;
-            height: 150px;
-            background-color: #f0f0f0;
-            border: 1px solid #ddd;
-            margin: 10px;
-            text-align: center;
-            padding: 20px;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-            transition: transform 0.2s ease-in-out;
-            cursor: pointer;
-        }
-
-        .card:hover {
-            transform: scale(1.05);
-        }
-
-        .card a {
-            text-decoration: none;
-            color: #333;
-        }
-    </style>
+    
 </head>
 <body>
     <div class="cards-container">
         <div class="card">
-            <a href="panel_usuario.php">Inicio</a>
+            <a href="mi_banco.php">Mi Banco</a>
         </div>
         <div class="card">
-            <a href="perfil.php">Perfil</a>
+            <a href="perfil.php">Datos Personales</a>
         </div>
         <div class="card">
-            <a href="reservas.php">Mis Reservas</a>
+            <a href="validar_identidad.php">Validar Identidad</a>
+        </div>
+        <div class="card">
+            <a href="notificaciones.php">Notificaciones</a>
+        </div>
+        <div class="card">
+            <a href="reservas.php">Historial de Reservas</a>
+        </div>
+        <div class="card">
+            <a href="admin_seguridad.php">Administración de Seguridad</a>
+        </div>
+        <div class="card">
+            <a href="cupones_tarjetas.php">Cupones y Tarjetas de Regalo</a>
+        </div>
+        <div class="card">
+            <a href="denuncias.php">Denuncias</a>
         </div>
         <div class="card">
             <a href="mensajes.php">Mensajes</a>
         </div>
         <div class="card">
-            <a href="ajustes.php">Ajustes</a>
-        </div>
-        <div class="card">
-            <a href="cerrar_sesion.php">Cerrar Sesión</a>
+            <a href="mis_resenas.php">Historial de Reseñas</a>
         </div>
     </div>
 </body>
