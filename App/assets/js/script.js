@@ -264,10 +264,54 @@
     //otro
     //###############################################################################################################################
 
+    $(document).ready(function () {
+        $('#loginForm').submit(function (e) {
+            e.preventDefault();
+    
+            // Obtener los datos del formulario
+            var identificacion = $('input[name=identificacion]').val();
+            var password = $('input[name=password]').val();
+    
+            // Realizar la verificación de credenciales mediante AJAX
+            $.ajax({
+                
+                type: 'POST',
+                url: '../../App/Modules/Servicios/Login_Negocios.php',
+                data: {
+                    verificarCredenciales: true,
+                    identificacion: identificacion,
+                    password: password
+                },
+                beforeSend: function () {
+                    // Mensaje antes de enviar la solicitud AJAX
+                    alert('Entró');
+                },
+                success: function (response) {
+                    if (response === 'true') {
+                        // Credenciales válidas, realiza las acciones necesarias (almacenar código, enviar correo, etc.)
+                        alert('Credenciales válidas');
+                    } else {
+                        // Credenciales inválidas, muestra un mensaje de error
+                        alert('Credenciales inválidas. Inténtalo de nuevo.');
+                    }
+                },
+                error: function () {
+                    // Error en la solicitud AJAX, muestra un mensaje de error
+                    alert('Error en la verificación de credenciales.');
+                }
+            });
+        });
+    });
+
+    //###############################################################################################################################
+    //inicio pruebas de login
+    //###############################################################################################################################
 
 
 
-
+    //###############################################################################################################################
+    //fin pruebas de login
+    //###############################################################################################################################
 
 
 
