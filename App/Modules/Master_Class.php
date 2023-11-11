@@ -2,11 +2,16 @@
 date_default_timezone_set("America/Costa_Rica");
 
 class Master_Class{
-    private $server = "tiusr29pl.cuc-carrera-ti.ac.cr";
-    private $username = "sitios";
-    private $password = "Sitios2023*";
-    private $db = "mylodgmentplace";
+    // private $server = "tiusr29pl.cuc-carrera-ti.ac.cr";
+    // private $username = "sitios";
+    // private $password = "Sitios2023*";
+    // private $db = "mylodgmentplace";
     private $conn;
+
+    private $server = "185.211.7.52";
+    private $username = "u538860919_sitios";
+    private $password = "Sitios2023*";
+    private $db = "u538860919_mylodgmentplac";
 
     function __construct()
     {

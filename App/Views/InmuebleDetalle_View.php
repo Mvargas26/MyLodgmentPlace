@@ -38,9 +38,9 @@ include './templates/Header.php';
               </div>
               <div class="swiper-pagination"></div>
             </div>
-            <div class="corazon">
-            <a href="#" id="btnAgregarFavoritos" class="btn btn Primary">Agregar a favoritos</a>
-            </div>
+            <div class="text-center mt-3">
+                    <button id="btnAgregarFavoritos" name="btnAgregarFavoritos" class="custom-button" type="submit">Agregar a Favoritos</button>
+                </div>
           </div>
 
           <div class="col-lg-4">
