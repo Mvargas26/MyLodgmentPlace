@@ -20,7 +20,7 @@ include './templates/Header.php';
             <label id="label-login" for="log-login-show">Registrate</label>
             <input type="radio" name="active-log-panel" id="log-login-show">
         </div>
-
+<div>prueba push</div>
         <div class="white-panel">
             <div class="login-show">
                 <h2>LOGIN</h2>
