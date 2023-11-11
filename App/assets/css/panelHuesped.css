@@ -1,13 +1,28 @@
+.image-container {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.image-container img {
+    width: 300px;
+    height: 150px;
+}
+
 .cards-container {
+    margin-left: 20px;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 10px;
+    gap: 20px;
     justify-content: center;
     align-items: center;
-    height: 100vh;
 }
 
 .card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     width: 100%;
     height: 120px;
     background-color: #ffffff;
@@ -20,15 +35,15 @@
 }
 
 .card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 10px rgb(78, 43, 93);
+    transform: scale(1.2);
+    box-shadow: 0 0 120px rgba(78, 43, 93, 0.8);
+    z-index: 1;
 }
 
 .card a {
     text-decoration: none;
-    color: #333;
+    color: #0a0909;
     font-size: 16px;
     font-weight: bold;
-    color: #007BFF;
-    margin-top: 10px;
+    color: #010202;
 }
