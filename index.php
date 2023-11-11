@@ -40,21 +40,74 @@
   <header id="header" class="d-flex align-items-center ">
     <div class="container-fluid d-flex align-items-center justify-content-lg-between">
 
-      <h1 class="logo me-auto me-lg-0"><a href="#">¡Vamos!</a></h1>
+      <h1 class="logo me-auto me-lg-0"><a href="#">
+        <img width="50" height="100" src="https://img.icons8.com/sf-black-filled/64/home.png" alt="home"/>
+      </a></h1>
 
+      
       <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>
           <li><a class="nav-link scrollto active" href="#hero">Inicio</a></li>
           <li><a class="nav-link scrollto" href="#about">Lugares</a></li>
+          
+          
+          <li><a class="nav-link scrollto" href="#about">
+            <?php 
+              session_start();
+              if(isset($_SESSION["nombre"] )){
+                echo  $_SESSION["nombre"] ;
 
 
-          <li><a class="nav-link scrollto" href="./App/Views/anunciosMultiples_View.php">Publica tu Espacio</a></li>
+              }
+              else{
+            ?>
+                <li><a class="nav-link scrollto " href="./App/Views/Login_View.php">Iniciar Sesion</a></li>
+                <li><a class="nav-link scrollto" href="./App/Views/registro_View.php">Registrarse</a></li>
+                <li><a class="nav-link scrollto" href="#contact">Contactenos</a></li>
+            <?php
+                
+              }
+            session_start();
+            if($_SESSION["Rol"] != null){
+              // NO SE HA LOGUEADO
+              //YA INICIO SESION, VALIDA SI ES HUESPED O ANFITRION
+    
+              //  ID ROL 1: Administracion
+              //  ID ROL 2: Anfitrion
+              //  ID ROL 3: Huesped
+              echo $_SESSION["Rol"];
+              
+              if($_SESSION["Rol"] == 2){
+              
+                ?>
+                <li><a class="nav-link scrollto" href="./App/Views/PanelUsuario_View.php">Perfil</a></li>
+                <li><a class="nav-link scrollto" href="./App/Views/anunciosMultiples_View.php">Publica tu Espacio</a></li>
+                <?php
+                
+              }
+              else{
+                
+                
+              }
+
+            }
+            else{
+              
+            }
+
+              
+            ?>
+
+
+
+<!-- }    -->
+
+<?php
+
+            ?>
+            <li><a class="nav-link scrollto" href="./App/Modules/Login/cerrarSesion_Negocios.php">Cerrar Sesion</a></li>
 
           
-          <li><a class="nav-link scrollto " href="./App/Views/Login_View.php">Iniciar Sesion</a></li>
-          <li><a class="nav-link scrollto" href="./App/Views/registro_View.php">Registrarse</a></li>
-          <li><a class="nav-link scrollto" href="#contact">Contactenos</a></li>
-          <li><a class="nav-link scrollto" href="./App/Views/PanelUsuario_View.php">Usuario</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
