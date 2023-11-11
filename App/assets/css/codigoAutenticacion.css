@@ -1,0 +1,9 @@
+
+.CajaCodigo {
+    text-align: center;
+    justify-content: center;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff;
+}
