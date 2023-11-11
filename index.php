@@ -49,65 +49,40 @@
         <ul>
           <li><a class="nav-link scrollto active" href="#hero">Inicio</a></li>
           <li><a class="nav-link scrollto" href="#about">Lugares</a></li>
-          
-          
-          <li><a class="nav-link scrollto" href="#about">
-            <?php 
-              session_start();
-              if(isset($_SESSION["nombre"] )){
-                echo  $_SESSION["nombre"] ;
-
-
-              }
+          <li><a class="nav-link scrollto" href="#contact">Contactenos</a></li>
+          <li><a class="nav-link scrollto" href="#about"><?php session_start(); if(isset($_SESSION["nombre"] )){echo  $_SESSION["nombre"] ;}
               else{
             ?>
                 <li><a class="nav-link scrollto " href="./App/Views/Login_View.php">Iniciar Sesion</a></li>
                 <li><a class="nav-link scrollto" href="./App/Views/registro_View.php">Registrarse</a></li>
-                <li><a class="nav-link scrollto" href="#contact">Contactenos</a></li>
             <?php
                 
               }
-            session_start();
-            if($_SESSION["Rol"] != null){
-              // NO SE HA LOGUEADO
-              //YA INICIO SESION, VALIDA SI ES HUESPED O ANFITRION
-    
-              //  ID ROL 1: Administracion
-              //  ID ROL 2: Anfitrion
-              //  ID ROL 3: Huesped
-              echo $_SESSION["Rol"];
-              
+
+            if (isset($_SESSION["Rol"])) {
+                   //session_start();
               if($_SESSION["Rol"] == 2){
-              
                 ?>
-                <li><a class="nav-link scrollto" href="./App/Views/PanelUsuario_View.php">Perfil</a></li>
+                <li><a class="nav-link scrollto" href="./App/Views/PanelUsuario_View.php">Perfil Anfitrion</a></li>
                 <li><a class="nav-link scrollto" href="./App/Views/anunciosMultiples_View.php">Publica tu Espacio</a></li>
                 <?php
                 
-              }
-              else{
-                
-                
-              }
+              };
 
-            }
-            else{
-              
-            }
-
-              
+              if($_SESSION["Rol"] == 3){
+                ?>
+                <li><a class="nav-link scrollto" href="./App/Views/PanelUsuario_View.php">Perfil Huesped</a></li>
+                <?php
+                
+              };
+            };
+             
             ?>
 
-
-
-<!-- }    -->
-
 <?php
-
             ?>
             <li><a class="nav-link scrollto" href="./App/Modules/Login/cerrarSesion_Negocios.php">Cerrar Sesion</a></li>
 
-          
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->

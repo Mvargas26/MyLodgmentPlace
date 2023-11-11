@@ -126,6 +126,8 @@
                     var x = JSON.parse(response);
                     if (x.exito == true) {
                         Swal.fire("Éxito", "Bienvenido " + x.nombre, "success");//mensaje bonito
+                        // Redireccionar al index.php después del mensaje de éxito
+                    window.location.href = "../../../index.php";
 
 
                         
@@ -258,7 +260,19 @@
             CargarServicios.init();
         });
     }
-    
+    //###############################################################################################################################
+    //otro
+    //###############################################################################################################################
+
+
+
+
+
+
+
+
+    //###############################################################################################################################
+    //dejar siempre de ultimo
     // AQUI SE INICIALIZA CADA METODO
      RegistroUsuarios.init();
      Login.init();
