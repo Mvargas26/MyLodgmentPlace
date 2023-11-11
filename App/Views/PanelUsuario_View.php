@@ -8,19 +8,19 @@ include './templates/Header.php';
     <br>
         <div class="cards-container">
             <div class="card">
-                <a href="mi_banco.php">Mi Banco</a>
+                <a href="mi_bancoHuesped_View.php">Mi Banco</a>
             </div>
             <div class="card">
-                <a href="perfil.php">Datos Personales</a>
+                <a href="perfilHuesped_View.php">Datos Personales</a>
             </div>
             <div class="card">
-                <a href="validar_identidad.php">Validar Identidad</a>
+                <a href="validar_identidadHuesped_View.php">Validar Identidad</a>
             </div>
             <div class="card">
-                <a href="notificaciones.php">Notificaciones</a>
+                <a href="notificacionesHuesped_View.php">Notificaciones</a>
             </div>
             <div class="card">
-                <a href="reservas.php">Historial de Reservas</a>
+                <a href="reservasHuesped_View.php">Historial de Reservas</a>
             </div>
         </div>
             </div>
@@ -29,19 +29,19 @@ include './templates/Header.php';
             </div>
         <div class="cards-container">
             <div class="card">
-                <a href="admin_seguridadHusped_View.php">Administración de Seguridad</a>
+                <a href="admin_seguridadHuesped_View.php">Administración de Seguridad</a>
             </div>
             <div class="card">
-                <a href="cupones_tarjetas.php">Cupones y Tarjetas de Regalo</a>
+                <a href="cupones_tarjetasHuesped_View.php">Cupones y Tarjetas de Regalo</a>
             </div>
             <div class="card">
-                <a href="denuncias.php">Denuncias</a>
+                <a href="denunciasHuesped_View.php">Denuncias</a>
             </div>
             <div class="card">
-                <a href="mensajes.php">Mensajes</a>
+                <a href="mensajesHuesped_View.php">Mensajes</a>
             </div>
             <div class="card">
-                <a href="mis_resenas.php">Historial de Reseñas</a>
+                <a href="mis_resenasHuesped_View.php">Historial de Reseñas</a>
             </div>
             
         </div>
