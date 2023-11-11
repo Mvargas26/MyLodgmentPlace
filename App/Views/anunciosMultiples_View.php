@@ -3,10 +3,14 @@ include './templates/Header.php';
 ?>
 <!-- ==============================================Fin header ======= -->
 
-<main id="main">
+<main>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <h1> Aqui va el punto V. anuncios Multiples</h1>
     
+
+
+
+
     <br/>
     <br/>
     <br/>
@@ -22,6 +26,7 @@ include './templates/Header.php';
         <!-- SE LLENA CON LOS SERVICIOS DE LA BASE DE DATOS -->
         <!-- ========================================================= -->
     </div>
+
     <hr/>
 
 </main>
@@ -30,6 +35,7 @@ include './templates/Header.php';
 
 <!-- ==============================================Inicio Footer ======= -->
 <?php
+echo '<script>window.isAnunciosMultiplesPage = true;</script>';
 include './templates/Footer.php';
 ?>
 <!-- ==============================================Fin Footer ======= -->
