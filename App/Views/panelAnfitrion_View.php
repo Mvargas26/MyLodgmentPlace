@@ -12,10 +12,10 @@ include './templates/Header.php';
                 <a href="PublicarInmueble_View.php">Publicar Espacio</a>
             </div>
             <div class="card">
-                <a href="">Recepcion de Denuncias</a>
+                <a href="recepcionDenuncias_View.php">Recepcion de Denuncias</a>
             </div>
             <div class="card">
-                <a href="">Validacion Segura del Perfil</a>
+                <a href="validar_identidadHuesped_View.php">Validacion Segura del Perfil</a>
             </div>
             <div class="card">
                 <a href="notificaciones.php">Notificaciones</a>
@@ -30,16 +30,16 @@ include './templates/Header.php';
         </div>
         <div class="cards-container">
             <div class="card">
-                <a href="">Reseñas y Calificacion de Huesped</a>
+                <a href="mis_resenasHuesped_View.php">Reseñas y Calificacion de Huesped</a>
             </div>
             <div class="card">
-                <a href="">Mi Banco</a>
+                <a href="mi_bancoHuesped_View.php">Mi Banco</a>
             </div>
             <div class="card">
                 <a href="calificarHuespedes_View.php">Calificacion a Huespedes</a>
             </div>
             <div class="card">
-                <a href="">Mensajeria</a>
+                <a href="mensajesHuesped_View.php">Mensajeria</a>
             </div>
         </div>
         <br>

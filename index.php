@@ -63,8 +63,9 @@
                    //session_start();
               if($_SESSION["Rol"] == 2){
                 ?>
-                <li><a class="nav-link scrollto" href="./App/Views/PanelUsuario_View.php">Perfil Anfitrion</a></li>
+                <li><a class="nav-link scrollto" href="./App/Views/anelAnfitrion_View.php">Panel Anfitrion</a></li>
                 <li><a class="nav-link scrollto" href="./App/Views/anunciosMultiples_View.php">Publica tu Espacio</a></li>
+                <li><a class="nav-link scrollto" href="./App/Views/calificarAnfitrion_View.php">Calificar Anfitrion</a></li>
                 <?php
                 
               };
