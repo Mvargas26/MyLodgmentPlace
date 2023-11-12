@@ -4,6 +4,7 @@ include './templates/Header.php';
 <!-- ==============================================Fin header ======= -->
 <main id="main">
 <link href="../assets/css/panelHuesped.css" rel="stylesheet">
+
 <body>
     <br>
         <div class="cards-container">
@@ -32,7 +33,7 @@ include './templates/Header.php';
                 <a href="admin_seguridadHuesped_View.php">Administración de Seguridad</a>
             </div>
             <div class="card">
-                <a href="cupones_tarjetasHuesped_View.php">Cupones y Tarjetas de Regalo</a>
+            <a href="cupones_View.php">Cupones y tarjetas de regalo</a>
             </div>
             <div class="card">
                 <a href="denunciasHuesped_View.php">Denuncias</a>
