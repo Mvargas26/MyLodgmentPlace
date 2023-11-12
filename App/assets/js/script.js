@@ -282,18 +282,25 @@
                     identificacion: identificacion,
                     password: password
                 },
-                beforeSend: function () {
-                    // Mensaje antes de enviar la solicitud AJAX
-                    alert('Entró');
-                },
                 success: function (response) {
-                    if (response === 'true') {
-                        // Credenciales válidas, realiza las acciones necesarias (almacenar código, enviar correo, etc.)
-                        alert('Credenciales válidas');
+                    //se vuelve a convertir a jason para poder usar la llave-valor que se le envia
+                    //var x = JSON.parse(response);
+                    if (response != null) {
+                        Swal.fire("Éxito", "Se ha iniciado sesion correctamente. " , "success");//mensaje bonito
+                   
                     } else {
-                        // Credenciales inválidas, muestra un mensaje de error
-                        alert('Credenciales inválidas. Inténtalo de nuevo.');
+                        
+                        Swal.fire("Error", "Lo sentimos, sus credenciales son invalidas, intentelo de nuevo.", "error");
                     }
+
+                    // if (response.exito === 'true') {
+                    //     // Credenciales válidas, realiza las acciones necesarias (almacenar código, enviar correo, etc.)
+                    //     alert('Credenciales válidas');
+
+                    // } else {
+                    //     // Credenciales inválidas, muestra un mensaje de error
+                    //     alert('Credenciales inválidas. Inténtalo de nuevo.');
+                    // }
                 },
                 error: function () {
                     // Error en la solicitud AJAX, muestra un mensaje de error

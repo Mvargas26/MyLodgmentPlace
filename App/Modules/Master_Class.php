@@ -1,5 +1,11 @@
 <?php
+require_once(__DIR__ . '/../../app//libs/PHPMAILER/autoload.php');
+
 date_default_timezone_set("America/Costa_Rica");
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\SMTP;
 
 class Master_Class{
     // private $server = "tiusr29pl.cuc-carrera-ti.ac.cr";
@@ -153,58 +159,8 @@ class Master_Class{
         /*-----------------------------------------------AUNTETINTIFICACION--------------------------------------------------*/
 
 //Funciones de prueba (inicio)
-function enviarCodigoAutenticacionCorreo($destinatario, $codigo_autenticacion) {
-    $asunto = "Código de autenticación";
-    $mensaje = "Su código de autenticación es: $codigo_autenticacion";
 
-    // Utiliza la función mail() para enviar correos (asegúrate de tener la configuración adecuada en tu servidor)
-    mail($destinatario, $asunto, $mensaje);
-}
-
-function verificarCredenciales($identificacion, $password) {
-    // Utiliza la instancia de la clase Master_Class
-    global $ObjMaster;
-
-    // Consulta la base de datos para verificar las credenciales
-    $result = $ObjMaster->ConsultarUsuario($identificacion, $password);
-
-    // Comprueba si se encontró un usuario con las credenciales proporcionadas
-    if ($result && $result->num_rows > 0) {
-        // Credenciales válidas
-        return true;
-    } else {
-        // Credenciales inválidas
-        return false;
-    }
-}
-
-function almacenarCodigoAutenticacion($identificacion, $codigo_autenticacion) {
-        // Utiliza la instancia de la clase Master_Class
-        global $ObjMaster;
-
-        try {
-            // Escapa los valores para prevenir SQL injection
-            $identificacion = $ObjMaster->GetConexion()->real_escape_string($identificacion);
-            $codigo_autenticacion = $ObjMaster->GetConexion()->real_escape_string($codigo_autenticacion);
-    
-            // Ejecuta la consulta SQL para actualizar el código de autenticación
-            $query = "UPDATE tbusuario SET codigoAutenticacion = '$codigo_autenticacion' WHERE idUser = '$identificacion'";
-            $ObjMaster->GetConexion()->query($query);
-    
-            // Verifica si la actualización fue exitosa
-            if ($ObjMaster->GetConexion()->affected_rows > 0) {
-                // Actualización exitosa
-                return true;
-            } else {
-                // No se realizó ninguna actualización
-                return false;
-            }
-        } catch (Exception $e) {
-            // Manejo de errores (puedes personalizar según tus necesidades)
-            error_log("Error al almacenar código de autenticación: " . $e->getMessage());
-            return false;
-        }
-}
+//inicio Funcion para codigo aleatorio
 
 function generarCodigoAleatorio($longitud) {
     $caracteres = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
@@ -216,6 +172,88 @@ function generarCodigoAleatorio($longitud) {
 
     return $codigo;
 }
+
+//fin Funcion para codigo aleatorio
+
+//Inicio funcion para guardar codigo aleatorio de autenticacion
+
+function almacenarCodigoAutenticacion($identificacion, $codigo_autenticacion) {
+    try {
+        // Escapa los valores para prevenir SQL injection
+        $identificacion = $this->GetConexion()->real_escape_string($identificacion);
+        $codigo_autenticacion = $this->GetConexion()->real_escape_string($codigo_autenticacion);
+
+        // Ejecuta la consulta SQL para actualizar el código de autenticación
+        $query = "UPDATE tbusuario SET codigoAutenticacion = '$codigo_autenticacion' WHERE idUser = '$identificacion'";
+        $this->GetConexion()->query($query);
+
+        // Verifica si la actualización fue exitosa
+        if ($this->GetConexion()->affected_rows > 0) {
+            // Actualización exitosa
+            return true;
+        } else {
+            // No se realizó ninguna actualización
+            return false;
+        }
+    } catch (Exception $e) {
+        // Manejo de errores (puedes personalizar según tus necesidades)
+        error_log("Error al almacenar código de autenticación: " . $e->getMessage());
+        return false;
+    }
+}
+
+//fin funcion para guardar codigo aleatorio de autenticacion
+
+//inicio funcion para enviar correo de autenticacion
+
+function enviarCodigoAutenticacionCorreo($destinatario, $codigo_autenticacion)
+    {
+        $mail = new PHPMailer(true);
+
+        try {
+
+            $mail->SMTPOptions = array('ssl' => array('verify_peer' => false, 'verify_peer_name' => false, 'allow_self_signed' => true));
+     
+     
+            try {
+                //$mail -> SMTPDebug = SMTP::DEBUG_SERVER;
+                $mail->isSMTP();
+                $mail->Host       = 'smtp.titan.email';
+                $mail->SMTPAuth   = true;
+                $mail->Username   = 'pruebas@tritechno.net';
+                $mail->Password   = 'Pruebas1234*';
+                $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+                $mail->Port       = 587;
+     
+                $mail->setFrom('pruebas@tritechno.net', 'My Lodgment Place');
+                 $mail->addAddress($destinatario);
+                $mail->isHTML(true);
+                $mail->Subject = 'Este es tu codigo de autenticacion para el inicio de sesion';
+                $mail->Body    = $codigo_autenticacion;
+                //$mail->send();
+     
+                if (!$mail->send()) {
+                    echo 'Error al enviar el correo electrónico: ' . $mail->ErrorInfo;
+                } else {
+                    // echo 'Correo electrónico enviado correctamente.';
+                }
+            } catch (\Exception $th) {
+                echo 'MEnsaje de Error: ' . $mail->ErrorInfo;
+            }
+
+            // Enviar el correo
+            //$mail->send();
+            
+            return true;
+        } catch (Exception $e) {
+            error_log("Error al enviar el correo: {$mail->ErrorInfo}");
+            return false;
+        }
+    }
+
+//fin funcion para enviar correo de autenticacion
+
+
 //Funciones de prueba(fin)
         /*----------------------------------------------- INMUEBLES --------------------------------------------------*/
 

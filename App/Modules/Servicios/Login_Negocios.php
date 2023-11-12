@@ -20,7 +20,28 @@ if (isset($_POST["verificarCredenciales"])) {
             $_SESSION['nombre'] = $usuario['nombre'];
             $_SESSION['Rol'] = $usuario['idRol'];
             $_SESSION['Correo'] = $usuario['correo'];
+
+            $codigoAutenticacion = $ObjMaster->generarCodigoAleatorio(5);
+
+            // Almacenar el código en la base de datos
+            $ObjMaster->almacenarCodigoAutenticacion($usuario['idUser'], $codigoAutenticacion);
+
+            $correoEnviado = $ObjMaster->enviarCodigoAutenticacionCorreo($usuario['correo'], $codigoAutenticacion);
+
+            if ($correoEnviado) {
+                $data = array("exito"=>true);
+ 
+                echo json_encode($data);
+                // echo json_encode(array('exito' => true, 'nombre' => $usuario['nombre']));
+            } else {
+                $data = array("exito"=>false);
+ 
+                echo json_encode(null);
+                // echo json_encode(array('exito' => false, 'response' => 'Error al enviar el correo.'));
+            } 
         }
+
+        //envio de correo
 
 
         // Devolver el resultado como texto ("true" o "false")
