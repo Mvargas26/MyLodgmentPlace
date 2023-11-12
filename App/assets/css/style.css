@@ -735,39 +735,66 @@ section {
 /*--------------------------------------------------------------
 # Services
 --------------------------------------------------------------*/
+
 .services .icon-box {
-  padding: 30px;
+  padding: 20px;
   position: relative;
   overflow: hidden;
   border-radius: 10px;
   background: #fff;
   box-shadow: 0 10px 29px 0 rgba(68, 88, 144, 0.1);
   transition: all 0.3s ease-in-out;
-  height: 100%;
+  height: 220px;
 }
 
 .services .icon-box:hover {
   transform: translateY(-5px);
+  cursor:pointer;
+}
+
+.services .title,
+.services .icon {
+  transition: all 0.3s ease-in-out;
+}
+
+.services .icon-box:hover .title,
+.services .icon-box:hover .icon {
+  opacity: 0; 
+  visibility: hidden;
+}
+
+.services .info {
+  display: none;
+}
+
+.services .icon-box:hover .info {
+  display: block; 
+}
+
+.services .title {
+  font-weight: 700;
+  margin-bottom: 15px;
+  font-size: 24px;
+  text-align: center;
 }
 
 .services .icon {
   position: absolute;
-  left: -20px;
-  top: calc(50% - 30px);
+  left: calc(35% - 5px);
+  top: calc(40% - 5px);
 }
 
+.services .info {
+  text-align: center;
+}
+
+
 .services .icon i {
-  font-size: 64px;
+  font-size: 100px;
   line-height: 1;
   transition: 0.5s;
 }
 
-.services .title {
-  margin-left: 40px;
-  font-weight: 700;
-  margin-bottom: 15px;
-  font-size: 18px;
-}
 
 .services .title a {
   color: #111;
@@ -779,10 +806,14 @@ section {
 
 .services .description {
   font-size: 14px;
-  margin-left: 40px;
+  /* margin-left: 35px; */
   line-height: 24px;
   margin-bottom: 0;
+  font-weight: bold;
 }
+
+
+
 
 /*--------------------------------------------------------------
 # Testimonials

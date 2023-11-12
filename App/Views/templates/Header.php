@@ -58,9 +58,9 @@ $base_path = '../assets/';
 
       <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>
-          <li><a class="nav-link scrollto active" href="#hero">Inicio</a></li>
+          <li><a class="nav-link scrollto active" href="../../">Inicio</a></li>
           <li><a class="nav-link scrollto" href="#about">Lugares</a></li>
-          <li><a class="nav-link scrollto" href="#services">Publica tu Espacio</a></li>
+          <li><a class="nav-link scrollto" href="PublicarInmueble_View.php">Publica tu Espacio</a></li>
           <li><a class="nav-link scrollto " href="Login_View.php">Iniciar Sesion</a></li>
           <li><a class="nav-link scrollto" href="registro_View.php">Registrarse</a></li>
           <li><a class="nav-link scrollto" href="#contact">Contactenos</a></li>

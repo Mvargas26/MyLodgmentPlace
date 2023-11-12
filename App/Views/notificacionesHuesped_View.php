@@ -4,10 +4,24 @@ include './templates/Header.php';
 <!-- ==============================================Fin header ======= -->
 <main id="main">
 
+<!-- ================================================================== -->
+<!-- NOTIFICACIONES DEL HUESPED LE TOCA A DIEGO -->
+<!-- ================================================================== -->
+
+
 <body id="body">
 
 
-<p>aca va las notificaciones </p>
+    <p>aca va las notificaciones </p>
+    
+
+
+
+
+
+
+
+
 
 
 

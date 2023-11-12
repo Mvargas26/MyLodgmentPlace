@@ -21,11 +21,11 @@ include './templates/Header.php';
     <hr/>
 
 
-    <div class="grid">
+    <!-- <div class="grid"> -->
         <!-- ========================================================= -->
         <!-- SE LLENA CON LOS SERVICIOS DE LA BASE DE DATOS -->
         <!-- ========================================================= -->
-    </div>
+    <!-- </div> -->
 
     <hr/>
 
