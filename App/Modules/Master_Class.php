@@ -119,7 +119,7 @@ class Master_Class{
 
             $data = null;
 
-            $query = "SELECT * FROM `tbfotoinmueble` where idInmueble = $idInmueble;";
+            $query = "SELECT * FROM `tbfotoinmueble`;";
             
             if ($sql = $this->conn->query($query)) {
                 while ($row = mysqli_fetch_assoc($sql)) {
@@ -260,8 +260,7 @@ function enviarCodigoAutenticacionCorreo($destinatario, $codigo_autenticacion)
         function ConsultarInmuebles() {
 
             try {
-                $query = " SELECT 
-                mu.id, 
+                $query = "SELECT         mu.id, 
                 mu.nombre AS nombre_inmueble, 
                 mu.valorDiario, 
                 mu.capacidadPersonas, 
@@ -270,9 +269,14 @@ function enviarCodigoAutenticacionCorreo($destinatario, $codigo_autenticacion)
                 mu.disponibilidad, 
                 mu.estrellas, 
                 mu.fechaLimiteDisponibilidad, 
-               CONCAT(us.nombre, ' ', us.apellido1, ' ', us.apellido2) AS nombre_propietario
-            FROM tbinmueble mu
-            INNER JOIN tbusuario us ON mu.Propietario = us.idUser;";
+               CONCAT(us.nombre, ' ', us.apellido1, ' ', us.apellido2) AS nombre_propietario,
+               ca.categoria as Categoria_Inmueble,
+               ft.nombreImagen as nameImagen
+            FROM tbinmueble as mu
+            INNER JOIN tbusuario as us ON mu.Propietario = us.idUser
+            INNER JOIN tbcategoriainmueble ON mu.id =tbcategoriainmueble.idInmueble
+            INNER JOIN tbcategorias ca ON tbcategoriainmueble.idCategoria = ca.idcategoria
+            INNER JOIN tbfotoinmueble ft ON mu.id = ft.idInmueble;";
 
                 $this->conn->set_charset("utf8"); 
                 $result = $this->getConexion()->query($query);
@@ -292,6 +296,8 @@ function enviarCodigoAutenticacionCorreo($destinatario, $codigo_autenticacion)
                             "estrellas" => $row["estrellas"],
                             "fechaLimiteDisponibilidad" => $row["fechaLimiteDisponibilidad"],
                             "nombre_propietario" => $row["nombre_propietario"],
+                            "Categoria_Inmueble" => $row["Categoria_Inmueble"],
+                            "nameImagen" => $row["nameImagen"],
                         );
                         $data[] = $item;
                     }
@@ -349,11 +355,6 @@ function enviarCodigoAutenticacionCorreo($destinatario, $codigo_autenticacion)
                     return null; // Retorna null en caso de error
                 }
         }
-
-
-
-
-
 
 
 }//fn cl_masterClass

@@ -21,13 +21,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 {
                     var respuestaJSON = JSON.parse(response);
 
-                    // respuestaJSON.forEach(function(objeto) {
-                    //     console.log("ID:", objeto.id);
-                    //     console.log("Nombre Inmueble:", objeto.Nombre_Inmueble);
-                    //     console.log("Estado:", objeto.Estado);
-                    //     console.log("Disponibilidad:", objeto.Disponibilidad);
-                    // });
-
                     //esto llena el grid
                     var tbody = document.querySelector('#GridAnunciosMultiples tbody');
                     tbody.innerHTML = '';
