@@ -36,16 +36,11 @@ if (isset($_POST["verificarCredenciales"])) {
             } else {
                 $data = array("exito"=>false);
  
-                echo json_encode(null);
+                echo json_encode($data);
                 // echo json_encode(array('exito' => false, 'response' => 'Error al enviar el correo.'));
             } 
         }
 
-        //envio de correo
-
-
-        // Devolver el resultado como texto ("true" o "false")
-        echo $credencialesValidas ? "true" : "false";
     } catch (Exception $e) {
         echo json_encode(array('error' => $e->getMessage()));
     }

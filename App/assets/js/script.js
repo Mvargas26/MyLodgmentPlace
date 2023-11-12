@@ -147,7 +147,7 @@
     const CargarServicios = {
         init: function () {
             // Realiza una solicitud GET al cargar la página
-           // console.log("FUNCION Servicios")
+            console.log("FUNCION Servicios")
             const ObtenerServicios = {
                 ObtenerServicios : "ObtenerServicios"
             };
@@ -160,7 +160,7 @@
                 },
                 success: function(response) 
                 {
-                  //  console.log("Si esta entrando")
+                    console.log("Si esta entrando")
 
                     if (Array.isArray(response)) {
                     
@@ -217,7 +217,7 @@
                 // Obtén todos los elementos con la clase 'hiddenInput'
                 var hiddenInputs = document.querySelectorAll('.hiddenInput');
                 
-                //console.log(hiddenInputs);
+                console.log(hiddenInputs);
                 // Array para almacenar los valores seleccionados
                 var valoresSeleccionados = [];
 
@@ -282,28 +282,29 @@
                     identificacion: identificacion,
                     password: password
                 },
+                dataType: 'json', // Indicar que esperamos un JSON como respuesta
                 success: function (response) {
-                    //se vuelve a convertir a jason para poder usar la llave-valor que se le envia
-                    //var x = JSON.parse(response);
-                    if (response != null) {
-                        Swal.fire("Éxito", "Se ha iniciado sesion correctamente. " , "success");//mensaje bonito
-                   
+                    if (response.exito) {
+                        // Mostrar el mensaje Swal
+                        Swal.fire({
+                            title: "Éxito",
+                            text: "Se ha iniciado sesión correctamente.",
+                            icon: "success",
+                            showCancelButton: false,
+                            confirmButtonColor: "#3085d6",
+                            confirmButtonText: "Aceptar"
+                        }).then((result) => {
+                            // Si el usuario hace clic en "Aceptar", redirige
+                            if (result.isConfirmed) {
+                                window.location.href = 'codigoAutenticacion_view.php';
+                            }
+                        });
                     } else {
-                        
-                        Swal.fire("Error", "Lo sentimos, sus credenciales son invalidas, intentelo de nuevo.", "error");
+                        // Mostrar el mensaje de error Swal
+                        Swal.fire("Error", "Lo sentimos, sus credenciales son inválidas. Inténtelo de nuevo.", "error");
                     }
-
-                    // if (response.exito === 'true') {
-                    //     // Credenciales válidas, realiza las acciones necesarias (almacenar código, enviar correo, etc.)
-                    //     alert('Credenciales válidas');
-
-                    // } else {
-                    //     // Credenciales inválidas, muestra un mensaje de error
-                    //     alert('Credenciales inválidas. Inténtalo de nuevo.');
-                    // }
                 },
                 error: function () {
-                    // Error en la solicitud AJAX, muestra un mensaje de error
                     alert('Error en la verificación de credenciales.');
                 }
             });
@@ -311,9 +312,14 @@
     });
 
     //###############################################################################################################################
-    //anuncios multiples
+    //inicio pruebas de login
     //###############################################################################################################################
-   
+
+
+
+    //###############################################################################################################################
+    //fin pruebas de login
+    //###############################################################################################################################
 
 
 
@@ -323,5 +329,3 @@
      RegistroUsuarios.init();
      Login.init();
      CargarServicios.init();
-    //  AnunciosMultiples.init();
-     
