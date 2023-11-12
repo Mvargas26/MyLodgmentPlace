@@ -8,11 +8,9 @@ include './templates/Header.php';
 
 
 
-
-
-
-
-
+<h3>Sos</h3>
+<h3>Bien</h3>
+<h3>Gay</h3>
 
 
 <!-- ==============================================Inicio Footer ======= -->
