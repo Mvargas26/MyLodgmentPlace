@@ -268,46 +268,49 @@ function generarCodigoAleatorio($longitud) {
                 return null; // Retorna null en caso de error
             }
 
-
-
-
-
-
-
-
-            // try {
-                        
-            //     $query = " SELECT 
-            //     mu.id, 
-            //     mu.nombre AS nombre_inmueble, 
-            //     mu.valorDiario, 
-            //     mu.capacidadPersonas, 
-            //     mu.costoPersonaExtra, 
-            //     mu.direccion, 
-            //     mu.disponibilidad, 
-            //     mu.estrellas, 
-            //     mu.fechaLimiteDisponibilidad, 
-            //    CONCAT(us.nombre, ' ', us.apellido1, ' ', us.apellido2) AS nombre_propietario,
-            //    fi.Fotografia   
-            // FROM tbinmueble mu
-            // INNER JOIN tbusuario us ON mu.Propietario = us.idUser
-            // INNER JOIN tbfotoinmueble fi ON mu.id = fi.idInmueble;";
-
-            //     $result = $this->getConexion()->query($query);
-            //     var_dump($result);
-
-            //     if ($result) {
-            //         return $result;
-            //     } else {
-            //         throw new Exception("Error en la consulta: " . $this->getConexion()->error);
-            //     }
-            // } catch (Exception $e) {
-            //     error_log($e->getMessage());
-            //     return $e->getMessage();
-            // }
         }//fn ConsultarUsuario
 
+        function ConsultaMultipleEspacios(){
+            $arry_Datos = func_get_args();
 
+            $idAnfitrion = $this->GetConexion()->real_escape_string($arry_Datos[0]);
+            
+            try {
+                    $query = " SELECT id, nombre AS nombre_inmueble,Estado,
+                    CASE disponibilidad
+                           WHEN 1 THEN 'Disponible'
+                           ELSE 'No Disponible'
+                       END AS disponibilidad
+                   FROM tbinmueble INNER JOIN tbestadolugar ON
+                   tbinmueble.estadoLugar = tbestadolugar.idEstado
+                   WHERE Propietario = $idAnfitrion;";
+    
+                    $this->conn->set_charset("utf8"); 
+                    $result = $this->getConexion()->query($query);
+            
+                    if ($result) {
+                        $data = array();
+            
+                        while ($row = $result->fetch_assoc()) {
+                            $item = array(
+                                "id" => $row['id'],
+                                "Nombre_Inmueble" => $row["nombre_inmueble"],
+                                "Estado" => $row["Estado"],
+                                "Disponibilidad" => $row["disponibilidad"]
+                            );
+                            $data[] = $item;
+                        }
+            
+                        return json_encode($data);
+    
+                    } else {
+                        throw new Exception("Error en la consulta: " . $this->getConexion()->error);
+                    }
+                } catch (Exception $e) {
+                    error_log($e->getMessage());
+                    return null; // Retorna null en caso de error
+                }
+        }
 
 
 

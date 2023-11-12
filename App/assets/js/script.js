@@ -147,7 +147,7 @@
     const CargarServicios = {
         init: function () {
             // Realiza una solicitud GET al cargar la página
-            console.log("FUNCION Servicios")
+           // console.log("FUNCION Servicios")
             const ObtenerServicios = {
                 ObtenerServicios : "ObtenerServicios"
             };
@@ -160,7 +160,7 @@
                 },
                 success: function(response) 
                 {
-                    console.log("Si esta entrando")
+                  //  console.log("Si esta entrando")
 
                     if (Array.isArray(response)) {
                     
@@ -217,7 +217,7 @@
                 // Obtén todos los elementos con la clase 'hiddenInput'
                 var hiddenInputs = document.querySelectorAll('.hiddenInput');
                 
-                console.log(hiddenInputs);
+                //console.log(hiddenInputs);
                 // Array para almacenar los valores seleccionados
                 var valoresSeleccionados = [];
 
@@ -304,14 +304,9 @@
     });
 
     //###############################################################################################################################
-    //inicio pruebas de login
+    //anuncios multiples
     //###############################################################################################################################
-
-
-
-    //###############################################################################################################################
-    //fin pruebas de login
-    //###############################################################################################################################
+   
 
 
 
@@ -321,3 +316,5 @@
      RegistroUsuarios.init();
      Login.init();
      CargarServicios.init();
+    //  AnunciosMultiples.init();
+     

@@ -45,3 +45,34 @@
   margin-top: 50px;
   margin-bottom: 50px;
 }
+ /*##########################################################################################################################*/
+/*###################################  Tabla Anuncios Multiples ###################################################################*/
+/*##########################################################################################################################*/
+#divGridAnunciosMultiples{
+  margin-top: 200px;
+  margin-bottom: 200px;
+  margin-left: 5%;
+  width: 80%;
+}
+
+#GridAnunciosMultiples {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#GridAnunciosMultiples td, #GridAnunciosMultiples th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+#GridAnunciosMultiples tr:nth-child(even){background-color: #f2f2f2;}
+
+#GridAnunciosMultiples tr:hover {background-color: #ddd;}
+
+#GridAnunciosMultiples th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #6f068a;
+  color: white;
+}

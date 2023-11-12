@@ -66,6 +66,7 @@
                 <li><a class="nav-link scrollto" href="./App/Views/anelAnfitrion_View.php">Panel Anfitrion</a></li>
                 <li><a class="nav-link scrollto" href="./App/Views/anunciosMultiples_View.php">Publica tu Espacio</a></li>
                 <li><a class="nav-link scrollto" href="./App/Views/calificarAnfitrion_View.php">Calificar Anfitrion</a></li>
+                <li><a class="nav-link scrollto" href="./App/Views/Anuncios_MultiplesV_View.php">Anuncios Multiples</a></li>
                 <?php
                 
               };
