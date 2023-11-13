@@ -69,18 +69,13 @@ include './templates/Header.php';
 
 
 
-
-
-
-
-
 <section id="services" class="services">
     <div class="section-title">
         <h2>Servicios de Nuestros Espacios</h2>
-        <p>Selecciona los servicios con los que cuenta </p>
+        <p>Selecciona los servicios con los que cuenta tu espacio para que el huesped</p>
     </div>
     
-    <hr/>
+    <!-- <hr/> -->
     
     <div class="grid">
         
@@ -115,6 +110,7 @@ include './templates/Header.php';
 <!-- <h3>&nbsp;&nbsp;Selecciona los Servicios que tiene tu Inmueble: </h3> -->
 
 <!-- ==============================================Inicio Footer ======= -->
+<script src="../assets/js/Servicios/script_servicios.js"></script>
 <?php
 include './templates/Footer.php';
 ?>

@@ -2,22 +2,6 @@
 //SERVICIOS
 //###############################################################################################################################
 
-    const vistaActual = document.body.dataset.vista;
-
-    // Verifica si la vista actual es PublicarInmueble_View.php
-    // Carga los Servicios de la base
-    if (vistaActual === 'PublicarInmueble_View.php') {
-        window.addEventListener('load', function() {
-            CargarTodosLosServicios.init();
-        });
-
-    }
-    else{
-        console.log("ES OTRA VISTA")
-
-    }
-
-
     const CargarTodosLosServicios = {
         init: function () {
             // Realiza una solicitud GET al cargar la página
@@ -125,6 +109,77 @@
                 });
             });
         });   
+
+        const InsertarServiciosPorInmueble = {
+            init: function () {
+                // Realiza una solicitud GET al cargar la página
+                console.log("FUNCION Servicios")
+                const InsertarServicios = {
+                    listaServicios : valoresSeleccionados,
+                    idInmueble : "ID INMUEBLE"
+                };
+    
+                $.ajax({
+                    url: "../../App/Modules/Servicios/servicios_Negocios.php",
+                    type: "POST",
+                    data:{
+                        InsertarServicios: InsertarServicios
+                    },
+                    success: function(response) 
+                    {
+                        console.log("Si esta entrando")
+    
+                        if (Array.isArray(response)) {
+                        
+                            for (var i = 0; i < response.length; i++) 
+                            {
+                                // Crea un nuevo label
+                                var nuevoLabel = document.createElement('label');
+                                nuevoLabel.className = 'containerServicios';
+                                // nuevoLabel.id = 'containerServicios';
+    
+                                // Crea un nuevo input tipo hidden
+                                var nuevoInputID = document.createElement('input');
+                                nuevoInputID.type = 'hidden';
+                                nuevoInputID.id = 'IDServicio';
+                                nuevoInputID.value = response[i].id;
+                                nuevoInputID.className = 'hiddenInput'
+    
+                                // Crea un nuevo input tipo checkbox
+                                var nuevoInputCheckbox = document.createElement('input');
+                                nuevoInputCheckbox.type = 'checkbox';
+                                nuevoInputCheckbox.checked = false;
+    
+                                // Crea un nuevo span
+                                var nuevoSpan = document.createElement('span');
+                                nuevoSpan.className = 'checkmark';
+    
+                                // Asigna el texto del label con el nombre del servicio
+                                nuevoLabel.innerText = response[i].nombre;
+    
+                                // Agrega los elementos al label
+                                nuevoLabel.appendChild(nuevoInputID);
+                                nuevoLabel.appendChild(nuevoInputCheckbox);
+                                nuevoLabel.appendChild(nuevoSpan);
+    
+                                // Agrega el label al contenedor grid
+                                document.querySelector('.grid').appendChild(nuevoLabel);
+    
+                            }
+                        } else {
+                            console.error('La respuesta no es un array:', response);
+                        }
+    
+    
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        console.error('Error en la solicitud AJAX:', textStatus, errorThrown);
+                    }
+                });
+            }
+        };
+
+
 
 CargarTodosLosServicios.init()
 

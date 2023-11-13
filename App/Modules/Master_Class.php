@@ -264,6 +264,29 @@ class Master_Class
             return null; // Retorna null en caso de error
         }
     }
+
+    function InsertarServicios()
+    {
+        $arry_Datos = func_get_args();
+
+        $listaIdServicios = $this->GetConexion()->real_escape_string($arry_Datos[0]);
+        $idInmueble = $this->GetConexion()->real_escape_string($arry_Datos[1]);
+
+        $success = true;
+
+        foreach ($listaIdServicios as $idServicio) {
+            $query = "INSERT INTO `tbinmuebleservicio`(`idServicio`, `idInmueble`, `disponibilidad`)
+                VALUES ('$idServicio', '$idInmueble', 'disponible')";
+
+            if (!$this->getConexion()->query($query)) {
+                $success = false;
+                break;
+            }
+        }
+
+        return $success;
+    }
+
     /*-----------------------------------------------AUNTETINTIFICACION--------------------------------------------------*/
 
 

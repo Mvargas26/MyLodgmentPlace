@@ -1,7 +1,7 @@
 
 .grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* Puedes ajustar el número de columnas según tus necesidades */
+    grid-template-columns: repeat(3, 1fr); /* Puedes ajustar el número de columnas según tus necesidades */
     gap: 10px; /* Espacio entre elementos */
     margin: 15px;
 }

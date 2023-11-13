@@ -11,7 +11,7 @@ session_start();
     Notificaciones</h1>
     <hr/>
     
-    <div id="divGridNotificacionesAnfitrion">
+    <div id="divGridNotificaciones">
         <!-- =============================================== -->
         <!-- se llena dinamicamente con JS -->
         <!-- =============================================== -->

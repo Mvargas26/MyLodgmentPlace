@@ -45,13 +45,13 @@ session_start();
     <div class="container-fluid d-flex align-items-center justify-content-lg-between">
 
       <h1 class="logo me-auto me-lg-0"><a href="#">
-          <img width="50" height="100" src="https://img.icons8.com/sf-black-filled/64/home.png" alt="home" />
+      <i class="bi bi-house-door-fill" style="font-size: 1.5em; color:#ffff;"></i>
         </a></h1>
 
 
       <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>
-          <li><a class="nav-link scrollto active" href="#hero">Inicio</a></li>
+          <li><a class="nav-link scrollto active" href="../../">Inicio</a></li>
           <li><a class="nav-link scrollto" href="#portfolio">Lugares</a></li>
           <li><a class="nav-link scrollto" href="#contact">Contactenos</a></li>
           <!-- <li><a class="nav-link scrollto" href="#about"> -->

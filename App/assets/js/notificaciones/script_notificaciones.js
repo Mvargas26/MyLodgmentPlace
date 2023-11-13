@@ -8,9 +8,9 @@
         // const ObtenerNotificaciones = {
         //     ObtenerNotificaciones : "ObtenerNotificaciones"
         // };
-        const GridNotificacionesAnfitrion = document.getElementById("GridNotificacionesAnfitrion");
+        const GridNotificaciones = document.getElementById("divGridNotificaciones");
 
-        if (GridNotificacionesAnfitrion) {
+        if (GridNotificaciones) {
 
             console.log("Entra al if")
             console.log(identificacion)
@@ -26,8 +26,8 @@
                     respuestaJSON.forEach(function(notificacion, index) {
                         // Crear un nuevo div para cada notificación
                         var nuevoGrid = document.createElement("div");
-                        nuevoGrid.classList.add("GridNotificacionesAnfitrion");
-                        nuevoGrid.id = "GridNotificacionesAnfitrion" ;
+                        nuevoGrid.classList.add("GridNotificaciones");
+                        nuevoGrid.id = "GridNotificaciones" ;
                 
                         // Crear el icono
                         var nuevoIcono = document.createElement("i");
@@ -48,15 +48,13 @@
                         nuevoGrid.appendChild(nuevoSpan);
                 
                         // Agregar el nuevo div al contenedor existente
-                        var contenedor = document.getElementById("divGridNotificacionesAnfitrion");
+                        var contenedor = document.getElementById("divGridNotificaciones");
                         contenedor.appendChild(nuevoGrid);
 
-                        
-                        // Agregar un <hr/> entre cada elemento, excepto después del último
-                        if (index < respuestaJSON.length - 1) {
-                            var hr = document.createElement("hr");
-                            contenedor.appendChild(hr);
-                        }
+                        // if (index < respuestaJSON.length - 1) {
+                        var hr = document.createElement("hr");
+                        contenedor.appendChild(hr);
+                        // }
                     });
                 },
                 error: function(textStatus, errorThrown) {

@@ -11,7 +11,7 @@
 }
 
 
-#divGridNotificacionesAnfitrion{
+#divGridNotificaciones{
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -27,19 +27,19 @@
     justify-content: center;
 }
 
-#GridNotificacionesAnfitrion{
+#GridNotificaciones{
     display: flex;
     justify-content: space-evenly;
     align-content: center;
     text-align: center;
     margin: 30px;
     height: 40px;
-    font-size: x-large;
+    font-size: large;
     color:black;
     font-weight: bold;
 }
 
-#GridNotificacionesAnfitrion > * {
+#GridNotificaciones > * {
     flex: 1; /* Distribuir espacio igualmente entre los elementos hijos */
     min-width: 0; /* Asegurarse de que los elementos puedan reducir su ancho si es necesario */
 }

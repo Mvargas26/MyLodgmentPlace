@@ -10,8 +10,8 @@ session_start();
     <i class="bi bi-bell-fill"></i>
     Notificaciones</h1>
     <hr/>
-    
-    <div id="divGridNotificacionesAnfitrion">
+
+    <div id="divGridNotificaciones">
         <!-- =============================================== -->
         <!-- se llena dinamicamente con JS -->
         <!-- =============================================== -->

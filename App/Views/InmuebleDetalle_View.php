@@ -1,9 +1,9 @@
 <?php
 include './templates/Header.php';
+
 ?>
    <!-- ==============================================Fin header ======= -->
-  
-  <main id="main">
+   <main id="main">
 
     <!-- ======= Breadcrumbs ======= -->
     <section id="breadcrumbs" class="breadcrumbs">
@@ -67,77 +67,204 @@ include './templates/Header.php';
 
     <p>Calendario</p>
 
-    <section id="testimonials" class="testimonials section-bg">
-      <div class="container">
+    <!-- <div id="reseniasDiv">
+      <i class="bi bi-star"></i>
+      <i class="bi bi-star"></i>
+      <i class="bi bi-star"></i>
+      <i class="bi bi-star"></i>
+      <i class="bi bi-star"></i>
 
-        <div class="section-title">
-          <h2>Reseñas</h2>
-          <p>Nos intereza mucho saber tu opinion y que la comunidad de My Lodgment Place tambien la conozca</p>
-        </div>
+    </div> -->
 
-        <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
-          <div class="swiper-wrapper">
+<!-- =============================================================================================== -->
+   <!-- RESEÑAS
+        RESEÑAS -->
+        <div id="ContenedorResenias">
+          <!-- <div id="iconoContenedor">
+            <i class="bi bi-chat-square-quote-fill" id="iconoR"></i>
+          </div> -->
+          <section id="DejaTuResenia">
 
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <p>
-                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  Disfrute mucho en una cabaña de montaña.
-                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-                <img src="../App/assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
-                <h3>Saul Gomez</h3>
-              </div>
-            </div><!-- End testimonial item -->
+            
+            <div id="reseniasDiv">
+              <form id="resenaForm" action="" method="post">
+                <i class="bi bi-star estrellas" data-index="0"></i>
+                <i class="bi bi-star estrellas" data-index="1"></i>
+                <i class="bi bi-star estrellas" data-index="2"></i>
+                <i class="bi bi-star estrellas" data-index="3"></i>
+                <i class="bi bi-star estrellas" data-index="4"></i>
+                
+                <br/>
+              
+                <textarea id="resenaTextarea"
+                name="resena" rows="3"
+                placeholder="Escribe tu reseña aquí..."
+                maxlength="100"
+                ></textarea>
+                
+                <button class="custom-button" type="button">Publicar Reseña</button>
+                
+              </form>
+            </div>
 
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <p>
-                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  Estuvimos el fin de semana en una hermasa casa con acceso privado a la Playa.
-                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-                <img src="./App/assets/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
-                <h3>Sara Rodriguez</h3>
-              </div>
-            </div><!-- End testimonial item -->
+            <!-- <div id="reseniasDiv">
 
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <p>
-                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  Alquilamos la Hacienda con Rancho para nuestra boda y todo salio de Maravilla
-                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-                <img src="../App/assets/img/testimonials/testimonials-3.jpg" class="testimonial-img" alt="">
-                <h3>Jena Karlis</h3>
-              </div>
-            </div><!-- End testimonial item -->
 
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <p>
-                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  La mejor opcion en alojamientos para los diferentes gustos de cada persona.
-                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-                <img src="./App/assets/img/testimonials/testimonials-5.jpg" class="testimonial-img" alt="">
-                <h3>John Larson</h3>
-                <h4>Entrepreneur</h4>
-              </div>
-            </div><!-- End testimonial item -->
+          
+            </div> -->
+          
+          
+          
+          
+          
+            <input type="hidden" id="estrellasSeleccionadas" value="1">
+          </section> <!--end section deja tu resena -->
 
+        
+        <section id="testimonials" class="testimonials section-bg">
+          
+
+          <div class="container">
+            
+            <div class="section-title">
+              <h2>Reseñas</h2>
+              <p>Nos intereza mucho saber tu opinion y que la comunidad de My Lodgment Place tambien la conozca</p>
+            </div>
+            
+            <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
+              <div class="swiper-wrapper">
+                
+                <div class="swiper-slide">
+                  <div class="testimonial-item">
+                    <p>
+                    <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                    Disfrute mucho en una cabaña de montaña.
+                    <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                  </p>
+                  <img src="../App/assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
+                  <h3>Saul Gomez</h3>
+                </div>
+              </div><!-- End testimonial item -->
+              
+              <div class="swiper-slide">
+                <div class="testimonial-item">
+                  <p>
+                    <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                    Estuvimos el fin de semana en una hermasa casa con acceso privado a la Playa.
+                    <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                  </p>
+                  <img src="./App/assets/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
+                  <h3>Sara Rodriguez</h3>
+                </div>
+              </div><!-- End testimonial item -->
+
+              <div class="swiper-slide">
+                <div class="testimonial-item">
+                  <p>
+                    <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                    Alquilamos la Hacienda con Rancho para nuestra boda y todo salio de Maravilla
+                    <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                  </p>
+                  <img src="../App/assets/img/testimonials/testimonials-3.jpg" class="testimonial-img" alt="">
+                  <h3>Jena Karlis</h3>
+                </div>
+              </div><!-- End testimonial item -->
+
+              <div class="swiper-slide">
+                <div class="testimonial-item">
+                  <p>
+                    <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                    La mejor opcion en alojamientos para los diferentes gustos de cada persona.
+                    <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                  </p>
+                  <img src="./App/assets/img/testimonials/testimonials-5.jpg" class="testimonial-img" alt="">
+                  <h3>John Ruiz</h3>
+                  
+                </div>
+              </div><!-- End testimonial item -->
+
+            </div>
+            <div class="swiper-pagination"></div>
           </div>
-          <div class="swiper-pagination"></div>
+
         </div>
 
-      </div>
-    </section><!-- End Testimonials Section -->
- 
-  </main><!-- End #main -->
- 
+      </section><!-- End Testimonials Section -->
+
+    </div>
+    
+    
+    <!-- <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var estrellas = document.querySelectorAll('.estrellas');
+        var inputEstrellas = document.getElementById('estrellasSeleccionadas');
+        
+        // Inicializar la primera estrella como llena
+        estrellas[0].classList.add('bi-star-fill');
+
+        estrellas.forEach(function (estrella) {
+            estrella.addEventListener('click', function () {
+                var index = parseInt(this.dataset.index, 10);
+
+                // Marcar las estrellas hasta la actual
+                for (var i = 0; i <= index; i++) {
+                    estrellas[i].classList.add('bi-star-fill');
+                    estrellas[i].classList.remove('bi-star');
+                }
+
+                // Desmarcar las estrellas después de la actual
+                for (var i = index + 1; i < estrellas.length; i++) {
+                    estrellas[i].classList.remove('bi-star-fill');
+                    estrellas[i].classList.add('bi-star');
+                }
+
+                inputEstrellas.value = index + 1;
+            });
+        });
+    });
+</script> -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var estrellas = document.querySelectorAll('.estrellas');
+        var inputEstrellas = document.getElementById('estrellasSeleccionadas');
+
+        // Inicializar la primera estrella como llena
+        marcarEstrellas(0);
+
+        estrellas.forEach(function (estrella) {
+            estrella.addEventListener('click', function () {
+                var index = parseInt(this.dataset.index, 10);
+                marcarEstrellas(index);
+                inputEstrellas.value = index + 1;
+            });
+        });
+
+        function marcarEstrellas(index) {
+            // Marcar las estrellas hasta la actual
+            for (var i = 0; i <= index; i++) {
+                estrellas[i].classList.add('bi-star-fill');
+                estrellas[i].classList.remove('bi-star');
+            }
+
+            // Desmarcar las estrellas después de la actual
+            for (var i = index + 1; i < estrellas.length; i++) {
+                estrellas[i].classList.remove('bi-star-fill');
+                estrellas[i].classList.add('bi-star');
+            }
+        }
+    });
+</script>
+
+<!-- =============================================================================================== -->
+<!-- END RESENAS  -->
+<!-- =============================================================================================== -->
+
+
+
+</main><!-- End #main -->
+
 <!-- ==============================================Inicio Footer ======= -->
-   
+
 <?php
 include './templates/Footer.php';
 ?>
