@@ -1688,3 +1688,10 @@ section {
     padding-top: 5px;
   }
 }
+
+/* ############################################################### */
+#aDelNombreSesion {
+  font-weight: bold;
+  color: white;
+  font-size: larger;
+}
