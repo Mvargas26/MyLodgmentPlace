@@ -76,3 +76,74 @@
   background-color: #6f068a;
   color: white;
 }
+/*##########################################################################################################################*/
+/*###################################  modal en Anuncio Multiple ###################################################################*/
+/*##########################################################################################################################*/
+#bodyDelModalAgregarFav {
+  background: #ccc;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+}
+
+#bodyDelModalAgregarFav {
+  display: table;
+}
+
+body {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+#examenModalAgregarFav {
+  margin: -44px 50px 0px;
+  position: relative;
+  width: calc(100% - 100px);
+  color: black;
+  background-color: black;
+}
+
+#examenModalAgregarFav h1 {
+  color: white;
+  font-weight: 600;
+  font-size: 30px;
+  text-transform: uppercase;
+  text-align: left;
+  line-height: 44px;
+}
+
+#preguntaModalAgregarFav {
+  padding: 20px;
+  background: #FAFAFA;
+}
+
+#preguntaModalAgregarFav h2 {
+  margin-bottom: 10px;
+  font-weight: 600;
+  font-size: 20px;
+}
+
+#preguntaModalAgregarFav input[type=radio] {
+  display: none;
+}
+
+#preguntaModalAgregarFav label {
+  display: inline-block;
+  margin-top: 2px;
+  margin: 4px;
+  padding: 8px;
+  background: #cebd20;
+  color: #4C3000;
+  width: calc(50% - 8px);
+  min-width: 100px;
+  cursor: pointer;
+}
+
+#preguntaModalAgregarFav label:hover {
+  background: orange;
+}
+
+#preguntaModalAgregarFav input[type=radio]:checked + label {
+  background: orangered;
+  color: #FAFAFA;
+}
