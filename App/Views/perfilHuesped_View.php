@@ -130,8 +130,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </main>
 
 
-  
-
 <!-- ==============================================Inicio Footer ======= -->
 <?php
 include './templates/Footer.php';
