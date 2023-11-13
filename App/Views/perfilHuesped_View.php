@@ -1,6 +1,52 @@
 <?php
 include './templates/Header.php';
 session_start();
+
+require_once('../Modules/Master_Class.php');
+
+$ObjMaster = new Master_Class();
+
+$idUsuario = $_SESSION['Identificacion'];
+$informacionUsuario = $ObjMaster->informacionUsuarios($idUsuario);
+
+if ($informacionUsuario) {
+     "<div>";
+     "<p><strong>Cédula: </strong>{$informacionUsuario['idUser']}</p>";
+     "<p><strong>Nombre: </strong>{$informacionUsuario['nombre']}</p>";
+     "<p><strong>Primer Apellido: </strong>{$informacionUsuario['apellido1']}</p>";
+     "<p><strong>Segundo Apellido: </strong>{$informacionUsuario['apellido2']}</p>";
+     "<p><strong>Dirección de Residencia: </strong>{$informacionUsuario['direccion']}</p>";
+     "<p><strong>Número de Teléfono: </strong>{$informacionUsuario['telefono']}</p>";
+     "<p><strong>Correo Electrónico: </strong>{$informacionUsuario['correo']}</p>";
+     "</div>";
+} else {
+    echo "Error al obtener los datos del usuario.";
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    
+    $nombre = htmlspecialchars($_POST['nombre']);
+    $apellido1 = htmlspecialchars($_POST['apellido1']);
+    $apellido2 = htmlspecialchars($_POST['apellido2']);
+    $direccion = htmlspecialchars($_POST['direccion']);
+    $telefono = htmlspecialchars($_POST['telefono']);
+    $cedula = htmlspecialchars($_POST['cedula']);
+    $email = htmlspecialchars($_POST['email']);
+
+    
+    $actualizacionExitosa = $ObjMaster->actualizaNombreApellido($cedula, $nombre, $apellido1, $apellido2, $direccion, $telefono, $email);
+
+    if ($actualizacionExitosa) {
+        echo "Datos actualizados correctamente";
+    } else {
+        echo "Error al actualizar datos";
+    }
+} else {
+    echo "Acceso no autorizado";
+}
+
+
+
 ?>
 <!-- ==============================================Fin header ======= -->
 <main id="main">
@@ -17,18 +63,18 @@ session_start();
 </head>
 <div class="container mt-5">
     <h2>Datos Personales</h2>
+
     <div>
-        <p><strong>Cédula: </strong><span id="cedulaFromDatabase"></span></p>
-        <p><strong>Nombre: </strong><span id="nameFromDatabase"></span></p>
-        <p><strong>Primer Apellido: </strong><span id="apellidoFromDatabase"></span></p>
-        <p><strong>Primer Apellido: </strong><span id="apellidoFromDatabase"></span></p>
-        <p><strong>Dirección de Residencia:</strong> <span id="currentAddress"></span></p>
-        <p><strong>Número de Teléfono:</strong> <span id="currentPhoneNumber">123456789</span></p>
-        <p><strong>Cédula:</strong> <span id="currentCedula">1234567890</span></p>
-        <p><strong>Correo Electrónico:</strong> <span id="currentEmail">correo@example.com</span></p>
-        <p><strong>Número de Contacto de Emergencia:</strong> <span id="currentEmergencyContactNumber">987654321</span></p>
-        <p><strong>Nombre de Contacto en Caso de Emergencia:</strong> <span id="currentEmergencyContactName">Nombre Contacto</span></p>
-    </div>
+    <p><strong>Cédula: </strong><?php echo $informacionUsuario['idUser']; ?></p>
+    <p><strong>Nombre: </strong><?php echo $informacionUsuario['nombre']; ?></p>
+    <p><strong>Primer Apellido: </strong><?php echo $informacionUsuario['apellido1']; ?></p>
+    <p><strong>Segundo Apellido: </strong><?php echo $informacionUsuario['apellido2']; ?></p>
+    <p><strong>Dirección de Residencia:</strong> <?php echo $informacionUsuario['direccion']; ?></p>
+    <p><strong>Número de Teléfono:</strong> <?php echo $informacionUsuario['telefono']; ?></p>
+    <p><strong>Correo Electrónico:</strong> <?php echo $informacionUsuario['correo']; ?></p>
+</div>
+
+
     <!-- Botón para activar el modal -->
     <button type="button" class="btn btn-primary mt-3" data-toggle="modal" data-target="#updateModal">
         Actualizar Datos
@@ -46,68 +92,40 @@ session_start();
                 </button>
             </div>
             <div class="modal-body">
-              
-                <form id="updateForm">
+                <form method="post" action="" id="ActualizarDatos">
                     <div class="form-group">
                         <label for="nameFromDatabase">Nombre:</label>
-                        <input type="text" class="form-control" id="nameFromDatabase" placeholder="Nuevo Nombre">
+                        <input type="text" class="form-control" id="nameFromDatabase" value="<?php echo $informacionUsuario['nombre']; ?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="apellido1">Primer apellido:</label>
+                        <input type="text" class="form-control" id="apellido1" value="<?php echo $informacionUsuario['apellido1']; ?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="apellido2">Segundo apellido:</label>
+                        <input type="text" class="form-control" id="apellido2" value="<?php echo $informacionUsuario['apellido2']; ?>">
                     </div>
                     <div class="form-group">
                         <label for="updatedAddress">Dirección de Residencia:</label>
-                        <input type="text" class="form-control" id="updatedAddress" placeholder="Nueva Dirección">
+                        <input type="text" class="form-control" id="updatedAddress" value="<?php echo $informacionUsuario['direccion']; ?>">
                     </div>
                     <div class="form-group">
                         <label for="updatedPhoneNumber">Número de Teléfono:</label>
-                        <input type="text" class="form-control" id="updatedPhoneNumber" placeholder="Nuevo Número de Teléfono">
-                    </div>
-                    <div class="form-group">
-                        <label for="updatedCedula">Cédula:</label>
-                        <input type="text" class="form-control" id="updatedCedula" placeholder="Nueva Cédula">
+                        <input type="text" class="form-control" id="updatedPhoneNumber" value="<?php echo $informacionUsuario['telefono']; ?>">
                     </div>
                     <div class="form-group">
                         <label for="updatedEmail">Correo Electrónico:</label>
-                        <input type="text" class="form-control" id="updatedEmail" placeholder="Nuevo Correo Electrónico">
+                        <input type="text" class="form-control" id="updatedEmail" value="<?php echo $informacionUsuario['correo']; ?>">
                     </div>
-                    <div class="form-group">
-                        <label for="updatedEmergencyContactNumber">Número de Contacto de Emergencia:</label>
-                        <input type="text" class="form-control" id="updatedEmergencyContactNumber" placeholder="Nuevo Número de Contacto de Emergencia">
-                    </div>
-                    <div class="form-group">
-                        <label for="updatedEmergencyContactName">Nombre de Contacto en Caso de Emergencia:</label>
-                        <input type="text" class="form-control" id="updatedEmergencyContactName" placeholder="Nuevo Nombre de Contacto en Caso de Emergencia">
-                    </div>
+
                     <!-- Botón para guardar datos -->
-                    <button type="button" class="btn btn-primary" onclick="guardarDatos()">Guardar Datos</button>
+                    <button type="button" id="btnGuardarDatos" class="btn btn-primary">Guardar Datos</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
-
-<script>
-    // Llena el modal con los datos actuales al abrirlo
-    $('#updateModal').on('show.bs.modal', function () {
-        $('#nameFromDatabase').val($('#currentName').text());
-        $('#updatedAddress').val($('#currentAddress').text());
-        $('#updatedPhoneNumber').val($('#currentPhoneNumber').text());
-        $('#updatedCedula').val($('#currentCedula').text());
-        $('#updatedEmail').val($('#currentEmail').text());
-        $('#updatedEmergencyContactNumber').val($('#currentEmergencyContactNumber').text());
-        $('#updatedEmergencyContactName').val($('#currentEmergencyContactName').text());
-    });
-
-    function guardarDatos() {
-        // Puedes agregar lógica aquí para enviar los datos al servidor
-        // En este ejemplo, simplemente mostramos una alerta
-        alert("Datos guardados correctamente.");
-        // Cierra el modal después de guardar datos
-        $('#updateModal').modal('hide');
-    }
-</script>
-
-<script>var identificacion = <?php echo json_encode($_SESSION["Identificacion"]); ?>; </script>
-<script>var nombreUsu = <?php echo json_encode($_SESSION["nombre"]); ?>; </script>
-
+<br>
 </body>
 </main>
 

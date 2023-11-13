@@ -173,6 +173,32 @@ class Master_Class
         }
     }
 
+    function actualizaNombreApellido($cedula, $nombre, $apellido1, $apellido2, $direccion, $telefono, $email) 
+    {
+
+        $stmt = $this->conn->prepare("UPDATE tbusuario SET nombre = ?, apellido1 = ?, apellido2 = ?, direccion = ?, telefono = ?, correo = ? WHERE idUser = ?");
+        
+        // Verifica si la preparación fue exitosa
+        if ($stmt === false) {
+            return false;
+        }
+    
+        $stmt->bind_param("ssssssi", $nombre, $apellido1, $apellido2, $direccion, $telefono, $email, $cedula);
+    
+       
+        $resultado = $stmt->execute();
+    
+        // Cierra la declaración
+        $stmt->close();
+    
+        // Retorna true si la actualización fue exitosa, de lo contrario, false
+        return $resultado;
+
+          
+    }
+
+
+
     /*-----------------------------------------------IMAGENES--------------------------------------------------*/
 
 

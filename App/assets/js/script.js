@@ -433,6 +433,52 @@
     //fin Codigo autenticacion de login
     //###############################################################################################################################
 
+    $(document).ready(function () {
+        $('#ActualizarDatos').submit(function (e) {
+
+            console.log("Entro");
+
+            const nombre = document.getElementById("nameFromDatabase").value;
+            const apellido1 = document.getElementById("apellido1").value;
+            const apellido2 = document.getElementById("apellido2").value;
+            const direccion = document.getElementById("updatedAddress").value;
+            const telefono = document.getElementById("updatedPhoneNumber").value;
+            const cedula = document.getElementById("updatedCedula").value;
+            const email = document.getElementById("updatedEmail").value;
+
+            
+            console.log(nombre);
+            console.log(apellido1);
+            console.log(apellido2);
+            console.log(direccion);
+            console.log(telefono);
+            console.log(cedula);
+            console.log(email);
+
+            // Realizar la solicitud AJAX
+            $.ajax({
+                type: 'POST',
+                url: '../Modules/Master_Class.php',
+                data: {
+                    nombre: nombre,
+                    apellido1: apellido1,
+                    apellido2: apellido2,
+                    direccion: direccion,
+                    telefono: telefono,
+                    cedula: cedula,
+                    email: email
+                },
+                success: function(response) {
+                    alert(response); 
+                    $('#updateModal').modal('hide'); 
+                },
+                error: function(error) {
+                    console.error('Error al enviar la solicitud AJAX', error);
+                }
+            });
+
+        });
+    });
 
 
 
