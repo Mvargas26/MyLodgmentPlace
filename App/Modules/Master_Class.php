@@ -98,20 +98,51 @@ class Master_Class{
                 // Escapa los datos para evitar inyección SQL
                 $nombreImagen = $this->getConexion()->real_escape_string($nombreImagen);
         
-                // Prepara la consulta SQL
-                $query = "INSERT INTO `tbvalidacionperfil` (`nombreImagenUsuario`, `estadoValidacion`) VALUES ('$nombreImagen', 'pendiente')";
+                // Prepara la consulta SQL para el INSERT
+                $insertQuery = "INSERT INTO `tbvalidacionperfil` (`nombreImagenUsuario`, `estadoValidacion`) VALUES (?, 'pendiente')";
+                $stmtInsert = $this->getConexion()->prepare($insertQuery);
+                $stmtInsert->bind_param("s", $nombreImagen);
         
-                // Ejecuta la consulta
-                if ($this->getConexion()->query($query)) {
-                    return true;
+                // Ejecuta el INSERT
+                if ($stmtInsert->execute()) {
+                    // Obtiene el ID recién insertado
+                    $idValidacionPerfil = $this->getConexion()->insert_id;
+        
+                    // Prepara la consulta SQL para el UPDATE
+                    $updateQuery = "UPDATE tbusuario SET idValidacionPerfil = ? WHERE idUser = ?";
+                    $stmtUpdate = $this->getConexion()->prepare($updateQuery);
+                    $stmtUpdate->bind_param("is", $idValidacionPerfil, $nombreImagen);
+        
+                    // Ejecuta el UPDATE
+                    if ($stmtUpdate->execute()) {
+                        return true;
+                    } else {
+                        throw new Exception("Error en la actualización del usuario: " . $stmtUpdate->error);
+                    }
                 } else {
-                    throw new Exception("Error en la inserción de la imagen de perfil: " . $this->getConexion()->error);
+                    throw new Exception("Error en la inserción de la imagen de perfil: " . $stmtInsert->error);
                 }
             } catch (Exception $e) {
                 error_log($e->getMessage());
                 return false;
             }
         }
+        function ConsultarValidacionUsuario($identificacion) { 
+            try {  
+                $query = " SELECT * FROM `tbvalidacionperfil` WHERE `nombreImagenUsuario` = '$identificacion';";
+
+                $result = $this->getConexion()->query($query);
+
+                if ($result) {
+                    return $result;
+                } else {
+                    throw new Exception("Error en la consulta: " . $this->getConexion()->error);
+                }
+            } catch (Exception $e) {
+                error_log($e->getMessage());
+                return $e->getMessage();
+            }
+        }        
 
                 /*-----------------------------------------------IMAGENES--------------------------------------------------*/
 

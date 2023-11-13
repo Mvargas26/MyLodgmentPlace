@@ -71,6 +71,7 @@ session_start();
                   <li><a class="nav-link scrollto" href="./App/Views/PanelAnfitrion_View.php">Panel Anfitrion</a></li>
                   <li><a class="nav-link scrollto" href="./App/Views/PublicarInmueble_View.php">Publica tu Espacio</a></li>
                   <li><a class="nav-link scrollto" href="./App/Views/Anuncios_MultiplesV_View.php">Anuncios Multiples</a></li>
+                  <li><a class="nav-link scrollto" href="./App/Views/validar_identidadHuesped_View.php">Validar Perfil</a></li>
           <?php
 
           };

@@ -24,6 +24,7 @@ session_start();
         <!-- Muestra la cédula desde la base de datos -->
         <p>Cédula: <span id="cedulaFromDatabase"></span></p>
         <p>Nombre: <span id="nameFromDatabase"></span></p>
+        <p>Estado de Validacion: <span id="estadoFromDatabase"></span></p>
         <br>
         <br>
         <!-- Contenedor para mostrar la imagen -->
