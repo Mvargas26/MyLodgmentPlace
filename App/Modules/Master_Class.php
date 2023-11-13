@@ -93,6 +93,26 @@ class Master_Class{
             }
         }
 
+        function insertarImagenPerfil($nombreImagen) {
+            try {
+                // Escapa los datos para evitar inyección SQL
+                $nombreImagen = $this->getConexion()->real_escape_string($nombreImagen);
+        
+                // Prepara la consulta SQL
+                $query = "INSERT INTO `tbvalidacionperfil` (`nombreImagenUsuario`, `estadoValidacion`) VALUES ('$nombreImagen', 'pendiente')";
+        
+                // Ejecuta la consulta
+                if ($this->getConexion()->query($query)) {
+                    return true;
+                } else {
+                    throw new Exception("Error en la inserción de la imagen de perfil: " . $this->getConexion()->error);
+                }
+            } catch (Exception $e) {
+                error_log($e->getMessage());
+                return false;
+            }
+        }
+
                 /*-----------------------------------------------IMAGENES--------------------------------------------------*/
 
         
@@ -423,7 +443,57 @@ function enviarCodigoAutenticacionCorreo($destinatario, $codigo_autenticacion)
                 }
         }
 
-
+        function ConsultarInmueblePorId($inmuebleId)
+        {
+            try {
+                $query = "SELECT 
+                mu.id, 
+                mu.nombre AS nombre_inmueble, 
+                mu.valorDiario, 
+                mu.capacidadPersonas, 
+                mu.costoPersonaExtra, 
+                mu.direccion, 
+                mu.disponibilidad, 
+                mu.estrellas, 
+                mu.fechaLimiteDisponibilidad, 
+                CONCAT(us.nombre, ' ', us.apellido1, ' ', us.apellido2) AS nombre_propietario
+            FROM tbinmueble mu
+            INNER JOIN tbusuario us ON mu.Propietario = us.idUser
+            WHERE mu.id = $inmuebleId;";
+    
+                $this->conn->set_charset("utf8");
+                $result = $this->getConexion()->query($query);
+    
+                if ($result) {
+                    $row = $result->fetch_assoc();
+    
+                    if ($row) {
+                        $inmueble = array(
+                            "id" => $row['id'],
+                            "Nombre_Inmueble" => $row["nombre_inmueble"],
+                            "valorDiario" => $row["valorDiario"],
+                            "capacidadPersonas" => $row["capacidadPersonas"],
+                            "costoPersonaExtra" => $row["costoPersonaExtra"],
+                            "direccion" => $row["direccion"],
+                            "disponibilidad" => $row["disponibilidad"],
+                            "estrellas" => $row["estrellas"],
+                            "fechaLimiteDisponibilidad" => $row["fechaLimiteDisponibilidad"],
+                            "nombre_propietario" => $row["nombre_propietario"],
+                        );
+    
+                        return json_encode($inmueble);
+                    } else {
+                        // No se encontró un inmueble con ese ID
+                        return json_encode(array("error" => "No se encontró el inmueble con ID $inmuebleId"));
+                    }
+                } else {
+                    throw new Exception("Error en la consulta: " . $this->getConexion()->error);
+                }
+            } catch (Exception $e) {
+                error_log($e->getMessage());
+                return null; // Retorna null en caso de error
+            }
+        }         
 }//fn cl_masterClass
 
 $ObjMaster = new Master_Class();
