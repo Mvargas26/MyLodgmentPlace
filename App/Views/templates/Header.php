@@ -53,28 +53,68 @@ $base_path = '../assets/';
 
   <!-- ======= Header ======= -->
   <header id="header" class="d-flex align-items-center ">
-    <div class="container-fluid d-flex align-items-center justify-content-lg-between">
+  <div class="container-fluid d-flex align-items-center justify-content-lg-between">
 
-      <h1 class="logo me-auto me-lg-0"><a href="../../">¡Vamos!</a></h1>
+<h1 class="logo me-auto me-lg-0"><a href="#">
+    <img width="50" height="100" src="https://img.icons8.com/sf-black-filled/64/home.png" alt="home" />
+  </a></h1>
 
-      <nav id="navbar" class="navbar order-last order-lg-0">
-        <ul>
-          <li><a class="nav-link scrollto active" href="../../">Inicio</a></li>
-          <li><a class="nav-link scrollto" href="#about">Lugares</a></li>
-          <li><a class="nav-link scrollto" href="PublicarInmueble_View.php">Publica tu Espacio</a></li>
-          <li><a class="nav-link scrollto " href="Login_View.php">Iniciar Sesion</a></li>
-          <li><a class="nav-link scrollto" href="registro_View.php">Registrarse</a></li>
-          <li><a class="nav-link scrollto" href="#contact">Contactenos</a></li>
-        </ul>
-        <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav><!-- .navbar -->
 
-      <div class="header-social-links d-flex align-items-center">
-        <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
-        <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-        <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-        <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
-      </div>
+<nav id="navbar" class="navbar order-last order-lg-0">
+  <ul>
+    <li><a class="nav-link scrollto active" href="#hero">Inicio</a></li>
+    <li><a class="nav-link scrollto" href="#portfolio">Lugares</a></li>
+    <li><a class="nav-link scrollto" href="#contact">Contactenos</a></li>
+    <!-- <li><a class="nav-link scrollto" href="#about"> -->
+      <?php 
+          if (isset($_SESSION["nombre"])) {
+             //echo  $_SESSION["nombre"];
+          } else {
+      ?>
+            <li><a class="nav-link scrollto " href="./App/Views/Login_View.php">Iniciar Sesion</a></li>
+            <li><a class="nav-link scrollto" href="./App/Views/registro_View.php">Registrarse</a></li>
+            <?php
 
-    </div>
+      }
+          if (isset($_SESSION["Rol"])) {
+            if ($_SESSION["Rol"] == 2) {
+    ?>
+            <li><a class="nav-link scrollto" href="./App/Views/PanelAnfitrion_View.php">Panel Anfitrion</a></li>
+            <li><a class="nav-link scrollto" href="./App/Views/PublicarInmueble_View.php">Publica tu Espacio</a></li>
+            <li><a class="nav-link scrollto" href="./App/Views/Anuncios_MultiplesV_View.php">Anuncios Multiples</a></li>
+            <li><a class="nav-link scrollto" href="./App/Views/validar_identidadHuesped_View.php">Validar Perfil</a></li>
+    <?php
+
+    };
+
+   if ($_SESSION["Rol"] == 3) {
+    ?>
+        <li><a class="nav-link scrollto" href="./App/Views/PanelUsuario_View.php">Perfil Huesped</a></li>
+        <li><a class="nav-link scrollto" href="./App/Views/calificarAnfitrion_View.php">Calificar Anfitrion</a></li>
+
+  <?php }; }; ?>
+
+
+
+  <?php if (isset($_SESSION["nombre"])) {  ?>
+  <li><a class="nav-link scrollto" href="./App/Modules/Login/cerrarSesion_Negocios.php">Cerrar Sesion</a></li>
+<?php  } ?>
+
+  </ul>
+  <i class="bi bi-list mobile-nav-toggle"></i>
+</nav><!-- .navbar -->
+<?php
+   if (isset($_SESSION["nombre"])) { ?> 
+         <a  id="aDelNombreSesion" href="#" class="twitter">Bienvenido(a): <?php  echo  $_SESSION["nombre"]; ?> <i class=""></i></a>
+
+<?php } ?>
+
+<div class="header-social-links d-flex align-items-center">
+  <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+  <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+  <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+  <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
+</div>
+
+</div>
   </header><!-- End Header -->
