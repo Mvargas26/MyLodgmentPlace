@@ -313,7 +313,7 @@
 
 
     //###############################################################################################################################
-    //otro
+    //inicio login
     //###############################################################################################################################
 
     $(document).ready(function () {
@@ -323,10 +323,15 @@
             // Obtener los datos del formulario
             var identificacion = $('input[name=identificacion]').val();
             var password = $('input[name=password]').val();
-    
+
+            // Validar campos
+            if (!identificacion || !password) {
+                Swal.fire("Error", "Por favor, complete todos los campos.", "error");
+                return; // Detener la ejecución si hay campos vacíos
+            }
             // Realizar la verificación de credenciales mediante AJAX
             $.ajax({
-                
+
                 type: 'POST',
                 url: '../../App/Modules/Servicios/Login_Negocios.php',
                 data: {
@@ -340,7 +345,7 @@
                         // Mostrar el mensaje Swal
                         Swal.fire({
                             title: "Éxito",
-                            text: "Se ha iniciado sesión correctamente.",
+                            text: "Credenciales válidas.",
                             icon: "success",
                             showCancelButton: false,
                             confirmButtonColor: "#3085d6",
@@ -348,12 +353,12 @@
                         }).then((result) => {
                             // Si el usuario hace clic en "Aceptar", redirige
                             if (result.isConfirmed) {
-                                window.location.href = 'codigoAutenticacion_view.php';
+                                window.location.href = 'codigoAutenticacion_view.php?identificacion=' + identificacion + '&password=' + password;
                             }
                         });
                     } else {
                         // Mostrar el mensaje de error Swal
-                        Swal.fire("Error", "Lo sentimos, sus credenciales son inválidas. Inténtelo de nuevo.", "error");
+                        Swal.fire("Error", "Hubo un problema al verificar las credenciales. Por favor, inténtelo de nuevo más tarde.", "error");
                     }
                 },
                 error: function () {
@@ -364,14 +369,70 @@
     });
 
     //###############################################################################################################################
-    //inicio pruebas de login
+    //fin login
     //###############################################################################################################################
 
 
+    //###############################################################################################################################
+    //inicio Codigo autenticacion de login
+    //###############################################################################################################################
+
+    $(document).ready(function () {
+        $('#codigoAutenticacionForm').submit(function (e) {
+            e.preventDefault();
+    
+            // Obtener el código ingresado
+            var codigo = $('input[name=codigo]').val();
+            var cedula = $('input[name=cedula]').val();
+            var password = $('input[name=password]').val();
+            
+    
+            // Realizar la verificación del código mediante AJAX
+            $.ajax({
+                type: 'POST',
+                url: '../../App/Modules/CodigoAutenticacionLogin/codigoAutenticacion_Negocios.php',
+                data: {
+                    verificarCodigo: true,
+                    codigo: codigo,
+                    cedula: cedula,
+                    password: password
+                },
+                dataType: 'json',
+                success: function (response) {
+                    if (response.exito) {
+                        // Mostrar el mensaje de éxito
+                        Swal.fire({
+                            title: "Éxito",
+                            text: "Código de autenticación verificado.",
+                            icon: "success",
+                            showCancelButton: false,
+                            confirmButtonColor: "#3085d6",
+                            confirmButtonText: "Aceptar"
+                        }).then((result) => {
+                            // Si el usuario hace clic en "Aceptar", redirige al index.php
+                            if (result.isConfirmed) {
+                                window.location.href = 'http://localhost/proyectos_php/MyLodgmentPlace/index.php';
+                            }
+                        });
+                    } else {
+                        // Mostrar el mensaje de error
+                        Swal.fire("Error", "Código de autenticación inválido. Inténtelo de nuevo.", "error");
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.log(xhr);
+                    console.log(status);
+                    console.log(error);
+                    alert('Error en la verificación del código de autenticación.');
+                }
+            });
+        });
+    });
 
     //###############################################################################################################################
-    //fin pruebas de login
+    //fin Codigo autenticacion de login
     //###############################################################################################################################
+
 
 
 

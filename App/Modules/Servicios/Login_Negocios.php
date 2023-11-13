@@ -15,11 +15,12 @@ if (isset($_POST["verificarCredenciales"])) {
             $usuario = $credencialesValidas->fetch_assoc();
         
             // Inicia la sesión y guarda la información deseada
-            session_start();
-            $_SESSION['Identificacion'] = $usuario['idUser'];
-            $_SESSION['nombre'] = $usuario['nombre'];
-            $_SESSION['Rol'] = $usuario['idRol'];
-            $_SESSION['Correo'] = $usuario['correo'];
+            // session_start();
+            // $_SESSION['Identificacion'] = $usuario['idUser'];
+            // $_SESSION['nombre'] = $usuario['nombre'];
+            // $_SESSION['Rol'] = $usuario['idRol'];
+            // $_SESSION['Correo'] = $usuario['correo'];
+            
 
             $codigoAutenticacion = $ObjMaster->generarCodigoAleatorio(5);
 

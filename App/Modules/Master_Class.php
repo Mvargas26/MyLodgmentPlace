@@ -273,6 +273,49 @@ function enviarCodigoAutenticacionCorreo($destinatario, $codigo_autenticacion)
 
 //fin funcion para enviar correo de autenticacion
 
+//inicio  funciones para codigos de autenticacion
+
+function verificarCodigoAutenticacion($identificacion, $codigo_ingresado)
+{
+    try {
+        $identificacion = $this->GetConexion()->real_escape_string($identificacion);
+        $codigo_ingresado = $this->GetConexion()->real_escape_string($codigo_ingresado);
+
+        $query = "SELECT * FROM tbusuario WHERE idUser = '$identificacion' AND codigoAutenticacion = '$codigo_ingresado'";
+        $result = $this->getConexion()->query($query);
+
+        if ($result && $result->num_rows > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    } catch (Exception $e) {
+        error_log("Error al verificar código de autenticación: " . $e->getMessage());
+        return false;
+    }
+}
+
+function eliminarCodigoAutenticacion($identificacion)
+{
+    try {
+        $identificacion = $this->GetConexion()->real_escape_string($identificacion);
+
+        $query = "UPDATE tbusuario SET codigoAutenticacion = NULL WHERE idUser = '$identificacion'";
+        $this->getConexion()->query($query);
+
+        if ($this->getConexion()->affected_rows > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    } catch (Exception $e) {
+        error_log("Error al eliminar código de autenticación: " . $e->getMessage());
+        return false;
+    }
+}
+
+//fin  funciones para codigos de autenticacion
+
 
 //Funciones de prueba(fin)
         /*----------------------------------------------- INMUEBLES --------------------------------------------------*/
