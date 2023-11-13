@@ -90,7 +90,7 @@
   display: table;
 }
 
-body {
+#bodyDelModalAgregarFav {
   display: table-cell;
   vertical-align: middle;
 }

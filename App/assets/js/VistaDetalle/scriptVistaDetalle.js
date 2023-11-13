@@ -83,9 +83,9 @@ document.addEventListener('DOMContentLoaded', function () {
                       '  <h1 id="nombrePregunta"> </h1>'+
                        ' <div id="preguntaModalAgregarFav">'+
                          ' <input type="radio" name="pregunta" value="pregunta1" id="pregunta1">'+
-                        '  <label for="pregunta1">pregunta1</label>'+
+                        '  <label for="pregunta1">Lista Favoritos 1</label>'+
                         '  <input type="radio" name="pregunta" value="pregunta2" id="pregunta2">'+
-                         ' <label for="pregunta2">pregunta2</label>'+
+                         ' <label for="pregunta2">Lista Favoritos 2</label>'+
                        ' </div>'+
                      ' </div>'+
                    ' </body>',
