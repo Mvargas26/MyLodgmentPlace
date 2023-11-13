@@ -4,29 +4,26 @@ session_start();
 ?>
 <!-- ==============================================Fin header ======= -->
 
+<section id="notificacionSection">
 
-<div id="divGridNotificaciones">
-<h1>Notificaciones</h1>
-
-    <table id="GridNotificaciones">
-        <thead>
-            <tr>
-                <th></th>
-                <th></th>
-                
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Llenado Dinamicamente en JS -->
-        </tbody>
-    </table>
-</div>
-
+    <h1 id="tituloN">
+    <i class="bi bi-bell-fill"></i>
+    Notificaciones</h1>
+    <hr/>
+    
+    <div id="divGridNotificacionesAnfitrion">
+        <!-- =============================================== -->
+        <!-- se llena dinamicamente con JS -->
+        <!-- =============================================== -->
+    </div>
+    
+</section>
 
 
 <script>var identificacion = <?php echo json_encode($_SESSION["Identificacion"]); ?>; </script>
 
 <!-- ==============================================Inicio Footer ======= -->
+<script src="../assets/js/notificaciones/script_notificaciones.js"></script>
 <?php
 include './templates/Footer.php';
 ?>

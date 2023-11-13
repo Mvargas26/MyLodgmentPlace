@@ -1,40 +1,29 @@
 <?php
 include './templates/Header.php';
+session_start();
 ?>
 <!-- ==============================================Fin header ======= -->
-<main id="main">
 
-<!-- ================================================================== -->
-<!-- NOTIFICACIONES DEL HUESPED LE TOCA A DIEGO -->
-<!-- ================================================================== -->
+<section id="notificacionSection">
 
-
-<body id="body">
-
-
-    <p>aca va las notificaciones </p>
+    <h1 id="tituloN">
+    <i class="bi bi-bell-fill"></i>
+    Notificaciones</h1>
+    <hr/>
     
+    <div id="divGridNotificacionesAnfitrion">
+        <!-- =============================================== -->
+        <!-- se llena dinamicamente con JS -->
+        <!-- =============================================== -->
+    </div>
+    
+</section>
 
 
-
-
-
-
-
-
-
-
-
-
-</body>
-
-
-</main>
-
-
-  
+<script>var identificacion = <?php echo json_encode($_SESSION["Identificacion"]); ?>; </script>
 
 <!-- ==============================================Inicio Footer ======= -->
+<script src="../assets/js/notificaciones/script_notificaciones.js"></script>
 <?php
 include './templates/Footer.php';
 ?>

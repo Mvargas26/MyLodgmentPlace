@@ -606,7 +606,7 @@ class Master_Class
         try {
             $query = " SELECT descripcion, fecha
                     FROM tbnotificaciones
-                    WHERE iduser = $idAnfitrion;";
+                    WHERE idUser = $idAnfitrion;";
 
             $this->conn->set_charset("utf8");
             $result = $this->getConexion()->query($query);
