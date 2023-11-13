@@ -71,6 +71,7 @@ session_start();
                   <li><a class="nav-link scrollto" href="./App/Views/PanelAnfitrion_View.php">Panel Anfitrion</a></li>
                   <li><a class="nav-link scrollto" href="./App/Views/PublicarInmueble_View.php">Publica tu Espacio</a></li>
                   <li><a class="nav-link scrollto" href="./App/Views/Anuncios_MultiplesV_View.php">Anuncios Multiples</a></li>
+                  <li><a class="nav-link scrollto" href="./App/Views/validar_identidadHuesped_View.php">Validar Perfil</a></li>
           <?php
 
           };
@@ -366,7 +367,7 @@ session_start();
                       <h4><?php  echo $dato['Nombre_Inmueble'] ?></h4>
                       <p> ₡ <?php echo $dato['valorDiario'] ?></p>
                       <a href="./App/assets/img/ImagenesInmuebles/<?php echo $dato['nameImagen'] ?>" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="<?php $dato['Nombre_Inmueble'] ?>"><i class="bx bx-plus"></i></a>
-                      <a href="./App/Views/InmuebleDetalle_View.php" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+                      <a href="./App/Views/InmuebleDetalle_View.php?nombre=<?php echo $dato['nombre']; ?>" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
                     </div>
                   </div>
             <?php

@@ -1,34 +1,28 @@
 $(document).ready(function () {
-    // Realiza una petición AJAX para obtener la ruta de la imagen
-
     $('#cedulaFromDatabase').text(identificacion);
     $('#nameFromDatabase').text(nombreUsu);
+    var imageUrl = '../../App/assets/img/usuarios/' + identificacion + '.png';
+
+    // Crea un elemento de imagen y establece la fuente
+    var img = document.createElement('img');
+    img.src = imageUrl; 
+    // Agrega la imagen al contenedor
+    $('#imageContainer').html(img);
+
     $.ajax({
-        url: '../../App/Modules/Login/obtener_ImagenesUsu_Negocios.php', // Ruta a tu script PHP para obtener la ruta de la imagen
-        type: 'GET',
-        success: function (response) {
+        url: '../../App/Modules/Login/obtener_datosValidacionP_Negocios.php',
+        type: 'POST',
+        data: { Identificacion: identificacion },
+        success: function (response) { 
+            // Parsea la respuesta JSON 
             var data = JSON.parse(response);
-
-            // Verifica si se obtuvo la ruta de la imagen
-            if (data.rutaImagen) {
-                // Muestra la imagen en la página
-                var imageUrl = data.rutaImagen;
-                var img = document.createElement('img');
-                img.src = imageUrl;
-
-                // Agrega la imagen al contenedor
-                $('#imageContainer').html(img);
-            } else {
-                // Muestra un mensaje si no se encuentra la imagen
-                console.error('Error: ' + data.error);
-            }
+            $('#estadoFromDatabase').text(data.estadoValidacion);
         },
         error: function (textStatus, errorThrown) {
             console.error('Error en la solicitud AJAX:', textStatus, errorThrown);
         }
     });
 });
-
 
 $('#fileInput').on('change', function () {
     var fileName = $(this).val().split('\\').pop();

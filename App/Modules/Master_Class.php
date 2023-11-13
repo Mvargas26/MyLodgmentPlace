@@ -98,14 +98,68 @@ class Master_Class{
                 // Escapa los datos para evitar inyección SQL
                 $nombreImagen = $this->getConexion()->real_escape_string($nombreImagen);
         
-                // Prepara la consulta SQL
-                $query = "INSERT INTO `tbvalidacionperfil` (`nombreImagenUsuario`, `estadoValidacion`) VALUES ('$nombreImagen', 'pendiente')";
+                // Prepara la consulta SQL para el INSERT
+                $insertQuery = "INSERT INTO `tbvalidacionperfil` (`nombreImagenUsuario`, `estadoValidacion`) VALUES (?, 'pendiente')";
+                $stmtInsert = $this->getConexion()->prepare($insertQuery);
+                $stmtInsert->bind_param("s", $nombreImagen);
         
-                // Ejecuta la consulta
-                if ($this->getConexion()->query($query)) {
-                    return true;
+                // Ejecuta el INSERT
+                if ($stmtInsert->execute()) {
+                    // Obtiene el ID recién insertado
+                    $idValidacionPerfil = $this->getConexion()->insert_id;
+        
+                    // Prepara la consulta SQL para el UPDATE
+                    $updateQuery = "UPDATE tbusuario SET idValidacionPerfil = ? WHERE idUser = ?";
+                    $stmtUpdate = $this->getConexion()->prepare($updateQuery);
+                    $stmtUpdate->bind_param("is", $idValidacionPerfil, $nombreImagen);
+        
+                    // Ejecuta el UPDATE
+                    if ($stmtUpdate->execute()) {
+                        return true;
+                    } else {
+                        throw new Exception("Error en la actualización del usuario: " . $stmtUpdate->error);
+                    }
                 } else {
-                    throw new Exception("Error en la inserción de la imagen de perfil: " . $this->getConexion()->error);
+                    throw new Exception("Error en la inserción de la imagen de perfil: " . $stmtInsert->error);
+                }
+            } catch (Exception $e) {
+                error_log($e->getMessage());
+                return false;
+            }
+        }
+        function ConsultarValidacionUsuario($identificacion) { 
+            try {  
+                $query = " SELECT * FROM `tbvalidacionperfil` WHERE `nombreImagenUsuario` = '$identificacion';";
+
+                $result = $this->getConexion()->query($query);
+
+                if ($result) {
+                    return $result;
+                } else {
+                    throw new Exception("Error en la consulta: " . $this->getConexion()->error);
+                }
+            } catch (Exception $e) {
+                error_log($e->getMessage());
+                return $e->getMessage();
+            }
+        } 
+        
+        function informacionUsuarios() {
+            $arry_Datos = func_get_args();
+        
+            try {
+                $identificacion = intval($this->GetConexion()->real_escape_string($arry_Datos[0]));
+                
+                $query = "SELECT * FROM `tbusuario` WHERE `idUser` = '$identificacion';";
+        
+                $result = $this->getConexion()->query($query);
+        
+                if ($result && $result->num_rows > 0) {
+                    // Obtener los datos del usuario
+                    $userData = $result->fetch_assoc();
+                    return $userData;
+                } else {
+                    throw new Exception("Error en la consulta: " . $this->getConexion()->error);
                 }
             } catch (Exception $e) {
                 error_log($e->getMessage());
@@ -178,9 +232,6 @@ class Master_Class{
         }
         /*-----------------------------------------------AUNTETINTIFICACION--------------------------------------------------*/
 
-//Funciones de prueba (inicio)
-
-//inicio Funcion para codigo aleatorio
 
 function generarCodigoAleatorio($longitud) {
     $caracteres = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
@@ -192,10 +243,6 @@ function generarCodigoAleatorio($longitud) {
 
     return $codigo;
 }
-
-//fin Funcion para codigo aleatorio
-
-//Inicio funcion para guardar codigo aleatorio de autenticacion
 
 function almacenarCodigoAutenticacion($identificacion, $codigo_autenticacion) {
     try {
@@ -222,9 +269,6 @@ function almacenarCodigoAutenticacion($identificacion, $codigo_autenticacion) {
     }
 }
 
-//fin funcion para guardar codigo aleatorio de autenticacion
-
-//inicio funcion para enviar correo de autenticacion
 
 function enviarCodigoAutenticacionCorreo($destinatario, $codigo_autenticacion)
     {
@@ -273,8 +317,50 @@ function enviarCodigoAutenticacionCorreo($destinatario, $codigo_autenticacion)
 
 //fin funcion para enviar correo de autenticacion
 
+//inicio  funciones para codigos de autenticacion
 
-//Funciones de prueba(fin)
+function verificarCodigoAutenticacion($identificacion, $codigo_ingresado)
+{
+    try {
+        $identificacion = $this->GetConexion()->real_escape_string($identificacion);
+        $codigo_ingresado = $this->GetConexion()->real_escape_string($codigo_ingresado);
+
+        $query = "SELECT * FROM tbusuario WHERE idUser = '$identificacion' AND codigoAutenticacion = '$codigo_ingresado'";
+        $result = $this->getConexion()->query($query);
+
+        if ($result && $result->num_rows > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    } catch (Exception $e) {
+        error_log("Error al verificar código de autenticación: " . $e->getMessage());
+        return false;
+    }
+}
+
+function eliminarCodigoAutenticacion($identificacion)
+{
+    try {
+        $identificacion = $this->GetConexion()->real_escape_string($identificacion);
+
+        $query = "UPDATE tbusuario SET codigoAutenticacion = NULL WHERE idUser = '$identificacion'";
+        $this->getConexion()->query($query);
+
+        if ($this->getConexion()->affected_rows > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    } catch (Exception $e) {
+        error_log("Error al eliminar código de autenticación: " . $e->getMessage());
+        return false;
+    }
+}
+
+//fin  funciones para codigos de autenticacion
+
+
         /*----------------------------------------------- INMUEBLES --------------------------------------------------*/
 
         function ConsultarInmuebles() {
@@ -406,43 +492,6 @@ function enviarCodigoAutenticacionCorreo($destinatario, $codigo_autenticacion)
                 }
 
         }
-
-
-        function ConsultaNotificaciones(){
-            $arry_Datos = func_get_args();
-
-            $idAnfitrion = $this->GetConexion()->real_escape_string($arry_Datos[0]);
-            
-            try {
-                    $query = " SELECT descripcion, fecha
-                    FROM tbnotificaciones
-                    WHERE iduser = $idAnfitrion;";
-    
-                    $this->conn->set_charset("utf8"); 
-                    $result = $this->getConexion()->query($query);
-            
-                    if ($result) {
-                        $data = array();
-            
-                        while ($row = $result->fetch_assoc()) {
-                            $item = array(
-                                "descripcion" => $row['descripcion'],
-                                "fecha" => $row["fecha"],                              
-                            );
-                            $data[] = $item;
-                        }
-            
-                        return json_encode($data);
-    
-                    } else {
-                        throw new Exception("Error en la consulta: " . $this->getConexion()->error);
-                    }
-                } catch (Exception $e) {
-                    error_log($e->getMessage());
-                    return null; // Retorna null en caso de error
-                }
-        }
-
         function ConsultarInmueblePorId($inmuebleId)
         {
             try {
@@ -493,7 +542,79 @@ function enviarCodigoAutenticacionCorreo($destinatario, $codigo_autenticacion)
                 error_log($e->getMessage());
                 return null; // Retorna null en caso de error
             }
-        }         
+        }  
+
+        function ConsultarListafavoritosPorUser($UserID)
+        {
+            try {
+                $query = "SELECT idLista,nombreLista FROM `tblista` WHERE idusuario = $UserID;";
+    
+                $this->conn->set_charset("utf8");
+                $result = $this->getConexion()->query($query);
+    
+                if ($result) {
+                    $row = $result->fetch_assoc();
+    
+                    if ($row) {
+                        $arrayListaFavoritos = array(
+                            "idLista" => $row['idLista'],
+                            "nombreLista" => $row["nombreLista"],
+                        );
+    
+                        return json_encode($arrayListaFavoritos);
+                    } else {
+                        // No se encontró un inmueble con ese ID
+                        return json_encode(array("error" => "No hay listas para $UserID"));
+                    }
+                } else {
+                    throw new Exception("Error en la consulta: " . $this->getConexion()->error);
+                }
+            } catch (Exception $e) {
+                error_log($e->getMessage());
+                return null; // Retorna null en caso de error
+            }
+        }//fin  ConsultarListafavoritosPorUser
+
+        
+
+        /*----------------------------------------------- Notificaciones --------------------------------------------------*/
+
+        function ConsultaNotificaciones(){
+            $arry_Datos = func_get_args();
+
+            $idAnfitrion = $this->GetConexion()->real_escape_string($arry_Datos[0]);
+            
+            try {
+                    $query = " SELECT descripcion, fecha
+                    FROM tbnotificaciones
+                    WHERE iduser = $idAnfitrion;";
+    
+                    $this->conn->set_charset("utf8"); 
+                    $result = $this->getConexion()->query($query);
+            
+                    if ($result) {
+                        $data = array();
+            
+                        while ($row = $result->fetch_assoc()) {
+                            $item = array(
+                                "descripcion" => $row['descripcion'],
+                                "fecha" => $row["fecha"],                              
+                            );
+                            $data[] = $item;
+                        }
+            
+                        return json_encode($data);
+    
+                    } else {
+                        throw new Exception("Error en la consulta: " . $this->getConexion()->error);
+                    }
+                } catch (Exception $e) {
+                    error_log($e->getMessage());
+                    return null; // Retorna null en caso de error
+                }
+        }
+
+              
 }//fn cl_masterClass
 
 $ObjMaster = new Master_Class();

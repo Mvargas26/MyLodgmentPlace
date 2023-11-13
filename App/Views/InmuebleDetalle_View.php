@@ -14,7 +14,6 @@ include './templates/Header.php';
       </div>
     </section><!-- End Breadcrumbs -->
 
-    <!-- ======= Portfolio Details Section ======= -->
     <section id="portfolio-details" class="portfolio-details">
       <div class="container">
 
@@ -134,17 +133,9 @@ include './templates/Header.php';
 
       </div>
     </section><!-- End Testimonials Section -->
-
-
-
-
+ 
   </main><!-- End #main -->
-
-
-
-
-
-
+ 
 <!-- ==============================================Inicio Footer ======= -->
    
 <?php
