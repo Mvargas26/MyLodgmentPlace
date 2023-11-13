@@ -4,10 +4,10 @@ $ObjMaster = new Master_Class();
 
 try {
 
-    if (isset($_POST['inmuebleSolo'])) {
+    if (isset($_POST['nombreInmueble'])) {
         // echo json_encode(array('Exito' =>$_POST["identificacion"]));
 
-        $inmuebleSolo = $_POST["inmuebleSolo"];
+        $inmuebleSolo = $_POST["nombreInmueble"];
 
         $resultadoConsulta = $ObjMaster->ConsultarInmueblePorId($inmuebleSolo);
 

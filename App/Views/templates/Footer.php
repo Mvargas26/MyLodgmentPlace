@@ -48,7 +48,6 @@
 <script src="../assets/js/VistaDetalle/scriptVistaDetalle.js"></script>
 <script src="../assets/js/VistaDetalle/script_inmuebleSolo.js"></script>
 
-
 </body>
 
 </html>

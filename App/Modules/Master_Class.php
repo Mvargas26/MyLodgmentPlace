@@ -559,21 +559,21 @@ class Master_Class
         try {
             $query = "SELECT 
             mu.id, 
-            mu.nombre AS nombre_inmueble, 
-            mu.valorDiario, 
+            mu.nombre AS nombre_inmueble,
             mu.capacidadPersonas,  
             mu.direccion, 
             mu.disponibilidad, 
             mu.estrellas, 
             mu.fechaLimiteDisponibilidad, 
             CONCAT(us.nombre, ' ', us.apellido1, ' ', us.apellido2) AS nombre_propietario,
-            tc.caracteristica1,  -- Ajusta con los nombres reales de las características
-            tc.caracteristica2,
-            tc.caracteristica3
+            -- tc.caracteristica1,
+            -- tc.caracteristica2,
+            -- tc.caracteristica3
         FROM tbinmueble mu
         INNER JOIN tbusuario us ON mu.Propietario = us.idUser
-        LEFT JOIN tbcaracteristicas tc ON mu.id = tc.idInmueble
-        WHERE mu.id = $nombreInmueble;";
+        -- LEFT JOIN tbinmuebleservicio tis ON mu.id = tis.id
+        -- LEFT JOIN tbcaracteristicas tc ON mu.id = tc.idInmueble
+        WHERE mu.id = '$nombreInmueble';";
 
             $this->conn->set_charset("utf8");
             $result = $this->getConexion()->query($query);
@@ -585,16 +585,16 @@ class Master_Class
                     $inmueble = array(
                         "id" => $row['id'],
                         "Nombre_Inmueble" => $row["nombre_inmueble"],
-                        "valorDiario" => $row["valorDiario"],
                         "capacidadPersonas" => $row["capacidadPersonas"],
                         "direccion" => $row["direccion"],
                         "disponibilidad" => $row["disponibilidad"],
                         "estrellas" => $row["estrellas"],
                         "fechaLimiteDisponibilidad" => $row["fechaLimiteDisponibilidad"],
                         "nombre_propietario" => $row["nombre_propietario"],
-                        "caracteristica1" => $row["caracteristica1"],
-                        "caracteristica2" => $row["caracteristica2"],
-                        "caracteristica3" => $row["caracteristica3"]
+                        
+                        // "caracteristica1" => $row["caracteristica1"],
+                        // "caracteristica2" => $row["caracteristica2"],
+                        // "caracteristica3" => $row["caracteristica3"]
                     );
 
                     return json_encode($inmueble);

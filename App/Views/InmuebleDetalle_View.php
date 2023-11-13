@@ -1,9 +1,11 @@
 <?php
 include './templates/Header.php';
-
-?>
-   <!-- ==============================================Fin header ======= -->
-   <main id="main">
+// Verificar si se proporcionó un nombre de inmueble en la URL
+if (isset($_GET['nombre'])) {
+  $nombreInmueble = $_GET['nombre'];
+  ?>
+  <!-- ==============================================Fin header ======= -->
+  <main id="main">
 
     <!-- ======= Breadcrumbs ======= -->
     <section id="breadcrumbs" class="breadcrumbs">
@@ -38,31 +40,51 @@ include './templates/Header.php';
               <div class="swiper-pagination"></div>
             </div>
             <div class="text-center mt-3">
-                    <button id="btnAgregarFavoritos" name="btnAgregarFavoritos" class="custom-button" type="submit">Agregar a Favoritos</button>
-                </div>
+              <button id="btnAgregarFavoritos" name="btnAgregarFavoritos" class="custom-button" type="submit">Agregar a
+                Favoritos</button>
+            </div>
           </div>
 
           <div class="col-lg-4">
             <div class="portfolio-info">
-              <h3>Cabaña El Sueño</h3>
+              <!-- <h3>Cabaña El Sueño</h3>
               <ul>
                 <li><strong>Precio:</strong>: Web design</li>
                 <li><strong>Ubicacion:</strong>: ASU Company</li>
                 <li><strong>Servicios:</strong>: 01 March, 2020</li>
                 <li><strong>Otros:</strong>: <a href="#">www.example.com</a></li>
               </ul>
+            </div> -->
+              <div class="portfolio-description">
+                <h2>Características del espacio:</h2>
+                <p>
+                  <strong>Nombre del Inmueble:</strong>
+                  <?php echo $data['Nombre_Inmueble']; ?><br>
+                  <strong>Capacidad de Personas:</strong>
+                  <?php echo $data['capacidadPersonas']; ?><br>
+                  <strong>Dirección:</strong>
+                  <?php echo $data['direccion']; ?><br>
+                  <strong>Disponibilidad:</strong>
+                  <?php echo $data['disponibilidad']; ?><br>
+                  <strong>Estrellas:</strong>
+                  <?php echo $data['estrellas']; ?><br>
+                  <strong>Fecha Límite de Disponibilidad:</strong>
+                  <?php echo $data['fechaLimiteDisponibilidad']; ?><br>
+                  <strong>Propietario:</strong>
+                  <?php echo $data['nombre_propietario']; ?><br>
+                  <strong>Característica 1:</strong>
+                  <?php echo $data['caracteristica1']; ?><br>
+                  <strong>Característica 2:</strong>
+                  <?php echo $data['caracteristica2']; ?><br>
+                  <strong>Característica 3:</strong>
+                  <?php echo $data['caracteristica3']; ?><br>
+                </p>
+              </div>
             </div>
-            <div class="portfolio-description">
-              <h2>Caracteristicas del espacio:</h2>
-              <p>
-                Poner aqui on lo que cuenta
-              </p>
-            </div>
+
           </div>
 
         </div>
-
-      </div>
     </section><!-- End Portfolio Details Section -->
 
     <p>Calendario</p>
@@ -76,67 +98,64 @@ include './templates/Header.php';
 
     </div> -->
 
-<!-- =============================================================================================== -->
-   <!-- RESEÑAS
+    <!-- =============================================================================================== -->
+    <!-- RESEÑAS
         RESEÑAS -->
-        <div id="ContenedorResenias">
-          <!-- <div id="iconoContenedor">
+    <div id="ContenedorResenias">
+      <!-- <div id="iconoContenedor">
             <i class="bi bi-chat-square-quote-fill" id="iconoR"></i>
           </div> -->
-          <section id="DejaTuResenia">
+      <section id="DejaTuResenia">
 
-            
-            <div id="reseniasDiv">
-              <form id="resenaForm" action="" method="post">
-                <i class="bi bi-star estrellas" data-index="0"></i>
-                <i class="bi bi-star estrellas" data-index="1"></i>
-                <i class="bi bi-star estrellas" data-index="2"></i>
-                <i class="bi bi-star estrellas" data-index="3"></i>
-                <i class="bi bi-star estrellas" data-index="4"></i>
-                
-                <br/>
-              
-                <textarea id="resenaTextarea"
-                name="resena" rows="3"
-                placeholder="Escribe tu reseña aquí..."
-                maxlength="100"
-                ></textarea>
-                
-                <button class="custom-button" type="button">Publicar Reseña</button>
-                
-              </form>
-            </div>
 
-            <!-- <div id="reseniasDiv">
+        <div id="reseniasDiv">
+          <form id="resenaForm" action="" method="post">
+            <i class="bi bi-star estrellas" data-index="0"></i>
+            <i class="bi bi-star estrellas" data-index="1"></i>
+            <i class="bi bi-star estrellas" data-index="2"></i>
+            <i class="bi bi-star estrellas" data-index="3"></i>
+            <i class="bi bi-star estrellas" data-index="4"></i>
+
+            <br />
+
+            <textarea id="resenaTextarea" name="resena" rows="3" placeholder="Escribe tu reseña aquí..."
+              maxlength="100"></textarea>
+
+            <button class="custom-button" type="button">Publicar Reseña</button>
+
+          </form>
+        </div>
+
+        <!-- <div id="reseniasDiv">
 
 
           
             </div> -->
-          
-          
-          
-          
-          
-            <input type="hidden" id="estrellasSeleccionadas" value="1">
-          </section> <!--end section deja tu resena -->
 
-        
-        <section id="testimonials" class="testimonials section-bg">
-          
 
-          <div class="container">
-            
-            <div class="section-title">
-              <h2>Reseñas</h2>
-              <p>Nos intereza mucho saber tu opinion y que la comunidad de My Lodgment Place tambien la conozca</p>
-            </div>
-            
-            <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
-              <div class="swiper-wrapper">
-                
-                <div class="swiper-slide">
-                  <div class="testimonial-item">
-                    <p>
+
+
+
+        <input type="hidden" id="estrellasSeleccionadas" value="1">
+      </section> <!--end section deja tu resena -->
+
+
+      <section id="testimonials" class="testimonials section-bg">
+
+
+        <div class="container">
+
+          <div class="section-title">
+            <h2>Reseñas</h2>
+            <p>Nos intereza mucho saber tu opinion y que la comunidad de My Lodgment Place tambien la conozca</p>
+          </div>
+
+          <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
+            <div class="swiper-wrapper">
+
+              <div class="swiper-slide">
+                <div class="testimonial-item">
+                  <p>
                     <i class="bx bxs-quote-alt-left quote-icon-left"></i>
                     Disfrute mucho en una cabaña de montaña.
                     <i class="bx bxs-quote-alt-right quote-icon-right"></i>
@@ -145,7 +164,7 @@ include './templates/Header.php';
                   <h3>Saul Gomez</h3>
                 </div>
               </div><!-- End testimonial item -->
-              
+
               <div class="swiper-slide">
                 <div class="testimonial-item">
                   <p>
@@ -179,7 +198,7 @@ include './templates/Header.php';
                   </p>
                   <img src="./App/assets/img/testimonials/testimonials-5.jpg" class="testimonial-img" alt="">
                   <h3>John Ruiz</h3>
-                  
+
                 </div>
               </div><!-- End testimonial item -->
 
@@ -192,8 +211,8 @@ include './templates/Header.php';
       </section><!-- End Testimonials Section -->
 
     </div>
-    
-    
+
+
     <!-- <script>
     document.addEventListener("DOMContentLoaded", function () {
         var estrellas = document.querySelectorAll('.estrellas');
@@ -223,8 +242,8 @@ include './templates/Header.php';
         });
     });
 </script> -->
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
         var estrellas = document.querySelectorAll('.estrellas');
         var inputEstrellas = document.getElementById('estrellasSeleccionadas');
 
@@ -232,40 +251,43 @@ include './templates/Header.php';
         marcarEstrellas(0);
 
         estrellas.forEach(function (estrella) {
-            estrella.addEventListener('click', function () {
-                var index = parseInt(this.dataset.index, 10);
-                marcarEstrellas(index);
-                inputEstrellas.value = index + 1;
-            });
+          estrella.addEventListener('click', function () {
+            var index = parseInt(this.dataset.index, 10);
+            marcarEstrellas(index);
+            inputEstrellas.value = index + 1;
+          });
         });
 
         function marcarEstrellas(index) {
-            // Marcar las estrellas hasta la actual
-            for (var i = 0; i <= index; i++) {
-                estrellas[i].classList.add('bi-star-fill');
-                estrellas[i].classList.remove('bi-star');
-            }
+          // Marcar las estrellas hasta la actual
+          for (var i = 0; i <= index; i++) {
+            estrellas[i].classList.add('bi-star-fill');
+            estrellas[i].classList.remove('bi-star');
+          }
 
-            // Desmarcar las estrellas después de la actual
-            for (var i = index + 1; i < estrellas.length; i++) {
-                estrellas[i].classList.remove('bi-star-fill');
-                estrellas[i].classList.add('bi-star');
-            }
+          // Desmarcar las estrellas después de la actual
+          for (var i = index + 1; i < estrellas.length; i++) {
+            estrellas[i].classList.remove('bi-star-fill');
+            estrellas[i].classList.add('bi-star');
+          }
         }
-    });
-</script>
+      });
+    </script>
 
-<!-- =============================================================================================== -->
-<!-- END RESENAS  -->
-<!-- =============================================================================================== -->
+    <!-- =============================================================================================== -->
+    <!-- END RESENAS  -->
+    <!-- =============================================================================================== -->
 
 
 
-</main><!-- End #main -->
+  </main><!-- End #main -->
 
-<!-- ==============================================Inicio Footer ======= -->
+  <!-- ==============================================Inicio Footer ======= -->
 
-<?php
+  <?php
+} else {
+  echo "Nombre del inmueble no proporcionado en la URL.";
+}
 include './templates/Footer.php';
 ?>
 <!-- ==============================================Fin Footer ======= -->
