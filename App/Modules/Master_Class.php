@@ -142,7 +142,30 @@ class Master_Class{
                 error_log($e->getMessage());
                 return $e->getMessage();
             }
-        }        
+        } 
+        
+        function informacionUsuarios() {
+            $arry_Datos = func_get_args();
+        
+            try {
+                $identificacion = intval($this->GetConexion()->real_escape_string($arry_Datos[0]));
+                
+                $query = "SELECT * FROM `tbusuario` WHERE `idUser` = '$identificacion';";
+        
+                $result = $this->getConexion()->query($query);
+        
+                if ($result && $result->num_rows > 0) {
+                    // Obtener los datos del usuario
+                    $userData = $result->fetch_assoc();
+                    return $userData;
+                } else {
+                    throw new Exception("Error en la consulta: " . $this->getConexion()->error);
+                }
+            } catch (Exception $e) {
+                error_log($e->getMessage());
+                return false;
+            }
+        }
 
                 /*-----------------------------------------------IMAGENES--------------------------------------------------*/
 

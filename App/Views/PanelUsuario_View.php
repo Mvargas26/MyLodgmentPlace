@@ -1,5 +1,6 @@
 <?php
 include './templates/Header.php';
+session_start();
 ?>
 <!-- ==============================================Fin header ======= -->
 <main id="main">
