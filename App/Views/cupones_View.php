@@ -1,13 +1,21 @@
 <?php
 include './templates/Header.php';
+session_start();
 ?>
 <!-- ==============================================Fin header ======= -->
 <main id="main">
 
     <link href="../assets/css/cupones.css" rel="stylesheet">
 
+    <div>
+        <p>Cédula: <span id="cedulaFromDatabase"></span></p> 
+        <p>Nombre: <span id="nameFromDatabase"></span></p>
+        
+    </div>
+
     <body id="body">
-    <div class="contener">   
+    <div class="contener"> 
+        
         <!-- Sección para cambiar la contraseña -->
         <div id="seccionCupon">
             <h2>Cupon de descuento</h2>
@@ -47,6 +55,10 @@ include './templates/Header.php';
         <br>
         </div>
     </body>
+
+    <script>var identificacion = <?php echo json_encode($_SESSION["Identificacion"]); ?>; </script>
+    <script>var nombreUsu = <?php echo json_encode($_SESSION["nombre"]); ?>; </script>
+
 </main>
 
 

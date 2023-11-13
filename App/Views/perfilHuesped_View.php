@@ -1,5 +1,6 @@
 <?php
 include './templates/Header.php';
+session_start();
 ?>
 <!-- ==============================================Fin header ======= -->
 <main id="main">
@@ -17,8 +18,11 @@ include './templates/Header.php';
 <div class="container mt-5">
     <h2>Datos Personales</h2>
     <div>
-        <p><strong>Nombre:</strong> <span id="currentName">Nombre Apellido</span></p>
-        <p><strong>Dirección de Residencia:</strong> <span id="currentAddress">Dirección de ejemplo</span></p>
+        <p><strong>Cédula: </strong><span id="cedulaFromDatabase"></span></p>
+        <p><strong>Nombre: </strong><span id="nameFromDatabase"></span></p>
+        <p><strong>Primer Apellido: </strong><span id="apellidoFromDatabase"></span></p>
+        <p><strong>Primer Apellido: </strong><span id="apellidoFromDatabase"></span></p>
+        <p><strong>Dirección de Residencia:</strong> <span id="currentAddress"></span></p>
         <p><strong>Número de Teléfono:</strong> <span id="currentPhoneNumber">123456789</span></p>
         <p><strong>Cédula:</strong> <span id="currentCedula">1234567890</span></p>
         <p><strong>Correo Electrónico:</strong> <span id="currentEmail">correo@example.com</span></p>
@@ -45,8 +49,8 @@ include './templates/Header.php';
               
                 <form id="updateForm">
                     <div class="form-group">
-                        <label for="updatedName">Nombre:</label>
-                        <input type="text" class="form-control" id="updatedName" placeholder="Nuevo Nombre">
+                        <label for="nameFromDatabase">Nombre:</label>
+                        <input type="text" class="form-control" id="nameFromDatabase" placeholder="Nuevo Nombre">
                     </div>
                     <div class="form-group">
                         <label for="updatedAddress">Dirección de Residencia:</label>
@@ -83,7 +87,7 @@ include './templates/Header.php';
 <script>
     // Llena el modal con los datos actuales al abrirlo
     $('#updateModal').on('show.bs.modal', function () {
-        $('#updatedName').val($('#currentName').text());
+        $('#nameFromDatabase').val($('#currentName').text());
         $('#updatedAddress').val($('#currentAddress').text());
         $('#updatedPhoneNumber').val($('#currentPhoneNumber').text());
         $('#updatedCedula').val($('#currentCedula').text());
@@ -100,6 +104,9 @@ include './templates/Header.php';
         $('#updateModal').modal('hide');
     }
 </script>
+
+<script>var identificacion = <?php echo json_encode($_SESSION["Identificacion"]); ?>; </script>
+<script>var nombreUsu = <?php echo json_encode($_SESSION["nombre"]); ?>; </script>
 
 </body>
 </main>
