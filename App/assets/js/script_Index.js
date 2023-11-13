@@ -16,50 +16,25 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
                 respuestaJSON.forEach(function(item) {
+                    // var portfolioItem = document.createElement("div");
+                    // portfolioItem.className = "col-lg-4 col-md-6 portfolio-item filter-app";
 
-                    var portfolioItem = document.createElement("div");
-                    portfolioItem.className = "col-lg-4 col-md-6 portfolio-item filter-app";
-
-                    // Contenido del div
-                    portfolioItem.innerHTML = `
-                    <div class="portfolio-img"><img src="App/assets/img/ImagenesInmuebles/${item.nameImagen}" class="img-fluid" alt=""></div>
-                    <div class="portfolio-info">
-                        <h4>${item.Nombre_Inmueble}</h4>
-                        <p>${item.Categoria_Inmueble}</p>
-                        <a href="App/assets/img/ImagenesInmuebles/${item.nameImagen}" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="${item.Nombre_Inmueble}"><i class="bx bx-plus"></i></a>
-                        <a href="./App/Views/InmuebleDetalle_View.php" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
-                    </div>
-                    `;
-
-                    portfolioContainer.appendChild(portfolioItem);
-
-                    // console.log(item.nameImagen);
-                    // console.log(item.Nombre_Inmueble);
-
-                    // var divExterno = document.createElement('div');
-
-                    // divExterno.className='col-lg-4 col-md-6 portfolio-item filter-app';
-
-                    // var divMedio = document.createElement('div');
-
-
-                    // var portfolioItem = document.createElement('div');
-                    // portfolioItem.classList.add('col-lg-4', 'col-md-6', 'portfolio-item', 'filter-app');
-
+                    // // Contenido del div
                     // portfolioItem.innerHTML = `
-                    // <div class="portfolio-img"><img src="App/assets/img/ImagenesInmuebles/${item.nameImagen}" class="img-fluid" alt=""></div>
+                    // <div class="portfolio-img"><img src="./App/assets/img/portfolio/portfolio-1.jpg" class="img-fluid" alt=""></div>
                     // <div class="portfolio-info">
-                    //   <h4>${item.Nombre_Inmueble}</h4>
-                    //   <p>${item.Categoria_Inmueble}</p>
-                    //   <a href="App/assets/img/ImagenesInmuebles/${item.nameImagen}" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="${item.Nombre_Inmueble}"><i class="bx bx-plus"></i></a>
-                    // //   <a href="${item.detailsLink}" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+                    //     <h4>App 1</h4>
+                    //     <p>App</p>
+                    //     <a href="./App/assets/img/portfolio/portfolio-1.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="App 1"><i class="bx bx-plus"></i></a>
+                    //     <a href="./App/Views/InmuebleDetalle_View.php" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
                     // </div>
-                //   `;
+                    // `;
+                    //portfolioContainer.appendChild(portfolioItem);
                 });
-                portfolioContainer.appendChild(portfolioItem);
+
 
             },
-            error: function(jqXHR, textStatus, errorThrown) {
+            error: function(textStatus, errorThrown) {
                 console.error('Error en la solicitud AJAX:', textStatus, errorThrown);
             }
         });

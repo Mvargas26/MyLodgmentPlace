@@ -1,3 +1,6 @@
+<?php
+require("App/Modules/Master_Class.php");
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -310,32 +313,73 @@
 
         <div class="section-title">
           <h2>Espacios</h2>
-          <p>¡./App/Para una Experiencia Mas Personalizada inicia Sesion !</p>
+          <p>¡Para una Experiencia Mas Personalizada inicia Sesion !</p>
         </div>
 
         <ul id="portfolio-flters" class="d-flex justify-content-center">
           <li data-filter="*" class="filter-active">All</li>
-          <li data-filter=".filter-app">Cabañas</li>
+          <?php
+             try {
+              $resultadoConsulta = $ObjMaster->ConsultarCategorias();
+              // Decodificar el string JSON a un array de PHP
+              $datos = json_decode($resultadoConsulta, true);
+
+              if ($datos) {
+                foreach ($datos as $dato) {
+          ?>
+              <li data-filter=".filter-<?php echo $dato['Nombre_Cat'] ?>"> <?php echo $dato['Nombre_Cat'] ?> </li>
+          <?php
+               }
+              } else {
+                echo 'Error al decodificar el JSON';
+              }
+            } catch (Exception $e) {
+              echo 'Error: ' . $e->getMessage();
+            }
+
+          ?>
+          <!-- <li data-filter=".filter-app">Cabañas</li>
           <li data-filter=".filter-card">Frente a la Playa</li>
-          <li data-filter=".filter-web">Zona Rural</li>
+          <li data-filter=".filter-web">Zona Rural</li> -->
         </ul>
 
         <div class="row portfolio-container" id="portfolioContainer">
 
-          <!-- <div class="col-lg-4 col-md-6 portfolio-item filter-app" >
-            <div class="portfolio-img"><img src="./App/assets/img/portfolio/portfolio-1.jpg" class="img-fluid" alt=""></div>
-            <div class="portfolio-info">
-              <h4>App 1</h4>
-              <p>App</p>
-              <a href="./App/assets/img/portfolio/portfolio-1.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="App 1"><i class="bx bx-plus"></i></a>
-              <a href="./App/Views/InmuebleDetalle_View.php" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
-            </div>
-          </div> -->
+            <?php
 
+            try {
+              $resultadoConsulta = $ObjMaster->ConsultarInmuebles();
+              // Decodificar el string JSON a un array de PHP
+              $datos = json_decode($resultadoConsulta, true);
+
+              if ($datos) {
+                // $datosAgrupados = array();
+
+                foreach ($datos as $dato) {
+            ?>
+                  <div class="col-lg-4 col-md-6 portfolio-item filter-<?php echo $dato['Categoria_Inmueble'] ?>">
+                    <div class="portfolio-img"><img src="./App/assets/img/ImagenesInmuebles/<?php echo $dato['nameImagen'] ?>" class="img-fluid" alt=""></div>
+                    <div class="portfolio-info">
+                      <h4><?php  echo $dato['Nombre_Inmueble'] ?></h4>
+                      <p> ₡ <?php echo $dato['valorDiario'] ?></p>
+                      <a href="./App/assets/img/ImagenesInmuebles/<?php echo $dato['nameImagen'] ?>" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="<?php $dato['Nombre_Inmueble'] ?>"><i class="bx bx-plus"></i></a>
+                      <a href="./App/Views/InmuebleDetalle_View.php" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+                    </div>
+                  </div>
+            <?php
+                }
+              } else {
+                echo 'Error al decodificar el JSON';
+              }
+            } catch (Exception $e) {
+              echo 'Error: ' . $e->getMessage();
+            }
+            ?>
         </div>
 
       </div>
-    </section><!-- End Portfolio Section -->
+    </section>
+    <!-- End Portfolio Section -->
 
 
 

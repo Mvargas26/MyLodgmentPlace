@@ -356,6 +356,37 @@ function enviarCodigoAutenticacionCorreo($destinatario, $codigo_autenticacion)
                 }
         }
 
+        function ConsultarCategorias(){
+
+            try {
+                    $query = " Select * FROM tbcategorias ";
+    
+                    $this->conn->set_charset("utf8"); 
+                    $result = $this->getConexion()->query($query);
+            
+                    if ($result) {
+                        $data = array();
+            
+                        while ($row = $result->fetch_assoc()) {
+                            $item = array(
+                                "idCat" => $row['idcategoria'],
+                                "Nombre_Cat" => $row["categoria"],
+                            );
+                            $data[] = $item;
+                        }
+            
+                        return json_encode($data);
+    
+                    } else {
+                        throw new Exception("Error en la consulta: " . $this->getConexion()->error);
+                    }
+                } catch (Exception $e) {
+                    error_log($e->getMessage());
+                    return null; // Retorna null en caso de error
+                }
+
+        }
+
 
 }//fn cl_masterClass
 

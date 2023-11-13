@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const GridAnunciosMultiples = document.getElementById("GridAnunciosMultiples");
 
         if (GridAnunciosMultiples) {
-            console.log("La cedula es:  "+identificacion);
+            //console.log("La cedula es:  "+identificacion);
 
 
             //HAcemos la peticion
