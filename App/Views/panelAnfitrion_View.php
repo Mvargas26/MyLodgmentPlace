@@ -18,7 +18,7 @@ include './templates/Header.php';
                 <a href="validar_identidadHuesped_View.php">Validacion Segura del Perfil</a>
             </div>
             <div class="card">
-                <a href="notificaciones.php">Notificaciones</a>
+                <a href="notificacionesAnfitrion_View.php">Notificaciones</a>
             </div>
             <div class="card">
                 <a href="">Creacion de Descuentos</a>

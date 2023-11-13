@@ -7,9 +7,6 @@ $ObjMaster = new Master_Class();
 if(isset($_POST["ObtenerServicios"])){
     try {
     
-    
-    
-    
         $resultadoConsulta = $ObjMaster->CargarServicios();
     
         if ($resultadoConsulta) {

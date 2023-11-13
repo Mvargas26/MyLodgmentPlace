@@ -254,7 +254,7 @@
 
     const vistaActual = document.body.dataset.vista;
 
-    // Verifica si la vista actual es anunciosMultiples_View.php
+    // Verifica si la vista actual es PublicarInmueble_View.php
     // Carga los Servicios de la base
     if (vistaActual === 'PublicarInmueble_View.php') {
         window.addEventListener('load', function() {
@@ -276,60 +276,33 @@
                 ObtenerNotificaciones : "ObtenerNotificaciones"
             };
 
+
             $.ajax({
-                url: "../../App/Modules/Servicios/servicios_Negocios.php",
+                url: "../../App/Modules/Notificaciones/notificaciones_Negocios.php",
                 type: "POST",
                 data:{
                     ObtenerNotificaciones: ObtenerNotificaciones
                 },
                 success: function(response) 
                 {
-                    console.log("Si esta entrando")
+                    var respuestaJSON = JSON.parse(response);
 
-                    if (Array.isArray(response)) {
-                    
-                        for (var i = 0; i < response.length; i++) 
-                        {
-                            // Crea un nuevo label
-                            var nuevoLabel = document.createElement('label');
-                            nuevoLabel.className = 'containerServicios';
-                            // nuevoLabel.id = 'containerServicios';
+                    //esto llena el grid
+                    var tbody = document.querySelector('#GridAnunciosMultiples tbody');
+                    tbody.innerHTML = '';
+            
+                    // Llena la tabla con los datos obtenidos de la consulta
+                    respuestaJSON.forEach(function(notificacion) {
+                        var fila = '<tr>';
+                        fila += '<td>' + notificacion.descripcion + '</td>';
+                        fila += '<td>' + notificacion.fecha + '</td>';                      
 
-                            // Crea un nuevo input tipo hidden
-                            var nuevoInputID = document.createElement('input');
-                            nuevoInputID.type = 'hidden';
-                            nuevoInputID.id = 'IDServicio';
-                            nuevoInputID.value = response[i].id;
-                            nuevoInputID.className = 'hiddenInput'
-
-                            // Crea un nuevo input tipo checkbox
-                            var nuevoInputCheckbox = document.createElement('input');
-                            nuevoInputCheckbox.type = 'checkbox';
-                            nuevoInputCheckbox.checked = false;
-
-                            // Crea un nuevo span
-                            var nuevoSpan = document.createElement('span');
-                            nuevoSpan.className = 'checkmark';
-
-                            // Asigna el texto del label con el nombre del servicio
-                            nuevoLabel.innerText = response[i].nombre;
-
-                            // Agrega los elementos al label
-                            nuevoLabel.appendChild(nuevoInputID);
-                            nuevoLabel.appendChild(nuevoInputCheckbox);
-                            nuevoLabel.appendChild(nuevoSpan);
-
-                            // Agrega el label al contenedor grid
-                            document.querySelector('.grid').appendChild(nuevoLabel);
-
-                        }
-                    } else {
-                        console.error('La respuesta no es un array:', response);
-                    }
-
-
+                        fila += '</tr>';
+                        tbody.innerHTML += fila;
+                    });
+    
                 },
-                error: function(jqXHR, textStatus, errorThrown) {
+                error: function(textStatus, errorThrown) {
                     console.error('Error en la solicitud AJAX:', textStatus, errorThrown);
                 }
             });
@@ -407,4 +380,5 @@
     // AQUI SE INICIALIZA CADA METODO
      RegistroUsuarios.init();
      Login.init();
-     CargarServicios.init();
+    //  CargarServicios.init();
+    //  CargarNotificaciones.init();

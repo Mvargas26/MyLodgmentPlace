@@ -388,6 +388,42 @@ function enviarCodigoAutenticacionCorreo($destinatario, $codigo_autenticacion)
         }
 
 
+        function ConsultaNotificaciones(){
+            $arry_Datos = func_get_args();
+
+            $idAnfitrion = $this->GetConexion()->real_escape_string($arry_Datos[0]);
+            
+            try {
+                    $query = " SELECT descripcion, fecha
+                    FROM tbnotificaciones
+                    WHERE iduser = $idAnfitrion;";
+    
+                    $this->conn->set_charset("utf8"); 
+                    $result = $this->getConexion()->query($query);
+            
+                    if ($result) {
+                        $data = array();
+            
+                        while ($row = $result->fetch_assoc()) {
+                            $item = array(
+                                "descripcion" => $row['descripcion'],
+                                "fecha" => $row["fecha"],                              
+                            );
+                            $data[] = $item;
+                        }
+            
+                        return json_encode($data);
+    
+                    } else {
+                        throw new Exception("Error en la consulta: " . $this->getConexion()->error);
+                    }
+                } catch (Exception $e) {
+                    error_log($e->getMessage());
+                    return null; // Retorna null en caso de error
+                }
+        }
+
+
 }//fn cl_masterClass
 
 $ObjMaster = new Master_Class();
