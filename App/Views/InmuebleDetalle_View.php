@@ -133,17 +133,9 @@ include './templates/Header.php';
 
       </div>
     </section><!-- End Testimonials Section -->
-
-
-
-
+ 
   </main><!-- End #main -->
-
-
-
-
-
-
+ 
 <!-- ==============================================Inicio Footer ======= -->
    
 <?php
