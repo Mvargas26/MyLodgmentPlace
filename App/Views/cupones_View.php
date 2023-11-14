@@ -4,61 +4,44 @@ session_start();
 ?>
 <!-- ==============================================Fin header ======= -->
 <main id="main">
-
     <link href="../assets/css/cupones.css" rel="stylesheet">
-
-    <div>
-        <p>Cédula: <span id="cedulaFromDatabase"></span></p> 
-        <p>Nombre: <span id="nameFromDatabase"></span></p>
-        
-    </div>
-
     <body id="body">
-    <div class="contener"> 
         
-        <!-- Sección para cambiar la contraseña -->
-        <div id="seccionCupon">
-            <h2>Cupon de descuento</h2>
-            <form>
-                <label for="contrasenaAnterior">Codigo del cupon:</label>
-                <input type="password" id="contrasenaAnterior" name="contrasenaAnterior" required><br>
+        <div class="contener"> 
 
-                <label for="contrasenaNueva">Contraseña Nueva:</label>
-                <input type="password" id="contrasenaNueva" name="contrasenaNueva" required><br>
+            <div id="seccionCupon">
+                <h2>Cupon de descuento</h2>
+                <form action="process_coupon.php" method="post" onsubmit="return showCouponAppliedAlert();">
+                    <label for="codigoCupon">Codigo del cupon:</label>
+                    <input type="text" id="codigoCupon" name="codigoCupon" required><br>
+                    <button type="submit">Aplicar Cupón</button>
+                </form>
+            </div>
 
-                <label for="confirmarContrasenaNueva">Confirmar Contraseña Nueva:</label>
-                <input type="password" id="confirmarContrasenaNueva" name="confirmarContrasenaNueva" required><br>
-
-                <button type="submit">Cambiar Contraseña</button>
-            </form>
-
-
+            <div id="seccionTarjeta">
+                <h2>Tarjeta de regalo</h2>
+                <form action="process_gift_card.php" method="post" onsubmit="return showGiftCardAppliedAlert();">
+                    <label for="codigoTarjeta">Codigo de la tarjeta de regalo:</label>
+                    <input type="text" id="codigoTarjeta" name="codigoTarjeta" required><br>
+                    <button type="submit">Aplicar Tarjeta de Regalo</button>
+                </form>
+            </div>
+            <br>
+            <br>
         </div>
+        </body>
 
-        <!-- Sección para cambiar el correo electrónico -->
-        <div id="seccionTarjeta">
-            <h2>Tarjeta de regalo</h2>
-            <form>
-                <label for="correoActual">Codigo de la tarejeta de regalo:</label>
-                <input type="email" id="correoActual" name="correoActual" required><br>
+        <script>
+            function showCouponAppliedAlert() {
+                alert("El cupón se aplicó correctamente");
+                return true; 
+            }
 
-                <label for="correoNuevo">Correo Nuevo:</label>
-                <input type="email" id="correoNuevo" name="correoNuevo" required><br>
-
-                <label for="confirmarCorreoNuevo">Confirmar Correo Nuevo:</label>
-                <input type="email" id="confirmarCorreoNuevo" name="confirmarCorreoNuevo" required><br>
-
-                <button type="submit">Cambiar Correo Electrónico</button>
-            </form>
-        </div>
-        <br>
-        <br>
-        </div>
-    </body>
-
-    <script>var identificacion = <?php echo json_encode($_SESSION["Identificacion"]); ?>; </script>
-    <script>var nombreUsu = <?php echo json_encode($_SESSION["nombre"]); ?>; </script>
-
+            function showGiftCardAppliedAlert() {
+                alert("La tarjeta de regalo se aplicó correctamente");
+                return true; 
+            }
+        </script>
 </main>
 
 

@@ -30,8 +30,11 @@ textarea {
 }
 
 button {
-    margin-top: 10px;
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
+    background-color: #524156; /* Color de fondo del botón */
+    color: #fff; /* Color del texto del botón */
+    border: none;
+    border-radius: 5px;
 }
