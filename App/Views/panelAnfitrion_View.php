@@ -41,6 +41,9 @@ include './templates/Header.php';
             <div class="card">
                 <a href="mensajesHuesped_View.php">Mensajeria</a>
             </div>
+            <div class="card">
+                <a href="denunciasHuesped_View.php">Denunciar</a>
+            </div>
         </div>
         <br>
     </body>

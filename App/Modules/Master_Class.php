@@ -601,7 +601,8 @@ class Master_Class
                         "Descripcion" => $row['Descripcion'],
                         "fechaResena" => $row["fechaResena"],
                         "NombreUsuarioResena" => $row["NombreUsuarioResena"],
-                        "fotoperfil" => $urlImagen,  // Aquí se guarda la imagen en formato base64
+                        "fotoperfil" => $urlImagen,
+                        // Aquí se guarda la imagen en formato base64
                     );
 
                     $data[] = $item;
@@ -818,6 +819,50 @@ class Master_Class
             return null; // Retorna null en caso de error
         }
     }
-} //fn cl_masterClass
 
+    //METODOS DE DENUNCIAS
+    function ConsultarReservasPorUsuario($identificacion)
+    {
+        try {
+            $query = "SELECT
+            r.idUsuario,
+            r.idInmueble,
+            r.idReserva,
+            u.nombre,
+            u.apellido1,
+            u.apellido2,
+            i.nombre AS nombre_inmueble
+        FROM tbreserva r
+        INNER JOIN tbusuario u ON r.idUsuario = u.idUser
+        INNER JOIN tbinmueble i ON r.idInmueble = i.id
+        WHERE r.idUsuario = '$identificacion';";
+
+            $result = $this->getConexion()->query($query);
+            $reservas = array();
+
+            if ($result) {
+                while ($row = $result->fetch_assoc()) {
+                    $reserva = array(
+                        "idReserva" => $row["idReserva"],
+                        "nombre" => $row["nombre"],
+                        "apellido1" => $row["apellido1"],
+                        "apellido2" => $row["apellido2"],
+                        "idInmueble" => $row["idInmueble"],
+                        "nombre_inmueble" => $row["nombre_inmueble"],
+                    );
+                    $reservas[] = $reserva;
+                }
+                return $reservas;
+            } else {
+                throw new Exception("Error en la consulta: " . $this->getConexion()->error);
+            }
+        } catch (Exception $e) {
+            error_log($e->getMessage());
+            return null;
+        }
+    }
+
+
+
+} //fn cl_masterClass
 $ObjMaster = new Master_Class();
