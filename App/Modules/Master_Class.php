@@ -478,7 +478,123 @@ class Master_Class
             return null; // Retorna null en caso de error
         }
 
-    } //fn ConsultarUsuario
+    } //fn ConsultarInmueble
+
+    function ConsultarInmuebles_porID($idInmueble)
+    {
+
+        try {
+            $query = "SELECT
+                mu.id, 
+                mu.nombre AS nombre_inmueble, 
+                mu.valorDiario, 
+                mu.capacidadPersonas, 
+                mu.costoPersonaExtra, 
+                mu.direccion, 
+                mu.disponibilidad, 
+                mu.estrellas, 
+                mu.fechaLimiteDisponibilidad, 
+                CONCAT(us.nombre, ' ', us.apellido1, ' ', us.apellido2) AS nombre_propietario,
+                ca.categoria as Categoria_Inmueble,
+                ft.nombreImagen as nameImagen
+            FROM tbinmueble as mu
+            INNER JOIN tbusuario as us ON mu.Propietario = us.idUser
+            INNER JOIN tbcategoriainmueble ON mu.id = tbcategoriainmueble.idInmueble
+            INNER JOIN tbcategorias ca ON tbcategoriainmueble.idCategoria = ca.idcategoria
+            INNER JOIN tbfotoinmueble ft ON mu.id = ft.idInmueble
+            WHERE mu.id = $idInmueble;";
+
+            $this->conn->set_charset("utf8");
+            $result = $this->getConexion()->query($query);
+
+            if ($result) {
+                $data = array();
+
+                while ($row = $result->fetch_assoc()) {
+                    $item = array(
+                        "id" => $row['id'],
+                        "Nombre_Inmueble" => $row["nombre_inmueble"],
+                        "valorDiario" => $row["valorDiario"],
+                        "capacidadPersonas" => $row["capacidadPersonas"],
+                        "costoPersonaExtra" => $row["costoPersonaExtra"],
+                        "direccion" => $row["direccion"],
+                        "disponibilidad" => $row["disponibilidad"],
+                        "estrellas" => $row["estrellas"],
+                        "fechaLimiteDisponibilidad" => $row["fechaLimiteDisponibilidad"],
+                        "nombre_propietario" => $row["nombre_propietario"],
+                        "Categoria_Inmueble" => $row["Categoria_Inmueble"],
+                        "nameImagen" => $row["nameImagen"],
+                    );
+                    $data[] = $item;
+                }
+
+                return json_encode($data);
+
+            } else {
+                throw new Exception("Error en la consulta: " . $this->getConexion()->error);
+            }
+        } catch (Exception $e) {
+            error_log($e->getMessage());
+            return null; // Retorna null en caso de error
+        }
+
+    } //fn ConsultarInmueble POR ID
+
+    function ConsultarResenas_porID($idInmueble)
+    {
+
+        try {
+            $query = "SELECT 
+                    tbresenalugar.Descripcion, 
+                    tbresenalugar.fechaResena, 
+                    tbusuario.Nombre AS NombreUsuarioResena, 
+                    tbusuario.fotoperfil
+                    FROM 
+                        tbresenalugar
+                    JOIN 
+                        tbusuario ON tbresenalugar.idUsuarioResena = tbusuario.idUser
+                    WHERE 
+                        tbresenalugar.idLugarDirigido = $idInmueble;";
+
+            $this->conn->set_charset("utf8");
+            $result = $this->getConexion()->query($query);
+
+            if ($result) {
+                $data = array();
+
+                while ($row = $result->fetch_assoc()) {
+                    // Suponiendo que $row["fotoperfil"] contiene la ruta de la imagen
+                    $imagenPath = $row["fotoperfil"];
+                    $imagenData = file_get_contents($imagenPath);
+                    $imagenBase64 = base64_encode($imagenData);
+
+                    $urlImagen = "data:image/jpeg;base64," . $imagenBase64;
+                
+                    $item = array(
+                        "Descripcion" => $row['Descripcion'],
+                        "fechaResena" => $row["fechaResena"],
+                        "NombreUsuarioResena" => $row["NombreUsuarioResena"],
+                        "fotoperfil" => $urlImagen,  // Aquí se guarda la imagen en formato base64
+                    );
+                
+                    $data[] = $item;
+                }
+
+                return json_encode($data);
+
+            } else {
+                throw new Exception("Error en la consulta: " . $this->getConexion()->error);
+            }
+        } catch (Exception $e) {
+            error_log($e->getMessage());
+            return null; // Retorna null en caso de error
+        }
+
+    } //fn ConsultarResenias POR id
+
+
+
+
 
     function ConsultaMultipleEspacios()
     {

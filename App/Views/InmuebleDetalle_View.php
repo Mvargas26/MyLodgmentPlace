@@ -1,30 +1,77 @@
 <?php
 include './templates/Header.php';
+require_once('../Modules/Master_Class.php');
+session_start();
 // Verificar si se proporcionó un nombre de inmueble en la URL
-if (isset($_GET['nombre'])) {
-  $nombreInmueble = $_GET['nombre'];
+if (isset($_GET['id'])) {
+  $idInmuebleDetalle = $_GET['id'];
   ?>
   <!-- ==============================================Fin header ======= -->
   <main id="main">
 
+    
+    <h1><?php echo $idInmuebleDetalle ?></h1>
+    <!-- ----------------------------------------------------- -->
+    <!-- PRIMERO HACE LA CONSULTA DE LOS DATOS DEL INMUEBLE -->
+    <!-- SEGUN EL ID QUE RECIBIO POR URL -->
+    <!-- ----------------------------------------------------- -->
+    <?php
+      try {
+
+        $resultadoConsulta = $ObjMaster->ConsultarInmuebles_porID($idInmuebleDetalle);
+        // Decodificar el string JSON a un array de PHP
+        $datos = json_decode($resultadoConsulta, true);
+      } catch (Exception $e) {
+        echo 'Error: ' . $e->getMessage();
+      }
+    
+    ?>         
+    <!-- ----------------------------------------------------- -->
     <!-- ======= Breadcrumbs ======= -->
     <section id="breadcrumbs" class="breadcrumbs">
       <div class="container">
 
-        <h2>Detalle</h2>
+        <h1>Informacion del espacio</h1>
 
+        
       </div>
     </section><!-- End Breadcrumbs -->
-
+    
     <section id="portfolio-details" class="portfolio-details">
       <div class="container">
-
+        
         <div class="row gy-4">
           <div class="col-lg-8">
             <div class="portfolio-details-slider swiper">
+              
+              
+              <!-- CAROUSEL CON IMAGENES DEL ESPACIO -->
               <div class="swiper-wrapper align-items-center">
+                
+                <?php
+                  
+                  if ($datos) {
+                    // $datosAgrupados = array();
+                    foreach ($datos as $dato) {
+                  ?>
+                    <div class="swiper-slide">
+                      <img src="../../App/assets/img/ImagenesInmuebles/<?php echo $dato['nameImagen'] ?> " alt="">
+                    </div>
+                    
+                    <?php
 
-                <div class="swiper-slide">
+                    }//end for 
+                  }//end if
+                  else{
+                    ?>
+                      <div class="swiper-slide">
+                        <p>No se encontraron imagenes para este inmueble</p>
+                        </div>
+                    <?php
+                  }
+                  ?>
+
+                <!-- <div class="swiper-slide">
                   <img src="../assets/img/portfolio/portfolio-1.jpg" alt="">
                 </div>
 
@@ -34,9 +81,10 @@ if (isset($_GET['nombre'])) {
 
                 <div class="swiper-slide">
                   <img src="../assets/img/portfolio/portfolio-3.jpg" alt="">
-                </div>
+                </div> -->
 
               </div>
+
               <div class="swiper-pagination"></div>
             </div>
             <div class="text-center mt-3">
@@ -55,29 +103,143 @@ if (isset($_GET['nombre'])) {
                 <li><strong>Otros:</strong>: <a href="#">www.example.com</a></li>
               </ul>
             </div> -->
-              <div class="portfolio-description">
+            <div class="portfolio-description">
+              
+              <?php
+
+// try {
+                //   $resultadoConsulta = $ObjMaster->ConsultarInmuebles();
+                //   // Decodificar el string JSON a un array de PHP
+                //   $datos = json_decode($resultadoConsulta, true);
+                
+                //   if ($datos) {
+                  //     // $datosAgrupados = array();
+                  
+                  
+                  //     foreach ($datos as $dato) {
+                    ?>
+                      <!-- <div class="col-lg-4 col-md-6 portfolio-item filter-<?php //echo $dato['Categoria_Inmueble'] ?>">
+                        <div class="portfolio-img"><img src="./App/assets/img/ImagenesInmuebles/<?php //echo $dato['nameImagen'] ?>" class="img-fluid" alt=""></div>
+                        <div class="portfolio-info">
+                          <h4><?php  //echo $dato['Nombre_Inmueble'] ?></h4>
+                          <p> ₡ <?php //echo $dato['valorDiario'] ?></p>
+                          <a href="./App/assets/img/ImagenesInmuebles/<?php //echo $dato['nameImagen'] ?>" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="<?php// $dato['Nombre_Inmueble'] ?>"><i class="bx bx-plus"></i></a>
+                          <a href="./App/Views/InmuebleDetalle_View.php?nombre=<?php //echo urlencode($dato['Nombre_Inmueble']); ?>" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+                        </div>
+                      </div> -->
+                <?php
+                  // function obtenerPrimerValorUnico($columna) {
+                  //   return reset(array_unique(array_column($datos, $columna)));
+                  // }
+                  
+                  ?>
+
                 <h2>Características del espacio:</h2>
                 <p>
                   <strong>Nombre del Inmueble:</strong>
-                  <?php echo $data['Nombre_Inmueble']; ?><br>
+                  <?php 
+                  foreach ($datos as $dato) {
+                    
+                    echo $dato['Nombre_Inmueble'];
+                    break;
+                  }               
+                  ?><br>
+                  <!-- ----------------------------------------------------- -->
+                  
                   <strong>Capacidad de Personas:</strong>
-                  <?php echo $data['capacidadPersonas']; ?><br>
+                  <?php 
+                    foreach ($datos as $dato) {
+                      
+                      echo $dato['capacidadPersonas'];
+                      break;
+                    }             
+                  ?><br>
+
+                  <!-- ----------------------------------------------------- -->
                   <strong>Dirección:</strong>
-                  <?php echo $data['direccion']; ?><br>
+                  <?php 
+                    foreach ($datos as $dato) {
+
+                      echo $dato['direccion'];
+                      break;
+                    }   
+                  
+                  ?><br>
+
+                  <!-- ----------------------------------------------------- -->
                   <strong>Disponibilidad:</strong>
-                  <?php echo $data['disponibilidad']; ?><br>
+                  <?php 
+                  foreach ($datos as $dato) {
+
+                    echo $dato['disponibilidad'];
+                    break;
+                  } 
+                  ?><br>
+
+                  <!-- ----------------------------------------------------- -->
                   <strong>Estrellas:</strong>
-                  <?php echo $data['estrellas']; ?><br>
+                  <?php
+                  foreach ($datos as $dato) {
+
+                    echo $dato['estrellas'];
+                    break;
+                  } 
+                  ?><br>
+
+                  <!-- ----------------------------------------------------- -->
                   <strong>Fecha Límite de Disponibilidad:</strong>
-                  <?php echo $data['fechaLimiteDisponibilidad']; ?><br>
+                  <?php 
+                  foreach ($datos as $dato) {
+
+                    echo $dato['fechaLimiteDisponibilidad'];
+                    break;
+                  } 
+                  
+                  ?><br>
+
+
+                  <!-- ----------------------------------------------------- -->
                   <strong>Propietario:</strong>
-                  <?php echo $data['nombre_propietario']; ?><br>
+                  <?php 
+                  foreach ($datos as $dato) {
+
+                    echo $dato['nombre_propietario'];
+                    break;
+                  } 
+
+                  ?><br>
+
+                  <!-- ----------------------------------------------------- -->
                   <strong>Característica 1:</strong>
-                  <?php echo $data['caracteristica1']; ?><br>
+                  <?php 
+
+                  // foreach ($datos as $dato) {
+
+                  //   echo $dato['caracteristica1'];
+                  //   break;
+                  // } 
+                  ?><br>
+
+                    <!-- ----------------------------------------------------- -->
                   <strong>Característica 2:</strong>
-                  <?php echo $data['caracteristica2']; ?><br>
+                  <?php 
+                  // foreach ($datos as $dato) {
+
+                  //   echo $dato['caracteristica2'];
+                  //   break;
+                  // } 
+                  ?><br>
+
+                    <!-- ----------------------------------------------------- -->
                   <strong>Característica 3:</strong>
-                  <?php echo $data['caracteristica3']; ?><br>
+                  <?php 
+                    // foreach ($datos as $dato) {
+
+                    //   echo $dato['caracteristica3'];
+                    //   break;
+                    // } 
+
+                  ?><br>
                 </p>
               </div>
             </div>
@@ -87,26 +249,20 @@ if (isset($_GET['nombre'])) {
         </div>
     </section><!-- End Portfolio Details Section -->
 
+    <br/>
+    <br/>
+    <br/>
     <p>Calendario</p>
-
-    <!-- <div id="reseniasDiv">
-      <i class="bi bi-star"></i>
-      <i class="bi bi-star"></i>
-      <i class="bi bi-star"></i>
-      <i class="bi bi-star"></i>
-      <i class="bi bi-star"></i>
-
-    </div> -->
+    <br/>
+    <br/>
+    <br/>
+    <br/>
 
     <!-- =============================================================================================== -->
     <!-- RESEÑAS
         RESEÑAS -->
     <div id="ContenedorResenias">
-      <!-- <div id="iconoContenedor">
-            <i class="bi bi-chat-square-quote-fill" id="iconoR"></i>
-          </div> -->
       <section id="DejaTuResenia">
-
 
         <div id="reseniasDiv">
           <form id="resenaForm" action="" method="post">
@@ -121,25 +277,49 @@ if (isset($_GET['nombre'])) {
             <textarea id="resenaTextarea" name="resena" rows="3" placeholder="Escribe tu reseña aquí..."
               maxlength="100"></textarea>
 
-            <button class="custom-button" type="button">Publicar Reseña</button>
+              <!--  -->
+              <?php 
+                if (isset($_SESSION["nombre"])) {
+                  ?>
+                    <button class="custom-button" type="button">Publicar Reseña</button>
+                  <?php 
+
+                } else {
+            ?>
+                  <p style="font-family: inherit;">Debes tener una cuenta para comentar! 
+                    <a class="nav-link scrollto" style="color: #f4572c;" href="Login_View.php">Iniciar Sesion</a> 
+                    <a class="nav-link scrollto" style="color: #f4572c;" href="registro_View.php">Registrarse</a>
+                  </p>
+            <?php
+
+            }
+          ?>
+              
+
 
           </form>
         </div>
-
-        <!-- <div id="reseniasDiv">
-
-
-          
-            </div> -->
-
-
-
-
-
         <input type="hidden" id="estrellasSeleccionadas" value="1">
       </section> <!--end section deja tu resena -->
 
 
+
+
+            <!-- CONSULTAR RESENAS POR ID -->
+<!-- ---------------------------------------------------------------- -->
+
+<?php
+      try {
+
+        $resultadoConsulta2 = $ObjMaster->ConsultarResenas_porID($idInmuebleDetalle);
+        // Decodificar el string JSON a un array de PHP
+        $datosResenas = json_decode($resultadoConsulta2, true);
+      } catch (Exception $e) {
+        echo 'Error: ' . $e->getMessage();
+      }
+    
+  ?>  
+<!-- ---------------------------------------------------------------- -->
       <section id="testimonials" class="testimonials section-bg">
 
 
@@ -153,17 +333,38 @@ if (isset($_GET['nombre'])) {
           <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
             <div class="swiper-wrapper">
 
-              <div class="swiper-slide">
-                <div class="testimonial-item">
-                  <p>
-                    <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                    Disfrute mucho en una cabaña de montaña.
-                    <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                  </p>
-                  <img src="../App/assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
-                  <h3>Saul Gomez</h3>
+              <?php
+
+                foreach ($datosResenas as $item) {
+                  ?>
+                    <div class="swiper-slide">
+                      <div class="testimonial-item">
+                        <p>
+                          <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                          <?php echo $item["Descripcion"] ?>
+                          <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                        </p>
+                        <img src="<?php echo $item["fotoperfil"] ?>" class="testimonial-img" alt="">
+                        <h3><?php echo $item["NombreUsuarioResena"] ?></h3>
+                        <h3><?php echo $item["fechaResena"] ?></h3>
+                      </div>
+                    </div><!-- End testimonial item -->
+                  <?php
+                }//end FOR 
+              ?>
+
+
+                <!-- <div class="swiper-slide">
+                  <div class="testimonial-item">
+                    <p>
+                      <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                      Disfrute mucho en una cabaña de montaña.
+                      <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                    </p>
+                    <img src="../../App/assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
+                    <h3>Saul Gomez</h3>
+                  </div>
                 </div>
-              </div><!-- End testimonial item -->
 
               <div class="swiper-slide">
                 <div class="testimonial-item">
@@ -175,7 +376,7 @@ if (isset($_GET['nombre'])) {
                   <img src="./App/assets/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
                   <h3>Sara Rodriguez</h3>
                 </div>
-              </div><!-- End testimonial item -->
+              </div>
 
               <div class="swiper-slide">
                 <div class="testimonial-item">
@@ -187,7 +388,7 @@ if (isset($_GET['nombre'])) {
                   <img src="../App/assets/img/testimonials/testimonials-3.jpg" class="testimonial-img" alt="">
                   <h3>Jena Karlis</h3>
                 </div>
-              </div><!-- End testimonial item -->
+              </div>
 
               <div class="swiper-slide">
                 <div class="testimonial-item">
@@ -200,9 +401,9 @@ if (isset($_GET['nombre'])) {
                   <h3>John Ruiz</h3>
 
                 </div>
-              </div><!-- End testimonial item -->
+              </div> -->
 
-            </div>
+            </div> <!-- end RESENIAS TARJETA -->
             <div class="swiper-pagination"></div>
           </div>
 
