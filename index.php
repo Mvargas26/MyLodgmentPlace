@@ -141,7 +141,7 @@ session_start();
     </section>End About Section -->
 
     <!-- ======= Counts Section ======= -->
-    <section id="counts" class="counts">
+    <!-- <section id="counts" class="counts">
       <div class="container">
 
         <div class="row counters">
@@ -169,11 +169,11 @@ session_start();
         </div>
 
       </div>
-    </section><!-- End Counts Section -->
+    </section>End Counts Section -->
 
 
     <!-- ======= Clients Section ======= -->
-    <section id="clients" class="clients section-bg">
+    <!-- <section id="clients" class="clients section-bg">
       <div class="container">
 
         <div class="row">
@@ -205,10 +205,10 @@ session_start();
         </div>
 
       </div>
-    </section><!-- End Clients Section -->
+    </section>End Clients Section -->
 
     <!-- ======= Services Section ======= -->
-    <section id="services" class="services">
+    <!-- <section id="services" class="services">
       <div class="container">
 
         <div class="section-title">
@@ -240,10 +240,10 @@ session_start();
             </div>
           </div>
 
-    </section><!-- End Services Section -->
+    </section>End Services Section -->
 
     <!-- ======= Testimonials Section ======= -->
-    <section id="testimonials" class="testimonials section-bg">
+    <!-- <section id="testimonials" class="testimonials section-bg">
       <div class="container">
 
         <div class="section-title">
@@ -264,7 +264,7 @@ session_start();
                 <img src="./App/assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
                 <h3>Saul Gomez</h3>
               </div>
-            </div><!-- End testimonial item -->
+            </div>
 
             <div class="swiper-slide">
               <div class="testimonial-item">
@@ -276,7 +276,7 @@ session_start();
                 <img src="./App/assets/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
                 <h3>Sara Rodriguez</h3>
               </div>
-            </div><!-- End testimonial item -->
+            </div>
 
             <div class="swiper-slide">
               <div class="testimonial-item">
@@ -288,7 +288,7 @@ session_start();
                 <img src="./App/assets/img/testimonials/testimonials-3.jpg" class="testimonial-img" alt="">
                 <h3>Jena Karlis</h3>
               </div>
-            </div><!-- End testimonial item -->
+            </div>
 
             <div class="swiper-slide">
               <div class="testimonial-item">
@@ -301,14 +301,14 @@ session_start();
                 <h3>John Larson</h3>
                 <h4>Entrepreneur</h4>
               </div>
-            </div><!-- End testimonial item -->
+            </div>
 
           </div>
           <div class="swiper-pagination"></div>
         </div>
 
       </div>
-    </section><!-- End Testimonials Section -->
+    </section> -->
 
 
     <!-- ======= Portfolio Section ======= -->
@@ -385,154 +385,6 @@ session_start();
       </div>
     </section>
     <!-- End Portfolio Section -->
-
-
-
-    <!-- ======= Pricing Section ======= -->
-    <section id="pricing" class="pricing">
-      <div class="container">
-
-        <div class="section-title">
-          <h2>Descuentos</h2>
-          <p>Seccion de Promociones para este Mes</p>
-        </div>
-
-        <div class="row">
-
-          <div class="col-lg-3 col-md-6">
-            <div class="box">
-              <h3>Cupón</h3>
-              <h4><sup>$</sup>100<span></span></h4>
-              <ul>
-                <li>Aplica para:</li>
-                <li>Cabañas</li>
-                <li>Casas de Playa</li>
-              </ul>
-              <div class="btn-wrap">
-                <a href="#" class="btn-buy">Adquirir</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6 mt-4 mt-md-0">
-            <div class="box featured">
-              <h3>Tarjeta de Regalo</h3>
-              <h4><sup>$</sup>200<span></span></h4>
-              <ul>
-                <li>Ideal para un regalo</li>
-                <li>Dsponible por 6 meses despues de su registro</li>
-                <li>Aplica para todos los espacios</li>
-                <li>Transferible</li>
-              </ul>
-              <div class="btn-wrap">
-                <a href="#" class="btn-buy">Adquirir</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6">
-            <div class="box">
-              <h3>Cupón</h3>
-              <h4><sup>$</sup>75<span></span></h4>
-              <ul>
-                <li>Aplica para:</li>
-                <li>Cabañas</li>
-                <li>Casas de Playa</li>
-              </ul>
-              <div class="btn-wrap">
-                <a href="#" class="btn-buy">Adquirir</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6">
-            <div class="box">
-              <h3>Cupón</h3>
-              <h4><sup>$</sup>25<span></span></h4>
-              <ul>
-                <li>Aplica para:</li>
-                <li>Cabañas</li>
-                <li>Casas de Playa</li>
-              </ul>
-              <div class="btn-wrap">
-                <a href="#" class="btn-buy">Adquirir</a>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-    </section><!-- End Pricing Section -->
-
-
-
-    <!-- ======= Sección de Contacto ======= -->
-    <section id="contact" class="contact">
-      <div class="container">
-
-        <div class="section-title">
-          <h2>Contacto</h2>
-          <p>Encuentre información de contacto y un formulario para comunicarse con nosotros. Estamos ubicados en Cartago, Costa Rica, en el Barrio El Molino, 400 metros al sur de la Funeraria La Última Joya, 100 metros al este y 50 metros al sur.</p>
-        </div>
-
-        <div>
-          <iframe style="border:0; width: 100%; height: 270px;" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15695.974723719185!2d-83.9399505!3d9.8732977!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8fa0a2a21512c34f%3A0x93604ea7a69a04a7!2sColegio%20Universitario%20de%20Cartago!5e0!3m2!1ses-419!2scr!4v1668709916645" frameborder="0" allowfullscreen></iframe>
-        </div>
-
-        <div class="row mt-5">
-
-          <div class="col-lg-4">
-            <div class="info">
-              <div class="address">
-                <i class="bi bi-geo-alt"></i>
-                <h4>Dirección:</h4>
-                <p>Cartago, Barrio El Molino. De la Funeraria La Última Joya, 400 metros al sur, 100 metros al este, 50 metros al sur, Costa Rica.</p>
-              </div>
-
-              <div class="email">
-                <i class="bi bi-envelope"></i>
-                <h4>Correo Electrónico:</h4>
-                <p>info@example.com</p>
-              </div>
-
-              <div class="phone">
-                <i class="bi bi-phone"></i>
-                <h4>Teléfono:</h4>
-                <p>+1 5589 55488 55s</p>
-              </div>
-
-            </div>
-          </div>
-
-          <div class="col-lg-8 mt-5 mt-lg-0">
-            <form action="forms/contact.php" method="post" role="form" class="php-email-form">
-              <div class="row">
-                <div class="col-md-6 form-group">
-                  <input type="text" name="name" class="form-control" id="name" placeholder="Tu Nombre" required>
-                </div>
-                <div class="col-md-6 form-group mt-3 mt-md-0">
-                  <input type="email" class="form-control" name="email" id="email" placeholder="Tu Correo Electrónico" required>
-                </div>
-              </div>
-              <div class="form-group mt-3">
-                <input type="text" class="form-control" name="subject" id="subject" placeholder="Asunto" required>
-              </div>
-              <div class="form-group mt-3">
-                <textarea class="form-control" name="message" rows="5" placeholder="Mensaje" required></textarea>
-              </div>
-              <div class="my-3">
-                <div class="loading">Cargando</div>
-                <div class="error-message"></div>
-                <div class="sent-message">¡Tu mensaje ha sido enviado. Gracias!</div>
-              </div>
-              <div class="text-center"><button type="submit">Enviar Mensaje</button></div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </section><!-- Fin de la Sección de Contacto -->
-
 
   </main><!-- End #main -->
 

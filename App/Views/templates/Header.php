@@ -36,6 +36,7 @@ $base_path = '../assets/';
   <link href="<?php echo $base_path; ?>css/serviciosAnfitrion.css" rel="stylesheet">
   <link href="<?php echo $base_path; ?>css/notificaciones.css" rel="stylesheet">
   <link href="<?php echo $base_path; ?>css/resenias.css" rel="stylesheet">
+  <link href="<?php echo $base_path; ?>css/publicarInmueble.css" rel="stylesheet">
   
 
 

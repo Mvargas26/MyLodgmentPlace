@@ -607,7 +607,6 @@ class Master_Class
 
                     $data[] = $item;
                 }
-
                 return json_encode($data);
             } else {
                 throw new Exception("Error en la consulta: " . $this->getConexion()->error);
@@ -616,6 +615,7 @@ class Master_Class
             error_log($e->getMessage());
             return null; // Retorna null en caso de error
         }
+        // $this->conn->close();
     } //fn ConsultarResenias POR id
 
 
@@ -653,7 +653,9 @@ class Master_Class
                     );
                     $data[] = $item;
                 }
+                // $this->getConexion()->close();
 
+                
                 return json_encode($data);
             } else {
                 throw new Exception("Error en la consulta: " . $this->getConexion()->error);
@@ -683,7 +685,6 @@ class Master_Class
                     );
                     $data[] = $item;
                 }
-
                 return json_encode($data);
             } else {
                 throw new Exception("Error en la consulta: " . $this->getConexion()->error);

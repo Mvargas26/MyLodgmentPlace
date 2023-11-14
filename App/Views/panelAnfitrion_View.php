@@ -21,6 +21,9 @@ include './templates/Header.php';
                 <a href="notificacionesAnfitrion_View.php">Notificaciones</a>
             </div>
             <div class="card">
+                <a href="mis_resenasAnfitrion_View.php">Historial de Reseñas</a>
+            </div>
+            <div class="card">
                 <a href="">Creacion de Descuentos</a>
             </div>
         </div>
