@@ -46,3 +46,26 @@ button {
     border: none;
     border-radius: 5px;
 }
+
+
+/* CSS for the alert */
+.alert {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 300px;
+    padding: 15px;
+    background-color: #f45f41; /* Color de fondo del alerta */
+    color: #fff; /* Color del texto del alerta */
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+    text-align: center;
+    display: none; /* Oculta el alerta inicialmente */
+}
+
+/* CSS for the success alert */
+.alert-success {
+    background-color: #4CAF50;
+}
+

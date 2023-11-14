@@ -1,9 +1,8 @@
 <?php
-include './templates/Header.php';
-session_start();
-
 require_once('../Modules/Master_Class.php');
+include './templates/Header.php';
 
+session_start();
 $ObjMaster = new Master_Class();
 
 $idUsuario = $_SESSION['Identificacion'];
@@ -42,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo "Error al actualizar datos";
     }
 } else {
-    echo "Acceso no autorizado";
+    echo " ";
 }
 
 

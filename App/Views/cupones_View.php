@@ -11,7 +11,7 @@ session_start();
 
             <div id="seccionCupon">
                 <h2>Cupon de descuento</h2>
-                <form action="process_coupon.php" method="post" onsubmit="return showCouponAppliedAlert();">
+                <form action="" method="post" onsubmit="return showCouponAppliedAlert();">
                     <label for="codigoCupon">Codigo del cupon:</label>
                     <input type="text" id="codigoCupon" name="codigoCupon" required><br>
                     <button type="submit">Aplicar Cupón</button>
@@ -20,7 +20,7 @@ session_start();
 
             <div id="seccionTarjeta">
                 <h2>Tarjeta de regalo</h2>
-                <form action="process_gift_card.php" method="post" onsubmit="return showGiftCardAppliedAlert();">
+                <form action="" method="post" onsubmit="return showGiftCardAppliedAlert();">
                     <label for="codigoTarjeta">Codigo de la tarjeta de regalo:</label>
                     <input type="text" id="codigoTarjeta" name="codigoTarjeta" required><br>
                     <button type="submit">Aplicar Tarjeta de Regalo</button>
@@ -33,15 +33,35 @@ session_start();
 
         <script>
             function showCouponAppliedAlert() {
-                alert("El cupón se aplicó correctamente");
+                showAndHideAlert("El cupón se aplicó correctamente", "alert-success");
                 return true; 
             }
 
             function showGiftCardAppliedAlert() {
-                alert("La tarjeta de regalo se aplicó correctamente");
+                showAndHideAlert("La tarjeta de regalo se aplicó correctamente", "alert-success");
                 return true; 
             }
+
+            function showAndHideAlert(message, alertClass) {
+                var alertDiv = document.createElement("div");
+                alertDiv.className = "alert " + alertClass;
+                alertDiv.appendChild(document.createTextNode(message));
+
+                // Append the alert to the body
+                document.body.appendChild(alertDiv);
+
+                // Show the alert
+                alertDiv.style.display = "block";
+
+                // Hide the alert after 3 seconds
+                setTimeout(function () {
+                    alertDiv.style.display = "none";
+                    // Remove the alert from the DOM
+                    alertDiv.parentNode.removeChild(alertDiv);
+                }, 10000000);
+            }
         </script>
+
 </main>
 
 

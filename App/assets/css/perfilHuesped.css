@@ -9,7 +9,7 @@ h2 {
 }
 
 button {
-    background-color: #007BFF;
+    background-color: #f45f41;
     color: #ffffff;
     border: none;
     padding: 10px 20px;
@@ -19,7 +19,7 @@ button {
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: #f45f41;
 }
 
 /* Estilos para el modal */
@@ -74,5 +74,5 @@ button:hover {
 }
 
 .btn-primary:hover {
-    background-color: #0056b3;
+    background-color: #f45f41;
 }
