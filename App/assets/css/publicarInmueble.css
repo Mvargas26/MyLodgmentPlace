@@ -1,0 +1,53 @@
+
+#contenedorInputs{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin: auto;
+
+}
+
+#divForm{
+    background-color: #f4f4f4;
+    padding: 20px;
+    border: 1px solid #ccc;
+    margin-top: 30px; /* Espacio en blanco superior personalizado */
+    margin-bottom: 30px; /* Espacio en blanco inferior personalizado */
+    max-width: 800px;
+
+}
+
+.form-control{
+    width: 70%;
+}
+
+#tituloPublicarInmueble{
+    font-family: inherit;
+    margin-top: 7%;
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    width: 550px;
+}
+
+#subtituloPoliticas{
+    font-family: inherit;
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    width: 550px;
+}
+
+#iconoInfo{
+    font-size: 2.3em;
+}
+
+#horasCancelacion{
+    cursor: pointer;
+}
+
+#horasCancelacion:hover{
+    background-color:#ca4f2d ;
+    color: white;
+
+}
