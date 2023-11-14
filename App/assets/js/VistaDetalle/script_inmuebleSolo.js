@@ -12,7 +12,7 @@ $(document).ready(function () {
         data: { nombreInmueble: nombreInmueble },
         success: function (response) {
             var data = JSON.parse(response);
-            console.log(data);
+            //console.log(data);
             // Mostrar los datos en la página
             // $('#nombreInmueble').text(data.Nombre_Inmueble);
             // $('#capacidadPersonas').text(data.capacidadPersonas);

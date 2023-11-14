@@ -10,16 +10,11 @@ if (isset($_POST["verificarCodigo"])) {
         $identificacion = $_POST["cedula"];
         $password = $_POST["password"];
 
-
-
-        // Verificar el código ingresado mediante la Master Class
         $codigoValido = $ObjMaster->verificarCodigoAutenticacion($identificacion, $codigoIngresado);
 
         if ($codigoValido) {
-            // Eliminar el código de autenticación después de ser utilizado
             $ObjMaster->eliminarCodigoAutenticacion($identificacion);
 
-            // Establecer una variable de sesión para indicar que el usuario ha iniciado sesión
             $credencialesValidas = $ObjMaster->ConsultarUsuario($identificacion, $password);
 
             $usuario = $credencialesValidas->fetch_assoc();

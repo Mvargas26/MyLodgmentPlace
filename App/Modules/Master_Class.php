@@ -173,28 +173,26 @@ class Master_Class
         }
     }
 
-    function actualizaNombreApellido($cedula, $nombre, $apellido1, $apellido2, $direccion, $telefono, $email) 
+    function actualizaNombreApellido($cedula, $nombre, $apellido1, $apellido2, $direccion, $telefono, $email)
     {
 
         $stmt = $this->conn->prepare("UPDATE tbusuario SET nombre = ?, apellido1 = ?, apellido2 = ?, direccion = ?, telefono = ?, correo = ? WHERE idUser = ?");
-        
+
         // Verifica si la preparación fue exitosa
         if ($stmt === false) {
             return false;
         }
-    
+
         $stmt->bind_param("ssssssi", $nombre, $apellido1, $apellido2, $direccion, $telefono, $email, $cedula);
-    
-       
+
+
         $resultado = $stmt->execute();
-    
+
         // Cierra la declaración
         $stmt->close();
-    
+
         // Retorna true si la actualización fue exitosa, de lo contrario, false
         return $resultado;
-
-          
     }
 
 
@@ -261,31 +259,31 @@ class Master_Class
             }
         } catch (Exception $e) {
             error_log($e->getMessage());
-            return null; // Retorna null en caso de error
+            return null;
         }
     }
 
-    function InsertarServicios()
-    {
-        $arry_Datos = func_get_args();
+    // function InsertarServicios()
+    // {
+    //     $arry_Datos = func_get_args();
 
-        $listaIdServicios = $this->GetConexion()->real_escape_string($arry_Datos[0]);
-        $idInmueble = $this->GetConexion()->real_escape_string($arry_Datos[1]);
+    //     $listaIdServicios = $this->GetConexion()->real_escape_string($arry_Datos[0]);
+    //     $idInmueble = $this->GetConexion()->real_escape_string($arry_Datos[1]);
 
-        $success = true;
+    //     $success = true;
 
-        foreach ($listaIdServicios as $idServicio) {
-            $query = "INSERT INTO `tbinmuebleservicio`(`idServicio`, `idInmueble`, `disponibilidad`)
-                VALUES ('$idServicio', '$idInmueble', 'disponible')";
+    //     foreach ($listaIdServicios as $idServicio) {
+    //         $query = "INSERT INTO `tbinmuebleservicio`(`idServicio`, `idInmueble`, `disponibilidad`)
+    //             VALUES ('$idServicio', '$idInmueble', 'disponible')";
 
-            if (!$this->getConexion()->query($query)) {
-                $success = false;
-                break;
-            }
-        }
+    //         if (!$this->getConexion()->query($query)) {
+    //             $success = false;
+    //             break;
+    //         }
+    //     }
 
-        return $success;
-    }
+    //     return $success;
+    // }
 
     /*-----------------------------------------------AUNTETINTIFICACION--------------------------------------------------*/
 
@@ -305,24 +303,18 @@ class Master_Class
     function almacenarCodigoAutenticacion($identificacion, $codigo_autenticacion)
     {
         try {
-            // Escapa los valores para prevenir SQL injection
             $identificacion = $this->GetConexion()->real_escape_string($identificacion);
             $codigo_autenticacion = $this->GetConexion()->real_escape_string($codigo_autenticacion);
 
-            // Ejecuta la consulta SQL para actualizar el código de autenticación
             $query = "UPDATE tbusuario SET codigoAutenticacion = '$codigo_autenticacion' WHERE idUser = '$identificacion'";
             $this->GetConexion()->query($query);
 
-            // Verifica si la actualización fue exitosa
             if ($this->GetConexion()->affected_rows > 0) {
-                // Actualización exitosa
                 return true;
             } else {
-                // No se realizó ninguna actualización
                 return false;
             }
         } catch (Exception $e) {
-            // Manejo de errores (puedes personalizar según tus necesidades)
             error_log("Error al almacenar código de autenticación: " . $e->getMessage());
             return false;
         }
@@ -339,7 +331,6 @@ class Master_Class
 
 
             try {
-                //$mail -> SMTPDebug = SMTP::DEBUG_SERVER;
                 $mail->isSMTP();
                 $mail->Host = 'smtp.titan.email';
                 $mail->SMTPAuth = true;
@@ -358,14 +349,10 @@ class Master_Class
                 if (!$mail->send()) {
                     echo 'Error al enviar el correo electrónico: ' . $mail->ErrorInfo;
                 } else {
-                    // echo 'Correo electrónico enviado correctamente.';
                 }
             } catch (\Exception $th) {
                 echo 'MEnsaje de Error: ' . $mail->ErrorInfo;
             }
-
-            // Enviar el correo
-            //$mail->send();
 
             return true;
         } catch (Exception $e) {
@@ -419,6 +406,50 @@ class Master_Class
 
     //fin  funciones para codigos de autenticacion
 
+    //Inicio  funcion para calculo previo reserva
+
+    function calcularValorTotal($cantidadDias)
+    {
+        $valorDiario = 20000;
+        $valorTotal = $valorDiario * $cantidadDias;
+        return $valorTotal;
+    }
+
+
+
+    //fin funcion para calculo previo reserva
+
+    //fin funcion Historial de reservas
+
+    public function obtenerHistorialReservasUsuario($idUser)
+    {
+
+        $idUser = $this->GetConexion()->real_escape_string($idUser);
+
+        $query = "SELECT r.fechaInicio, r.fechaFin, r.montoTotal, r.montoTotalImpuesto, i.nombre as nombreInmueble
+          FROM tbreserva r
+          INNER JOIN tbinmueble i ON r.idInmueble = i.id
+          WHERE r.idUsuario = '$idUser'";
+
+        $resultado = $this->GetConexion()->query($query);
+
+        $historialReservas = array();
+
+        if ($resultado->num_rows > 0) {
+            while ($fila = $resultado->fetch_assoc()) {
+                $historialReservas[] = array(
+                    'fechaInicio' => $fila['fechaInicio'],
+                    'fechaFin' => $fila['fechaFin'],
+                    'montoTotal' => $fila['montoTotal'],
+                    'montoTotalImpuesto' => $fila['montoTotalImpuesto'],
+                    'nombreInmueble' => $fila['nombreInmueble']
+                );
+            }
+        }
+
+        return $historialReservas;
+    }
+    //fin funcion Historial de reservas
 
     /*----------------------------------------------- INMUEBLES --------------------------------------------------*/
 
@@ -469,7 +500,6 @@ class Master_Class
                 }
 
                 return json_encode($data);
-
             } else {
                 throw new Exception("Error en la consulta: " . $this->getConexion()->error);
             }
@@ -477,7 +507,6 @@ class Master_Class
             error_log($e->getMessage());
             return null; // Retorna null en caso de error
         }
-
     } //fn ConsultarInmueble
 
     function ConsultarInmuebles_porID($idInmueble)
@@ -529,7 +558,6 @@ class Master_Class
                 }
 
                 return json_encode($data);
-
             } else {
                 throw new Exception("Error en la consulta: " . $this->getConexion()->error);
             }
@@ -537,7 +565,6 @@ class Master_Class
             error_log($e->getMessage());
             return null; // Retorna null en caso de error
         }
-
     } //fn ConsultarInmueble POR ID
 
     function ConsultarResenas_porID($idInmueble)
@@ -569,19 +596,18 @@ class Master_Class
                     $imagenBase64 = base64_encode($imagenData);
 
                     $urlImagen = "data:image/jpeg;base64," . $imagenBase64;
-                
+
                     $item = array(
                         "Descripcion" => $row['Descripcion'],
                         "fechaResena" => $row["fechaResena"],
                         "NombreUsuarioResena" => $row["NombreUsuarioResena"],
                         "fotoperfil" => $urlImagen,  // Aquí se guarda la imagen en formato base64
                     );
-                
+
                     $data[] = $item;
                 }
 
                 return json_encode($data);
-
             } else {
                 throw new Exception("Error en la consulta: " . $this->getConexion()->error);
             }
@@ -589,7 +615,6 @@ class Master_Class
             error_log($e->getMessage());
             return null; // Retorna null en caso de error
         }
-
     } //fn ConsultarResenias POR id
 
 
@@ -629,7 +654,6 @@ class Master_Class
                 }
 
                 return json_encode($data);
-
             } else {
                 throw new Exception("Error en la consulta: " . $this->getConexion()->error);
             }
@@ -660,7 +684,6 @@ class Master_Class
                 }
 
                 return json_encode($data);
-
             } else {
                 throw new Exception("Error en la consulta: " . $this->getConexion()->error);
             }
@@ -668,7 +691,6 @@ class Master_Class
             error_log($e->getMessage());
             return null; // Retorna null en caso de error
         }
-
     }
     function ConsultarInmueblePorId($nombreInmueble)
     {
@@ -707,7 +729,7 @@ class Master_Class
                         "estrellas" => $row["estrellas"],
                         "fechaLimiteDisponibilidad" => $row["fechaLimiteDisponibilidad"],
                         "nombre_propietario" => $row["nombre_propietario"],
-                        
+
                         // "caracteristica1" => $row["caracteristica1"],
                         // "caracteristica2" => $row["caracteristica2"],
                         // "caracteristica3" => $row["caracteristica3"]
@@ -788,7 +810,6 @@ class Master_Class
                 }
 
                 return json_encode($data);
-
             } else {
                 throw new Exception("Error en la consulta: " . $this->getConexion()->error);
             }
@@ -797,9 +818,6 @@ class Master_Class
             return null; // Retorna null en caso de error
         }
     }
-
-
 } //fn cl_masterClass
 
 $ObjMaster = new Master_Class();
-?>
