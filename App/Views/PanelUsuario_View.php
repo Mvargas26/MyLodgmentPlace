@@ -10,7 +10,7 @@ session_start();
     <br>
         <div class="cards-container">
             <div class="card">
-                <a href="mi_bancoHuesped_View.php">Mi Banco</a>
+                <a href="https://tiusr29pl.cuc-carrera-ti.ac.cr/MyBancoWeb/Default">Mi Banco</a>
             </div>
             <div class="card">
                 <a href="perfilHuesped_View.php">Datos Personales</a>

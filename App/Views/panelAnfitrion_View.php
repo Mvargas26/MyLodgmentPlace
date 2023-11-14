@@ -33,7 +33,7 @@ include './templates/Header.php';
                 <a href="mis_resenasHuesped_View.php">Reseñas y Calificacion de Huesped</a>
             </div>
             <div class="card">
-                <a href="mi_bancoHuesped_View.php">Mi Banco</a>
+                <a href="https://tiusr29pl.cuc-carrera-ti.ac.cr/MyBancoWeb/Default">Mi Banco</a>
             </div>
             <div class="card">
                 <a href="calificarHuespedes_View.php">Calificacion a Huespedes</a>
