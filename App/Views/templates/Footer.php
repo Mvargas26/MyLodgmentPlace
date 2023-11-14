@@ -45,8 +45,7 @@
 <script src="../assets/js/script.js"></script>
 <script src="../assets/js/script_personalizado.js"></script>
 <script src="../assets/js/script_validarIdentidad.js"></script>
-<script src="../assets/js/VistaDetalle/scriptVistaDetalle.js"></script>
-<script src="../assets/js/VistaDetalle/script_inmuebleSolo.js"></script>
+<script src="../assets/js/VistaDetalle/scriptVistaDetalle.js"></script> 
 
 </body>
 

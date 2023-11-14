@@ -655,7 +655,7 @@ class Master_Class
                 }
                 // $this->getConexion()->close();
 
-                
+
                 return json_encode($data);
             } else {
                 throw new Exception("Error en la consulta: " . $this->getConexion()->error);
@@ -829,9 +829,9 @@ class Master_Class
             r.idUsuario,
             r.idInmueble,
             r.idReserva,
-            u.nombre,
-            u.apellido1,
-            u.apellido2,
+            CONCAT(r.fechaInicio, ' / ', r.fechaFin) AS fecha,
+            CONCAT(u.nombre, ' ', u.apellido1, ' ', u.apellido2) AS nombre_completo,
+            i.Propietario,
             i.nombre AS nombre_inmueble
         FROM tbreserva r
         INNER JOIN tbusuario u ON r.idUsuario = u.idUser
@@ -845,10 +845,11 @@ class Master_Class
                 while ($row = $result->fetch_assoc()) {
                     $reserva = array(
                         "idReserva" => $row["idReserva"],
-                        "nombre" => $row["nombre"],
-                        "apellido1" => $row["apellido1"],
-                        "apellido2" => $row["apellido2"],
+                        "idUsuario" => $row["idUsuario"],
+                        "fecha" => $row["fecha"],
+                        "nombreC" => $row["nombre_completo"],
                         "idInmueble" => $row["idInmueble"],
+                        "id_propietarioI" => $row["Propietario"],
                         "nombre_inmueble" => $row["nombre_inmueble"],
                     );
                     $reservas[] = $reserva;
@@ -863,7 +864,27 @@ class Master_Class
         }
     }
 
+    function ConsultarTipoDenuncias()
+    {
+        try {
+            $query = "SELECT * FROM `tbtipodenuncia`";
+            $result = $this->getConexion()->query($query);
+            $tiposDenuncias = array();
 
+            if ($result) {
+                while ($row = $result->fetch_assoc()) {
+                    // Almacena toda la fila en el array de tipos de denuncias
+                    $tiposDenuncias[] = $row;
+                }
+                return $tiposDenuncias;
+            } else {
+                throw new Exception("Error en la consulta: " . $this->getConexion()->error);
+            }
+        } catch (Exception $e) {
+            error_log($e->getMessage());
+            return null;
+        }
+    }
 
 } //fn cl_masterClass
 $ObjMaster = new Master_Class();
