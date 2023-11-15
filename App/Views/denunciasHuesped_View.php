@@ -5,11 +5,9 @@ session_start();
 ?>
 <!-- ==============================================Fin header ======= -->
 <main id="mainDenuncia">
+    <script src="../assets/js/Denuncias/script_denuncias.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
         crossorigin="anonymous"></script>
@@ -87,8 +85,9 @@ session_start();
             <tbody>
                 <?php
                 if ($datos) {
+                    $contadorFila = 0;
                     foreach ($datos as $dato) {
-                        echo "<tr>" .
+                        echo "<tr data-fila='$contadorFila'>" .
                             "<td style='display:none;'>" . $dato['idUsuario'] . "</td>" .
                             "<td style='display:none;'>" . $dato['id_propietarioI'] . "</td>" .
                             "<td>" . $dato['idReserva'] . "</td>" .
@@ -96,13 +95,15 @@ session_start();
                             "<td>" . $dato['fecha'] . "</td>" .
                             "<td style='display:none;'> " . $dato['idInmueble'] . "</td>" .
                             "<td>" . $dato['nombre_inmueble'] . "</td>" .
-                            "<td><button type='button' class='btn btn-outline-secondary btn-emoji' data-toggle='modal' data-target='#myModal'><i class='bi bi-emoji-smile-fill'></i></button></td>" .
+                            "<td><button type='button' class='btn btn-outline-secondary btn-emoji' data-toggle='modal' data-target='#myModal' data-fila='$contadorFila'><i class='bi bi-emoji-smile-fill'></i></button></td>" .
                             "</tr>";
+                        $contadorFila++;
                     }
                 } else {
                     echo "<tr><td colspan='6'>No hay reservas por el momento.</td></tr>";
                 }
                 ?>
+
             </tbody>
         </table>
     </div>
@@ -141,7 +142,7 @@ session_start();
                         // Verificar si hay tipos de denuncias
                         if (!empty($denuncias)) {
                             foreach ($denuncias as $denuncia) {
-                                echo "<option value='{$denuncia['idTipoDenuncia']}'>{$denuncia['nombre']}</option>";
+                                echo "<option value='{$denuncia['id']}'>{$denuncia['tipoDenuncia']}</option>";
                             }
                         } else {
                             echo "<option value='' disabled>No hay tipos de denuncias disponibles</option>";
@@ -150,7 +151,7 @@ session_start();
                     </select>
                     <br><br>
                     <label for="campo1">Detalles de la Denuncia:</label>
-                    <input type="text" id="campo1" name="campo1">
+                    <textarea id="campo1" name="campo1" class="form-control"></textarea>
                     <br>
                 </div>
                 <div class="modal-footer">
@@ -160,7 +161,6 @@ session_start();
             </div>
         </div>
     </div>
-
     <script>var identificacion = <?php echo json_encode($_SESSION["Identificacion"]); ?>;</script>
     <script>
         $(document).ready(function () {
@@ -179,7 +179,7 @@ session_start();
                     }
                 }
             );
-        });
+        }); 
     </script>
 </main>
 

@@ -12,7 +12,7 @@ include './templates/Header.php';
                 <a href="PublicarInmueble_View.php">Publicar Espacio</a>
             </div>
             <div class="card">
-                <a href="recepcionDenuncias_View.php">Recepcion de Denuncias</a>
+                <a href="denunciasAnfitrion_View.php">Recepcion de Denuncias</a>
             </div>
             <div class="card">
                 <a href="validar_identidadHuesped_View.php">Validacion Segura del Perfil</a>
@@ -43,14 +43,10 @@ include './templates/Header.php';
             </div>
             <div class="card">
                 <a href="mensajesHuesped_View.php">Mensajeria</a>
-            </div>
-            <div class="card">
-                <a href="denunciasHuesped_View.php">Denunciar</a>
-            </div>
+            </div>  
         </div>
         <br>
     </body>
-
 </main>
 
 <!-- ==============================================Inicio Footer ======= -->

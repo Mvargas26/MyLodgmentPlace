@@ -127,9 +127,7 @@
                     if (x.exito == true) {
                         Swal.fire("Éxito", "Bienvenido " + x.nombre, "success");//mensaje bonito
                         // Redireccionar al index.php después del mensaje de éxito
-                    window.location.href = "../../../index.php";
-
-
+                        window.location.href = "../../MyLodgmentPlace/index.php";
                         
                     } else {
                         console.log(x.response);

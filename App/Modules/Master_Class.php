@@ -876,7 +876,7 @@ class Master_Class
                     // Almacena toda la fila en el array de tipos de denuncias
                     $tiposDenuncias[] = $row;
                 }
-                return $tiposDenuncias;
+                return json_encode($tiposDenuncias);
             } else {
                 throw new Exception("Error en la consulta: " . $this->getConexion()->error);
             }
@@ -885,6 +885,163 @@ class Master_Class
             return null;
         }
     }
+
+    function insertarDenuncia($idUsuario, $detalleDenuncia, $idUsuarioADenunciar, $estado, $tipoDenuncia)
+    {
+        try {
+            $conexion = $this->getConexion();
+
+            // Preparar la sentencia SQL
+            $query = "INSERT INTO tbdenuncia (IdUsuarioQD, detalleDenuncia, idUsuarioADenunciar, estado, tipoDenuncia) VALUES (?, ?, ?, ?, ?)";
+            $stmt = $conexion->prepare($query);
+
+            // Vincular parámetros
+            $stmt->bind_param("issis", $idUsuario, $detalleDenuncia, $idUsuarioADenunciar, $estado, $tipoDenuncia);
+
+            // Ejecutar la consulta
+            $resultado = $stmt->execute();
+
+            // Verificar si la inserción fue exitosa
+            if ($resultado) {
+                return true;
+            } else {
+                throw new Exception("Error en la inserción: " . $stmt->error);
+            }
+        } catch (Exception $e) {
+            error_log($e->getMessage());
+            return false;
+        } finally {
+            $stmt->close();
+        }
+    }
+
+    function modificarDenuncia($idDenuncia, $respuestaDenunciado)
+    {
+        try {
+            $conexion = $this->getConexion();
+
+            // Preparar la sentencia SQL
+            $query = "UPDATE tbdenuncia SET RespuestaUsuarioDenunciado = ? WHERE idDenuncia = ?";
+            $stmt = $conexion->prepare($query);
+
+            // Vincular parámetros
+            $stmt->bind_param("si", $respuestaDenunciado, $idDenuncia);
+
+            // Ejecutar la consulta
+            $resultado = $stmt->execute();
+
+            // Verificar si la actualización fue exitosa
+            if ($resultado) {
+                return true;
+            } else {
+                throw new Exception("Error en la actualización: " . $stmt->error);
+            }
+        } catch (Exception $e) {
+            error_log($e->getMessage());
+            return false;
+        } finally {
+            $stmt->close();
+        }
+    }
+
+    function modificarDenunciaAdm($idDenuncia, $identificacion, $respuestaDenunciaAdm, $estadoNuevo)
+{
+    try {
+        // Obtener la conexión
+        $conexion = $this->getConexion();
+
+        // Verificar si la conexión es válida
+        if (!$conexion) {
+            throw new Exception("Error al obtener la conexión.");
+        }
+
+        // Preparar la sentencia SQL
+        $query = "UPDATE tbdenuncia SET RespuestaDenunciaAdmin = ?, idAdminAtiende = ?, estado = ? WHERE idDenuncia = ?";
+        $stmt = $conexion->prepare($query);
+
+        // Vincular parámetros
+        $stmt->bind_param("sssi", $respuestaDenunciaAdm, $identificacion, $estadoNuevo, $idDenuncia);
+
+        // Ejecutar la consulta
+        $resultado = $stmt->execute();
+
+        // Verificar si la actualización fue exitosa
+        if ($resultado) {
+            return true;
+        } else {
+            throw new Exception("Error en la actualización: " . $stmt->error);
+        }
+    } catch (Exception $e) {
+        error_log($e->getMessage());
+        return false;
+    } finally {
+        // Cerrar la declaración
+        if (isset($stmt)) {
+            $stmt->close();
+        }
+    }
+}
+
+
+    function ConsultarDenunciasPorCedula($identificacion)
+    {
+        try {
+            $query = "SELECT tbdenuncia.*, 
+            CONCAT(tbusuario.nombre, ' ', tbusuario.apellido1, ' ', tbusuario.apellido2) AS nombreC_Usu, 
+            CONCAT(usuariosADenunciar.nombre, ' ', usuariosADenunciar.apellido1, ' ', usuariosADenunciar.apellido2) AS nombreC_Denunciado,  
+            tbtipodenuncia.tipoDenuncia
+            FROM tbdenuncia
+            JOIN tbusuario ON tbdenuncia.IdUsuarioQD = tbusuario.idUser
+            JOIN tbusuario AS usuariosADenunciar ON tbdenuncia.idUsuarioADenunciar = usuariosADenunciar.idUser
+            JOIN tbtipodenuncia ON tbdenuncia.tipoDenuncia = tbtipodenuncia.id
+            WHERE tbdenuncia.IdUsuarioQD = '$identificacion' OR tbdenuncia.idUsuarioADenunciar = '$identificacion' AND tbdenuncia.estado = 'Proceso'";
+            $result = $this->getConexion()->query($query);
+            $DenunciasxID = array();
+
+            if ($result) {
+                while ($row = $result->fetch_assoc()) {
+                    // Almacena toda la fila en el array de tipos de denuncias
+                    $DenunciasxID[] = $row;
+                }
+                return json_encode($DenunciasxID);
+            } else {
+                throw new Exception("Error en la consulta: " . $this->getConexion()->error);
+            }
+        } catch (Exception $e) {
+            error_log($e->getMessage());
+            return null;
+        }
+    }
+
+    function TodasDenuncias()
+    {
+        try {
+            $query = "SELECT tbdenuncia.*, 
+            CONCAT(tbusuario.nombre, ' ', tbusuario.apellido1, ' ', tbusuario.apellido2) AS nombreC_Usu, 
+            CONCAT(usuariosADenunciar.nombre, ' ', usuariosADenunciar.apellido1, ' ', usuariosADenunciar.apellido2) AS nombreC_Denunciado,  
+            tbtipodenuncia.tipoDenuncia
+            FROM tbdenuncia
+            JOIN tbusuario ON tbdenuncia.IdUsuarioQD = tbusuario.idUser
+            JOIN tbusuario AS usuariosADenunciar ON tbdenuncia.idUsuarioADenunciar = usuariosADenunciar.idUser
+            JOIN tbtipodenuncia ON tbdenuncia.tipoDenuncia = tbtipodenuncia.id";
+            $result = $this->getConexion()->query($query);
+            $DenunciasxID = array();
+
+            if ($result) {
+                while ($row = $result->fetch_assoc()) {
+                    // Almacena toda la fila en el array de tipos de denuncias
+                    $DenunciasxID[] = $row;
+                }
+                return json_encode($DenunciasxID);
+            } else {
+                throw new Exception("Error en la consulta: " . $this->getConexion()->error);
+            }
+        } catch (Exception $e) {
+            error_log($e->getMessage());
+            return null;
+        }
+    }
+
 
 } //fn cl_masterClass
 $ObjMaster = new Master_Class();

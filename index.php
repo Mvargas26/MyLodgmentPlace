@@ -54,6 +54,7 @@ session_start();
           <li><a class="nav-link scrollto active" href="../../">Inicio</a></li>
           <li><a class="nav-link scrollto" href="#portfolio">Lugares</a></li>
           <li><a class="nav-link scrollto" href="#contact">Contactenos</a></li>
+          <li><a class="nav-link scrollto" href="./App/Views/denunciasAdministrador_View.php">Recepcion Denuncias Administrador</a></li>
           <!-- <li><a class="nav-link scrollto" href="#about"> -->
             <?php 
                 if (isset($_SESSION["nombre"])) {
