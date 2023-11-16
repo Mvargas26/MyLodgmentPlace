@@ -197,25 +197,47 @@ class Master_Class
 
         /* --------------------------- Obtener Usuarios --------------------------- */
     
-        function GetUsuarios()
-        {
-            $sql = "SELECT * FROM tbusuario";
-            $result = $this->conn->query($sql);
-    
-            if ($result->num_rows > 0) {
-                $users = array();
-                while ($row = $result->fetch_assoc()) {
-                    $users[] = $row;
-                }
-                return $users;
-            } else {
-                return array();
+    function GetUsuarios()
+    {
+        $sql = "SELECT * FROM tbusuario";
+        $result = $this->conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            $users = array();
+            while ($row = $result->fetch_assoc()) {
+                $users[] = $row;
             }
+            return $users;
+        } else {
+            return array();
         }
+    }
     
         /* --------------------------- Otras funciones --------------------------- */
 
-
+        function GetUsuarioDetails($idUser)
+        {
+            if ($idUser === null) {
+                return array();
+            }
+        
+            $sql = "SELECT * FROM tbusuario WHERE idUser = ?";
+            $stmt = $this->conn->prepare($sql);
+        
+            if ($stmt) {
+                $stmt->bind_param("i", $idUser);
+                $stmt->execute();
+                $result = $stmt->get_result();
+        
+                if ($result->num_rows > 0) {
+                    return $result->fetch_assoc();
+                }
+            }
+        
+            return array();
+        }
+        
+        
 
     /*-----------------------------------------------IMAGENES--------------------------------------------------*/
 

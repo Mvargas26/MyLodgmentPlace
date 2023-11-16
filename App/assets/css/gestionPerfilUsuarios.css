@@ -1,54 +1,74 @@
-
-
 .contener {
+    display: contents;
+    flex-wrap: wrap;
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    width: 600px;
+    max-width: 800px;
+    margin: 0 auto; 
 }
 
 h2 {
     text-align: center;
+    color: #f45f41;
 }
 
-/* Estilo para la lista de usuarios */
 .user-list {
     display: flex;
     flex-wrap: wrap;
-    justify-content:space-between; /* Puedes ajustar esto según tus preferencias */
+    justify-content: flex-start;   
 }
 
-/* Estilo para cada usuario */
 .user {
     margin: 10px;
-    flex-basis: calc(10% - 20px); /* Calcula el ancho para mostrar 10 usuarios por fila */
+    width: calc(20% - 20px);
+    box-sizing: border-box; 
+    background: rgba(68, 55, 69, 0.9);
+    border-radius: 15px;
+    box-shadow: 0 0 20px 5px rgba(244, 110, 65, 0.738);
 }
 
-/* Estilo para la imagen del perfil */
 .user img {
-    width: 100%; /* Ajusta el tamaño según tus preferencias */
-    height: auto; /* Para mantener la relación de aspecto */
-    object-fit: cover; /* Para asegurar que la imagen mantenga su relación de aspecto */
+    width: 50%;
+    height: 50%;
+    object-fit: cover;
+    border-radius: 8px;
+    display: block; 
+    margin: 0 auto;
 }
 
-/* Estilo para los detalles del usuario */
 .user-details {
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 50%; 
 }
 
-/* Estilo para el botón de ver perfil */
+
 .button-view-profile {
     margin-top: 5px;
-}
-
-
-
-.button-view-profile {
-    background-color: #4caf50;
+    background-color: #f45f41;
     color: #fff;
     border: none;
     padding: 10px;
     cursor: pointer;
     border-radius: 4px;
+    transition: background-color 0.3s; 
+}
+
+.button-view-profile:hover {
+    background-color: #d63447; 
+}
+
+@media screen and (max-width: 600px) {
+    .user {
+        width: calc(50% - 20px); 
+    }
+
+    .user-details div {
+        max-width: 50%; 
+    }
 }

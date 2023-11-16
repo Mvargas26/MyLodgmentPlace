@@ -19,9 +19,15 @@ $(document).ready(function () {
                 var userName = $('<div></div>').text(user.nombre + ' ' + user.apellido1 + ' ' + user.apellido2);
                 userDetails.append(userName);
 
+                var userCedula = $('<div class="user-cedula"></div>').text(user.idUser).hide();
+                userDetails.append(userCedula);
+
                 var viewProfileButton = $('<button class="button-view-profile">Ver Perfil</button>');
+                // Corrige la asignación del evento al botón actual, no al id fijo
                 viewProfileButton.on('click', function () {
-                    alert('Ver perfil de ' + user.nombre);
+                    // Obtén el ID del usuario para redirigir a la página correspondiente
+                    var idUser = user.idUser;
+                    window.location.href = 'vistaPerfilUsuarios_View.php?idUser=' + idUser;
                 });
 
                 userDetails.append(viewProfileButton);
@@ -32,10 +38,6 @@ $(document).ready(function () {
         },
         error: function (xhr, status, error) {
             console.error('Error al obtener la lista de usuarios:', error);
-            console.log(xhr);
-            console.log(status);
-            console.log(error);
-
             alert('Error al obtener la lista de usuarios. Por favor, inténtelo de nuevo más tarde.');
         }
     });
