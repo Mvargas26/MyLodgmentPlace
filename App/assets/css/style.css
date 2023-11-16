@@ -736,7 +736,7 @@ section {
 # Services
 --------------------------------------------------------------*/
 
-.services .icon-box {
+/* .services .icon-box {
   padding: 20px;
   position: relative;
   overflow: hidden;
@@ -806,11 +806,104 @@ section {
 
 .services .description {
   font-size: 14px;
-  /* margin-left: 35px; */
+  line-height: 24px;
+  margin-bottom: 0;
+  font-weight: bold;
+} */
+
+
+/*--------------------------------------------------------------
+# Politicas
+--------------------------------------------------------------*/
+
+.politicas{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+}
+
+
+.politicas .icon-box {
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+  margin: 10px;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 10px 29px 0 rgba(68, 88, 144, 0.1);
+  transition: all 0.3s ease-in-out;
+  height: 220px;
+  width: 200px;
+}
+
+.politicas .icon-box:hover {
+  transform: translateY(-5px);
+  height: 450px;
+  width: 33%;
+  z-index:100;
+
+}
+
+.politicas .title,
+.politicas .icon {
+  transition: all 0.3s ease-in-out;
+}
+
+.politicas .icon-box:hover .title,
+.politicas .icon-box:hover .icon {
+  opacity: 0; 
+  visibility: hidden;
+}
+
+.politicas .info {
+  display: none;
+}
+
+.politicas .icon-box:hover .info {
+  display: block; 
+}
+
+.politicas .title {
+  font-weight: 700;
+  margin-bottom: 15px;
+  font-size: 24px;
+  text-align: center;
+}
+
+.politicas .icon {
+  position: absolute;
+  left: calc(30% - 5px);
+  top: calc(40% - 5px);
+}
+
+.politicas .info {
+  text-align: center;
+}
+
+
+.politicas .icon i {
+  font-size: 100px;
+  line-height: 1;
+  transition: 0.5s;
+}
+
+
+.politicas .title a {
+  color: #111;
+}
+
+.politicas .icon-box:hover .title a {
+  color: #ff7f5d;
+}
+
+.politicas .description {
+  font-size: 14px;
   line-height: 24px;
   margin-bottom: 0;
   font-weight: bold;
 }
+
 
 
 

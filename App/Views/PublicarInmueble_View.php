@@ -2,6 +2,7 @@
 include './templates/Header.php';
 ?>
 <!-- ==============================================Fin header ======= -->
+<body>
 
 <div class="form-container">
     <section id="Info_inmueble" class="form-section active">
@@ -18,6 +19,7 @@ include './templates/Header.php';
             </a>
 
         </div>
+
         <hr/>
 
         <div id="contenedorInputs">
@@ -181,43 +183,159 @@ include './templates/Header.php';
     <section id="Calendario" class="form-section">
         <img src="../assets/img/publicarinmueble/PASOS2.png" alt="">
     
-            <div class="section-title">
-                <a class="bar-anchor" onclick="showNextSection()">
-                    <span>Siguiente</span>
-                    <div class="transition-bar"></div>
-                </a>
-            </div>
-    
-            <div style="display: flex; justify-content: center; align-content: center;">
+        <div class="section-title">
+            <a class="bar-anchor" onclick="showNextSection()">
+                <span>Siguiente</span>
+                <div class="transition-bar"></div>
+            </a>
+        </div>
 
-                <h1>AQUI VA EL CALENDARIO</h1>
-            </div>
-        
+        <div style="display: flex; justify-content: center; align-content: center;">
+
+            <h1>AQUI VA EL CALENDARIO</h1>
+        </div>
+    
 
     </section>
-
-    <hr>
-
+        
+    
     <!-- ========================================================================== -->
     <!-- POLITICAS -->
     <!-- ========================================================================== -->
-
-    <section id="PAGINA_POLITICAS" class="form-section">
-
-    <img src="../assets/img/publicarinmueble/PASOS3.png" alt="">
-
-        <div class="container">
+    
+    <section id="politicas" class="form-section">
+        <img src="../assets/img/publicarinmueble/PASOS3.png" alt="">
+        <a style="margin-left:85%;" class="bar-anchor" onclick="showNextSection()">
+            <span>Siguiente</span>
+            <div class="transition-bar"></div>
+        </a>
+        
+        
+        <div class="politicasgrid">
             <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+                
+                
+                <div class="section-title">
+                    <h2>Políticas</h2>
+                    <p>Cuales van a ser tus políticas en cuanto a... </p>
+                   
+                </div>
+                <hr>
+                
+                <div class="politicas">
+                           
+                    <div class="icon-box">
+                        <div class="icon"><i class="i bi-house-slash-fill" style="color: #ff689b;"></i></div>
+                        <h2 class="title">Cancelacion</h2>                          
+                        <div class="info">
+                            <h5></h5>
+                            <hr>
+
+                            <p class="description">
+                                <label>
+                                    <input type="radio" name="opciones" value="opcion1">
+                                    2 dias antes de la fecha programada
+                                </label>
+                                <label>
+                                    <input type="radio" name="opciones" value="opcion2">
+                                    4 dias antes de la fecha programada
+                                </label>
+                                <label>
+                                    <input type="radio" name="opciones" value="opcion3">
+                                    7 dias antes de la fecha programada
+                                </label>
+                            </p>
+                            <br>                      
+                        </div>
+                    </div>
+                    
+
+                    <div class="icon-box">
+                        <div class="icon"><i class="bi bi-wallet" style="color: #e9bf06;"></i></div>
+                        <h4 class="title">Reembolsos</h4>
+                        <div class="info">
+                            <h5></h5>
+                            <hr>
+
+                            <p class="description">
+                                <label>
+                                    <input type="radio" name="opciones" value="opcion1">
+                                    Sin Reembolso
+                                </label>
+                                <label>
+                                    <input type="radio" name="opciones" value="opcion2">
+                                    Reembolso del 50%
+                                </label>
+                                <label>
+                                    <input type="radio" name="opciones" value="opcion3">
+                                    Reembolso del 100%
+                                </label>
+                            </p>
+                            <br>                      
+                        </div>
+                        <br>    
+                    
+                    </div>
+
+                    <div class="icon-box">
+                        <div class="icon"><i class="bi bi-three-dots" style="color: #3fcdc7;"></i></div>
+                        <h4 class="title">Horario</h4>
+                        
+                        <div class="info">
+                            <h5>Hora de Entrada y Salida </h5>
+                            <hr>
+                        
+                            <p class="description">
+                                <label>
+                                    <input type="radio" name="opciones" value="opcion1">
+                                    2:00 pm - 11:00 am
+                                </label>
+                                <label>
+                                    <input type="radio" name="opciones" value="opcion2">
+                                    3:00 pm  - 12:00 pm
+                                </label>
+                                <label>
+                                    <input type="radio" name="opciones" value="opcion3">
+                                    3:00 pm  - 4:00 pm
+                                </label>
+                            </p>
+                        </div>
+                    </div>
+                <br/>
+              
+                    <!-- <div class="icon-box">
+                        <div class="icon"><i class="bi bi-three-dots" style="color: #3fcdc7;"></i></div>
+                        <h4 class="title">Otras</h4>
+                        
+                        <div class="info">
+                            <p class="description">Otras políticas como privacidad y protección de los datos está diseñada
+                                para garantizar que tu información se maneje de manera 
+                                <strong>segura</strong> y <strong>ética</strong></p>
+                            </div>
+                    </div> -->
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
 
                 <div class="section-title">
                     <h2>Políticas</h2>
                     <p>Cada uno de nuestros espacios ofrece una experiencia única, 
                         respaldada por políticas cuidadosamente diseñadas para hacer de tu elección un momento inolvidable.</p>
                     </div>
-                    <a class="bar-anchor" onclick="showNextSection()">
-                        <span>Siguiente</span>
-                        <div class="transition-bar"></div>
-                    </a>
                     
                     <br/>
                     <div id="subtituloPoliticas">
@@ -227,7 +345,7 @@ include './templates/Header.php';
                         <i class="i bi-house-slash-fill" style="color: #ff689b; margin-left:-100px; margin-top:-20px;" id="iconoInfo"></i>
                     </div>
                 </div>
-                <!-- <br/> -->
+                
                 
                 <div class="row" style="display:flex; justify-content: center; align-content: center; margin:55px;">
                     <div class="col-md-5 form-group">
@@ -257,7 +375,7 @@ include './templates/Header.php';
                     <h3>Reembolso</h5>
                     <i class="bi bi-wallet" style="color: #e9bf06; margin-left:-100px; margin-top:-20px;" id="iconoInfo"></i>
                 </div>
-                <!-- <br/> -->
+                <
                 
                 <div class="row" style="display:flex; justify-content: center; align-content: center; margin:55px;">
                     <div class="col-md-5 form-group">
@@ -279,7 +397,7 @@ include './templates/Header.php';
                             </strong>
                         </p>              
                     </div>
-                </div>
+                </div> -->
             </form>
         </div>
 
@@ -363,7 +481,7 @@ include './templates/Header.php';
     <!-- <hr/> -->
 
     <section id="services" class="form-section">
-        <img src="../assets/img/publicarinmueble/PASOS5.png" alt="">
+        <img src="../assets/img/publicarinmueble/PASOS4.png" alt="">
         <div class="section-title">
             <h2>Servicios</h2>
             <p>¡Los servicios mejorarán la calidad de tu espacio!</p>
@@ -375,6 +493,8 @@ include './templates/Header.php';
         </div>
         
         <!-- <hr/> -->
+
+
         
         <div class="grid">
             
@@ -389,7 +509,7 @@ include './templates/Header.php';
     </section><!-- End Services Section -->
 
     <section id="Amenidades" class="form-section">
-        <img src="../assets/img/publicarinmueble/PASOSFINAL.png" alt="">
+        <img src="../assets/img/publicarinmueble/PASOS5.png" alt="">
         <div style="display: flex; justify-content: center; align-content: center;">
             <h1>AQUI VA AMENIDADES</h1>
         </div>
@@ -479,10 +599,7 @@ include './templates/Header.php';
           nextButton.style.display = 'none';
         }
       }
-        <?php
-            echo "Hola"
 
-        ?>
     }
 
 
@@ -490,6 +607,17 @@ include './templates/Header.php';
     if (sections.length > 1) {
       nextButton.style.display = 'block';
     }
+
+    document.addEventListener('DOMContentLoaded', function() {
+            // Oculta la página al principio
+            document.body.style.display = 'none';
+
+            // Espera a que la ventana se cargue completamente
+            window.addEventListener('load', function () {
+                // Muestra la página después de que todo se haya cargado
+                document.body.style.display = 'block';
+            });
+        });
   </script>
 
 
@@ -503,12 +631,16 @@ include './templates/Header.php';
 
 
 
-
+    
+</body>
 <!-- <h3>&nbsp;&nbsp;Selecciona los Servicios que tiene tu Inmueble: </h3> -->
 
 <!-- ==============================================Inicio Footer ======= -->
-<script src="../assets/js/Servicios/script_servicios.js"></script>
+<script async src="../assets/js/Servicios/script_servicios.js"></script>
+
+
 <?php
 include './templates/Footer.php';
 ?>
 <!-- ==============================================Fin Footer ======= -->
+

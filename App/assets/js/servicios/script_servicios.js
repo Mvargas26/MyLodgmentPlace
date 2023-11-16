@@ -41,6 +41,9 @@
                             nuevoInputCheckbox.type = 'checkbox';
                             nuevoInputCheckbox.checked = false;
 
+                            var nuevoIcono = document.createElement('i');
+                            nuevoIcono.className = response[i].icono;
+
                             // Crea un nuevo span
                             var nuevoSpan = document.createElement('span');
                             nuevoSpan.className = 'checkmark';
@@ -49,6 +52,7 @@
                             nuevoLabel.innerText = response[i].nombre;
 
                             // Agrega los elementos al label
+                            nuevoLabel.appendChild(nuevoIcono);
                             nuevoLabel.appendChild(nuevoInputID);
                             nuevoLabel.appendChild(nuevoInputCheckbox);
                             nuevoLabel.appendChild(nuevoSpan);

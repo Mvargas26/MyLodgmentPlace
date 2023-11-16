@@ -278,23 +278,23 @@ class Master_Class
         }
     } //cargarImagenes
     /*-----------------------------------------------sERVICIOS--------------------------------------------------*/
-
+    
     function CargarServicios()
     {
         try {
-            $query = "SELECT id, nombre FROM `tbservicio`;";
+            $query = "SELECT id, icono, nombre FROM `tbservicio`;";
             $this->conn->set_charset("utf8"); // Establecer la codificación a UTF-8
             $result = $this->getConexion()->query($query);
-
+            
             if ($result) {
                 $data = array();
-
+                
                 // Iterar sobre los resultados y construir el array asociativo
                 while ($row = $result->fetch_assoc()) {
                     $row['id'] = (int) $row['id'];
                     $data[] = $row;
                 }
-
+                
                 return $data;
             } else {
                 throw new Exception("Error en la consulta: " . $this->getConexion()->error);
@@ -304,46 +304,108 @@ class Master_Class
             return null;
         }
     }
-
+    
     // function InsertarServicios()
     // {
-    //     $arry_Datos = func_get_args();
+        //     $arry_Datos = func_get_args();
+        
+        //     $listaIdServicios = $this->GetConexion()->real_escape_string($arry_Datos[0]);
+        //     $idInmueble = $this->GetConexion()->real_escape_string($arry_Datos[1]);
+        
+        //     $success = true;
+        
+        //     foreach ($listaIdServicios as $idServicio) {
+            //         $query = "INSERT INTO `tbinmuebleservicio`(`idServicio`, `idInmueble`, `disponibilidad`)
+            //             VALUES ('$idServicio', '$idInmueble', 'disponible')";
+            
+            //         if (!$this->getConexion()->query($query)) {
+                //             $success = false;
+                //             break;
+                //         }
+                //     }
+                
+                //     return $success;
+                // }
+    /*-----------------------------------------------Politicas--------------------------------------------------*/
+    
+    function CargarPoliticas(){
+        // try {
+        //     $query = "SELECT
+        //         mu.id, 
+        //         mu.nombre AS nombre_inmueble, 
+        //         mu.valorDiario, 
+        //         mu.capacidadPersonas, 
+        //         mu.costoPersonaExtra, 
+        //         mu.direccion, 
+        //         mu.disponibilidad, 
+        //         mu.estrellas, 
+        //         mu.fechaLimiteDisponibilidad, 
+        //         CONCAT(us.nombre, ' ', us.apellido1, ' ', us.apellido2) AS nombre_propietario,
+        //         ca.categoria as Categoria_Inmueble,
+        //         ft.nombreImagen as nameImagen
+        //     FROM tbinmueble as mu
+        //     INNER JOIN tbusuario as us ON mu.Propietario = us.idUser
+        //     INNER JOIN tbcategoriainmueble ON mu.id = tbcategoriainmueble.idInmueble
+        //     INNER JOIN tbcategorias ca ON tbcategoriainmueble.idCategoria = ca.idcategoria
+        //     INNER JOIN tbfotoinmueble ft ON mu.id = ft.idInmueble
+        //     WHERE mu.id = $idInmueble;";
 
-    //     $listaIdServicios = $this->GetConexion()->real_escape_string($arry_Datos[0]);
-    //     $idInmueble = $this->GetConexion()->real_escape_string($arry_Datos[1]);
+        //     $this->conn->set_charset("utf8");
+        //     $result = $this->getConexion()->query($query);
 
-    //     $success = true;
+        //     if ($result) {
+        //         $data = array();
 
-    //     foreach ($listaIdServicios as $idServicio) {
-    //         $query = "INSERT INTO `tbinmuebleservicio`(`idServicio`, `idInmueble`, `disponibilidad`)
-    //             VALUES ('$idServicio', '$idInmueble', 'disponible')";
+        //         while ($row = $result->fetch_assoc()) {
+        //             $item = array(
+        //                 "id" => $row['id'],
+        //                 "Nombre_Inmueble" => $row["nombre_inmueble"],
+        //                 "valorDiario" => $row["valorDiario"],
+        //                 "capacidadPersonas" => $row["capacidadPersonas"],
+        //                 "costoPersonaExtra" => $row["costoPersonaExtra"],
+        //                 "direccion" => $row["direccion"],
+        //                 "disponibilidad" => $row["disponibilidad"],
+        //                 "estrellas" => $row["estrellas"],
+        //                 "fechaLimiteDisponibilidad" => $row["fechaLimiteDisponibilidad"],
+        //                 "nombre_propietario" => $row["nombre_propietario"],
+        //                 "Categoria_Inmueble" => $row["Categoria_Inmueble"],
+        //                 "nameImagen" => $row["nameImagen"],
+        //             );
+        //             $data[] = $item;
+        //         }
 
-    //         if (!$this->getConexion()->query($query)) {
-    //             $success = false;
-    //             break;
-    //         }
-    //     }
-
-    //     return $success;
-    // }
-
-    /*-----------------------------------------------AUNTETINTIFICACION--------------------------------------------------*/
+        //         return json_encode($data);
+        //     } else {
+        //         throw new Exception("Error en la consulta: " . $this->getConexion()->error);
+        //     }
+        // } catch (Exception $e) {
+        //     error_log($e->getMessage());
+        //     return null; // Retorna null en caso de error
+        // }
 
 
-    function generarCodigoAleatorio($longitud)
-    {
-        $caracteres = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-        $codigo = "";
+    } //end politicas
 
-        for ($i = 0; $i < $longitud; $i++) {
-            $codigo .= $caracteres[rand(0, strlen($caracteres) - 1)];
-        }
 
-        return $codigo;
-    }
 
-    function almacenarCodigoAutenticacion($identificacion, $codigo_autenticacion)
-    {
+
+                /*-----------------------------------------------AUNTETINTIFICACION--------------------------------------------------*/
+                
+                
+                function generarCodigoAleatorio($longitud)
+                {
+                    $caracteres = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+                    $codigo = "";
+                    
+                    for ($i = 0; $i < $longitud; $i++) {
+                        $codigo .= $caracteres[rand(0, strlen($caracteres) - 1)];
+                    }
+                    
+                    return $codigo;
+                }
+                
+                function almacenarCodigoAutenticacion($identificacion, $codigo_autenticacion)
+                {
         try {
             $identificacion = $this->GetConexion()->real_escape_string($identificacion);
             $codigo_autenticacion = $this->GetConexion()->real_escape_string($codigo_autenticacion);
