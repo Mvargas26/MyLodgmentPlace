@@ -499,23 +499,29 @@ class Master_Class
     {
 
         try {
-            $query = "SELECT         mu.id, 
-                mu.nombre AS nombre_inmueble, 
-                mu.valorDiario, 
-                mu.capacidadPersonas, 
-                mu.costoPersonaExtra, 
-                mu.direccion, 
-                mu.disponibilidad, 
-                mu.estrellas, 
-                mu.fechaLimiteDisponibilidad, 
-               CONCAT(us.nombre, ' ', us.apellido1, ' ', us.apellido2) AS nombre_propietario,
-               ca.categoria as Categoria_Inmueble,
-               ft.nombreImagen as nameImagen
-            FROM tbinmueble as mu
-            INNER JOIN tbusuario as us ON mu.Propietario = us.idUser
-            INNER JOIN tbcategoriainmueble ON mu.id =tbcategoriainmueble.idInmueble
-            INNER JOIN tbcategorias ca ON tbcategoriainmueble.idCategoria = ca.idcategoria
-            INNER JOIN tbfotoinmueble ft ON mu.id = ft.idInmueble;";
+            $query = "SELECT
+                    mu.id,
+                    mu.nombre AS nombre_inmueble,
+                    mu.valorDiario,
+                    mu.capacidadPersonas,
+                    mu.costoPersonaExtra,
+                    mu.direccion,
+                    mu.disponibilidad,
+                    mu.estrellas,
+                    mu.fechaLimiteDisponibilidad,
+                    CONCAT(us.nombre, ' ', us.apellido1, ' ', us.apellido2) AS nombre_propietario,
+                    ca.categoria AS Categoria_Inmueble,
+                    ft.nombreImagen AS nameImagen
+                FROM tbinmueble AS mu
+                INNER JOIN tbusuario AS us ON mu.Propietario = us.idUser
+                INNER JOIN tbcategoriainmueble ON mu.id = tbcategoriainmueble.idInmueble
+                INNER JOIN tbcategorias AS ca ON tbcategoriainmueble.idCategoria = ca.idcategoria
+                LEFT JOIN (
+                    SELECT idInmueble, nombreImagen
+                    FROM tbfotoinmueble
+                    GROUP BY idInmueble
+                    LIMIT 1
+                ) AS ft ON mu.id = ft.idInmueble;";
 
             $this->conn->set_charset("utf8");
             $result = $this->getConexion()->query($query);

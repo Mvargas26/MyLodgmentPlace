@@ -14,11 +14,13 @@ session_start();
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
+    <link href="../assets/css/tablaDenuncias_styles.css" rel="stylesheet">
     <style>
         .btn-emoji {
             font-size: 2rem;
             /* Tamaño del emoji */
             color: orange;
+            background-color: #464A52;
             /* Color inicial del emoji */
             transition: color 0.3s ease-in-out;
             /* Transición suave del color */
@@ -41,11 +43,6 @@ session_start();
         .custom-container {
             display: flex;
             justify-content: space-between;
-        }
-
-        .custom-table {
-            width: 60%;
-            /* Ancho de la tabla */
         }
 
         .custom-modal {
@@ -72,11 +69,11 @@ session_start();
     ?>
     <div class="container">
         <h2>Reservas del Usuario</h2>
-        <table class="table">
+        <table class="container">
             <thead>
                 <tr>
                     <th>ID Reserva</th>
-                    <th>Nombre C</th>
+                    <th>Nombre Completo</th>
                     <th>Fechas</th>
                     <th>Nombre Inmueble</th>
                     <th>Denunciar</th>
