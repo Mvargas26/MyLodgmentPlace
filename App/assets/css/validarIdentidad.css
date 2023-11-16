@@ -5,42 +5,63 @@ body {
     padding: 0;
 }
 
-.container {
-    max-width: 600px;
-    margin: 0 auto;
+main{
+    max-width: 100%;
 }
 
 h2 {
     color: #ff7f5d;
 }
 
-.modal-body {
-    text-align: center;
-}
-
-#uploadContainer {
-    margin-top: 20px;
-}
-
-#uploadButton {
-    background-color: #524156;
-    border-color: #524156;
- 
-    cursor: pointer;
-    margin-top: 20px;
-}
-
-/* Estilos para resaltar el botón de selección de archivo */
-#uploadButton:hover {
-    background-color: #ff7f5d;
-    border-color: #ff7f5d;
-}
-
-/* Estilos para el mensaje de archivo seleccionado */
-#uploadButton:after {
-    content: '';
+.value-container {
     display: inline-block;
-    margin-left: 10px;
+    margin-left: 60px; /* Ajusta el margen según tus preferencias */
+}
+
+.value-container1 {
+    display: inline-block;
+    margin-left: 160px; /* Ajusta el margen según tus preferencias */
+}
+
+/* Contenedor izquierdo con bordes y sombras */
+#leftContainer {
+    background-color: #fff;
+    border: 2px solid rgb(247, 155, 90);
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(238, 40, 40, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+    text-align: left;
+    max-width: 450px; /* Ajusta el tamaño según tus necesidades */
+    width: 100%;
+    margin-left: 5%;
+    /* Alineación vertical */
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    /* Alineación horizontal a la izquierda */
+    left: 0;
+}
+
+#rightContainer {
+    background-color: #fff;
+    border: 2px solid rgb(247, 155, 90);
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+    text-align: right;
+    margin-left: 35%;
+    max-width: fit-content; /* Ajusta el tamaño según tus necesidades */
+}
+
+
+/* Estilos para los campos de Cédula, Nombre y Estado de Validación */
+#cedulaFromDatabase,
+#nameFromDatabase,
+#estadoFromDatabase {
+    display: block;
+    margin-bottom: 10px;
 }
 
 /* Estilos adicionales para el modal */
@@ -63,25 +84,9 @@ h2 {
     border-color: #ff7f5d;
 }
 
-#fileInput {
-    border-color: #ff7f5d;
-}
-
 /* Estilos para resaltar el campo de entrada de archivo al pasar el ratón */
 #fileInput:hover {
     border-color: #ff7f5d;
-}
-
-/* Estilos para el texto que muestra el nombre del archivo seleccionado */
-#uploadButton:after {
-    content: '';
-    display: inline-block;
-    margin-left: 10px;
-}
-
-/* Estilos para resaltar el nombre del archivo seleccionado */
-#uploadButton:hover:after {
-    color: #ff7f5d;
 }
 
 /* Espaciado entre la cédula y el botón Subir Foto */
@@ -92,6 +97,6 @@ h2 {
 
 /* Estilos para la imagen subida */
 #uploadedImage {
-    max-width: 100%;
-    margin-top: 20px;
+    max-width: 75%;
+    margin-top: 15px;
 }
