@@ -195,6 +195,26 @@ class Master_Class
         return $resultado;
     }
 
+        /* --------------------------- Obtener Usuarios --------------------------- */
+    
+        function GetUsuarios()
+        {
+            $sql = "SELECT * FROM tbusuario";
+            $result = $this->conn->query($sql);
+    
+            if ($result->num_rows > 0) {
+                $users = array();
+                while ($row = $result->fetch_assoc()) {
+                    $users[] = $row;
+                }
+                return $users;
+            } else {
+                return array();
+            }
+        }
+    
+        /* --------------------------- Otras funciones --------------------------- */
+
 
 
     /*-----------------------------------------------IMAGENES--------------------------------------------------*/

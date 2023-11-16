@@ -1,0 +1,54 @@
+
+
+.contener {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 600px;
+}
+
+h2 {
+    text-align: center;
+}
+
+/* Estilo para la lista de usuarios */
+.user-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content:space-between; /* Puedes ajustar esto según tus preferencias */
+}
+
+/* Estilo para cada usuario */
+.user {
+    margin: 10px;
+    flex-basis: calc(10% - 20px); /* Calcula el ancho para mostrar 10 usuarios por fila */
+}
+
+/* Estilo para la imagen del perfil */
+.user img {
+    width: 100%; /* Ajusta el tamaño según tus preferencias */
+    height: auto; /* Para mantener la relación de aspecto */
+    object-fit: cover; /* Para asegurar que la imagen mantenga su relación de aspecto */
+}
+
+/* Estilo para los detalles del usuario */
+.user-details {
+    text-align: center;
+}
+
+/* Estilo para el botón de ver perfil */
+.button-view-profile {
+    margin-top: 5px;
+}
+
+
+
+.button-view-profile {
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 4px;
+}

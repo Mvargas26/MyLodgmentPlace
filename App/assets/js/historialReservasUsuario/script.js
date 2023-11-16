@@ -22,9 +22,6 @@
                 });
             },
             error: function (xhr, status, error) {
-                console.log(xhr);
-                console.log(status);
-                console.log(error);
                 alert('Error al obtener el historial de reservas.');
             }
         });
