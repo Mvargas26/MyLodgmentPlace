@@ -20,24 +20,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     <p><strong>Correo Electrónico:</strong> ${userDetails.correo || 'N/A'}</p>
                     <p><strong>Teléfono:</strong> ${userDetails.telefono || 'N/A'}</p>
                     <p><strong>Dirección:</strong> ${userDetails.direccion || 'N/A'}</p>
-                    <!-- Agrega más detalles según sea necesario -->
-                `);
-
-                // Botones de activar/desactivar usuario
-                var userOptions = $('.user-options');
-                userOptions.html(`
-                    <button id="activateUser">Activar Usuario</button>
-                    <button id="deactivateUser">Desactivar Usuario</button>
-                `);
-
-                // Opciones de administrador
-                var adminOptions = $('.admin-options');
-                adminOptions.html(`
-                    <h4>Opciones de Administrador:</h4>
-                    <button id="validateIdentity">Validar Identidad</button>
-                    <button id="validateSpace">Validar Espacio</button>
-                    <button id="checkReports">Revisar Denuncias</button>
-                    <button id="checkReviews">Revisar Reseñas</button>
                 `);
             } else {
                 console.error('Los detalles del usuario son nulos o indefinidos.');
