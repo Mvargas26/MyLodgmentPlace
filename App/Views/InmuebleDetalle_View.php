@@ -123,7 +123,7 @@ if (isset($_GET['id'])) {
                         <div class="portfolio-info">
                           <h4><?php  //echo $dato['Nombre_Inmueble'] ?></h4>
                           <p> ₡ <?php //echo $dato['valorDiario'] ?></p>
-                          <a href="./App/assets/img/ImagenesInmuebles/<?php //echo $dato['nameImagen'] ?>" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="<?php// $dato['Nombre_Inmueble'] ?>"><i class="bx bx-plus"></i></a>
+                          <a href="./App/assets/img/ImagenesInmuebles/<?php //echo $dato['nameImagen'] ?>" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="// $dato['Nombre_Inmueble'] ?>"><i class="bx bx-plus"></i></a>
                           <a href="./App/Views/InmuebleDetalle_View.php?nombre=<?php //echo urlencode($dato['Nombre_Inmueble']); ?>" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
                         </div>
                       </div> -->

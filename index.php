@@ -51,10 +51,9 @@ session_start();
 
       <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>
-          <li><a class="nav-link scrollto active" href="../../">Inicio</a></li>
+          <li><a class="nav-link scrollto active" href="#">Inicio</a></li>
           <li><a class="nav-link scrollto" href="#portfolio">Lugares</a></li>
-          <li><a class="nav-link scrollto" href="#contact">Contactenos</a></li>
-          <li><a class="nav-link scrollto" href="./App/Views/denunciasAdministrador_View.php">Recepcion Denuncias Administrador</a></li>
+          <!-- <li><a class="nav-link scrollto" href="#contact">Contactenos</a></li> -->
           <!-- <li><a class="nav-link scrollto" href="#about"> -->
             <?php 
                 if (isset($_SESSION["nombre"])) {
@@ -69,10 +68,23 @@ session_start();
                 if (isset($_SESSION["Rol"])) {
                   if ($_SESSION["Rol"] == 2) {
           ?>
-                  <li><a class="nav-link scrollto" href="./App/Views/PanelAnfitrion_View.php">Panel Anfitrion</a></li>
+<!-- ----------------------------- -->
+<li class="dropdown"><a href="#"><span>Opciones para Anfitrión</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+            <li><a class="nav-link scrollto" href="./App/Views/PanelAnfitrion_View.php">Panel Anfitrion</a></li>
                   <li><a class="nav-link scrollto" href="./App/Views/PublicarInmueble_View.php">Publica tu Espacio</a></li>
                   <li><a class="nav-link scrollto" href="./App/Views/Anuncios_MultiplesV_View.php">Anuncios Multiples</a></li>
                   <li><a class="nav-link scrollto" href="./App/Views/validar_identidadHuesped_View.php">Validar Perfil</a></li>
+                  <li><a class="nav-link scrollto" href="./App/Views/denunciasAdministrador_View.php">Recepcion Denuncias Administrador</a></li>
+
+            </ul>
+          </li>
+
+<!-- ----------------------------------------------- -->
+                  <!-- <li><a class="nav-link scrollto" href="./App/Views/PanelAnfitrion_View.php">Panel Anfitrion</a></li>
+                  <li><a class="nav-link scrollto" href="./App/Views/PublicarInmueble_View.php">Publica tu Espacio</a></li>
+                  <li><a class="nav-link scrollto" href="./App/Views/Anuncios_MultiplesV_View.php">Anuncios Multiples</a></li>
+                  <li><a class="nav-link scrollto" href="./App/Views/validar_identidadHuesped_View.php">Validar Perfil</a></li> -->
           <?php
 
           };

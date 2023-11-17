@@ -2,33 +2,34 @@
 require_once('../Master_Class.php');
 $ObjMaster = new Master_Class();
 
-       echo json_encode(array('llego' => 'Vas bien Varguitas'));
 
-// try {
+try {
 
-//     if (isset($_POST['$idUser'])) {
+    if (isset($_POST['cedUsuario'])) {
 
-//         $idUser = $_POST['$idUser'];
+        $idUser = $_POST['cedUsuario'];
 
-//         $resultadoConsulta = $ObjMaster->ConsultarListafavoritosPorUser($idUser);
+       // echo json_encode(array('ced' => $idUser));
 
-//         if ($resultadoConsulta) {
+        $resultadoConsulta = $ObjMaster->ConsultarListafavoritosPorUser($idUser);
 
-//             header('Content-Type: application/json; charset=utf-8');
-//             echo json_encode($resultadoConsulta, JSON_UNESCAPED_UNICODE);
+        if ($resultadoConsulta) {
 
-//         } else {
-//             echo json_encode(array('error' => 'No hay datos disponibles'));
-//         }
+            header('Content-Type: application/json; charset=utf-8');
+            echo json_encode($resultadoConsulta, JSON_UNESCAPED_UNICODE);
 
-//     } else {
-//         echo json_encode(array('Vacio' => 'No entro al If'));
+        } else {
+            echo json_encode(array('error' => 'No hay datos disponibles'));
+        }
 
-//     }
+    } else {
+        echo json_encode(array('Vacio' => 'No entro al If'));
 
-// } catch (Exception $e) {
-//     echo json_encode(array('error' => $e->getMessage()));
-// }
+    }
+
+} catch (Exception $e) {
+    echo json_encode(array('error' => $e->getMessage()));
+}
 
 
 ?>

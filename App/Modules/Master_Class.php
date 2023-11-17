@@ -561,6 +561,16 @@ class Master_Class
     {
 
         try {
+
+            // $query = "SELECT mu.id, mu.nombre AS nombre_inmueble, mu.valorDiario, mu.capacidadPersonas,
+            //  mu.costoPersonaExtra, mu.direccion, mu.disponibilidad, mu.estrellas, mu.fechaLimiteDisponibilidad,
+            //   CONCAT(us.nombre, ' ', us.apellido1, ' ', us.apellido2) AS nombre_propietario, ca.categoria AS Categoria_Inmueble,
+            //    ft.nombreImagen AS nameImagen, ft.Fotografia FROM tbinmueble AS mu INNER JOIN tbusuario AS us
+            //     ON mu.Propietario = us.idUser
+            //      INNER JOIN tbcategoriainmueble ON mu.id = tbcategoriainmueble.idInmueble
+            //      INNER JOIN tbcategorias AS ca ON tbcategoriainmueble.idCategoria = ca.idcategoria 
+            //      LEFT JOIN ( SELECT idInmueble, nombreImagen, Fotografia
+            //       FROM tbfotoinmueble GROUP BY idInmueble LIMIT 1 ) AS ft ON mu.id = ft.idInmueble WHERE ft.Fotografia IS NOT NULL;";
             $query = "SELECT
                     mu.id,
                     mu.nombre AS nombre_inmueble,
@@ -870,19 +880,17 @@ class Master_Class
             $result = $this->getConexion()->query($query);
 
             if ($result) {
-                $row = $result->fetch_assoc();
+                $data = array();
 
-                if ($row) {
-                    $arrayListaFavoritos = array(
+                while ($row = $result->fetch_assoc()) {
+                    $item = array(
                         "idLista" => $row['idLista'],
-                        "nombreLista" => $row["nombreLista"],
+                        "nombreLista" => $row["nombreLista"]
                     );
-
-                    return json_encode($arrayListaFavoritos);
-                } else {
-                    // No se encontró un inmueble con ese ID
-                    return json_encode(array("error" => "No hay listas para $UserID"));
+                    $data[] = $item;
                 }
+
+                return json_encode($data);
             } else {
                 throw new Exception("Error en la consulta: " . $this->getConexion()->error);
             }
