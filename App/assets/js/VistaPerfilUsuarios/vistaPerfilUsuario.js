@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     <p><strong>Correo Electrónico:</strong> ${userDetails.correo || 'N/A'}</p>
                     <p><strong>Teléfono:</strong> ${userDetails.telefono || 'N/A'}</p>
                     <p><strong>Dirección:</strong> ${userDetails.direccion || 'N/A'}</p>
+                    <!-- Agrega más detalles según sea necesario -->
                 `);
             } else {
                 console.error('Los detalles del usuario son nulos o indefinidos.');
@@ -32,6 +33,33 @@ document.addEventListener('DOMContentLoaded', function () {
             alert('Error al obtener los detalles del usuario. Por favor, inténtelo de nuevo más tarde.');
         }
     });
+
+     // Asocia eventos de clic a cada botón
+     $('#validarIdentidadBtn').on('click', function () {
+        redirigirAotraPagina('vista_validarIdentidad_adm_View.php', idUser);
+    });
+
+    $('#validarEspacioBtn').on('click', function () {
+        redirigirAotraPagina('vista_validarEspacio_adm_View.php', idUser);
+    });
+
+    $('#denunciasBtn').on('click', function () {
+        redirigirAotraPagina('ruta_denuncias.php', idUser);
+    });
+
+    $('#activarUsuarioBtn').on('click', function () {
+        redirigirAotraPagina('ruta_activar_usuario.php', idUser);
+    });
+
+    $('#inactivarUsuarioBtn').on('click', function () {
+        redirigirAotraPagina('ruta_inactivar_usuario.php', idUser);
+    });
+
+    // Función para redirigir a otra página con el idUser
+    function redirigirAotraPagina(ruta, idUser) {
+        // Cambiar la ubicación de la página a la ruta deseada con el idUser
+        window.location.href = `${ruta}?idUser=${idUser}`;
+    }
 
     // Función para obtener parámetros de la URL
     function obtenerParametroUrl(parametro) {

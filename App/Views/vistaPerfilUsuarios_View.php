@@ -11,18 +11,19 @@
         <div class="contiene">
             <img src="" alt="Foto de Perfil" id="userProfileImage">
             <div class="user-details" id="userDetails">
-                <!-- Aquí se llenarán dinámicamente los detalles del usuario -->
+                
             </div>
             
             <div class="contiene">
-            <ul>
-                <li><span>Validar Identidad</span></li>
-                <li><span>Validar Espacio</span></li>
-                <li><span>Denuncias</span></li>
-                <li><span>Activar Usuario</span></li>
-                <li><span>Inactivar Usuario</span></li>
-            </ul>
+                <ul>
+                    <li id="validarIdentidadBtn"><span>Validar Identidad</span></li>
+                    <li id="validarEspacioBtn"><span>Validar Espacio</span></li>
+                    <li id="denunciasBtn"><span>Denuncias</span></li>
+                    <li id="activarUsuarioBtn"><span>Activar Usuario</span></li>
+                    <li id="inactivarUsuarioBtn"><span>Inactivar Usuario</span></li>
+                </ul>
             </div>
+
         </div>
     </div>
 </main>

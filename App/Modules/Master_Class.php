@@ -237,6 +237,34 @@ class Master_Class
         return array();
     }
 
+    function obtenerParametroUrl($parametro) {
+        $url = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '';
+        $query = parse_url($url, PHP_URL_QUERY);
+        parse_str($query, $parametros);
+        
+        return isset($parametros[$parametro]) ? $parametros[$parametro] : null;
+    }
+
+    function getValidacionPerfil($idUser)
+    {
+        // Lógica para obtener detalles de validación del perfil basados en $idUser
+        $consulta = "SELECT nombreImagenUsuario FROM tbvalidacionperfil WHERE idUser = ?";
+        
+        // Ejecutar la consulta con $idUser como parámetro
+        // Aquí asumo que tienes una conexión PDO llamada $pdo
+        $stmt = $this->conn->prepare($consulta);
+        $stmt->execute([$idUser]);
+        
+        // Obtener los resultados
+        $resultados = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+        return $resultados;
+    }
+
+    function activarEstadoValidacion($idValidacionPerfil)
+    {
+        // Lógica para activar el estado en la base de datos
+    }
 
 
     /*-----------------------------------------------IMAGENES--------------------------------------------------*/
