@@ -195,8 +195,8 @@ class Master_Class
         return $resultado;
     }
 
-        /* --------------------------- Obtener Usuarios --------------------------- */
-    
+    /* --------------------------- Obtener Usuarios --------------------------- */
+
     function GetUsuarios()
     {
         $sql = "SELECT * FROM tbusuario";
@@ -212,32 +212,32 @@ class Master_Class
             return array();
         }
     }
-    
-        /* --------------------------- Otras funciones --------------------------- */
 
-        function GetUsuarioDetails($idUser)
-        {
-            if ($idUser === null) {
-                return array();
-            }
-        
-            $sql = "SELECT * FROM tbusuario WHERE idUser = ?";
-            $stmt = $this->conn->prepare($sql);
-        
-            if ($stmt) {
-                $stmt->bind_param("i", $idUser);
-                $stmt->execute();
-                $result = $stmt->get_result();
-        
-                if ($result->num_rows > 0) {
-                    return $result->fetch_assoc();
-                }
-            }
-        
+    /* --------------------------- Otras funciones --------------------------- */
+
+    function GetUsuarioDetails($idUser)
+    {
+        if ($idUser === null) {
             return array();
         }
-        
-        
+
+        $sql = "SELECT * FROM tbusuario WHERE idUser = ?";
+        $stmt = $this->conn->prepare($sql);
+
+        if ($stmt) {
+            $stmt->bind_param("i", $idUser);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            if ($result->num_rows > 0) {
+                return $result->fetch_assoc();
+            }
+        }
+
+        return array();
+    }
+
+
 
     /*-----------------------------------------------IMAGENES--------------------------------------------------*/
 
@@ -278,23 +278,23 @@ class Master_Class
         }
     } //cargarImagenes
     /*-----------------------------------------------sERVICIOS--------------------------------------------------*/
-    
+
     function CargarServicios()
     {
         try {
             $query = "SELECT id, icono, nombre FROM `tbservicio`;";
             $this->conn->set_charset("utf8"); // Establecer la codificación a UTF-8
             $result = $this->getConexion()->query($query);
-            
+
             if ($result) {
                 $data = array();
-                
+
                 // Iterar sobre los resultados y construir el array asociativo
                 while ($row = $result->fetch_assoc()) {
                     $row['id'] = (int) $row['id'];
                     $data[] = $row;
                 }
-                
+
                 return $data;
             } else {
                 throw new Exception("Error en la consulta: " . $this->getConexion()->error);
@@ -304,31 +304,32 @@ class Master_Class
             return null;
         }
     }
-    
+
     // function InsertarServicios()
     // {
-        //     $arry_Datos = func_get_args();
-        
-        //     $listaIdServicios = $this->GetConexion()->real_escape_string($arry_Datos[0]);
-        //     $idInmueble = $this->GetConexion()->real_escape_string($arry_Datos[1]);
-        
-        //     $success = true;
-        
-        //     foreach ($listaIdServicios as $idServicio) {
-            //         $query = "INSERT INTO `tbinmuebleservicio`(`idServicio`, `idInmueble`, `disponibilidad`)
-            //             VALUES ('$idServicio', '$idInmueble', 'disponible')";
-            
-            //         if (!$this->getConexion()->query($query)) {
-                //             $success = false;
-                //             break;
-                //         }
-                //     }
-                
-                //     return $success;
-                // }
+    //     $arry_Datos = func_get_args();
+
+    //     $listaIdServicios = $this->GetConexion()->real_escape_string($arry_Datos[0]);
+    //     $idInmueble = $this->GetConexion()->real_escape_string($arry_Datos[1]);
+
+    //     $success = true;
+
+    //     foreach ($listaIdServicios as $idServicio) {
+    //         $query = "INSERT INTO `tbinmuebleservicio`(`idServicio`, `idInmueble`, `disponibilidad`)
+    //             VALUES ('$idServicio', '$idInmueble', 'disponible')";
+
+    //         if (!$this->getConexion()->query($query)) {
+    //             $success = false;
+    //             break;
+    //         }
+    //     }
+
+    //     return $success;
+    // }
     /*-----------------------------------------------Politicas--------------------------------------------------*/
-    
-    function CargarPoliticas(){
+
+    function CargarPoliticas()
+    {
         // try {
         //     $query = "SELECT
         //         mu.id, 
@@ -389,23 +390,23 @@ class Master_Class
 
 
 
-                /*-----------------------------------------------AUNTETINTIFICACION--------------------------------------------------*/
-                
-                
-                function generarCodigoAleatorio($longitud)
-                {
-                    $caracteres = "0123456789";
-                    $codigo = "";
-                    
-                    for ($i = 0; $i < $longitud; $i++) {
-                        $codigo .= $caracteres[rand(0, strlen($caracteres) - 1)];
-                    }
-                    
-                    return $codigo;
-                }
-                
-                function almacenarCodigoAutenticacion($identificacion, $codigo_autenticacion)
-                {
+    /*-----------------------------------------------AUNTETINTIFICACION--------------------------------------------------*/
+
+
+    function generarCodigoAleatorio($longitud)
+    {
+        $caracteres = "0123456789";
+        $codigo = "";
+
+        for ($i = 0; $i < $longitud; $i++) {
+            $codigo .= $caracteres[rand(0, strlen($caracteres) - 1)];
+        }
+
+        return $codigo;
+    }
+
+    function almacenarCodigoAutenticacion($identificacion, $codigo_autenticacion)
+    {
         try {
             $identificacion = $this->GetConexion()->real_escape_string($identificacion);
             $codigo_autenticacion = $this->GetConexion()->real_escape_string($codigo_autenticacion);
@@ -1063,42 +1064,42 @@ class Master_Class
     }
 
     function modificarDenunciaAdm($idDenuncia, $identificacion, $respuestaDenunciaAdm, $estadoNuevo)
-{
-    try {
-        // Obtener la conexión
-        $conexion = $this->getConexion();
+    {
+        try {
+            // Obtener la conexión
+            $conexion = $this->getConexion();
 
-        // Verificar si la conexión es válida
-        if (!$conexion) {
-            throw new Exception("Error al obtener la conexión.");
-        }
+            // Verificar si la conexión es válida
+            if (!$conexion) {
+                throw new Exception("Error al obtener la conexión.");
+            }
 
-        // Preparar la sentencia SQL
-        $query = "UPDATE tbdenuncia SET RespuestaDenunciaAdmin = ?, idAdminAtiende = ?, estado = ? WHERE idDenuncia = ?";
-        $stmt = $conexion->prepare($query);
+            // Preparar la sentencia SQL
+            $query = "UPDATE tbdenuncia SET RespuestaDenunciaAdmin = ?, idAdminAtiende = ?, estado = ? WHERE idDenuncia = ?";
+            $stmt = $conexion->prepare($query);
 
-        // Vincular parámetros
-        $stmt->bind_param("sssi", $respuestaDenunciaAdm, $identificacion, $estadoNuevo, $idDenuncia);
+            // Vincular parámetros
+            $stmt->bind_param("sssi", $respuestaDenunciaAdm, $identificacion, $estadoNuevo, $idDenuncia);
 
-        // Ejecutar la consulta
-        $resultado = $stmt->execute();
+            // Ejecutar la consulta
+            $resultado = $stmt->execute();
 
-        // Verificar si la actualización fue exitosa
-        if ($resultado) {
-            return true;
-        } else {
-            throw new Exception("Error en la actualización: " . $stmt->error);
-        }
-    } catch (Exception $e) {
-        error_log($e->getMessage());
-        return false;
-    } finally {
-        // Cerrar la declaración
-        if (isset($stmt)) {
-            $stmt->close();
+            // Verificar si la actualización fue exitosa
+            if ($resultado) {
+                return true;
+            } else {
+                throw new Exception("Error en la actualización: " . $stmt->error);
+            }
+        } catch (Exception $e) {
+            error_log($e->getMessage());
+            return false;
+        } finally {
+            // Cerrar la declaración
+            if (isset($stmt)) {
+                $stmt->close();
+            }
         }
     }
-}
 
 
     function ConsultarDenunciasPorCedula($identificacion)
@@ -1159,7 +1160,5 @@ class Master_Class
             return null;
         }
     }
-
-
 } //fn cl_masterClass
 $ObjMaster = new Master_Class();
