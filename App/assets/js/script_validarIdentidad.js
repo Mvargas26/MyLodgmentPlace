@@ -7,7 +7,7 @@ $(document).ready(function () {
     var img = document.createElement('img');
     img.src = imageUrl; 
     // Agrega la imagen al contenedor
-    $('#imageColumn').html(img);
+    $('#imageContainer').html(img);
 
     $.ajax({
         url: '../../App/Modules/Login/obtener_datosValidacionP_Negocios.php',
@@ -36,7 +36,7 @@ function guardarDatos() {
     img.src = imageUrl;
 
     // Agregar la imagen al contenedor
-    $('#imageColumn').html(img);
+    $('#imageContainer').html(img);
 
     // Mostrar la alerta
     alert("Se subió la foto correctamente. En proceso de validación.");

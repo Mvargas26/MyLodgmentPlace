@@ -1,5 +1,6 @@
 <?php
 require_once('../Master_Class.php');
+
 $ObjMaster = new Master_Class();
 
 try {

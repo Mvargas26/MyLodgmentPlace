@@ -2,6 +2,7 @@
 include './templates/Header.php';
 require_once('../Modules/Master_Class.php');
 session_start();
+
 ?>
 <!-- ==============================================Fin header ======= -->
 <main id="mainDenuncia">
@@ -118,16 +119,17 @@ session_start();
         </div>
     </div>
     <?php
-    // Verificar si la sesión está iniciada y si la clave "Identificacion" está presente
+   
     if (session_status() == PHP_SESSION_NONE || !isset($_SESSION["Identificacion"])) {
-        // En este caso, $_SESSION["Identificacion"] no está definida o la sesión no está iniciada.
-        // Puedes asignar un valor por defecto o manejar este caso según tus necesidades.
-        $identificacion = "valor_por_defecto"; // Cambia esto según tus necesidades
+       
+        $identificacion = "valor_por_defecto"; 
     } else {
         $identificacion = $_SESSION["Identificacion"];
     }
     ?>
+
     <script>var identificacion = <?php echo json_encode($identificacion); ?>;</script>
+
 </main>
 
 <!-- ==============================================Inicio Footer ======= -->

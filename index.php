@@ -322,7 +322,7 @@ session_start();
         </div>
 
         <ul id="portfolio-flters" class="d-flex justify-content-center">
-          <li data-filter="*" class="filter-active">Todos</li>
+          <li data-filter="*" class="filter-active">All</li>
           <?php
              try {
               $resultadoConsulta = $ObjMaster->ConsultarCategorias();

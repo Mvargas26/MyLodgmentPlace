@@ -573,21 +573,6 @@ include './templates/Header.php';
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     function showNextSection() {
       if (currentSection < sections.length) {
         sections[currentSection - 1].classList.remove('active');
