@@ -929,7 +929,23 @@ class Master_Class
         }
     } //fin  ConsultarListafavoritosPorUser
 
+    function insertarFavoritoEnListadeUsuario(){
 
+        $arry_Datos = func_get_args();
+
+        $idInmueble = $this->GetConexion()->real_escape_string($arry_Datos[0]);
+        $idLista = $this->GetConexion()->real_escape_string($arry_Datos[1]);
+        $idusuario = $this->GetConexion()->real_escape_string($arry_Datos[2]);
+
+        $query = "INSERT INTO `tbinmueblefavorito` (`idInmueble`, `idLista`, `idusuario`) VALUES ($idInmueble,  $idLista,  $idusuario)";
+
+        if ($this->getConexion()->query($query)) {
+            return true;
+        } else {
+            return false;
+        }
+        
+    }
 
     /*----------------------------------------------- Notificaciones --------------------------------------------------*/
 

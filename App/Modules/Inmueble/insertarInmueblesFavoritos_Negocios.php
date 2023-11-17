@@ -4,15 +4,17 @@ $ObjMaster = new Master_Class();
 
 
 try {
-    
-    //AQUI ENTRA PARA CONSULTAR
-    if (isset($_POST['cedUsuario'])) {
+    //AQUI ENTRA PARA INSERTAR
 
-        $idUser = $_POST['cedUsuario'];
+    if (isset($_POST['IdLista'])) {
+
+        $idInmueble = $_POST['idInmueble'];
+        $idLista = $_POST['IdLista'];
+        $idusuario = $_POST['cedUsuario'];
 
        // echo json_encode(array('ced' => $idUser));
 
-        $resultadoConsulta = $ObjMaster->ConsultarListafavoritosPorUser($idUser);
+        $resultadoConsulta = $ObjMaster->insertarFavoritoEnListadeUsuario( $idInmueble, $idLista, $idusuario);
 
         if ($resultadoConsulta) {
 
@@ -28,16 +30,9 @@ try {
 
     };
 
-
-
-
-
-
-
-
+   
 } catch (Exception $e) {
     echo json_encode(array('error' => $e->getMessage()));
 }
-
 
 ?>
