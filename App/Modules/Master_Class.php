@@ -394,7 +394,7 @@ class Master_Class
                 
                 function generarCodigoAleatorio($longitud)
                 {
-                    $caracteres = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+                    $caracteres = "0123456789";
                     $codigo = "";
                     
                     for ($i = 0; $i < $longitud; $i++) {
