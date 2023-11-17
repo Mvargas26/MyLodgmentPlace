@@ -1,5 +1,6 @@
 <?php
 require_once(__DIR__ . '/../../app//libs/PHPMAILER/autoload.php');
+session_start();
 
 date_default_timezone_set("America/Costa_Rica");
 
@@ -305,6 +306,181 @@ class Master_Class
             return false;
         }
     } //cargarImagenes
+
+    
+    /*D----------------------------------------------------------------------------------------------D*/
+    /*D-------PUBLICAR INMUEBLE----------PUBLICAR INMUEBLE-----------PUBLICAR INMUEBLE-------------------------------------------D*/
+    /*D----------------------------------------------------------------------------------------------D*/
+  
+    function Insertar_Inmueble($nombreEspacio, $disponibilidad,
+    $valorDiario,$estadoLugar,$Propietario,$estrellas,$direccion,
+    $capacidadPersonas,$costoPersonaExtra,$fechaLimiteDisponible,
+    $nombresImagenes)
+    {
+
+        $query = "INSERT INTO `tbinmueble`(`nombre`, `disponibilidad`, 
+        `valorDiario`, `estadoLugar`, `Propietario`, `estrellas`, `direccion`, 
+        `capacidadPersonas`, `costoPersonaExtra`, `fechaLimiteDisponibilidad`) 
+        VALUES ('$nombreEspacio', '$disponibilidad', '$valorDiario', '$estadoLugar','$Propietario',
+        '$estrellas','$direccion','$capacidadPersonas','$costoPersonaExtra','$fechaLimiteDisponible')";
+
+        if ($this->getConexion()->query($query)) {
+
+            // AHORA ENCUENTRA EL ID DEL INMUEBLE QUE SE ACABA DE INSERTAR
+            $query = "SELECT `id` FROM `tbinmueble` WHERE 
+                        `nombre` = '$nombreEspacio' AND 
+                        `Propietario` = '$Propietario' AND 
+                        `capacidadPersonas` = '$capacidadPersonas' AND 
+                        `costoPersonaExtra` = '$costoPersonaExtra' AND
+                        `estadoLugar` = '$estadoLugar'
+                        LIMIT 1";
+        
+            // Ejecutar la consulta
+            $result = $this->GetConexion()->query($query);
+        
+            // Verificar si la consulta fue exitosa
+            if ($result) {
+                // Obtener el ID si hay resultados
+                if ($result->num_rows > 0) {
+                    $row = $result->fetch_assoc();
+                    $idInmuebleNuevo = $row['id'];
+                } else {
+                    // No se encontraron resultados
+                    $idInmuebleNuevo = null;
+                }
+            } else {
+                // Hubo un error en la consulta
+                $idInmuebleNuevo = null;
+            }
+
+            if($idInmuebleNuevo !== null){
+
+                $_SESSION['idInmueble'] = $idInmuebleNuevo;
+
+                $query = "INSERT INTO `tbfotoinmueble` (`idInmueble`, `nombreImagen`) VALUES ";
+
+                // uno por cada foto
+                foreach ($nombresImagenes as $nombreImagen) {
+
+                    $nombreImagen = $this->GetConexion()->real_escape_string($nombreImagen);
+            
+                    $query .= "('$idInmuebleNuevo', '$nombreImagen'),";
+                }
+                
+                $query = rtrim($query, ',');
+    
+        
+                if ($this->GetConexion()->query($query)) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+            else{
+                return false;
+            }
+        } else {
+            return false;
+        }
+        
+        
+    } //fin Insertar Inmueble
+
+
+    
+    function Insertar_ServiciosInmueble($nombreEspacio, $disponibilidad,
+    $valorDiario,$estadoLugar,$Propietario,$estrellas,$direccion,
+    $capacidadPersonas,$costoPersonaExtra,$fechaLimiteDisponible,
+    $nombresImagenes)
+    {
+
+        $query = "INSERT INTO `tbinmueble`(`nombre`, `disponibilidad`, 
+        `valorDiario`, `estadoLugar`, `Propietario`, `estrellas`, `direccion`, 
+        `capacidadPersonas`, `costoPersonaExtra`, `fechaLimiteDisponibilidad`) 
+        VALUES ('$nombreEspacio', '$disponibilidad', '$valorDiario', '$estadoLugar','$Propietario',
+        '$estrellas','$direccion','$capacidadPersonas','$costoPersonaExtra','$fechaLimiteDisponible')";
+
+        if ($this->getConexion()->query($query)) {
+
+            // AHORA ENCUENTRA EL ID DEL INMUEBLE QUE SE ACABA DE INSERTAR
+            $query = "SELECT `id` FROM `tbinmueble` WHERE 
+                        `nombre` = '$nombreEspacio' AND 
+                        `Propietario` = '$Propietario' AND 
+                        `capacidadPersonas` = '$capacidadPersonas' AND 
+                        `costoPersonaExtra` = '$costoPersonaExtra' AND
+                        `estadoLugar` = '$estadoLugar'
+                        LIMIT 1";
+        
+            // Ejecutar la consulta
+            $result = $this->GetConexion()->query($query);
+        
+            // Verificar si la consulta fue exitosa
+            if ($result) {
+                // Obtener el ID si hay resultados
+                if ($result->num_rows > 0) {
+                    $row = $result->fetch_assoc();
+                    $idInmuebleNuevo = $row['id'];
+                } else {
+                    // No se encontraron resultados
+                    $idInmuebleNuevo = null;
+                }
+            } else {
+                // Hubo un error en la consulta
+                $idInmuebleNuevo = null;
+            }
+
+            if($idInmuebleNuevo !== null){
+
+                $_SESSION['idInmueble'] = $idInmuebleNuevo;
+
+                $query = "INSERT INTO `tbfotoinmueble` (`idInmueble`, `nombreImagen`) VALUES ";
+
+                // uno por cada foto
+                foreach ($nombresImagenes as $nombreImagen) {
+
+                    $nombreImagen = $this->GetConexion()->real_escape_string($nombreImagen);
+            
+                    $query .= "('$idInmuebleNuevo', '$nombreImagen'),";
+                }
+                
+                $query = rtrim($query, ',');
+    
+        
+                if ($this->GetConexion()->query($query)) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+            else{
+                return false;
+            }
+        } else {
+            return false;
+        }
+        
+        
+    } //fin Insertar Servicios inmueble
+
+
+
+    
+
+                                    
+
+    
+    
+    
+    
+
+
+    
+    
+    /*----------------------------------------END PUBLICAR INMUEBLE------------------------------------------------------*/
+
+
+
+
     /*-----------------------------------------------sERVICIOS--------------------------------------------------*/
 
     function CargarServicios()
@@ -358,61 +534,6 @@ class Master_Class
 
     function CargarPoliticas()
     {
-        // try {
-        //     $query = "SELECT
-        //         mu.id, 
-        //         mu.nombre AS nombre_inmueble, 
-        //         mu.valorDiario, 
-        //         mu.capacidadPersonas, 
-        //         mu.costoPersonaExtra, 
-        //         mu.direccion, 
-        //         mu.disponibilidad, 
-        //         mu.estrellas, 
-        //         mu.fechaLimiteDisponibilidad, 
-        //         CONCAT(us.nombre, ' ', us.apellido1, ' ', us.apellido2) AS nombre_propietario,
-        //         ca.categoria as Categoria_Inmueble,
-        //         ft.nombreImagen as nameImagen
-        //     FROM tbinmueble as mu
-        //     INNER JOIN tbusuario as us ON mu.Propietario = us.idUser
-        //     INNER JOIN tbcategoriainmueble ON mu.id = tbcategoriainmueble.idInmueble
-        //     INNER JOIN tbcategorias ca ON tbcategoriainmueble.idCategoria = ca.idcategoria
-        //     INNER JOIN tbfotoinmueble ft ON mu.id = ft.idInmueble
-        //     WHERE mu.id = $idInmueble;";
-
-        //     $this->conn->set_charset("utf8");
-        //     $result = $this->getConexion()->query($query);
-
-        //     if ($result) {
-        //         $data = array();
-
-        //         while ($row = $result->fetch_assoc()) {
-        //             $item = array(
-        //                 "id" => $row['id'],
-        //                 "Nombre_Inmueble" => $row["nombre_inmueble"],
-        //                 "valorDiario" => $row["valorDiario"],
-        //                 "capacidadPersonas" => $row["capacidadPersonas"],
-        //                 "costoPersonaExtra" => $row["costoPersonaExtra"],
-        //                 "direccion" => $row["direccion"],
-        //                 "disponibilidad" => $row["disponibilidad"],
-        //                 "estrellas" => $row["estrellas"],
-        //                 "fechaLimiteDisponibilidad" => $row["fechaLimiteDisponibilidad"],
-        //                 "nombre_propietario" => $row["nombre_propietario"],
-        //                 "Categoria_Inmueble" => $row["Categoria_Inmueble"],
-        //                 "nameImagen" => $row["nameImagen"],
-        //             );
-        //             $data[] = $item;
-        //         }
-
-        //         return json_encode($data);
-        //     } else {
-        //         throw new Exception("Error en la consulta: " . $this->getConexion()->error);
-        //     }
-        // } catch (Exception $e) {
-        //     error_log($e->getMessage());
-        //     return null; // Retorna null en caso de error
-        // }
-
-
     } //end politicas
 
 

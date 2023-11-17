@@ -1,8 +1,32 @@
 <?php
 include './templates/Header.php';
+session_start();
 ?>
 <!-- ==============================================Fin header ======= -->
+
+<?php
+
+if (isset($_SESSION["Identificacion"])) {
+    $ID = $_SESSION["Identificacion"];
+    ?>
+    <input type="text" id="PropietarioID" value="<?php echo $_SESSION["Identificacion"] ?>"/>
+
+<?php
+ }
+ else{
+    $ID = "NO HAY ID";
+    ?>
+        <input type="text" id="PropietarioID" value="N0 HAY ID"/>
+
+    <?php
+ }
+ 
+
+?>
+
 <body>
+
+
 
 <div class="form-container">
     <section id="Info_inmueble" class="form-section active">
@@ -13,7 +37,7 @@ include './templates/Header.php';
             <h1>Información de tu Espacio</h1>
 
             <!-- <button id="nextButton" onclick="showNextSection()">➡️</button> -->
-            <a class="bar-anchor" onclick="showNextSection()">
+            <a class="bar-anchor" id="nextButton" onclick="InsertarInmueble()">
                 <span>Siguiente</span>
                 <div class="transition-bar"></div>
             </a>
@@ -23,7 +47,7 @@ include './templates/Header.php';
         <hr/>
 
         <div id="contenedorInputs">
-            <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+            <form action="" method="post" role="form" enctype="multipart/form-data" class="php-email-form">
 
                 <div class="row">
                     <div class="col-md-4 form-group">
@@ -136,9 +160,9 @@ include './templates/Header.php';
                 <div class="section-title" style="display:flex; justify-content: space-around;">
                     <h1>Caracteristicas</h1>
                     <a class="bar-anchor" onclick="showNextSection()">
-                        <span>Siguiente</span>
-                        <div class="transition-bar"></div>
-                    </a>
+                <span>Siguiente</span>
+                <div class="transition-bar"></div>
+            </a>
                 </div>    
                 <hr>
                 
@@ -205,10 +229,10 @@ include './templates/Header.php';
     
     <section id="politicas" class="form-section">
         <img src="../assets/img/publicarinmueble/PASOS3.png" alt="">
-        <a style="margin-left:85%;" class="bar-anchor" onclick="showNextSection()">
-            <span>Siguiente</span>
-            <div class="transition-bar"></div>
-        </a>
+        <a class="bar-anchor" onclick="showNextSection()">
+                <span>Siguiente</span>
+                <div class="transition-bar"></div>
+            </a>
         
         
         <div class="politicasgrid">
@@ -276,9 +300,9 @@ include './templates/Header.php';
                         <br>    
                     
                     </div>
-
+                    <!-- <i class="bi bi-alarm-fill"></i> -->
                     <div class="icon-box">
-                        <div class="icon"><i class="bi bi-three-dots" style="color: #3fcdc7;"></i></div>
+                        <div class="icon"><i class="bi bi-alarm-fill" style="color: #3fcdc7;"></i></div>
                         <h4 class="title">Horario</h4>
                         
                         <div class="info">
@@ -296,11 +320,36 @@ include './templates/Header.php';
                                 </label>
                                 <label>
                                     <input type="radio" name="opciones" value="opcion3">
-                                    3:00 pm  - 4:00 pm
+                                    4:00 pm  - 1:00 pm
                                 </label>
                             </p>
                         </div>
                     </div>
+                    <div class="icon-box">
+                        <div class="icon"><i class="bi bi-coin" style="color: #8bc34a;"></i></div>
+                        <h4 class="title">Cargos Adicionales</h4>
+                        
+                        <div class="info">
+                            <h5>cancela despues del plazo</h5>
+                            <hr>
+                        
+                            <p class="description">
+                                <label>
+                                    <input type="radio" name="opciones" value="opcion1">
+                                    20 000
+                                </label>
+                                <label>
+                                    <input type="radio" name="opciones" value="opcion2">
+                                    40 000
+                                </label>
+                                <label>
+                                    <input type="radio" name="opciones" value="opcion3">
+                                    60 000
+                                </label>
+                            </p>
+                        </div>
+                    </div>
+
                 <br/>
               
                     <!-- <div class="icon-box">
@@ -483,10 +532,11 @@ include './templates/Header.php';
     <section id="services" class="form-section">
         <img src="../assets/img/publicarinmueble/PASOS4.png" alt="">
         <div class="section-title">
+            <input type="textarea" id="ArrayServicios">
             <h2>Servicios</h2>
             <p>¡Los servicios mejorarán la calidad de tu espacio!</p>
 
-            <a class="bar-anchor" onclick="showNextSection()">
+            <a class="bar-anchor" onclick="Insertar_ServiciosInmueble()">
                 <span>Siguiente</span>
                 <div class="transition-bar"></div>
             </a>
@@ -505,122 +555,68 @@ include './templates/Header.php';
         </div>
         
         <hr/>
-        
+        <script>          
+                var hiddenInputs = document.querySelectorAll('.hiddenInput');
+                
+                console.log(hiddenInputs);
+                var valoresSeleccionados = [];
+                
+                // Función para manejar el cambio en los checkboxes
+                function handleCheckboxChange(event) {
+                    
+                    // Encuentra el input hidden asociado al checkbox
+                    var hiddenInput = event.target.parentElement.querySelector('.hiddenInput');
+                    
+                    
+                    // Verifica si el checkbox está marcado o desmarcado
+                    if (event.target.checked) {
+                                // Si está marcado, agrega el valor al array
+                                valoresSeleccionados.push(hiddenInput.value);
+                            } else {
+                                // Si está desmarcado, elimina el valor del array
+                                var index = valoresSeleccionados.indexOf(hiddenInput.value);
+                                if (index !== -1) {
+                                    valoresSeleccionados.splice(index, 1);
+                                }
+                            }
+                            
+                            var ArrayServicios = document.getElementById("ArrayServicios");
+                            
+                            // ArrayServicios.value = JSON.stringify(valoresSeleccionados);
+                            console.log(valoresSeleccionados);
+                }
+                        
+                        
+                hiddenInputs.forEach(function (hiddenInput) {
+                    var checkbox = hiddenInput.parentElement.querySelector('input[type="checkbox"]');
+                    checkbox.addEventListener('change', handleCheckboxChange);
+                }); 
+        </script>
     </section><!-- End Services Section -->
-
+            
     <section id="Amenidades" class="form-section">
-        <img src="../assets/img/publicarinmueble/PASOS5.png" alt="">
-        <div style="display: flex; justify-content: center; align-content: center;">
-            <h1>AQUI VA AMENIDADES</h1>
-        </div>
-
-
+    <img src="../assets/img/publicarinmueble/PASOS5.png" alt="">
+    <div style="display: flex; justify-content: center; align-content: center;">
+    <h1>AQUI VA AMENIDADES</h1>
+    </div>
+    
+    
     </section>
 
-
+    
 </div>  <!-- End DIV PRINCIPAL -->
 
 
-<button id="nextButton" onclick="showNextSection()">➡️</button>
+<!-- <button id="nextButton" onclick="showNextSection()">➡️</button> -->
 
 
 
 
-<script>
-    let currentSection = 1;
-    const sections = document.querySelectorAll('.form-section');
-    const nextButton = document.getElementById('nextButton');
-
-    function dropHandler(event) {
-    event.preventDefault();
-
-    const files = event.dataTransfer.files;
-    const imagenesInput = document.getElementById('imagenesInput');
-
-    // Procesar los archivos y agregarlos al input hidden
-    for (const file of files) {
-        const reader = new FileReader();
-
-        reader.onload = function (e) {
-        const dataURL = e.target.result;
-        // Agregar la URL de la imagen al array
-        imagenes.push(dataURL);
-        // Actualizar el valor del input hidden con el array de imágenes en formato JSON
-        imagenesInput.value = JSON.stringify(imagenes);
-
-        Swal.fire("Éxito", "Se guardó la imagen correctamente.", "success");
-        };
-        reader.readAsDataURL(file);
-    }
-
-    console.log(imagenes);
-    }
-
-    function dragOverHandler(event) {
-    event.preventDefault();
-    // Agregar una clase para resaltar el área de arrastrar y soltar cuando se está arrastrando
-    document.getElementById('drop-area').classList.add('dragover');
-    }
-
-    // Restaurar la apariencia normal cuando se deja de arrastrar
-    document.getElementById('drop-area').ondragleave = function () {
-    document.getElementById('drop-area').classList.remove('dragover');
-    };
-
-    // Array para almacenar las URLs de las imágenes
-    const imagenes = [];
-
-
-
-
-    function showNextSection() {
-      if (currentSection < sections.length) {
-        sections[currentSection - 1].classList.remove('active');
-        sections[currentSection].classList.add('active');
-        currentSection++;
-
-        // Ocultar el botón al llegar a la última sección
-        if (currentSection === sections.length) {
-          nextButton.style.display = 'none';
-        }
-      }
-
-    }
-
-
-    // Mostrar el botón solo si hay más de una sección
-    if (sections.length > 1) {
-      nextButton.style.display = 'block';
-    }
-
-    document.addEventListener('DOMContentLoaded', function() {
-            // Oculta la página al principio
-            document.body.style.display = 'none';
-
-            // Espera a que la ventana se cargue completamente
-            window.addEventListener('load', function () {
-                // Muestra la página después de que todo se haya cargado
-                document.body.style.display = 'block';
-            });
-        });
-  </script>
-
-
-
-
-
-
-
-
-
-
-
-
-    
 </body>
 <!-- <h3>&nbsp;&nbsp;Selecciona los Servicios que tiene tu Inmueble: </h3> -->
 
 <!-- ==============================================Inicio Footer ======= -->
+<script src="../assets/js/inmueble/script_inmueble.js"></script>
 <script async src="../assets/js/Servicios/script_servicios.js"></script>
 
 

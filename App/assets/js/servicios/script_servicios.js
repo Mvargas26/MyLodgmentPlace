@@ -36,6 +36,8 @@
                             nuevoInputID.value = response[i].id;
                             nuevoInputID.className = 'hiddenInput'
 
+                            // console.log(nuevoInputID.value);
+
                             // Crea un nuevo input tipo checkbox
                             var nuevoInputCheckbox = document.createElement('input');
                             nuevoInputCheckbox.type = 'checkbox';
@@ -64,8 +66,8 @@
                     } else {
                         console.error('La respuesta no es un array:', response);
                     }
-
-
+                    
+                    
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
                     console.error('Error en la solicitud AJAX:', textStatus, errorThrown);
@@ -73,115 +75,151 @@
             });
         }
     };
-
-        document.addEventListener('DOMContentLoaded', function () {
-            window.addEventListener('load', function(){
-                
-
-                var hiddenInputs = document.querySelectorAll('.hiddenInput');
-                
-                console.log(hiddenInputs);
-                var valoresSeleccionados = [];
-
-                // Función para manejar el cambio en los checkboxes
-                function handleCheckboxChange(event) {
-
-                // Encuentra el input hidden asociado al checkbox
-                var hiddenInput = event.target.parentElement.querySelector('.hiddenInput');
-                
-
-                // Verifica si el checkbox está marcado o desmarcado
-                if (event.target.checked) {
-                    // Si está marcado, agrega el valor al array
-                    valoresSeleccionados.push(hiddenInput.value);
-                } else {
-                    // Si está desmarcado, elimina el valor del array
-                    var index = valoresSeleccionados.indexOf(hiddenInput.value);
-                    if (index !== -1) {
-                    valoresSeleccionados.splice(index, 1);
-                    }
-                }
-
-                
-                console.log(valoresSeleccionados);
-                }
-
-                
-                hiddenInputs.forEach(function (hiddenInput) {
-                var checkbox = hiddenInput.parentElement.querySelector('input[type="checkbox"]');
-                checkbox.addEventListener('change', handleCheckboxChange);
-                });
-            });
-        });   
-
-        const InsertarServiciosPorInmueble = {
-            init: function () {
-                // Realiza una solicitud GET al cargar la página
-                console.log("FUNCION Servicios")
-                const InsertarServicios = {
-                    listaServicios : valoresSeleccionados,
-                    idInmueble : "ID INMUEBLE"
-                };
+    // document.addEventListener('DOMContentLoaded', function () {
+    // window.addEventListener('load', function(){
+        
+    //             });
+    //         });   
+            
+    // var hiddenInputs = document.querySelectorAll('.hiddenInput');
     
-                $.ajax({
-                    url: "../../App/Modules/Servicios/servicios_Negocios.php",
-                    type: "POST",
-                    data:{
-                        InsertarServicios: InsertarServicios
-                    },
-                    success: function(response) 
-                    {
-                        console.log("Si esta entrando")
+    //     console.log(hiddenInputs);
+    //     var valoresSeleccionados = [];
+        
+    //     // Función para manejar el cambio en los checkboxes
+    //     function handleCheckboxChange(event) {
+            
+    //         // Encuentra el input hidden asociado al checkbox
+    //         var hiddenInput = event.target.parentElement.querySelector('.hiddenInput');
+            
+            
+    //         // Verifica si el checkbox está marcado o desmarcado
+    //         if (event.target.checked) {
+    //                     // Si está marcado, agrega el valor al array
+    //                     valoresSeleccionados.push(hiddenInput.value);
+    //                 } else {
+    //                     // Si está desmarcado, elimina el valor del array
+    //                     var index = valoresSeleccionados.indexOf(hiddenInput.value);
+    //                     if (index !== -1) {
+    //                     valoresSeleccionados.splice(index, 1);
+    //                     }
+    //                 }
+                    
+    //                 var ArrayServicios = document.getElementById("ArrayServicios");
+                    
+    //                 // ArrayServicios.value = JSON.stringify(valoresSeleccionados);
+    //                 console.log(valoresSeleccionados);
+    //             }
+                
+                
+    //             hiddenInputs.forEach(function (hiddenInput) {
+    //                 var checkbox = hiddenInput.parentElement.querySelector('input[type="checkbox"]');
+    //                 checkbox.addEventListener('change', handleCheckboxChange);
+    //             });
     
-                        if (Array.isArray(response)) {
+    // var hiddenInputs = document.querySelectorAll('.hiddenInput');
+    
+    // console.log(hiddenInputs);
+    // var valoresSeleccionados = [];
+    
+    // // Función para manejar el cambio en los checkboxes
+    // function handleCheckboxChange(event) {
+        
+    //     // Encuentra el input hidden asociado al checkbox
+    //     var hiddenInput = event.target.parentElement.querySelector('.hiddenInput');
+        
+        
+    //     // Verifica si el checkbox está marcado o desmarcado
+    //     if (event.target.checked) {
+    //                 // Si está marcado, agrega el valor al array
+    //                 valoresSeleccionados.push(hiddenInput.value);
+    //             } else {
+    //                 // Si está desmarcado, elimina el valor del array
+    //                 var index = valoresSeleccionados.indexOf(hiddenInput.value);
+    //                 if (index !== -1) {
+    //                 valoresSeleccionados.splice(index, 1);
+    //                 }
+    //             }
+                
+    //             var ArrayServicios = document.getElementById("ArrayServicios");
+                
+    //             // ArrayServicios.value = JSON.stringify(valoresSeleccionados);
+    //             console.log(valoresSeleccionados);
+    //         }
+            
+            
+    //         hiddenInputs.forEach(function (hiddenInput) {
+    //             var checkbox = hiddenInput.parentElement.querySelector('input[type="checkbox"]');
+    //             checkbox.addEventListener('change', handleCheckboxChange);
+    //         });
+        // const InsertarServiciosPorInmueble = {
+        //     init: function () {
+        //         // Realiza una solicitud GET al cargar la página
+        //         console.log("FUNCION Servicios")
+        //         const InsertarServicios = {
+        //             listaServicios : valoresSeleccionados,
+        //             idInmueble : "ID INMUEBLE"
+        //         };
+                
+        //         $.ajax({
+        //             url: "../../App/Modules/Servicios/servicios_Negocios.php",
+        //             type: "POST",
+        //             data:{
+        //                 InsertarServicios: InsertarServicios
+        //             },
+        //             success: function(response) 
+        //             {
+        //                 console.log("Si esta entrando")
                         
-                            for (var i = 0; i < response.length; i++) 
-                            {
-                                // Crea un nuevo label
-                                var nuevoLabel = document.createElement('label');
-                                nuevoLabel.className = 'containerServicios';
-                                // nuevoLabel.id = 'containerServicios';
+        //                 if (Array.isArray(response)) {
+                            
+        //                     for (var i = 0; i < response.length; i++) 
+        //                     {
+        //                         // Crea un nuevo label
+        //                         var nuevoLabel = document.createElement('label');
+        //                         nuevoLabel.className = 'containerServicios';
+        //                         // nuevoLabel.id = 'containerServicios';
+                                
+        //                         // Crea un nuevo input tipo hidden
+        //                         var nuevoInputID = document.createElement('input');
+        //                         nuevoInputID.type = 'hidden';
+        //                         nuevoInputID.id = 'IDServicio';
+        //                         nuevoInputID.value = response[i].id;
+        //                         nuevoInputID.className = 'hiddenInput'
     
-                                // Crea un nuevo input tipo hidden
-                                var nuevoInputID = document.createElement('input');
-                                nuevoInputID.type = 'hidden';
-                                nuevoInputID.id = 'IDServicio';
-                                nuevoInputID.value = response[i].id;
-                                nuevoInputID.className = 'hiddenInput'
+        //                         // Crea un nuevo input tipo checkbox
+        //                         var nuevoInputCheckbox = document.createElement('input');
+        //                         nuevoInputCheckbox.type = 'checkbox';
+        //                         nuevoInputCheckbox.checked = false;
     
-                                // Crea un nuevo input tipo checkbox
-                                var nuevoInputCheckbox = document.createElement('input');
-                                nuevoInputCheckbox.type = 'checkbox';
-                                nuevoInputCheckbox.checked = false;
+        //                         // Crea un nuevo span
+        //                         var nuevoSpan = document.createElement('span');
+        //                         nuevoSpan.className = 'checkmark';
     
-                                // Crea un nuevo span
-                                var nuevoSpan = document.createElement('span');
-                                nuevoSpan.className = 'checkmark';
+        //                         // Asigna el texto del label con el nombre del servicio
+        //                         nuevoLabel.innerText = response[i].nombre;
     
-                                // Asigna el texto del label con el nombre del servicio
-                                nuevoLabel.innerText = response[i].nombre;
+        //                         // Agrega los elementos al label
+        //                         nuevoLabel.appendChild(nuevoInputID);
+        //                         nuevoLabel.appendChild(nuevoInputCheckbox);
+        //                         nuevoLabel.appendChild(nuevoSpan);
     
-                                // Agrega los elementos al label
-                                nuevoLabel.appendChild(nuevoInputID);
-                                nuevoLabel.appendChild(nuevoInputCheckbox);
-                                nuevoLabel.appendChild(nuevoSpan);
+        //                         // Agrega el label al contenedor grid
+        //                         document.querySelector('.grid').appendChild(nuevoLabel);
     
-                                // Agrega el label al contenedor grid
-                                document.querySelector('.grid').appendChild(nuevoLabel);
-    
-                            }
-                        } else {
-                            console.error('La respuesta no es un array:', response);
-                        }
+        //                     }
+        //                 } else {
+        //                     console.error('La respuesta no es un array:', response);
+        //                 }
     
     
-                    },
-                    error: function(jqXHR, textStatus, errorThrown) {
-                        console.error('Error en la solicitud AJAX:', textStatus, errorThrown);
-                    }
-                });
-            }
-        };
+        //             },
+        //             error: function(jqXHR, textStatus, errorThrown) {
+        //                 console.error('Error en la solicitud AJAX:', textStatus, errorThrown);
+        //             }
+        //         });
+        //     }
+        // };
 
 
 
