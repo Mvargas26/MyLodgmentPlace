@@ -389,8 +389,6 @@ class Master_Class
         } else {
             return false;
         }
-
-
     } //fin Insertar Inmueble
 
 
@@ -472,8 +470,6 @@ class Master_Class
         } else {
             return false;
         }
-
-
     } //fin Insertar Servicios inmueble
 
 
@@ -656,7 +652,7 @@ class Master_Class
                 // Asignar el cuerpo del correo según la acción
                 switch ($accion) {
                     case 'denunciaAn':
-                           $mail->Body = "Se a realizado correctamente la respuesta a una denuncia sobre uno de sus inmuebles";
+                        $mail->Body = "Se a realizado correctamente la respuesta a una denuncia sobre uno de sus inmuebles";
                         break;
 
                     case 'denunciaHu':
@@ -783,6 +779,47 @@ class Master_Class
         return $historialReservas;
     }
     //fin funcion Historial de reservas
+
+    //Inicio funcion Creacion de cupones de descuento 
+
+    public function crearCupon($montoDescuento, $cantidadCupones, $fechaVencimiento, $tipoDescuento)
+    {
+        // Aquí realizas la lógica para crear el cupón en la base de datos
+        // Por ejemplo:
+        // $query = "INSERT INTO tbDescuento (monto, cantidadCupones, fechaVencimiento, tipoDescuento) VALUES ('$montoDescuento', '$cantidadCupones', '$fechaVencimiento', '$tipoDescuento')";
+        // Ejecutar la consulta y manejar el resultado
+
+        // Retorna true si la creación fue exitosa o false si hubo algún error
+        return true; // O false en caso de error
+    }
+
+    //fin funcion Creacion de cupones de descuento 
+
+    //Inicio funcion obtener nombres de inmuebles
+
+    public function obtenerNombresInmuebles($idPropietario)
+    {
+        $idPropietario = $this->GetConexion()->real_escape_string($idPropietario);
+
+        $query = "SELECT id, nombre FROM tbinmueble WHERE Propietario = '$idPropietario'";
+
+        $resultado = $this->GetConexion()->query($query);
+
+        $nombresInmuebles = array();
+
+        if ($resultado->num_rows > 0) {
+            while ($fila = $resultado->fetch_assoc()) {
+                $nombresInmuebles[] = array(
+                    'id' => $fila['id'],
+                    'nombre' => $fila['nombre']
+                );
+            }
+        }
+
+        return $nombresInmuebles;
+    }
+
+    //fin funcion obtener nombres de inmuebles
 
     /*----------------------------------------------- INMUEBLES --------------------------------------------------*/
 
@@ -1145,7 +1182,6 @@ class Master_Class
         } else {
             return false;
         }
-
     }
 
     /*----------------------------------------------- Notificaciones --------------------------------------------------*/

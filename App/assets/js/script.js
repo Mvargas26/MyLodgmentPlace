@@ -398,20 +398,11 @@ $(document).ready(function () {
             dataType: 'json',
             success: function (response) {
                 if (response.exito) {
-                    // Mostrar el mensaje de éxito
-                    Swal.fire({
-                        title: "Éxito",
-                        text: "Código de autenticación verificado.",
-                        icon: "success",
-                        showCancelButton: false,
-                        confirmButtonColor: "#3085d6",
-                        confirmButtonText: "Aceptar"
-                    }).then((result) => {
-                        // Si el usuario hace clic en "Aceptar", redirige al index.php
-                        if (result.isConfirmed) {
-                            window.location.href = 'http://localhost/proyectos_php/MyLodgmentPlace/index.php';
-                        }
-                    });
+                    Swal.fire("Éxito", "Bienvenido ", "success");//mensaje bonito
+                    setTimeout(function() {
+                        location.href="../../index.php";
+                        },
+                     2000);
                 } else {
                     // Mostrar el mensaje de error
                     Swal.fire("Error", "Código de autenticación inválido. Inténtelo de nuevo.", "error");
