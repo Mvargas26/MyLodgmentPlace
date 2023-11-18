@@ -25,7 +25,7 @@ $(document).ready(function () {
         $('#idDenuncia').prop('value', idDenuncia);
     });
 
-    // Restablecer hizoClic cuando se cierra el modal
+    // Restablecer   hizoClic cuando se cierra el modal
     $('#myModal').on('hidden.bs.modal', function () {
         hizoClic = false;
     });
@@ -34,14 +34,14 @@ $(document).ready(function () {
 // Agrega un nuevo evento click para el botón "Enviar Denuncia"
 $(document).on('click', '#btnEnviarDenuncia', function () {
     var idDenuncia = $('#idDenuncia').val();
-    var respuestaDenunciaAnfi = $('#campo1').val();
-    console.log(idDenuncia);
+    var respuestaDenunciaAnfi = $('#campo1').val();  
     $.ajax({
         type: 'POST',
         url: '../../App/Modules/Denuncias/modificarDenuncia_Denunciado_Negocios.php',
         data: { 
             respuesta: respuestaDenunciaAnfi,
-            idDenuncia: idDenuncia,
+            idDenuncia: idDenuncia, 
+            Correo: correo,
         },
         success: function (response) {
             console.log(response);

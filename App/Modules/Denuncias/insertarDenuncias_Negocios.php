@@ -10,6 +10,18 @@ try {
         $tipoDenuncia = $_POST['tipoDenuncia'];
         $detallesDenuncia = $_POST['detallesDenuncia'];
         $estado = "Proceso";
+        //Mandar mensaje al correo
+        $correo = ($_POST["Correo"]);
+        $resultado = $ObjMaster->enviarMensajesCorreo($correo, 'denunciaHu');
+
+        // Llama al método para enviar mensajes de correos
+        if ($resultado) {
+            $data = array("exito" => true);
+            echo json_encode($data);
+        } else {
+            $data = array("exito" => false, "error" => "Error al enviar el correo electrónico.");
+            echo json_encode($data);
+        }
 
         $mensajeDB = $ObjMaster->insertarDenuncia($idUsuario, $detallesDenuncia, $idPropietario, $estado, $tipoDenuncia);
         $data = array("exito" => $mensajeDB);

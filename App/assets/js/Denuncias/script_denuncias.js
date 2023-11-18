@@ -24,7 +24,8 @@ $(document).ready(function () {
                 idUsuario: idUsuario,
                 idPropietario: idPropietario,
                 tipoDenuncia: tipoDenuncia,
-                detallesDenuncia: detallesDenuncia
+                detallesDenuncia: detallesDenuncia,
+                Correo: correo,
             },
             success: function (response) {
                 console.log(response);

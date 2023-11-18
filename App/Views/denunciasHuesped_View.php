@@ -159,6 +159,7 @@ session_start();
         </div>
     </div>
     <script>var identificacion = <?php echo json_encode($_SESSION["Identificacion"]); ?>;</script>
+    <script>var correo = <?php echo json_encode($_SESSION["Correo"]); ?>;</script>
     <script>
         $(document).ready(function () {
             var hizoClic = false;

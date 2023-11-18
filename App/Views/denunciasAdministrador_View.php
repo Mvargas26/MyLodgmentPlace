@@ -1,8 +1,6 @@
 <?php
 include './templates/Header.php';
 require_once('../Modules/Master_Class.php');
-session_start();
-
 ?>
 <!-- ==============================================Fin header ======= -->
 <main id="mainDenuncia">
@@ -118,18 +116,8 @@ session_start();
             </div>
         </div>
     </div>
-    <?php
-   
-    if (session_status() == PHP_SESSION_NONE || !isset($_SESSION["Identificacion"])) {
-       
-        $identificacion = "valor_por_defecto"; 
-    } else {
-        $identificacion = $_SESSION["Identificacion"];
-    }
-    ?>
-
-    <script>var identificacion = <?php echo json_encode($identificacion); ?>;</script>
-
+    <script>var identificacion = <?php echo json_encode($_SESSION["Identificacion"]); ?>;</script>  
+    <script>var correo = <?php echo json_encode($_SESSION["Correo"]); ?>;</script>  
 </main>
 
 <!-- ==============================================Inicio Footer ======= -->

@@ -1,6 +1,5 @@
 <?php
 require_once(__DIR__ . '/../../app//libs/PHPMAILER/autoload.php');
-session_start();
 
 date_default_timezone_set("America/Costa_Rica");
 
@@ -238,11 +237,12 @@ class Master_Class
         return array();
     }
 
-    function obtenerParametroUrl($parametro) {
+    function obtenerParametroUrl($parametro)
+    {
         $url = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '';
         $query = parse_url($url, PHP_URL_QUERY);
         parse_str($query, $parametros);
-        
+
         return isset($parametros[$parametro]) ? $parametros[$parametro] : null;
     }
 
@@ -250,15 +250,15 @@ class Master_Class
     {
         // Lógica para obtener detalles de validación del perfil basados en $idUser
         $consulta = "SELECT nombreImagenUsuario FROM tbvalidacionperfil WHERE idUser = ?";
-        
+
         // Ejecutar la consulta con $idUser como parámetro
         // Aquí asumo que tienes una conexión PDO llamada $pdo
         $stmt = $this->conn->prepare($consulta);
         $stmt->execute([$idUser]);
-        
+
         // Obtener los resultados
         $resultados = $stmt->fetch(PDO::FETCH_ASSOC);
-        
+
         return $resultados;
     }
 
@@ -307,16 +307,24 @@ class Master_Class
         }
     } //cargarImagenes
 
-    
+
     /*D----------------------------------------------------------------------------------------------D*/
     /*D-------PUBLICAR INMUEBLE----------PUBLICAR INMUEBLE-----------PUBLICAR INMUEBLE-------------------------------------------D*/
     /*D----------------------------------------------------------------------------------------------D*/
-  
-    function Insertar_Inmueble($nombreEspacio, $disponibilidad,
-    $valorDiario,$estadoLugar,$Propietario,$estrellas,$direccion,
-    $capacidadPersonas,$costoPersonaExtra,$fechaLimiteDisponible,
-    $nombresImagenes)
-    {
+
+    function Insertar_Inmueble(
+        $nombreEspacio,
+        $disponibilidad,
+        $valorDiario,
+        $estadoLugar,
+        $Propietario,
+        $estrellas,
+        $direccion,
+        $capacidadPersonas,
+        $costoPersonaExtra,
+        $fechaLimiteDisponible,
+        $nombresImagenes
+    ) {
 
         $query = "INSERT INTO `tbinmueble`(`nombre`, `disponibilidad`, 
         `valorDiario`, `estadoLugar`, `Propietario`, `estrellas`, `direccion`, 
@@ -334,10 +342,10 @@ class Master_Class
                         `costoPersonaExtra` = '$costoPersonaExtra' AND
                         `estadoLugar` = '$estadoLugar'
                         LIMIT 1";
-        
+
             // Ejecutar la consulta
             $result = $this->GetConexion()->query($query);
-        
+
             // Verificar si la consulta fue exitosa
             if ($result) {
                 // Obtener el ID si hay resultados
@@ -353,7 +361,7 @@ class Master_Class
                 $idInmuebleNuevo = null;
             }
 
-            if($idInmuebleNuevo !== null){
+            if ($idInmuebleNuevo !== null) {
 
                 $_SESSION['idInmueble'] = $idInmuebleNuevo;
 
@@ -363,36 +371,43 @@ class Master_Class
                 foreach ($nombresImagenes as $nombreImagen) {
 
                     $nombreImagen = $this->GetConexion()->real_escape_string($nombreImagen);
-            
+
                     $query .= "('$idInmuebleNuevo', '$nombreImagen'),";
                 }
-                
+
                 $query = rtrim($query, ',');
-    
-        
+
+
                 if ($this->GetConexion()->query($query)) {
                     return true;
                 } else {
                     return false;
                 }
-            }
-            else{
+            } else {
                 return false;
             }
         } else {
             return false;
         }
-        
-        
+
+
     } //fin Insertar Inmueble
 
 
-    
-    function Insertar_ServiciosInmueble($nombreEspacio, $disponibilidad,
-    $valorDiario,$estadoLugar,$Propietario,$estrellas,$direccion,
-    $capacidadPersonas,$costoPersonaExtra,$fechaLimiteDisponible,
-    $nombresImagenes)
-    {
+
+    function Insertar_ServiciosInmueble(
+        $nombreEspacio,
+        $disponibilidad,
+        $valorDiario,
+        $estadoLugar,
+        $Propietario,
+        $estrellas,
+        $direccion,
+        $capacidadPersonas,
+        $costoPersonaExtra,
+        $fechaLimiteDisponible,
+        $nombresImagenes
+    ) {
 
         $query = "INSERT INTO `tbinmueble`(`nombre`, `disponibilidad`, 
         `valorDiario`, `estadoLugar`, `Propietario`, `estrellas`, `direccion`, 
@@ -410,10 +425,10 @@ class Master_Class
                         `costoPersonaExtra` = '$costoPersonaExtra' AND
                         `estadoLugar` = '$estadoLugar'
                         LIMIT 1";
-        
+
             // Ejecutar la consulta
             $result = $this->GetConexion()->query($query);
-        
+
             // Verificar si la consulta fue exitosa
             if ($result) {
                 // Obtener el ID si hay resultados
@@ -429,7 +444,7 @@ class Master_Class
                 $idInmuebleNuevo = null;
             }
 
-            if($idInmuebleNuevo !== null){
+            if ($idInmuebleNuevo !== null) {
 
                 $_SESSION['idInmueble'] = $idInmuebleNuevo;
 
@@ -439,43 +454,42 @@ class Master_Class
                 foreach ($nombresImagenes as $nombreImagen) {
 
                     $nombreImagen = $this->GetConexion()->real_escape_string($nombreImagen);
-            
+
                     $query .= "('$idInmuebleNuevo', '$nombreImagen'),";
                 }
-                
+
                 $query = rtrim($query, ',');
-    
-        
+
+
                 if ($this->GetConexion()->query($query)) {
                     return true;
                 } else {
                     return false;
                 }
-            }
-            else{
+            } else {
                 return false;
             }
         } else {
             return false;
         }
-        
-        
+
+
     } //fin Insertar Servicios inmueble
 
 
 
-    
-
-                                    
-
-    
-    
-    
-    
 
 
-    
-    
+
+
+
+
+
+
+
+
+
+
     /*----------------------------------------END PUBLICAR INMUEBLE------------------------------------------------------*/
 
 
@@ -616,6 +630,71 @@ class Master_Class
     }
 
     //fin funcion para enviar correo de autenticacion
+
+    //Inicio envio de mensajes por correo
+    function enviarMensajesCorreo($destinatario, $accion)
+    {
+        $mail = new PHPMailer(true);
+
+        try {
+            $mail->SMTPOptions = array('ssl' => array('verify_peer' => false, 'verify_peer_name' => false, 'allow_self_signed' => true));
+
+            try {
+                $mail->isSMTP();
+                $mail->Host = 'smtp.titan.email';
+                $mail->SMTPAuth = true;
+                $mail->Username = 'pruebas@tritechno.net';
+                $mail->Password = 'Pruebas1234*';
+                $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+                $mail->Port = 587;
+
+                $mail->setFrom('pruebas@tritechno.net', 'My Lodgment Place');
+                $mail->addAddress($destinatario);
+                $mail->isHTML(true);
+                $mail->Subject = 'Notificaciones del Equipo de MyLogment Place';
+
+                // Asignar el cuerpo del correo según la acción
+                switch ($accion) {
+                    case 'denunciaAn':
+                        $mail->Body = "Se a realizado correctamente la respuesta a una denucia sobre uno de sus inmuebles";
+                        break;
+
+                    case 'denunciaHu':
+                        $mail->Body = "Se a realizado correctamente la denuncia hacia una reserva";
+                        break;
+
+                    case 'registro':
+                        $mail->Body = "Usted ha creado una cuenta con exito en la pagina de My Lodgment Place";
+                        break;
+
+                    case 'a':
+                        $mail->Body = "";
+                        break;
+
+                    default:
+                        break;
+                }
+
+                // Intenta enviar el correo
+                if (!$mail->send()) {
+                    // Si hay un error al enviar, lanza una excepción
+                    error_log('Error al enviar el correo electrónico: ' . $mail->ErrorInfo);
+                    return false;
+                }
+                // Si todo fue exitoso, retorna true
+                return true;
+            } catch (\Exception $th) {
+                // Si hay una excepción, imprime el mensaje de error y retorna false
+                echo 'Mensaje de Error: ' . $th->getMessage();
+                return false;
+            }
+        } catch (Exception $e) {
+            // Si hay una excepción, imprime el mensaje de error y retorna false
+            error_log("Error al enviar el correo: {$e->getMessage()}");
+            return false;
+        }
+    }
+    //Fin envio de mensajes por correo
 
     //inicio  funciones para codigos de autenticacion
 
@@ -1050,7 +1129,8 @@ class Master_Class
         }
     } //fin  ConsultarListafavoritosPorUser
 
-    function insertarFavoritoEnListadeUsuario(){
+    function insertarFavoritoEnListadeUsuario()
+    {
 
         $arry_Datos = func_get_args();
 
@@ -1065,7 +1145,7 @@ class Master_Class
         } else {
             return false;
         }
-        
+
     }
 
     /*----------------------------------------------- Notificaciones --------------------------------------------------*/
