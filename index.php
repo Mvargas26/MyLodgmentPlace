@@ -1,6 +1,6 @@
 <?php
 require("App/Modules/Master_Class.php");
-session_start();
+//session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -330,7 +330,9 @@ session_start();
 
         <div class="section-title">
           <h2>Espacios</h2>
+          <?php  if(!isset($_SESSION["nombre"])){           ?>
           <p>¡Para una Experiencia Mas Personalizada inicia Sesion !</p>
+          <?php } ?>
         </div>
 
         <ul id="portfolio-flters" class="d-flex justify-content-center">

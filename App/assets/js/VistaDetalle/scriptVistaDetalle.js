@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
   window.addEventListener('load', function(){
 
-      var cedula = 304710908;
+      var cedula = identificacion;
       var idInmueble = 2 ;
       const btnAgregarFavoritos = document.getElementById("btnAgregarFavoritos");
 
