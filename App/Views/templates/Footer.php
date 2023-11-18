@@ -46,6 +46,8 @@
 <script src="../assets/js/script_personalizado.js"></script>
 <script src="../assets/js/script_validarIdentidad.js"></script>
 <script src="../assets/js/VistaDetalle/scriptVistaDetalle.js"></script> 
+<script src="../assets/js/Registro/registroScript.js"></script> 
+
 
 </body>
 

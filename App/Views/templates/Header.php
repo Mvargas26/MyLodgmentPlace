@@ -38,6 +38,7 @@ $base_path = '../assets/';
   <link href="<?php echo $base_path; ?>css/notificaciones.css" rel="stylesheet">
   <link href="<?php echo $base_path; ?>css/resenias.css" rel="stylesheet">
   <link href="<?php echo $base_path; ?>css/publicarInmueble.css" rel="stylesheet">
+  <link href="<?php echo $base_path; ?>css/Registro/styleRegistro.css" rel="stylesheet">
 
 
   <!-- FireBase -->
@@ -46,6 +47,9 @@ $base_path = '../assets/';
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.1.1/css/all.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"> </script>
+    
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     
 </head>
 
@@ -65,11 +69,6 @@ $base_path = '../assets/';
       <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>
           <li><a class="nav-link scrollto active" href="../../">Inicio</a></li>
-          <!-- <li><a class="nav-link scrollto" href="#about">Lugares</a></li> -->
-          <!-- <li><a class="nav-link scrollto" href="PublicarInmueble_View.php">Publica tu Espacio</a></li> -->
-          <!-- <li><a class="nav-link scrollto " href="Login_View.php">Iniciar Sesion</a></li> -->
-          <!-- <li><a class="nav-link scrollto" href="registro_View.php">Registrarse</a></li> -->
-          <!-- <li><a class="nav-link scrollto" href="#contact">Contactenos</a></li> -->
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->

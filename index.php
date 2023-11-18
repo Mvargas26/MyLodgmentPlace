@@ -68,19 +68,18 @@ require("App/Modules/Master_Class.php");
                 if (isset($_SESSION["Rol"])) {
                   if ($_SESSION["Rol"] == 2) {
           ?>
-<!-- ----------------------------- -->
-<li class="dropdown"><a href="#"><span>Opciones para Anfitrión</span> <i class="bi bi-chevron-down"></i></a>
+                            <li><a class="nav-link scrollto" href="./App/Views/PanelAnfitrion_View.php">Panel Anfitrión</a></li>
+            <!-- <li class="dropdown"><a href="#"><span>Opciones para Anfitrión</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
-            <li><a class="nav-link scrollto" href="./App/Views/PanelAnfitrion_View.php">Panel Anfitrion</a></li>
+                  <li><a class="nav-link scrollto" href="./App/Views/PanelAnfitrion_View.php">Panel Anfitrion</a></li>
                   <li><a class="nav-link scrollto" href="./App/Views/PublicarInmueble_View.php">Publica tu Espacio</a></li>
                   <li><a class="nav-link scrollto" href="./App/Views/Anuncios_MultiplesV_View.php">Anuncios Multiples</a></li>
                   <li><a class="nav-link scrollto" href="./App/Views/validar_identidadHuesped_View.php">Validar Perfil</a></li>
                   <li><a class="nav-link scrollto" href="./App/Views/denunciasAdministrador_View.php">Recepcion Denuncias Administrador</a></li>
 
             </ul>
-          </li>
+          </li> -->
 
-<!-- ----------------------------------------------- -->
                   <!-- <li><a class="nav-link scrollto" href="./App/Views/PanelAnfitrion_View.php">Panel Anfitrion</a></li>
                   <li><a class="nav-link scrollto" href="./App/Views/PublicarInmueble_View.php">Publica tu Espacio</a></li>
                   <li><a class="nav-link scrollto" href="./App/Views/Anuncios_MultiplesV_View.php">Anuncios Multiples</a></li>
