@@ -7,12 +7,12 @@
 
             <div class="white-panel">
                 <div class="login-show">
-                    <h2>LOGIN</h2>
+                    <h2>¡Por favor ingrese sus Credenciales!</h2>
                     <!-- Agrega un formulario de login -->
                     <form action="" method="post" id="loginForm">
-                        <input type="text" name="identificacion" placeholder="Identificación" required>
+                        <input type="number" name="identificacion" placeholder="Identificación" required>
                         <input type="password" name="password" placeholder="Contraseña" required>
-                        <input type="submit" value="Login">
+                        <input type="submit" value="Entrar">
                         <a href="#">Forgot password?</a>
                     </form>
                 </div>

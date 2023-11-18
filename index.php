@@ -1,6 +1,6 @@
 <?php
 require("App/Modules/Master_Class.php");
-//session_start();
+session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">

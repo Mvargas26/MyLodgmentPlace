@@ -56,7 +56,10 @@ const RegistroUsuarios = {
                         var x = JSON.parse(response);
                         if (x.exito == true) {
                             Swal.fire("Éxito", "Se guardaron los datos correctamente. " + x.nombre, "success");//mensaje bonito
-
+                            setTimeout(function() {
+                                location.href="../../index.php";
+                                },
+                             2000);
                         } else {
                             console.log(x.response);
                             Swal.fire("Error", "Lo sentimos, ocurrió un error.", "error");
@@ -125,8 +128,10 @@ const Login = {
                 var x = JSON.parse(response);
                 if (x.exito == true) {
                     Swal.fire("Éxito", "Bienvenido " + x.nombre, "success");//mensaje bonito
-                    // Redireccionar al index.php después del mensaje de éxito
-                    window.location.href = "../.././MyLodgmentPlace/index.php";
+                    setTimeout(function() {
+                        location.href="../../index.php";
+                        },
+                     2000);
                 } else {
                     console.log(x.response);
                     Swal.fire("Error", "Lo sentimos, ocurrió un error.", "error");

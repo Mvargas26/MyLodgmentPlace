@@ -1,7 +1,7 @@
 <?php
 include './templates/Header.php';
 require_once('../Modules/Master_Class.php');
-//session_start();
+session_start();
 // Verificar si se proporcionó un nombre de inmueble en la URL
 if (isset($_GET['id'])) {
   $idInmuebleDetalle = $_GET['id'];
