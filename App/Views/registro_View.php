@@ -31,13 +31,13 @@ include './templates/Header.php';
                 <div class="tab">
                   <h6>¿Cual es sú identificación?</h6>
                     <p>
-                    <input type="number" name="identificacion" class="form-control" id="identificacion" placeholder="301110222" required>
+                    <input type="number" name="identificacion" class="inputformRegistro" id="identificacion" placeholder="301110222" required>
                       <!-- <input placeholder="Name..." oninput="this.className = ''" name="fname"></p> -->
                     
                 </div>
                 <div class="tab">
                   <h6 >¿Cúal será su contraseña?</h6>
-                  <input type="password" name="Clave" class="form-control" id="Clave"  required>
+                  <input type="password" name="Clave" class="inputformRegistro" id="Clave"  required>
                     <!-- <p><input placeholder="City" oninput="this.className = ''" name="dd"></p> -->
                 </div>
                 <div class="tab">
@@ -47,32 +47,32 @@ include './templates/Header.php';
                 </div>
                 <div class="tab">
                     <h6>¿Cual es sú primer apellido?</h6>
-                    <input type="text" name="primerApellido" class="form-control" id="primerApellido" placeholder="Flores" required>
+                    <input type="text" name="primerApellido" class="inputformRegistro" id="primerApellido" placeholder="Flores" required>
                     <!-- <p><input placeholder="Favourite car" oninput="this.className = ''" name="uname"></p> -->
                 </div>
                 <div class="tab">
                 <h6>¿Cual es sú segundo apellido?</h6>
-                <input type="text" name="segundoApellido" class="form-control" id="segundoApellido" placeholder="Flores">
+                <input type="text" name="segundoApellido" class="inputformRegistro" id="segundoApellido" placeholder="Flores">
                 </div>
 
 
                 <div class="tab">
                 <h6>¿Cual es sú correo electrónico?</h6>
-                <input type="email" name="email" class="form-control" id="email" placeholder="correo@example.com" require>
+                <input type="email" name="email" class="inputformRegistro" id="email" placeholder="correo@example.com" require>
                 </div>
 
                 <div class="tab">
                 <h6>¿Cual es sú número telefónico?</h6>
-                <input type="number" name="telefono" class="form-control" id="telefono" placeholder="8888 8888">
+                <input type="number" name="telefono" class="inputformRegistro" id="telefono" placeholder="8888 8888">
                 </div>
 
                 <div class="tab">
                 <h6>¿Cual es sú edad?</h6>
-                <input type="number" name="edad" class="form-control" id="edad" placeholder="30">
+                <input type="number" name="edad" class="inputformRegistro" id="edad" placeholder="30">
                 </div>
                 <div class="tab">
                 <h6>¿Cual es sú dirección?</h6>
-                <input type="text" name="direccion" class="form-control" id="direccion" placeholder="100 norte, 50 oeste de las Ruinas, Cartago">
+                <input type="text" name="direccion" class="inputformRegistro" id="direccion" placeholder="100 norte, 50 oeste de las Ruinas, Cartago">
                 </div>
                 
                 <div class="tab">
