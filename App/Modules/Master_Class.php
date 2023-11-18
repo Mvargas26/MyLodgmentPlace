@@ -656,7 +656,7 @@ class Master_Class
                 // Asignar el cuerpo del correo según la acción
                 switch ($accion) {
                     case 'denunciaAn':
-                        $mail->Body = "Se a realizado correctamente la respuesta a una denucia sobre uno de sus inmuebles";
+                           $mail->Body = "Se a realizado correctamente la respuesta a una denuncia sobre uno de sus inmuebles";
                         break;
 
                     case 'denunciaHu':
