@@ -4,8 +4,10 @@ document.addEventListener('DOMContentLoaded', function () {
       var cedula = identificacion;
       var idInmueble = 2 ;
       const btnAgregarFavoritos = document.getElementById("btnAgregarFavoritos");
+      const btnAgregarLista = document.getElementById("btnAgregarLista");
 
      
+    //   ----------------------------------------------------------------------------------------
 
       if (btnAgregarFavoritos) {
 
@@ -106,9 +108,69 @@ document.addEventListener('DOMContentLoaded', function () {
               console.error(error);
           });
       });
-          
+      }//fin del if boton existe
+    //   ----------------------------------------------------------------------------------------
+    if (btnAgregarLista) {
 
+      function InsertarNuevaLista(nombreLista) {
+          return new Promise((resolve, reject) => {
+              var cedUsuario = cedula;
+              $.ajax({
+                  url: "../../App/Modules/Inmueble/addListaFavoritos_Negocios.php",
+                  type: "POST",
+                  data:{
+                      cedUsuario: cedUsuario,
+                      nombreLista:nombreLista
+                  },
+                  success: function(response) {
+                      var respuestaJSON = JSON.parse(response);
 
+                      if (respuestaJSON === true) {
+                        resolve('exito');
+                    } else {
+                        reject('Error al insertar en la lista');
+                    }
+                  },
+                  error: function(textStatus, errorThrown) {
+                      reject('Error en la solicitud AJAX:', textStatus, errorThrown);
+                  }
+              });
+          });
+      }//FIN FUNTION InsertarFavoritos
+
+      
+      btnAgregarLista.addEventListener('click', function() {
+        Swal.fire({
+            title: 'Nombre de la nueva lista:',
+            html: `<input type="text" id="addLista" value="">`,
+            showCancelButton: true,
+            confirmButtonText: 'Nueva',
+            cancelButtonText: 'Cerrar',
+            preConfirm: () => {
+                const listaNombre = document.getElementById('addLista').value;
+                if (!listaNombre) {
+                    Swal.showValidationMessage('Debes ingresar un nombre para la lista');
+                }
+                return listaNombre;
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const listaSeleccionada = result.value;
+    
+                // Llama a InsertarNuevaLista y pasa el result.value como parámetro
+                InsertarNuevaLista(listaSeleccionada)
+                    .then(() => {
+                        Swal.fire(`Lista "${listaSeleccionada}" creada con éxito`);
+                    })
+                    .catch((error) => {
+                        Swal.fire(`Error al crear la lista: ${error}`);
+                    });
+            } else {
+                Swal.fire('Cancelar');
+            }
+        });
+        
+      });//fin del clic
       }//fin del if boton existe
 
 

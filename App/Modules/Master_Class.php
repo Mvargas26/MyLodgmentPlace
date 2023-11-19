@@ -1140,6 +1140,19 @@ class Master_Class
         }
     }
 
+    function addNuevaLista($idusuario,$nombreLista)
+    {
+
+        $query = "INSERT INTO `tblista` (`idusuario`, `nombreLista`) VALUES ($idusuario,'$nombreLista');";
+
+        if ($this->getConexion()->query($query)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
     /*----------------------------------------------- Notificaciones --------------------------------------------------*/
 
     function ConsultaNotificaciones()
