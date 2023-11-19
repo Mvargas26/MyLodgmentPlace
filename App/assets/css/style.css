@@ -1788,3 +1788,15 @@ section {
   color: white;
   font-size: larger;
 }
+
+
+
+
+#CalendarioDiv{
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-content: center;
+
+}
