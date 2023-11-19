@@ -57,13 +57,19 @@
         }
         
 
-        if(isset($_POST['nombreEspacio'])){
+        if(isset($_POST['ArrayServicios']))
+        {
+            echo json_encode(array('exito' => true, 'mensaje' => 'Entro'));
 
-            
-
-
-
-
+            // $ArrayServicios = json_decode($_POST['ArrayServicios']);
+    
+            // $resultadoConsulta = $ObjMaster->Insertar_ServiciosInmueble($ArrayServicios);
+    
+            // if ($resultadoConsulta) {
+            //     echo json_encode(array('exito' => true, 'mensaje' => 'Servicios de inmueble agregados correctamente'));
+            // } else {
+            //     echo json_encode(array('exito' => false, 'mensaje' => 'Error al agregar los servicios del inmueble'));
+            // }
         }
 
 

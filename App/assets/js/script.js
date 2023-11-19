@@ -214,19 +214,21 @@ const CargarServicios = {
 document.addEventListener('DOMContentLoaded', function () {
     window.addEventListener('load', function () {
 
-
+        
         var hiddenInputs = document.querySelectorAll('.hiddenInput');
-
+        
         console.log(hiddenInputs);
+        console.log("SE ACTIVA EL SCRIPT DE LOS INPUT HIDDEN");
         var valoresSeleccionados = [];
-
+        
         // Función para manejar el cambio en los checkboxes
         function handleCheckboxChange(event) {
-
+            
             // Encuentra el input hidden asociado al checkbox
             var hiddenInput = event.target.parentElement.querySelector('.hiddenInput');
-
-
+            
+            console.log("SE HIZO CLICK EN EL CHECKBOX");
+            
             // Verifica si el checkbox está marcado o desmarcado
             if (event.target.checked) {
                 // Si está marcado, agrega el valor al array
@@ -238,12 +240,14 @@ document.addEventListener('DOMContentLoaded', function () {
                     valoresSeleccionados.splice(index, 1);
                 }
             }
-
-
+            
+            var ArrayServicios = document.getElementById("ArrayServicios");
+            
+            ArrayServicios.value = JSON.stringify(valoresSeleccionados);
             console.log(valoresSeleccionados);
         }
-
-
+                
+                
         hiddenInputs.forEach(function (hiddenInput) {
             var checkbox = hiddenInput.parentElement.querySelector('input[type="checkbox"]');
             checkbox.addEventListener('change', handleCheckboxChange);

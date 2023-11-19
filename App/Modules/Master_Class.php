@@ -309,7 +309,7 @@ class Master_Class
 
 
     /*D----------------------------------------------------------------------------------------------D*/
-    /*D-------PUBLICAR INMUEBLE----------PUBLICAR INMUEBLE-----------PUBLICAR INMUEBLE-------------------------------------------D*/
+    /*D-------PUBLICAR INMUEBLE----------PUBLICAR INMUEBLE-----------PUBLICAR INMUEBLE---------------D*/
     /*D----------------------------------------------------------------------------------------------D*/
 
     function Insertar_Inmueble(
@@ -363,7 +363,7 @@ class Master_Class
 
             if ($idInmuebleNuevo !== null) {
 
-                $_SESSION['idInmueble'] = $idInmuebleNuevo;
+                // $_SESSION['idInmueble'] = $idInmuebleNuevo;
 
                 $query = "INSERT INTO `tbfotoinmueble` (`idInmueble`, `nombreImagen`) VALUES ";
 
@@ -379,6 +379,14 @@ class Master_Class
 
 
                 if ($this->GetConexion()->query($query)) {
+
+                    $query = "INSERT INTO `tbcategoriainmueble` (`idInmueble`, `nombreImagen`) VALUES ";
+
+
+
+
+
+
                     return true;
                 } else {
                     return false;
@@ -393,84 +401,39 @@ class Master_Class
 
 
 
-    function Insertar_ServiciosInmueble(
-        $nombreEspacio,
-        $disponibilidad,
-        $valorDiario,
-        $estadoLugar,
-        $Propietario,
-        $estrellas,
-        $direccion,
-        $capacidadPersonas,
-        $costoPersonaExtra,
-        $fechaLimiteDisponible,
-        $nombresImagenes
-    ) {
+    function Insertar_ServiciosInmueble($ArrayServicios)
+    {
+        // Obtener el último ID de la tabla tbinmueble
+        $query = "SELECT id FROM tbinmueble ORDER BY id DESC LIMIT 1;";
+        $result = $this->GetConexion()->query($query);
 
-        $query = "INSERT INTO `tbinmueble`(`nombre`, `disponibilidad`, 
-        `valorDiario`, `estadoLugar`, `Propietario`, `estrellas`, `direccion`, 
-        `capacidadPersonas`, `costoPersonaExtra`, `fechaLimiteDisponibilidad`) 
-        VALUES ('$nombreEspacio', '$disponibilidad', '$valorDiario', '$estadoLugar','$Propietario',
-        '$estrellas','$direccion','$capacidadPersonas','$costoPersonaExtra','$fechaLimiteDisponible')";
-
-        if ($this->getConexion()->query($query)) {
-
-            // AHORA ENCUENTRA EL ID DEL INMUEBLE QUE SE ACABA DE INSERTAR
-            $query = "SELECT `id` FROM `tbinmueble` WHERE 
-                        `nombre` = '$nombreEspacio' AND 
-                        `Propietario` = '$Propietario' AND 
-                        `capacidadPersonas` = '$capacidadPersonas' AND 
-                        `costoPersonaExtra` = '$costoPersonaExtra' AND
-                        `estadoLugar` = '$estadoLugar'
-                        LIMIT 1";
-
-            // Ejecutar la consulta
-            $result = $this->GetConexion()->query($query);
-
-            // Verificar si la consulta fue exitosa
-            if ($result) {
-                // Obtener el ID si hay resultados
-                if ($result->num_rows > 0) {
-                    $row = $result->fetch_assoc();
-                    $idInmuebleNuevo = $row['id'];
-                } else {
-                    // No se encontraron resultados
-                    $idInmuebleNuevo = null;
-                }
-            } else {
-                // Hubo un error en la consulta
-                $idInmuebleNuevo = null;
-            }
-
-            if ($idInmuebleNuevo !== null) {
-
-                $_SESSION['idInmueble'] = $idInmuebleNuevo;
-
-                $query = "INSERT INTO `tbfotoinmueble` (`idInmueble`, `nombreImagen`) VALUES ";
-
-                // uno por cada foto
-                foreach ($nombresImagenes as $nombreImagen) {
-
-                    $nombreImagen = $this->GetConexion()->real_escape_string($nombreImagen);
-
-                    $query .= "('$idInmuebleNuevo', '$nombreImagen'),";
-                }
-
-                $query = rtrim($query, ',');
-
-
-                if ($this->GetConexion()->query($query)) {
-                    return true;
-                } else {
-                    return false;
-                }
-            } else {
-                return false;
-            }
+        if ($result && $result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            $idInmuebleNuevo = $row['id'];
         } else {
+            // Manejar el caso cuando no se encuentra ningún ID
             return false;
         }
-    } //fin Insertar Servicios inmueble
+
+        // Construir la consulta para insertar servicios
+        $query = "INSERT INTO `tbinmuebleservicio` (`idServicio`, `idInmueble`, `disponibilidad`) VALUES ";
+
+        // Uno por cada servicio
+        foreach ($ArrayServicios as $idServicio) {
+            $idServicio = $this->GetConexion()->real_escape_string($idServicio);
+            // Añadir un valor fijo para 'disponibilidad', puedes ajustarlo según tus necesidades
+            $query .= "('$idServicio', '$idInmuebleNuevo', 'disponible'),";
+        }
+        $query = rtrim($query, ',');
+
+        // Ejecutar la consulta para insertar servicios
+        if ($this->GetConexion()->query($query)) {
+            return true;
+        } else {
+            // Manejar el caso cuando la inserción falla
+            return false;
+        }
+    }
 
     /*----------------------------------------END PUBLICAR INMUEBLE------------------------------------------------------*/
 

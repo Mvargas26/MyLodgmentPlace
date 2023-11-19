@@ -75,47 +75,63 @@
             });
         }
     };
-    // document.addEventListener('DOMContentLoaded', function () {
-    // window.addEventListener('load', function(){
+
+    document.addEventListener('DOMContentLoaded', function () {
+        window.addEventListener('load', function(){
         
-    //             });
-    //         });   
+            //POLITICAS
+            // =========================================================================
+            var valorCancelacion = $("input[name='cancelacion']:checked").val();
+            var valorReembolso = $("input[name='reembolso']:checked").val();
+            var valorhorario = $("input[name='horario']:checked").val();
+            var valorCargos = $("input[name='cargosAdicionales']:checked").val();
+            // Actualiza los input hidden con los valores preseleccionados
+            $("#cancelacionSeleccionada").val(valorCancelacion);
+            $("#reembolsosSeleccionados").val(valorReembolso);
+            $("#horarioSeleccionado").val(valorhorario);
+            $("#cargosAdicionalesSeleccionados").val(valorCargos);
+            // =========================================================================
             
-    // var hiddenInputs = document.querySelectorAll('.hiddenInput');
-    
-    //     console.log(hiddenInputs);
-    //     var valoresSeleccionados = [];
+            
+            // var hiddenInputs = document.querySelectorAll('.hiddenInput');
         
-    //     // Función para manejar el cambio en los checkboxes
-    //     function handleCheckboxChange(event) {
+            // console.log(hiddenInputs);
+            // console.log("SE ACTIVA EL SCRIPT DE LOS INPUT HIDDEN");
+            // var valoresSeleccionados = [];
             
-    //         // Encuentra el input hidden asociado al checkbox
-    //         var hiddenInput = event.target.parentElement.querySelector('.hiddenInput');
-            
-            
-    //         // Verifica si el checkbox está marcado o desmarcado
-    //         if (event.target.checked) {
-    //                     // Si está marcado, agrega el valor al array
-    //                     valoresSeleccionados.push(hiddenInput.value);
-    //                 } else {
-    //                     // Si está desmarcado, elimina el valor del array
-    //                     var index = valoresSeleccionados.indexOf(hiddenInput.value);
-    //                     if (index !== -1) {
-    //                     valoresSeleccionados.splice(index, 1);
-    //                     }
-    //                 }
-                    
-    //                 var ArrayServicios = document.getElementById("ArrayServicios");
-                    
-    //                 // ArrayServicios.value = JSON.stringify(valoresSeleccionados);
-    //                 console.log(valoresSeleccionados);
-    //             }
+            // // Función para manejar el cambio en los checkboxes
+            // function handleCheckboxChange(event) {
                 
+            //     // Encuentra el input hidden asociado al checkbox
+            //     var hiddenInput = event.target.parentElement.querySelector('.hiddenInput');
                 
-    //             hiddenInputs.forEach(function (hiddenInput) {
-    //                 var checkbox = hiddenInput.parentElement.querySelector('input[type="checkbox"]');
-    //                 checkbox.addEventListener('change', handleCheckboxChange);
-    //             });
+            //     console.log("SE HIZO CLICK EN EL CHECKBOX");
+                
+            //     // Verifica si el checkbox está marcado o desmarcado
+            //     if (event.target.checked) {
+            //         // Si está marcado, agrega el valor al array
+            //         valoresSeleccionados.push(hiddenInput.value);
+            //     } else {
+            //         // Si está desmarcado, elimina el valor del array
+            //         var index = valoresSeleccionados.indexOf(hiddenInput.value);
+            //         if (index !== -1) {
+            //             valoresSeleccionados.splice(index, 1);
+            //         }
+            //     }
+                
+            //     var ArrayServicios = document.getElementById("ArrayServicios");
+                
+            //     ArrayServicios.value = JSON.stringify(valoresSeleccionados);
+            //     console.log(valoresSeleccionados);
+            // }
+                    
+                    
+            // hiddenInputs.forEach(function (hiddenInput) {
+            //     var checkbox = hiddenInput.parentElement.querySelector('input[type="checkbox"]');
+            //     checkbox.addEventListener('change', handleCheckboxChange);
+            // });
+        });
+    });
     
     // var hiddenInputs = document.querySelectorAll('.hiddenInput');
     

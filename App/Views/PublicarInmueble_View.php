@@ -229,10 +229,6 @@ if (isset($_SESSION["Identificacion"])) {
     
     <section id="politicas" class="form-section">
         <img src="../assets/img/publicarinmueble/PASOS3.png" alt="">
-        <a class="bar-anchor" onclick="showNextSection()">
-                <span>Siguiente</span>
-                <div class="transition-bar"></div>
-            </a>
         
         
         <div class="politicasgrid">
@@ -242,7 +238,11 @@ if (isset($_SESSION["Identificacion"])) {
                 <div class="section-title">
                     <h2>Políticas</h2>
                     <p>Cuales van a ser tus políticas en cuanto a... </p>
-                   
+                    <a class="bar-anchor" onclick="showNextSection()">
+                            <span>Siguiente</span>
+                            <div class="transition-bar"></div>
+                    </a>
+                    
                 </div>
                 <hr>
                 
@@ -252,20 +252,21 @@ if (isset($_SESSION["Identificacion"])) {
                         <div class="icon"><i class="i bi-house-slash-fill" style="color: #ff689b;"></i></div>
                         <h2 class="title">Cancelacion</h2>                          
                         <div class="info">
-                            <h5></h5>
+                            <h5>cancelacion</h5>
                             <hr>
 
                             <p class="description">
+                                <input type="text" id="cancelacionSeleccionada" name="cancelacionSeleccionada" value="">
                                 <label>
-                                    <input type="radio" name="opciones" value="opcion1">
+                                    <input type="radio" name="cancelacion" class="opciones-cancelacion" value="2" checked onchange="actualizarInputHidden('cancelacionSeleccionada', this)">
                                     2 dias antes de la fecha programada
                                 </label>
                                 <label>
-                                    <input type="radio" name="opciones" value="opcion2">
+                                    <input type="radio" name="cancelacion" class="opciones-cancelacion" value="4" onchange="actualizarInputHidden('cancelacionSeleccionada', this)">
                                     4 dias antes de la fecha programada
                                 </label>
                                 <label>
-                                    <input type="radio" name="opciones" value="opcion3">
+                                    <input type="radio" name="cancelacion" class="opciones-cancelacion" value="7" onchange="actualizarInputHidden('cancelacionSeleccionada', this)">
                                     7 dias antes de la fecha programada
                                 </label>
                             </p>
@@ -278,20 +279,21 @@ if (isset($_SESSION["Identificacion"])) {
                         <div class="icon"><i class="bi bi-wallet" style="color: #e9bf06;"></i></div>
                         <h4 class="title">Reembolsos</h4>
                         <div class="info">
-                            <h5></h5>
+                            <h5>Reembolsos</h5>
                             <hr>
 
                             <p class="description">
+                                <input type="text" id="reembolsosSeleccionados" name="reembolsosSeleccionados" value="">
                                 <label>
-                                    <input type="radio" name="opciones" value="opcion1">
+                                    <input type="radio" name="reembolso" class="opciones-reembolso" value="0" checked onchange="actualizarInputHidden('reembolsosSeleccionados', this)">
                                     Sin Reembolso
                                 </label>
                                 <label>
-                                    <input type="radio" name="opciones" value="opcion2">
+                                    <input type="radio" name="reembolso" class="opciones-reembolso" value="50%" onchange="actualizarInputHidden('reembolsosSeleccionados', this)">
                                     Reembolso del 50%
                                 </label>
                                 <label>
-                                    <input type="radio" name="opciones" value="opcion3">
+                                    <input type="radio" name="reembolso" class="opciones-reembolso" value="100%" onchange="actualizarInputHidden('reembolsosSeleccionados', this)">
                                     Reembolso del 100%
                                 </label>
                             </p>
@@ -308,21 +310,22 @@ if (isset($_SESSION["Identificacion"])) {
                         <div class="info">
                             <h5>Hora de Entrada y Salida </h5>
                             <hr>
-                        
                             <p class="description">
+                                <input type="text" id="horarioSeleccionado" name="horarioSeleccionado" value="">
                                 <label>
-                                    <input type="radio" name="opciones" value="opcion1">
+                                    <input type="radio" name="horario" class="opciones-horario" value="2:00 pm - 11:00 am" checked onchange="actualizarInputHidden('horarioSeleccionado', this)">
                                     2:00 pm - 11:00 am
                                 </label>
                                 <label>
-                                    <input type="radio" name="opciones" value="opcion2">
+                                    <input type="radio" name="horario" class="opciones-horario" value="3:00 pm  - 12:00 pm" onchange="actualizarInputHidden('horarioSeleccionado', this)">
                                     3:00 pm  - 12:00 pm
                                 </label>
                                 <label>
-                                    <input type="radio" name="opciones" value="opcion3">
+                                    <input type="radio" name="horario" class="opciones-horario" value="4:00 pm  - 1:00 pm" onchange="actualizarInputHidden('horarioSeleccionado', this)">
                                     4:00 pm  - 1:00 pm
                                 </label>
                             </p>
+
                         </div>
                     </div>
                     <div class="icon-box">
@@ -330,21 +333,22 @@ if (isset($_SESSION["Identificacion"])) {
                         <h4 class="title">Cargos Adicionales</h4>
                         
                         <div class="info">
-                            <h5>cancela despues del plazo</h5>
+                            <h5>Daños</h5>
                             <hr>
                         
                             <p class="description">
+                                <input type="text" id="cargosAdicionalesSeleccionados" name="cargosAdicionalesSeleccionados" value="">
                                 <label>
-                                    <input type="radio" name="opciones" value="opcion1">
-                                    20 000
+                                    <input type="radio" name="cargosAdicionales" class="opciones-cargos" value="10" checked onchange="actualizarInputHidden('cargosAdicionalesSeleccionados', this)">
+                                    Del 10%
                                 </label>
                                 <label>
-                                    <input type="radio" name="opciones" value="opcion2">
-                                    40 000
+                                    <input type="radio" name="cargosAdicionales" class="opciones-cargos" value="20" onchange="actualizarInputHidden('cargosAdicionalesSeleccionados', this)">
+                                    Del 20%
                                 </label>
                                 <label>
-                                    <input type="radio" name="opciones" value="opcion3">
-                                    60 000
+                                    <input type="radio" name="cargosAdicionales" class="opciones-cargos" value="30" onchange="actualizarInputHidden('cargosAdicionalesSeleccionados', this)">
+                                    Del 30%
                                 </label>
                             </p>
                         </div>
@@ -363,7 +367,16 @@ if (isset($_SESSION["Identificacion"])) {
                             </div>
                     </div> -->
         </div>
-
+        <script>
+            // Función para actualizar el valor del input hidden
+            function actualizarInputHidden(inputHiddenId, radioButton) {
+                if (radioButton.checked) {
+                    // Si el radio button está seleccionado, actualiza el valor del input hidden correspondiente
+                    $("#" + inputHiddenId).val(radioButton.value);
+                }
+            }
+            
+        </script>
 
 
 
@@ -531,66 +544,66 @@ if (isset($_SESSION["Identificacion"])) {
 
     <section id="services" class="form-section">
         <img src="../assets/img/publicarinmueble/PASOS4.png" alt="">
-        <div class="section-title">
-            <input type="textarea" id="ArrayServicios">
-            <h2>Servicios</h2>
-            <p>¡Los servicios mejorarán la calidad de tu espacio!</p>
+        <form action="" method="post" role="form" enctype="multipart/form-data">
 
-            <a class="bar-anchor" onclick="Insertar_ServiciosInmueble()">
-                <span>Siguiente</span>
-                <div class="transition-bar"></div>
-            </a>
-        </div>
-        
-        <!-- <hr/> -->
+            <div class="section-title">
+                <input type="textarea" id="ArrayServicios">
+                <h2>Servicios</h2>
+                <p>¡Los servicios mejorarán la calidad de tu espacio!</p>
 
-
-        
-        <div class="grid">
+                <a class="bar-anchor" onclick="Insertar_ServicioInmueble()">
+                    <span>Siguiente</span>
+                    <div class="transition-bar"></div>
+                </a>
+            </div>
             
-            <!-- ========================================================= -->
-            <!-- SE LLENA CON LOS SERVICIOS DE LA BASE DE DATOS -->
-            <!-- ========================================================= -->
-            
-        </div>
+            <!-- <hr/> -->
+            <div class="grid">
+                
+                <!-- ========================================================= -->
+                <!-- SE LLENA CON LOS SERVICIOS DE LA BASE DE DATOS -->
+                <!-- ========================================================= -->
+                
+            </div>
+        </form>
         
-        <hr/>
-        <script>          
-                var hiddenInputs = document.querySelectorAll('.hiddenInput');
+            <hr/>
+            <script>          
+                // var hiddenInputs = document.querySelectorAll('.hiddenInput');
                 
-                console.log(hiddenInputs);
-                var valoresSeleccionados = [];
+                // console.log(hiddenInputs);
+                // var valoresSeleccionados = [];
                 
-                // Función para manejar el cambio en los checkboxes
-                function handleCheckboxChange(event) {
+                // // Función para manejar el cambio en los checkboxes
+                // function handleCheckboxChange(event) {
                     
-                    // Encuentra el input hidden asociado al checkbox
-                    var hiddenInput = event.target.parentElement.querySelector('.hiddenInput');
+                //     // Encuentra el input hidden asociado al checkbox
+                //     var hiddenInput = event.target.parentElement.querySelector('.hiddenInput');
                     
                     
-                    // Verifica si el checkbox está marcado o desmarcado
-                    if (event.target.checked) {
-                                // Si está marcado, agrega el valor al array
-                                valoresSeleccionados.push(hiddenInput.value);
-                            } else {
-                                // Si está desmarcado, elimina el valor del array
-                                var index = valoresSeleccionados.indexOf(hiddenInput.value);
-                                if (index !== -1) {
-                                    valoresSeleccionados.splice(index, 1);
-                                }
-                            }
+                //     // Verifica si el checkbox está marcado o desmarcado
+                //     if (event.target.checked) {
+                //                 // Si está marcado, agrega el valor al array
+                //                 valoresSeleccionados.push(hiddenInput.value);
+                //             } else {
+                //                 // Si está desmarcado, elimina el valor del array
+                //                 var index = valoresSeleccionados.indexOf(hiddenInput.value);
+                //                 if (index !== -1) {
+                //                     valoresSeleccionados.splice(index, 1);
+                //                 }
+                //             }
                             
-                            var ArrayServicios = document.getElementById("ArrayServicios");
+                //             var ArrayServicios = document.getElementById("ArrayServicios");
                             
-                            // ArrayServicios.value = JSON.stringify(valoresSeleccionados);
-                            console.log(valoresSeleccionados);
-                }
+                //             // ArrayServicios.value = JSON.stringify(valoresSeleccionados);
+                //             console.log(valoresSeleccionados);
+                // }
                         
                         
-                hiddenInputs.forEach(function (hiddenInput) {
-                    var checkbox = hiddenInput.parentElement.querySelector('input[type="checkbox"]');
-                    checkbox.addEventListener('change', handleCheckboxChange);
-                }); 
+                // hiddenInputs.forEach(function (hiddenInput) {
+                //     var checkbox = hiddenInput.parentElement.querySelector('input[type="checkbox"]');
+                //     checkbox.addEventListener('change', handleCheckboxChange);
+                // }); 
         </script>
     </section><!-- End Services Section -->
             
