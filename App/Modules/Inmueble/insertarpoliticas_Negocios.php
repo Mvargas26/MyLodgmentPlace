@@ -5,15 +5,17 @@
 
 
     try{
-
-        $ArrayServicios = json_decode($_POST['ArrayServicios']);
-    
-        $resultadoConsulta = $ObjMaster->Insertar_ServiciosInmueble($ArrayServicios);
+        $cancelacion = $_POST['Cancelacion'];
+        $reembolso = $_POST['reembolso'];
+        $horario = $_POST['horario'];
+        $cargos = $_POST['cargos'];
+           
+        $resultadoConsulta = $ObjMaster->Insertar_PoliticasInmueble($cancelacion , $reembolso , $horario , $cargos);
     
         if ($resultadoConsulta) {
-            echo json_encode(array('exito' => true, 'mensaje' => 'Servicios de inmueble agregados correctamente'));
+            echo json_encode(array('exito' => true, 'mensaje' => 'Politicas agregadas correctamente'));
         } else {
-            echo json_encode(array('exito' => false, 'mensaje' => 'Error al agregar los servicios del inmueble'));
+            echo json_encode(array('exito' => false, 'mensaje' => 'Error al agregar las Politicas del inmueble'));
         }
         
         

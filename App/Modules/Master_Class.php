@@ -323,7 +323,8 @@ class Master_Class
         $capacidadPersonas,
         $costoPersonaExtra,
         $fechaLimiteDisponible,
-        $nombresImagenes
+        $nombresImagenes,
+        $categoria
     ) {
 
         $query = "INSERT INTO `tbinmueble`(`nombre`, `disponibilidad`, 
@@ -380,14 +381,16 @@ class Master_Class
 
                 if ($this->GetConexion()->query($query)) {
 
-                    $query = "INSERT INTO `tbcategoriainmueble` (`idInmueble`, `nombreImagen`) VALUES ";
+                    $query = "INSERT INTO `tbcategoriainmueble`(`idCategoria`, `idInmueble`) 
+                    VALUES ('$categoria','$idInmuebleNuevo')";
 
+                    if ($this->GetConexion()->query($query)) {
+                        return true;
+                    }
+                    else{
+                        return false;
+                    }
 
-
-
-
-
-                    return true;
                 } else {
                     return false;
                 }
@@ -431,6 +434,38 @@ class Master_Class
             return true;
         } else {
             // Manejar el caso cuando la inserción falla
+            return false;
+        }
+    }
+
+
+    function Insertar_PoliticasInmueble($cancelacion , 
+    $reembolso , $horario , $cargos)
+    {
+        // Obtener el último ID de la tabla tbinmueble
+        $query = "SELECT id FROM tbinmueble ORDER BY id DESC LIMIT 1;";
+        $result = $this->GetConexion()->query($query);
+
+        if ($result && $result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            $idInmuebleNuevo = $row['id'];
+        } else {
+            // Manejar el caso cuando no se encuentra ningún ID
+            return false;
+        }
+
+        // Construir la consulta para insertar servicios
+        $query = "INSERT INTO `tbpoliticaespacio` (`idInmueble`, `politica`, `tipo`) VALUES ";
+
+        $query .= "('$idInmuebleNuevo', '$cancelacion', 'Cancelacion'),";
+        $query .= "('$idInmuebleNuevo', '$reembolso', 'Reembolso'),";
+        $query .= "('$idInmuebleNuevo', '$horario', 'Horario'),";
+        $query .= "('$idInmuebleNuevo', '$cargos', 'Cargos')";
+
+        // Ejecutar la consulta para insertar servicios
+        if ($this->GetConexion()->query($query)) {
+            return true;
+        } else {
             return false;
         }
     }

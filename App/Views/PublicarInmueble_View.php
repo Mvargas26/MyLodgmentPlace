@@ -7,7 +7,7 @@ session_start();
 <?php
 
 if (isset($_SESSION["Identificacion"])) {
-    $ID = $_SESSION["Identificacion"];
+    // $ID = $_SESSION["Identificacion"];
     ?>
     <input type="text" id="PropietarioID" value="<?php echo $_SESSION["Identificacion"] ?>"/>
 
@@ -88,6 +88,20 @@ if (isset($_SESSION["Identificacion"])) {
                             <br>
                             <input type="file" class="form-control" name="fotoInmueble" id="fotoInmueble" multiple accept="image/*">
                         </div>
+                    </div>
+
+                </div> <!--end row -->
+                <div class="row">
+                    <div class="col-md-4 form-group">
+                        <label for="categoriaInmueble">Categoria:</label>
+                        <select id="categoriaInmueble" onchange="obtenerValor()">
+                            <option value="Sin Categoría">Sin Categoría</option>
+                            <option value="Cabañas">Cabañas</option>
+                            <option value="Playa">Playa</option>
+                            <option value="Rural">Rural</option>
+                            <option value="Lujo">Lujo</option>
+                            <option value="Fincas">Fincas</option>
+                        </select>
                     </div>
 
                 </div> <!--end row -->
@@ -238,7 +252,7 @@ if (isset($_SESSION["Identificacion"])) {
                 <div class="section-title">
                     <h2>Políticas</h2>
                     <p>Cuales van a ser tus políticas en cuanto a... </p>
-                    <a class="bar-anchor" onclick="showNextSection()">
+                    <a class="bar-anchor" onclick="Insertar_PoliticaInmueble()">
                             <span>Siguiente</span>
                             <div class="transition-bar"></div>
                     </a>
