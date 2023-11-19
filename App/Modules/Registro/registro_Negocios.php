@@ -1,8 +1,4 @@
 <?php
-
-// logica metodos capa de negocios
-
-
 require_once('../Master_Class.php');
 
 $ObjMaster = new Master_Class();
@@ -28,21 +24,14 @@ if (isset($_POST["imagenData"])) {
         $email,$telefono,$edad,$idRol,$direccion);
 
         $resultado = $ObjMaster->enviarMensajesCorreo($email, 'registro');
-        // // Llama al método para enviar mensajes de correos
-        // if ($resultado) {
-        //     $data = array("exito" => true);
-        //     echo json_encode($data);
-        // } else {
-        //     $data = array("exito" => false, "error" => "Error al enviar el correo electrónico.");
-        //     echo json_encode($data);
-        // }
-
-        $data = array("exito"=>$mensajeDB,"nombre" => $nombre);
-
-        echo json_encode($data);
-
-    } catch (\Throwable $th) {
-        $response = array("message" => "Error en Negocios");
+        // Llama al método para enviar mensajes de correoss
+        if ($mensajeDB) {
+            echo json_encode(array('exito' => true, 'mensaje' => $mensajeDB));
+        } else {
+            echo json_encode(array('exito' => true, 'mensaje' => $mensajeDB));
+        }
+    } catch (Throwable $th) {
+        echo json_encode(array('error' => false, 'mensaje' => $th));
     }
 }
 ?>
