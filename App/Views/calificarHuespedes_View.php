@@ -2,6 +2,11 @@
 include './templates/Header.php';
 session_start();
 require_once('../Modules/Master_Class.php');
+$cedcapturada =0;
+
+if (isset($_SESSION["Identificacion"])) {
+  $cedcapturada = $_SESSION["Identificacion"];
+}
 ?>
 
 <link href="../assets/css/Anfitrion/styleCalificarHuesped.css" rel="stylesheet">
@@ -35,7 +40,7 @@ require_once('../Modules/Master_Class.php');
                         <tbody>
                     <?php
                               try {
-                                $resultadoConsulta = $ObjMaster->consultaInfoparaCalificarHuesped(888888888);
+                                $resultadoConsulta = $ObjMaster->consultaInfoparaCalificarHuesped($cedcapturada);
                                 $datos = json_decode($resultadoConsulta, true);
                                 if ($datos) {
                                   foreach ($datos as $dato) {
@@ -51,7 +56,14 @@ require_once('../Modules/Master_Class.php');
                     <?php
                                   }
                                 } else {
-                                  echo 'Error al decodificar el JSON';
+                    ?> 
+                            <tr>
+                                <td>No</td>
+                                <td>tienes</td>
+                                <td>reservas en</td>
+                                <td>tus espacios</td>
+                            </tr> 
+                    <?php
                                 }
                               } catch (Exception $e) {
                                 echo 'Error: ' . $e->getMessage();
@@ -76,7 +88,7 @@ require_once('../Modules/Master_Class.php');
                           
                         <?php
                               try {
-                                $resultadoConsulta = $ObjMaster->consultaInfoparaCalificarHuesped(888888888);
+                                $resultadoConsulta = $ObjMaster->consultaInfoparaCalificarHuesped($cedcapturada);
                                 $datos = json_decode($resultadoConsulta, true);
                                 if ($datos) {
                                   foreach ($datos as $dato) {
@@ -85,7 +97,9 @@ require_once('../Modules/Master_Class.php');
                     <?php
                                   }
                                 } else {
-                                  echo 'Error al decodificar el JSON';
+                    ?>              
+                               <option value="0">vacio</option>
+                    <?php
                                 }
                               } catch (Exception $e) {
                                 echo 'Error: ' . $e->getMessage();
@@ -101,7 +115,7 @@ require_once('../Modules/Master_Class.php');
             <br />
             <textarea id="resenaTextarea" name="resena" rows="3" placeholder="Escribe tu comentario aquí..." maxlength="100"></textarea>
 
-              <button class="custom-button" type="submit">Enviar Calificación</button>
+              <button id="btnEnviarCalificacion" class="custom-button" type="submit">Enviar Calificación</button>
           </form>
         </div>
         <input type="hidden" id="estrellasSeleccionadas" value="1">
@@ -111,7 +125,6 @@ require_once('../Modules/Master_Class.php');
 </div>
 
 <!-- este script llena las estrillitas -->
-
 <script>
       document.addEventListener("DOMContentLoaded", function() {
         var estrellas = document.querySelectorAll('.estrellas');

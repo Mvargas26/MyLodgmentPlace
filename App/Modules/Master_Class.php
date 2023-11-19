@@ -472,20 +472,6 @@ class Master_Class
         }
     } //fin Insertar Servicios inmueble
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     /*----------------------------------------END PUBLICAR INMUEBLE------------------------------------------------------*/
 
 
@@ -1448,6 +1434,42 @@ class Master_Class
             return null;
         }
     }//fin consultaInfoparaCalificarHuesped
+
+    //----------------------------------------------------------CALIFICACIONES ------------------------------------------
+    function InsertarCalificacion($reservaBase, $comentario, $estrellas, $cedulacalificador, $tipoCalificacion)
+{
+    try {
+        $conexion = $this->getConexion();
+
+        // Utilizar una consulta preparada para evitar la inyección de SQL
+        $query = "INSERT INTO `tbcalificaciones` (`idReservaBase`, `comentario`, `estrellas`, `idCalificador`, `idTipoCalificacion`) 
+                  VALUES (?, ?, ?, ?, ?)";
+
+        $stmt = $conexion->prepare($query);
+
+        // Vincular parámetros (significa integer,string,integer,integer,integer)
+        $stmt->bind_param("isiii", $reservaBase, $comentario, $estrellas, $cedulacalificador, $tipoCalificacion);
+
+        // Ejecutar la consulta preparada
+        $stmt->execute();
+
+        // Verificar si la inserción fue exitosa
+        if ($stmt->affected_rows > 0) {
+            // Devolver el ID de la fila insertada (si es relevante para tu aplicación)
+            return $stmt->insert_id;
+        } else {
+            throw new Exception("Error en la inserción: " . $stmt->error);
+        }
+    } catch (Exception $e) {
+        error_log($e->getMessage());
+        return false;
+    } finally {
+        // Cerrar la consulta preparada y la conexión
+        $stmt->close();
+        $conexion->close();
+    }
+}
+
 
 
 

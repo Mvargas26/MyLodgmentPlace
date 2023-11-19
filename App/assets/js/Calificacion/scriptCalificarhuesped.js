@@ -2,6 +2,13 @@ document.addEventListener('DOMContentLoaded', function () {
     window.addEventListener('load', function(){
 
         const formCalificarHuesped = document.getElementById("formCalificarHuesped");
+        var btnEnviarCalificacion = document.getElementById("btnEnviarCalificacion");
+
+        if (typeof identificacion === "undefined" || identificacion === null) {
+            btnEnviarCalificacion.disabled = true;
+        }else{
+            btnEnviarCalificacion.disabled = false;
+        }
         
         if (formCalificarHuesped) {
             formCalificarHuesped.addEventListener('submit',function () {
@@ -22,15 +29,22 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
             $.ajax({
-                url: "../../App/Modules/Calificar/calificarhuesped.php",
+                url: "../../App/Modules/Calificar/calificarhuesped_Negocios.php",
                 type: "POST",
                 data: {formData: formData},              
                 success: function(response) 
                 {
-                    var respuestaJSON = JSON.parse(response);
-                    console.log(respuestaJSON);
-
-                   
+                    var x = JSON.parse(response);
+                    if (x.exito ) {
+                        Swal.fire("Éxito", "Se guardó la calificación correctamente. " + x.nombre, "success");//mensaje bonito
+                        setTimeout(function() {
+                            location.reload(true);
+                            },
+                         2000);
+                    } else {
+                        console.log(x.response);
+                        Swal.fire("Error", "Lo sentimos, ocurrió un error.", "error");
+                    }
     
                 },
                 error: function(textStatus, errorThrown) {

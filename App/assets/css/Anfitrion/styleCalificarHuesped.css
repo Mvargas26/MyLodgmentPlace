@@ -1,16 +1,21 @@
 .divImagen{
     display: flex;
 justify-content: center;
-margin: 50px;
+margin: 40px;
 }
 #contenedorTablaResenas{
-    margin: 5%;
+    margin: 4%;
+    display: flex;
+    justify-content: center;
+    
 }
 
-#DejaTuResenia{
-    background-color: orangered;
-    margin-bottom: 5%;
+#ReservaCalificar{
+    background-color: orange;
+    font-size: x-large;
 }
+
+
 /* ############################################################################################## */
 #DejaTuResenia{
     position: sticky;
@@ -18,9 +23,10 @@ margin: 50px;
     display: flex;
     justify-content: center;
     margin: auto;
+    margin-bottom: 5%;
     width: 600px;
     height: 100%;
-    background-color: #ff7f5d;
+    background-color: orangered;
     /* background: rgba(255, 127, 93, 0.7); */
 }
 
