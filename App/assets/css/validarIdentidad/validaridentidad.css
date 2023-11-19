@@ -1,0 +1,35 @@
+/* Estilos básicos, ajusta según sea necesario */
+body {
+    font-family: Arial, sans-serif;
+}
+
+.profile-validation {
+    text-align: center;
+    margin-top: 50px;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+#estado-usuario {
+    font-size: 18px;
+    color: #333;
+}
+
+#btn-validate {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#btn-validate:hover {
+    background-color: #45a049;
+}

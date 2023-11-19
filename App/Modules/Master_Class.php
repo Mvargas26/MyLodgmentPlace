@@ -528,6 +528,8 @@ class Master_Class
 
     function CargarPoliticas()
     {
+
+
     } //end politicas
 
 
@@ -1409,8 +1411,6 @@ class Master_Class
         }
     }
 
-
-
     // --------------------------------------------------------------- RESERVAS -------------------------------------
 
     function consultaInfoparaCalificarHuesped($identificacion)
@@ -1448,40 +1448,102 @@ class Master_Class
 
     //----------------------------------------------------------CALIFICACIONES ------------------------------------------
     function InsertarCalificacion($reservaBase, $comentario, $estrellas, $cedulacalificador, $tipoCalificacion)
-{
-    try {
-        $conexion = $this->getConexion();
+    {
+        try {
+            $conexion = $this->getConexion();
 
-        // Utilizar una consulta preparada para evitar la inyección de SQL
-        $query = "INSERT INTO `tbcalificaciones` (`idReservaBase`, `comentario`, `estrellas`, `idCalificador`, `idTipoCalificacion`) 
-                  VALUES (?, ?, ?, ?, ?)";
+            // Utilizar una consulta preparada para evitar la inyección de SQL
+            $query = "INSERT INTO `tbcalificaciones` (`idReservaBase`, `comentario`, `estrellas`, `idCalificador`, `idTipoCalificacion`) 
+                    VALUES (?, ?, ?, ?, ?)";
 
-        $stmt = $conexion->prepare($query);
+            $stmt = $conexion->prepare($query);
 
-        // Vincular parámetros (significa integer,string,integer,integer,integer)
-        $stmt->bind_param("isiii", $reservaBase, $comentario, $estrellas, $cedulacalificador, $tipoCalificacion);
+            // Vincular parámetros (significa integer,string,integer,integer,integer)
+            $stmt->bind_param("isiii", $reservaBase, $comentario, $estrellas, $cedulacalificador, $tipoCalificacion);
 
-        // Ejecutar la consulta preparada
-        $stmt->execute();
+            // Ejecutar la consulta preparada
+            $stmt->execute();
 
-        // Verificar si la inserción fue exitosa
-        if ($stmt->affected_rows > 0) {
-            // Devolver el ID de la fila insertada (si es relevante para tu aplicación)
-            return $stmt->insert_id;
-        } else {
-            throw new Exception("Error en la inserción: " . $stmt->error);
+            // Verificar si la inserción fue exitosa
+            if ($stmt->affected_rows > 0) {
+                // Devolver el ID de la fila insertada (si es relevante para tu aplicación)
+                return $stmt->insert_id;
+            } else {
+                throw new Exception("Error en la inserción: " . $stmt->error);
+            }
+        } catch (Exception $e) {
+            error_log($e->getMessage());
+            return false;
+        } finally {
+            // Cerrar la consulta preparada y la conexión
+            $stmt->close();
+            $conexion->close();
         }
-    } catch (Exception $e) {
-        error_log($e->getMessage());
-        return false;
-    } finally {
-        // Cerrar la consulta preparada y la conexión
-        $stmt->close();
-        $conexion->close();
+
     }
-}
 
+     //----------------------------------------------------------Validar Perfil ------------------------------------------
 
+    // función para actualizar el estado en la base de datos
+    function actualizarEstado($idUser, $nuevoEstado)
+    {
+        try {
+            $conn = $this->GetConexion();
+
+            $idUser = $conn->real_escape_string($idUser);
+            $nuevoEstado = $conn->real_escape_string($nuevoEstado);
+ 
+           $sql = "UPDATE tbvalidacionperfil SET estadoValidacion = '$nuevoEstado' WHERE nombreImagenUsuario = '$idUser'";
+
+           if ($conn->query($sql) === TRUE) {
+               return true; 
+           } else {
+               return false;
+           }
+       } catch (Exception $e) {
+           echo "Error: " . $e->getMessage();
+           return false; 
+       }
+    }
+
+     // función para Validar la identidad
+
+    function validarIdentidad($idUser)
+    {
+        try {
+            return $this->actualizarEstado($idUser, 'Activado');
+        } catch (Exception $e) {
+            echo "Error al validar la identidad: " . $e->getMessage();
+            return false; // Error general
+        }
+    }
+    // función para obtener el estado del usuario
+    function obtenerEstadoUsuario($idUser)
+    {
+        try {
+            $conn = $this->GetConexion();
+
+            // Escapar los datos para prevenir inyecciones SQL
+            $idUser = $conn->real_escape_string($idUser);
+
+            // Consulta SQL para obtener el estado del usuario
+            $sql = "SELECT estadoValidacion FROM tbvalidacionperfil WHERE nombreImagenUsuario = '$idUser'";
+
+            // Ejecutar la consulta
+            $resultado = $conn->query($sql);
+
+            // Verificar si se obtuvieron resultados
+            if ($resultado->num_rows > 0) {
+                $fila = $resultado->fetch_assoc();
+                return $fila['estadoValidacion'];
+            } else {
+                return "No se encontró el usuario";
+            }
+        } catch (Exception $e) {
+            echo "Error al obtener el estado del usuario: " . $e->getMessage();
+            return "Error"; // Puedes manejar el error de la manera que prefieras
+        }
+    }
 
 
 } //fn cl_masterClass
