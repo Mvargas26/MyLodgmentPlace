@@ -16,11 +16,15 @@ $(document).ready(function () {
 
                 var userDetails = $('<div class="user-details"></div>');
 
+                userDetails.append('<br>');
+
                 var userName = $('<div></div>').text(user.nombre + ' ' + user.apellido1 + ' ' + user.apellido2);
                 userDetails.append(userName);
 
                 var userCedula = $('<div class="user-cedula"></div>').text(user.idUser).hide();
                 userDetails.append(userCedula);
+
+                userDetails.append('<br>');
 
                 var viewProfileButton = $('<button class="button-view-profile">Ver Perfil</button>');
                 // Corrige la asignación del evento al botón actual, no al id fijo

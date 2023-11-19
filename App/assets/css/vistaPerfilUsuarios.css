@@ -1,9 +1,9 @@
 .contiene {
     max-width: 800px;
     margin: 20px auto;
-    background-color: #524156;
+    /* background-color: #524156; */
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(234, 119, 18, 6.9);
+    /* box-shadow: 0 0 10px rgba(234, 119, 18, 6.9); */
     padding: 20px;
     text-align: center; /* Center the buttons within the div */
 }
@@ -91,5 +91,5 @@ li span {
 li:hover span {
     transform: translateX(0.15em);
     background-color: #f45f41; 
-    color: #524156; 
+    /* color: #524156;  */
 }
