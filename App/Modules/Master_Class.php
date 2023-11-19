@@ -1429,7 +1429,7 @@ class Master_Class
                     `tbinmueble` ON tbreserva.idInmueble = tbinmueble.id
                 INNER JOIN 
                     `tbusuario` ON tbreserva.idUsuario = tbusuario.idUser
-                    where tbreserva.idUsuario = $identificacion;";
+                    where tbinmueble.Propietario = $identificacion;";
 
                 $result = $this->getConexion()->query($query);
                 $arrayData = array();
