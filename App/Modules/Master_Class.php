@@ -625,9 +625,7 @@ class Master_Class
         }
     }
 
-    //fin funcion para enviar correo de autenticacion
 
-    //Inicio envio de mensajes por correo
     function enviarMensajesCorreo($destinatario, $accion)
     {
         $mail = new PHPMailer(true);
@@ -690,9 +688,7 @@ class Master_Class
             return false;
         }
     }
-    //Fin envio de mensajes por correo
 
-    //inicio  funciones para codigos de autenticacion
 
     function verificarCodigoAutenticacion($identificacion, $codigo_ingresado)
     {
@@ -733,9 +729,6 @@ class Master_Class
         }
     }
 
-    //fin  funciones para codigos de autenticacion
-
-    //Inicio  funcion para calculo previo reserva
 
     function calcularValorTotal($cantidadDias)
     {
@@ -743,12 +736,6 @@ class Master_Class
         $valorTotal = $valorDiario * $cantidadDias;
         return $valorTotal;
     }
-
-
-
-    //fin funcion para calculo previo reserva
-
-    //fin funcion Historial de reservas
 
     public function obtenerHistorialReservasUsuario($idUser)
     {
@@ -780,7 +767,6 @@ class Master_Class
     }
     //fin funcion Historial de reservas
 
-    //Inicio funcion Creacion de cupones de descuento 
 
     public function crearCupon($montoDescuento, $cantidadCupones, $fechaVencimiento, $tipoDescuento)
     {
@@ -792,10 +778,6 @@ class Master_Class
         // Retorna true si la creación fue exitosa o false si hubo algún error
         return true; // O false en caso de error
     }
-
-    //fin funcion Creacion de cupones de descuento 
-
-    //Inicio funcion obtener nombres de inmuebles
 
     public function obtenerNombresInmuebles($idPropietario)
     {
@@ -827,16 +809,7 @@ class Master_Class
     {
 
         try {
-
-            // $query = "SELECT mu.id, mu.nombre AS nombre_inmueble, mu.valorDiario, mu.capacidadPersonas,
-            //  mu.costoPersonaExtra, mu.direccion, mu.disponibilidad, mu.estrellas, mu.fechaLimiteDisponibilidad,
-            //   CONCAT(us.nombre, ' ', us.apellido1, ' ', us.apellido2) AS nombre_propietario, ca.categoria AS Categoria_Inmueble,
-            //    ft.nombreImagen AS nameImagen, ft.Fotografia FROM tbinmueble AS mu INNER JOIN tbusuario AS us
-            //     ON mu.Propietario = us.idUser
-            //      INNER JOIN tbcategoriainmueble ON mu.id = tbcategoriainmueble.idInmueble
-            //      INNER JOIN tbcategorias AS ca ON tbcategoriainmueble.idCategoria = ca.idcategoria 
-            //      LEFT JOIN ( SELECT idInmueble, nombreImagen, Fotografia
-            //       FROM tbfotoinmueble GROUP BY idInmueble LIMIT 1 ) AS ft ON mu.id = ft.idInmueble WHERE ft.Fotografia IS NOT NULL;";
+            
             $query = "SELECT
                     mu.id,
                     mu.nombre AS nombre_inmueble,
@@ -1003,9 +976,6 @@ class Master_Class
         }
         // $this->conn->close();
     } //fn ConsultarResenias POR id
-
-
-
 
 
     function ConsultaMultipleEspacios()
@@ -1441,5 +1411,45 @@ class Master_Class
             return null;
         }
     }
+
+
+
+    // --------------------------------------------------------------- RESERVAS -------------------------------------
+
+    function consultaInfoparaCalificarHuesped($identificacion)
+    {
+        try {
+            $query = "SELECT 
+                    tbreserva.idReserva as reserva,
+                    tbinmueble.nombre AS inmueble_reservado,
+                    tbreserva.idUsuario as ced_huesped,
+                    CONCAT(tbusuario.nombre, ' ', tbusuario.apellido1, ' ', tbusuario.apellido2) AS nombre_huesped
+                FROM 
+                    `tbreserva`
+                INNER JOIN 
+                    `tbinmueble` ON tbreserva.idInmueble = tbinmueble.id
+                INNER JOIN 
+                    `tbusuario` ON tbreserva.idUsuario = tbusuario.idUser
+                    where tbreserva.idUsuario = $identificacion;";
+
+                $result = $this->getConexion()->query($query);
+                $arrayData = array();
+
+            if ($result) {
+                while ($row = $result->fetch_assoc()) {
+                    $arrayData[] = $row;
+                }
+                return json_encode($arrayData);
+            } else {
+                throw new Exception("Error en la consulta: " . $this->getConexion()->error);
+            }
+        } catch (Exception $e) {
+            error_log($e->getMessage());
+            return null;
+        }
+    }//fin consultaInfoparaCalificarHuesped
+
+
+
 } //fn cl_masterClass
 $ObjMaster = new Master_Class();
