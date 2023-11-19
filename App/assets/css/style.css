@@ -147,6 +147,15 @@ h6 {
   }
 }
 
+#CalendarioDiv{
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-content: center;
+
+}
+
 /*--------------------------------------------------------------
 # Header Social Links
 --------------------------------------------------------------*/
@@ -1792,11 +1801,4 @@ section {
 
 
 
-#CalendarioDiv{
 
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-content: center;
-
-}

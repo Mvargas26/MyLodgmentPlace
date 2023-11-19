@@ -342,6 +342,7 @@ if (isset($_GET['id'])) {
                                       while ($dataEvento = mysqli_fetch_array($resulEventos)) { ?>
                                           {
                                               _id: '<?php echo $dataEvento['idReserva']; ?>',
+                                              title: '<?php echo 'Reservado'; ?>',
                                               start: '<?php echo $dataEvento['fechaInicio']; ?>',
                                               end: '<?php echo $dataEvento['fechaFin']; ?>',
                                               color: '<?php echo $dataEvento['colorEvento']; ?>'
