@@ -19,12 +19,86 @@ $compra = 'No disponible';
      $fecha = $exchangeRateData['fecha'];
  }
 
+ // Verifica si se estableció el ID de usuario en la sesión
+if (isset($_SESSION['Identificacion'])) {
+  // Obtiene el ID de usuario de la sesión
+  $userId = $_SESSION['Identificacion'];
 
- $nombre = "Juan";
- $apellidos = "Pérez Gómez";
- $cedula = "123456789";
- $direccion = "Calle 123, Ciudad";
- $saldo = "$5,000.00";
+  // Tu URL de punto final de la API con el ID de usuario
+  $userApiUrl = 'https://tiusr29pl.cuc-carrera-ti.ac.cr/Mybanco/api/Usuarios/' . $userId;
+
+  // Inicializa la sesión cURL para los datos del usuario
+  $chUser = curl_init($userApiUrl);
+
+  // Establece opciones de cURL para la solicitud de datos del usuario
+  curl_setopt($chUser, CURLOPT_RETURNTRANSFER, true);
+
+  // Ejecuta la sesión cURL y obtén la respuesta de la API de datos del usuario
+  $userApiResponse = curl_exec($chUser);
+
+  // Verifica errores de cURL
+  if (curl_errno($chUser)) {
+      echo 'Error cURL: ' . curl_error($chUser);
+  }
+
+  // Cierra la sesión cURL de datos del usuario
+  curl_close($chUser);
+
+  // Decodifica la respuesta JSON de datos del usuario
+  $userData = json_decode($userApiResponse, true);
+
+  // Verifica si la decodificación fue exitosa
+  if ($userData === null) {
+      echo 'Error decodificando JSON para los datos del usuario';
+  } else {
+    $nombre = $userData['nombre'];
+    $apellido1 = $userData['apellido1'];
+    $apellido2 = $userData['apellido2'];
+    $cedula = $userData['cedula'];
+    $email = $userData['correo'];
+  }
+} else {
+  echo 'ID de usuario no establecido en la sesión';
+}
+
+if (isset($_SESSION['Identificacion'])) {
+  // Obtiene el ID de usuario de la sesión
+  $userId = $_SESSION['Identificacion'];
+
+  // Tu URL de punto final de la API de saldos con el ID de usuario
+  $saldoApiUrl = 'https://tiusr29pl.cuc-carrera-ti.ac.cr/Mybanco/api/Saldos/' . $userId;
+
+  // Inicializa la sesión cURL para los datos del saldo
+  $chSaldo = curl_init($saldoApiUrl);
+
+  // Establece opciones de cURL para la solicitud de datos del saldo
+  curl_setopt($chSaldo, CURLOPT_RETURNTRANSFER, true);
+
+  // Ejecuta la sesión cURL y obtén la respuesta de la API de datos del saldo
+  $saldoApiResponse = curl_exec($chSaldo);
+
+  // Verifica errores de cURL
+  if (curl_errno($chSaldo)) {
+      echo 'Error cURL: ' . curl_error($chSaldo);
+  }
+
+  // Cierra la sesión cURL de datos del saldo
+  curl_close($chSaldo);
+
+  // Decodifica la respuesta JSON de datos del saldo
+  $saldoData = json_decode($saldoApiResponse, true);
+
+  // Verifica si la decodificación fue exitosa
+  if ($saldoData === null) {
+      echo 'Error decodificando JSON para los datos del saldo';
+  } else {
+      // Asigna el saldo a la variable correspondiente
+      $saldo = isset($saldoData['saldo']) ? $saldoData['saldo'] : 'No disponible';
+  }
+} else {
+  echo 'ID de usuario no establecido en la sesión';
+}
+
 
 ?>
 
@@ -57,17 +131,16 @@ $compra = 'No disponible';
       <li class="cards__item">
         <div class="card">
           <div class="card__image card__image--river"></div>
-          <div class="card__content">
-            <div class="card__title">Datos Personales</div>
-            <label for="nombre">Nombre: <span id="nombre"><?php echo $nombre; ?></span></label>
-            <label for="apellidos">Apellidos: <span id="apellidos"><?php echo $apellidos; ?></span></label>
-            <label for="cedula">Cédula: <span id="cedula"><?php echo $cedula; ?></span></label>
-            <label for="direccion">Dirección: <span id="direccion"><?php echo $direccion; ?></span></label>
-          </div>
+            <div class="card__content">
+              <div class="card__title">Datos Personales</div>
+              <label for="nombre">Nombre: <span id="nombre"><?php echo $nombre; ?></span></label>
+              <label for="apellidos">Apellidos: <span id="apellidos"><?php echo $apellido1; ?> <?php echo $apellido2; ?></span></label>
+              <label for="cedula">Cédula: <span id="cedula"><?php echo $cedula; ?></span></label>
+              <label for="direccion">Correo Electrónico: <span id="direccion"><?php echo $email; ?></span></label>
+            </div>
         </div>
       </li>
-      </ul>
-
+    </ul>
     <ul class="cards">
       <li class="cards__item">
         <div class="card">
