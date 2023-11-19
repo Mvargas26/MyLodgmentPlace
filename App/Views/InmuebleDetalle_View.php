@@ -371,60 +371,59 @@ if (isset($_GET['id'])) {
                       </script>
                   </div>
               </div>
+              
           </div>
       </div>
-    </section>
-<section id="portfolio-details" class="portfolio-details">
-  <div class="portfolio-description">
-    <div class="" id=""  tabindex="-1" role="dialog">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-              <h5 class="modal-title">Reservar espacio</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <form name="formEvento" id="formEvento" action="nuevoEvento.php" class="form-horizontal" method="POST">
-                <div class="form-group">
-                  <label for="cantidadPersonas" class="col-sm-12 control-label" >Cantidad de personas</label>
-                  <div class="col-sm-10">
-                    <input type="text" class="form-control" name="cantidadPersonas" id="cantidadPersonas" placeholder="Cantidad de Personas">
+    <div class="container">
+      <div class="" id=""  tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Reservar espacio</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <form name="formEvento" id="formEvento" action="nuevoEvento.php" class="form-horizontal" method="POST">
+                  <div class="form-group">
+                    <label for="cantidadPersonas" class="col-sm-12 control-label" >Cantidad de personas</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" name="cantidadPersonas" id="cantidadPersonas" placeholder="Cantidad de Personas">
+                    </div>
                   </div>
-                </div>
-                <div class="form-group">
-                  <label for="cantidadPersonasExtra" class="col-sm-12 control-label" >Cantidad de personas extra</label>
-                  <div class="col-sm-10">
-                    <input type="text" class="form-control" name="cantidadPersonasExtra" id="cantidadPersonasExtra" placeholder="Cantidad de Personas">
+                  <div class="form-group">
+                    <label for="cantidadPersonasExtra" class="col-sm-12 control-label" >Cantidad de personas extra</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" name="cantidadPersonasExtra" id="cantidadPersonasExtra" placeholder="Cantidad de Personas">
+                    </div>
                   </div>
-                </div>
-                <div class="form-group">
-                  <label for="fechaInicio" class="col-sm-12 control-label" >Fecha Ingreso</label>
-                  <div class="col-sm-10">
-                    <input type="text" class="form-control" name="fechaInicio" id="fechaInicio" placeholder="Fecha Inicio">
+                  <div class="form-group">
+                    <label for="fechaInicio" class="col-sm-12 control-label" >Fecha Ingreso</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" name="fechaInicio" id="fechaInicio" placeholder="Fecha Inicio">
+                    </div>
                   </div>
-                </div>
-                <div class="form-group">
-                  <label for="fechaFin" class="col-sm-12 control-label">Fecha Salida</label>
-                  <div class="col-sm-10">
-                    <input type="text" class="form-control" name="fechaFin" id="fechaFin" placeholder="Fecha Final">
+                  <div class="form-group">
+                    <label for="fechaFin" class="col-sm-12 control-label">Fecha Salida</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" name="fechaFin" id="fechaFin" placeholder="Fecha Final">
+                    </div>
                   </div>
-                </div>
-                <div class="form-group">
-                  <label for="Cupon" class="col-sm-12 control-label">Cupon de descuento</label>
-                  <div class="col-sm-10">
-                    <input type="text" class="form-control" name="Cupon" id="Cupon" placeholder="Cupon de descuento">
+                  <div class="form-group">
+                    <label for="Cupon" class="col-sm-12 control-label">Cupon de descuento</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" name="Cupon" id="Cupon" placeholder="Cupon de descuento">
+                    </div>
                   </div>
-                </div>
-                <div class="modal-footer">
-                  <button type="submit" class="btn btn-success">Guardar Evento</button>
-                </div>
-            </form>
+                  <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Guardar Evento</button>
+                  </div>
+              </form>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 </div>
 
 <!-- colores -->

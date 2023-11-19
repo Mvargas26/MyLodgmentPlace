@@ -10,7 +10,7 @@ session_start();
     <br>
         <div class="cards-container">
             <div class="card">
-                <a href="https://tiusr29pl.cuc-carrera-ti.ac.cr/MyBancoWeb/Default">Mi Banco</a>
+                <a href="mi_bancoHuesped_View.php">Mi Banco</a>
             </div>
             <div class="card">
                 <a href="perfilHuesped_View.php">Datos Personales</a>
@@ -33,9 +33,9 @@ session_start();
             <div class="card">
                 <a href="admin_seguridadHuesped_View.php">Administración de Seguridad</a>
             </div>
-            <div class="card">
+            <!-- <div class="card">
             <a href="cupones_View.php">Cupones y tarjetas de regalo</a>
-            </div>
+            </div> -->
             <div class="card">
                 <a href="denunciasHuesped_View.php">Denuncias</a>
             </div>
