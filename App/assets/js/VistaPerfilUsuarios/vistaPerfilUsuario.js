@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     $('#denunciasBtn').on('click', function () {
-        redirigirAotraPagina('ruta_denuncias.php', idUser);
+        redirigirAotraPagina('denuncias_porusuario_View.php', idUser);
     });
 
     $('#activarUsuarioBtn').on('click', function () {

@@ -123,7 +123,6 @@ if (isset($_SESSION['Identificacion'])) {
 
     <h1>Información del Usuario</h1>
 
-  <div class="cards-container" >
       <ul class="cards">
           <li class="cards__item">
             <div class="card">
@@ -137,11 +136,6 @@ if (isset($_SESSION['Identificacion'])) {
                     </div>
                 </div>
           </li>
-      </ul> 
-    </div>
-
-    <div class="cards-container" >
-      <ul class="cards">
         <li class="cards__item">
           <div class="card">
             <div class="card__image card__image--river"></div>
@@ -154,14 +148,9 @@ if (isset($_SESSION['Identificacion'])) {
               </div>
           </div>
         </li>
-      </ul>
-    </div>
-
-    <div class="cards-container" >
-      <ul class="cards">
         <li class="cards__item">
           <div class="card">
-            <div class="card__image card__image--river"></div>
+            <div class="card__image card__image--record"></div>
               <div class="card__content">
                 <div class="card__title">Saldo</div>
                 <p for="CuentaBancario">Numero de Cuenta Bancario Actual: <span id="CuentaBancario"><?php echo $numeroCuenta; ?></span> </p>
@@ -172,9 +161,7 @@ if (isset($_SESSION['Identificacion'])) {
           </div>
         </li>
       </ul>
-    </div>
-
-</body>
+   
 
 </main>
 

@@ -18,8 +18,12 @@ html {
   background-color: var(--gray-lightest);
 }
 
+h1{
+  text-align: center;
+}
 
-.cuerpo {
+
+#cards-container {
     background-color: var(--gray-lightest);
     color: var(--gray);
     font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -30,6 +34,7 @@ html {
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    justify-content: center;
 }
 
 img {
@@ -128,20 +133,16 @@ img {
   }
 }
 
-.card__image--flowers {
-  background-image: url(https://unsplash.it/800/600?image=82);
-}
-
 .card__image--river {
-  background-image: url(https://unsplash.it/800/600?image=11);
+  background-image: url(https://img.100r.systems/img/db18a93e2e9b411eda7184b066438a0a.jpg);
 }
 
 .card__image--record {
-  background-image: url(https://unsplash.it/800/600?image=39);
+  background-image: url(https://casasdevacaciones.pe/wp-content/uploads/2020/03/casa-de-playa-vichayito-vista-deck.jpg);
 }
 
 .card__image--fence {
-  background-image: url(https://unsplash.it/800/600?image=59);
+  background-image: url(https://a0.muscache.com/im/pictures/cf9a855c-69fa-4bfb-a59f-cfad8acfa814.jpg?im_w=720);
 }
 
 .card__title {

@@ -4,6 +4,7 @@ include './templates/Header.php';
 require_once '../Modules/Master_Class.php';
 
 $idUser = isset($_GET['idUser']) ? $_GET['idUser'] : null;
+
 $masterClass = new Master_Class();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -11,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $idUser = $_POST["idValidacionPerfil"];
 
         if ($masterClass->validarIdentidad($idUser)) {
-            echo "Identidad validada correctamente.";
+           
         } else {
             echo "Error al validar la identidad.";
         }
@@ -26,18 +27,31 @@ $estadoUsuario = $masterClass->obtenerEstadoUsuario($idUser);
 ?>
 
 <main id="main">
+    <link rel="stylesheet" href="../assets/css/validarIdentidad/validaridentidad.css">
+
     <body>
-        <div class="profile-validation">
-            <p>ID del Usuario: <?php echo $idUser; ?></p>
-            <p id="estado-usuario">Estado: <?php echo $estadoUsuario; ?></p>
+    <br>
+    <h1>Validacion de Perfil</h1>
+      <ul class="cards">
+          <li class="cards__item">
+            <div class="card">
+                <div class="card__image card__image--fence"></div>
+                    <div class="card__content">
+                    <div class="card__title">Usuario</div>
+                    <br>
+                    <p>Cedula del Usuario: <?php echo $idUser; ?></p>
 
-            <!-- Formulario para enviar la solicitud de validación -->
-            <form method="post" action="">
-                <input type="hidden" name="idValidacionPerfil" value="<?php echo $idUser; ?>">
-                <button type="submit">Validar Identidad</button>
-            </form>
-        </div>
+                    <p id="estado-usuario">Estado: <?php echo $estadoUsuario; ?></p>
 
+                    <form method="post" action="">
+                        <input type="hidden" name="idValidacionPerfil" value="<?php echo $idUser; ?>">
+                        <button type="submit">Validar Identidad</button>
+                    </form>
+
+                    </div>
+                </div>
+          </li>
+      </ul> 
         <!-- Incluye tu archivo JavaScript si es necesario -->
         <script src="../assets/js/VistaPerfilUsuarios/vistaPerfilUsuario.js"></script>
     </body>
