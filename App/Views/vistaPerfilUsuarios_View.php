@@ -16,11 +16,11 @@
             
             <div class="contiene">
                 <ul>
-                    <li id="validarIdentidadBtn"><span>Validar Identidad</span></li>
-                    <li id="validarEspacioBtn"><span>Validar Espacio</span></li>
-                    <li id="denunciasBtn"><span>Denuncias</span></li>
-                    <li id="activarUsuarioBtn"><span>Activar Usuario</span></li>
-                    <li id="inactivarUsuarioBtn"><span>Inactivar Usuario</span></li>
+                    <li class="li" id="validarIdentidadBtn"><span>Validar Identidad</span></li>
+                    <li class="li" id="validarEspacioBtn"><span>Validar Espacio</span></li>
+                    <li class="li" id="denunciasBtn"><span>Denuncias</span></li>
+                    <!-- <li class="li" id="activarUsuarioBtn"><span>Activar Usuario</span></li>
+                    <li class="li" id="inactivarUsuarioBtn"><span>Inactivar Usuario</span></li> -->
                 </ul>
             </div>
 

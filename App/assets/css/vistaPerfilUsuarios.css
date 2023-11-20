@@ -36,7 +36,7 @@ h2 {
     text-align: center;
 }
 
-li {
+.li {
     display: inline-block;
     font-size: 25px;
     width: 8em;
@@ -49,8 +49,8 @@ li {
     cursor: pointer;
 }
 
-li::before,
-li::after {
+.li::before,
+.li::after {
     content: '';
     position: absolute;
     width: inherit;
@@ -58,21 +58,21 @@ li::after {
     z-index: -1;
 }
 
-li::before {
+.li::before {
     height: 80%;
     top: 10%;
     left: calc(-0.15em - 0.08em * 2);
     filter: brightness(0.8);
 }
 
-li::after {
+.li::after {
     height: 60%;
     top: 20%;
     left: calc(-0.15em * 2 - 0.08em * 3);
     filter: brightness(0.6);
 }
 
-li span {
+.li span {
     position: relative;
     height: 120%;
     top: -10%;
@@ -88,7 +88,7 @@ li span {
     transition: 0.3s;
 }
 
-li:hover span {
+.li:hover span {
     transform: translateX(0.15em);
     background-color: #f45f41; 
     /* color: #524156;  */
