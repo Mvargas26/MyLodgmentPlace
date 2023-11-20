@@ -55,9 +55,9 @@ document.addEventListener('DOMContentLoaded', function () {
         redirigirAotraPagina('ruta_inactivar_usuario.php', idUser);
     });
 
-    // Función para redirigir a otra página con el idUser
+    
     function redirigirAotraPagina(ruta, idUser) {
-        // Cambiar la ubicación de la página a la ruta deseada con el idUser
+    
         window.location.href = `${ruta}?idUser=${idUser}`;
     }
 
