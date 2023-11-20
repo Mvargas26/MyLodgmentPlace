@@ -380,9 +380,6 @@ if (isset($_GET['id'])) {
           <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Reservar espacio</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
               </div>
               <form name="formEvento" id="formEvento" action="nuevoEvento.php" class="form-horizontal" method="POST">
                   <div class="form-group">

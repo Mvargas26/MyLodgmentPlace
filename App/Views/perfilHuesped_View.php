@@ -5,8 +5,8 @@ include './templates/Header.php';
 session_start();
 $ObjMaster = new Master_Class();
 
-$idUsuario = $_SESSION['Identificacion'];
-$informacionUsuario = $ObjMaster->informacionUsuarios($idUsuario);
+$idUser = $_SESSION['Identificacion'];
+$informacionUsuario = $ObjMaster->informacionUsuarios($idUser);
 
 if ($informacionUsuario) {
      "<div>";
@@ -22,33 +22,10 @@ if ($informacionUsuario) {
     echo "Error al obtener los datos del usuario.";
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    
-    $nombre = htmlspecialchars($_POST['nombre']);
-    $apellido1 = htmlspecialchars($_POST['apellido1']);
-    $apellido2 = htmlspecialchars($_POST['apellido2']);
-    $direccion = htmlspecialchars($_POST['direccion']);
-    $telefono = htmlspecialchars($_POST['telefono']);
-    $cedula = htmlspecialchars($_POST['cedula']);
-    $email = htmlspecialchars($_POST['email']);
-
-    
-    $actualizacionExitosa = $ObjMaster->actualizaNombreApellido($cedula, $nombre, $apellido1, $apellido2, $direccion, $telefono, $email);
-
-    if ($actualizacionExitosa) {
-        echo "Datos actualizados correctamente";
-    } else {
-        echo "Error al actualizar datos";
-    }
-} else {
-    echo " ";
-}
-
-
-
 ?>
 <!-- ==============================================Fin header ======= -->
-<main id="main">
+<!DOCTYPE html>
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -60,74 +37,82 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <link  href="../assets/css/perfilHuesped.css" rel="stylesheet">
 </head>
-<div class="container mt-5">
-    <h2>Datos Personales</h2>
+<body>
 
-    <div>
-    <p><strong>Cédula: </strong><?php echo $informacionUsuario['idUser']; ?></p>
-    <p><strong>Nombre: </strong><?php echo $informacionUsuario['nombre']; ?></p>
-    <p><strong>Primer Apellido: </strong><?php echo $informacionUsuario['apellido1']; ?></p>
-    <p><strong>Segundo Apellido: </strong><?php echo $informacionUsuario['apellido2']; ?></p>
-    <p><strong>Dirección de Residencia:</strong> <?php echo $informacionUsuario['direccion']; ?></p>
-    <p><strong>Número de Teléfono:</strong> <?php echo $informacionUsuario['telefono']; ?></p>
-    <p><strong>Correo Electrónico:</strong> <?php echo $informacionUsuario['correo']; ?></p>
-</div>
+<main id="main">
+<br>
+        <br>
+    <div class="container mt-5">
+        <h2>Datos Personales</h2>
 
+        <div>
+            <p><strong>Cédula: </strong><?php echo $informacionUsuario['idUser']; ?></p>
+            <p><strong>Nombre: </strong><?php echo $informacionUsuario['nombre']; ?></p>
+            <p><strong>Primer Apellido: </strong><?php echo $informacionUsuario['apellido1']; ?></p>
+            <p><strong>Segundo Apellido: </strong><?php echo $informacionUsuario['apellido2']; ?></p>
+            <p><strong>Dirección de Residencia:</strong> <?php echo $informacionUsuario['direccion']; ?></p>
+            <p><strong>Número de Teléfono:</strong> <?php echo $informacionUsuario['telefono']; ?></p>
+            <p><strong>Correo Electrónico:</strong> <?php echo $informacionUsuario['correo']; ?></p>
+        </div>
 
-    <!-- Botón para activar el modal -->
-    <button type="button" class="btn btn-primary mt-3" data-toggle="modal" data-target="#updateModal">
-        Actualizar Datos
-    </button>
-</div>
+        <!-- Botón para activar el modal -->
+        <button type="button" class="btn btn-primary mt-3" data-toggle="modal" data-target="#updateModal">
+            Actualizar Datos
+        </button>
+    </div>
 
-<!-- Modal para actualizar datos -->
-<div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="updateModalLabel">Actualizar Datos Personales</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form method="post" action="" id="ActualizarDatos">
-                    <div class="form-group">
-                        <label for="nameFromDatabase">Nombre:</label>
-                        <input type="text" class="form-control" id="nameFromDatabase" value="<?php echo $informacionUsuario['nombre']; ?>">
-                    </div>
-                    <div class="form-group">
-                        <label for="apellido1">Primer apellido:</label>
-                        <input type="text" class="form-control" id="apellido1" value="<?php echo $informacionUsuario['apellido1']; ?>">
-                    </div>
-                    <div class="form-group">
-                        <label for="apellido2">Segundo apellido:</label>
-                        <input type="text" class="form-control" id="apellido2" value="<?php echo $informacionUsuario['apellido2']; ?>">
-                    </div>
-                    <div class="form-group">
-                        <label for="updatedAddress">Dirección de Residencia:</label>
-                        <input type="text" class="form-control" id="updatedAddress" value="<?php echo $informacionUsuario['direccion']; ?>">
-                    </div>
-                    <div class="form-group">
-                        <label for="updatedPhoneNumber">Número de Teléfono:</label>
-                        <input type="text" class="form-control" id="updatedPhoneNumber" value="<?php echo $informacionUsuario['telefono']; ?>">
-                    </div>
-                    <div class="form-group">
-                        <label for="updatedEmail">Correo Electrónico:</label>
-                        <input type="text" class="form-control" id="updatedEmail" value="<?php echo $informacionUsuario['correo']; ?>">
-                    </div>
+    <!-- Modal para actualizar datos -->
+    <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="updateModalLabel">Actualizar Datos Personales</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="" id="ActualizarDatos">
+                        <div class="form-group">
+                            <label for="nameFromDatabase">Nombre:</label>
+                            <input type="text" class="form-control" id="nameFromDatabase" value="<?php echo $informacionUsuario['nombre']; ?>">
+                        </div>
+                        <div class="form-group">
+                            <label for="apellido1">Primer apellido:</label>
+                            <input type="text" class="form-control" id="apellido1" value="<?php echo $informacionUsuario['apellido1']; ?>">
+                        </div>
+                        <div class="form-group">
+                            <label for="apellido2">Segundo apellido:</label>
+                            <input type="text" class="form-control" id="apellido2" value="<?php echo $informacionUsuario['apellido2']; ?>">
+                        </div>
+                        <div class="form-group">
+                            <label for="updatedAddress">Dirección de Residencia:</label>
+                            <input type="text" class="form-control" id="updatedAddress" value="<?php echo $informacionUsuario['direccion']; ?>">
+                        </div>
+                        <div class="form-group">
+                            <label for="updatedPhoneNumber">Número de Teléfono:</label>
+                            <input type="text" class="form-control" id="updatedPhoneNumber" value="<?php echo $informacionUsuario['telefono']; ?>">
+                        </div>
+                        <div class="form-group">
+                            <label for="updatedEmail">Correo Electrónico:</label>
+                            <input type="text" class="form-control" id="updatedEmail" value="<?php echo $informacionUsuario['correo']; ?>">
+                        </div>
 
-                    <!-- Botón para guardar datos -->
-                    <button type="button" id="btnGuardarDatos" class="btn btn-primary">Guardar Datos</button>
-                </form>
+                        <button type="button" id="btnGuardarDatos" class="btn btn-primary">Guardar Datos</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<br>
-</body>
 </main>
 
+<script src="../assets/js/actualizarDatosUsuarios/actualizarDatos.js"></script>
+
+</body>
+<br>
+        <br>
+
+</html>
 
 <!-- ==============================================Inicio Footer ======= -->
 <?php
