@@ -18,13 +18,15 @@ document.addEventListener('DOMContentLoaded', function () {
             const comentarioCalificacion = document.getElementById("resenaTextarea").value;
             const estrellasSeleccionadas = document.getElementById("estrellasSeleccionadas").value;
             const cedAnfitrionCalifica = identificacion;
+            const Rol = rol;
 
 
             const formData = {
                 ReservaCalificar,
                 comentarioCalificacion,
                 estrellasSeleccionadas,
-                cedAnfitrionCalifica
+                cedAnfitrionCalifica,
+                Rol
             };
 
 
@@ -36,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 {
                     var x = JSON.parse(response);
                     if (x.exito ) {
-                        Swal.fire("Éxito", "Se guardó la calificación correctamente. " + x.nombre, "success");//mensaje bonito
+                        Swal.fire("Éxito", "Se guardó la calificación correctamente. ", "success");//mensaje bonito
                         setTimeout(function() {
                             location.reload(true);
                             },

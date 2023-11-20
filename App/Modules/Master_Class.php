@@ -1446,6 +1446,39 @@ class Master_Class
         }
     }//fin consultaInfoparaCalificarHuesped
 
+    function consultaInfoparaCalificarAnfitrion($identificacion)
+    {
+        try {
+            $query = "SELECT 
+            tbreserva.idReserva as reserva,
+            tbinmueble.nombre AS inmueble_reservado,
+           tbinmueble.Propietario as ced_anfitrion,
+            CONCAT(tbusuario.nombre, ' ', tbusuario.apellido1, ' ', tbusuario.apellido2) AS nombre_anfitrion
+        FROM 
+            `tbreserva`
+        INNER JOIN 
+            `tbinmueble` ON tbreserva.idInmueble = tbinmueble.id
+        INNER JOIN 
+            `tbusuario` ON tbinmueble.Propietario = tbusuario.idUser
+            where tbreserva.idUsuario = $identificacion;";
+
+                $result = $this->getConexion()->query($query);
+                $arrayData = array();
+
+            if ($result) {
+                while ($row = $result->fetch_assoc()) {
+                    $arrayData[] = $row;
+                }
+                return json_encode($arrayData);
+            } else {
+                throw new Exception("Error en la consulta: " . $this->getConexion()->error);
+            }
+        } catch (Exception $e) {
+            error_log($e->getMessage());
+            return null;
+        }
+    }//fin consultaInfoparaCalificarHuesped
+
     //----------------------------------------------------------CALIFICACIONES ------------------------------------------
     function InsertarCalificacion($reservaBase, $comentario, $estrellas, $cedulacalificador, $tipoCalificacion)
     {

@@ -69,31 +69,24 @@ session_start();
                   if ($_SESSION["Rol"] == 2) {
           ?>
                             <li><a class="nav-link scrollto" href="./App/Views/PanelAnfitrion_View.php">Panel Anfitrión</a></li>
-            <!-- <li class="dropdown"><a href="#"><span>Opciones para Anfitrión</span> <i class="bi bi-chevron-down"></i></a>
-            <ul>
-                  <li><a class="nav-link scrollto" href="./App/Views/PanelAnfitrion_View.php">Panel Anfitrion</a></li>
-                  <li><a class="nav-link scrollto" href="./App/Views/PublicarInmueble_View.php">Publica tu Espacio</a></li>
-                  <li><a class="nav-link scrollto" href="./App/Views/Anuncios_MultiplesV_View.php">Anuncios Multiples</a></li>
-                  <li><a class="nav-link scrollto" href="./App/Views/validar_identidadHuesped_View.php">Validar Perfil</a></li>
-                  <li><a class="nav-link scrollto" href="./App/Views/denunciasAdministrador_View.php">Recepcion Denuncias Administrador</a></li>
 
-            </ul>
-          </li> -->
-
-                  <!-- <li><a class="nav-link scrollto" href="./App/Views/PanelAnfitrion_View.php">Panel Anfitrion</a></li>
-                  <li><a class="nav-link scrollto" href="./App/Views/PublicarInmueble_View.php">Publica tu Espacio</a></li>
-                  <li><a class="nav-link scrollto" href="./App/Views/Anuncios_MultiplesV_View.php">Anuncios Multiples</a></li>
-                  <li><a class="nav-link scrollto" href="./App/Views/validar_identidadHuesped_View.php">Validar Perfil</a></li> -->
           <?php
 
           };
 
          if ($_SESSION["Rol"] == 3) {
           ?>
-              <li><a class="nav-link scrollto" href="./App/Views/PanelUsuario_View.php">Perfil Huesped</a></li>
-              <li><a class="nav-link scrollto" href="./App/Views/calificarAnfitrion_View.php">Calificar Anfitrion</a></li>
+              <li><a class="nav-link scrollto" href="./App/Views/PanelUsuario_View.php">Panel Huésped</a></li>
 
-        <?php }; }; ?>
+        <?php }; 
+
+          if ($_SESSION["Rol"] == 1) {
+            ?>
+                <li><a class="nav-link scrollto" href="./App/Views/gestionPerfilUsuarios_View.php">Panel Administrador</a></li>
+
+          <?php }; 
+      
+      }; ?>
 
     
 
