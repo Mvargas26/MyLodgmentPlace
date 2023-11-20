@@ -11,4 +11,5 @@ $userDetails = $idUser ? $master->GetUsuarioDetails($idUser) : null;
 
 // Devolver los detalles del usuario como respuesta en formato JSON
 echo json_encode($userDetails);
+
 ?>
