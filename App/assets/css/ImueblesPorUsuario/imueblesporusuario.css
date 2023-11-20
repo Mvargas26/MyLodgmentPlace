@@ -1,0 +1,63 @@
+/* Reset de estilos para eliminar márgenes y rellenos predeterminados */
+body, h1, h2, p, ul, li {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+}
+
+/* Estilo para el contenedor principal */
+.contiene {
+    max-width: 900px; /* Aumentado el ancho del contenedor */
+    margin: 20px auto;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    background-color: #f4f4f4;
+}
+
+/* Estilo para el encabezado h2 */
+h2 {
+    color: #f45f41;
+    text-align: center;
+}
+
+/* Estilo para la lista de inmuebles */
+.inmueble-list {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around; /* Cambiado a espacio alrededor para distribuir en varias filas y columnas */
+}
+
+/* Estilo básico para los elementos de la lista de inmuebles */
+.inmueble {
+    width: calc(30% - 20px); /* Ajustado el ancho y márgenes para que sean más anchos en los lados */
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 0 20px 1px rgba(244, 122, 65, 0.9);
+}
+
+/* Estilo para el botón de validación */
+.button-validar-inmueble {
+    background-color: #524156;
+    color: #fff;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.button-validar-inmueble:hover {
+    background-color: #f45f41;
+}
+
+/* Estilos adicionales según sea necesario */

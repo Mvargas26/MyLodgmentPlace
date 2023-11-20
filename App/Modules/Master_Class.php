@@ -1546,5 +1546,33 @@ class Master_Class
     }
 
 
+
+
+    /* ----------------------- Obtener Inmuebles por Propietario ----------------------- */
+
+    function GetInmueblesByPropietario($idUser)
+    {
+        $sql = "SELECT * FROM tbinmueble WHERE Propietario = ?";
+        $stmt = $this->conn->prepare($sql);
+
+        if ($stmt) {
+            $stmt->bind_param("i", $idUser);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            if ($result->num_rows > 0) {
+                $inmuebles = array();
+                while ($row = $result->fetch_assoc()) {
+                    $inmuebles[] = $row;
+                }
+                return $inmuebles;
+            }
+        }
+
+        return array();
+    }
+
+
+
 } //fn cl_masterClass
 $ObjMaster = new Master_Class();
