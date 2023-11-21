@@ -476,6 +476,7 @@ if (isset($_GET['id'])) {
                   <input type="hidden" id="valorDiario" value="<?php echo $dato['valorDiario']; ?>">
                   <input type="hidden" id="capacidadMaxima" value="<?php echo $dato['capacidadPersonas']; ?>">
                   <input type="hidden" id="costoPersonaExtra" value="<?php echo $dato['costoPersonaExtra']; ?>">
+                  <input type="hidden" id="idUsuario" value="<?php echo $Session['Identificacion']; ?>">
                   <!-- fin campos hidden para el calculo previo -->
                 </div>
               </div>
@@ -491,7 +492,7 @@ if (isset($_GET['id'])) {
               <!-- Nuevo contenedor para mostrar el valor total -->
 
               <div class="modal-footer">
-                <button type="submit" class="btn btn-success">Guardar Evento</button>
+                <button type="submit" id="crearReserva" class="btn btn-success">Reservar lugar</button>
               </div>
             </form>
           </div>
@@ -715,6 +716,7 @@ if (isset($_GET['id'])) {
     var identificacion = <?php echo json_encode($_SESSION["Identificacion"]); ?>;
   </script>
   <script src="../assets/js/calculoPrevioReserva/script.js"></script>
+  <script src="../assets/js/ReservarLugar/script.js"></script>
 
 <?php
 } else {

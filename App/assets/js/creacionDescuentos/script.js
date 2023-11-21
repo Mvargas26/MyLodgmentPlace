@@ -56,7 +56,7 @@ $(document).ready(function() {
             },
             dataType: 'json',
             success: function(response) {
-                if (response.exito) {
+                if (response) {
                     alert('¡Cupón creado exitosamente!');
                     //reinicia los campos del formulario
                     $('#formCrearCupon')[0].reset();

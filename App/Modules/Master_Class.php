@@ -775,16 +775,54 @@ class Master_Class
     }
     //fin funcion Historial de reservas
 
+    //Inicio funcion ReservaLugar
 
-    public function crearCupon($montoDescuento, $cantidadCupones, $fechaVencimiento, $tipoDescuento)
+    public function ReservaLugar($idUsuario, $idInmueble, $fechaInicio, $fechaFin, $Cupon, $montoTotal, $montoTotalImpuesto, $personasExtra, $cantPersonas)
     {
-        // Aquí realizas la lógica para crear el cupón en la base de datos
-        // Por ejemplo:
-        // $query = "INSERT INTO tbDescuento (monto, cantidadCupones, fechaVencimiento, tipoDescuento) VALUES ('$montoDescuento', '$cantidadCupones', '$fechaVencimiento', '$tipoDescuento')";
-        // Ejecutar la consulta y manejar el resultado
 
-        // Retorna true si la creación fue exitosa o false si hubo algún error
-        return true; // O false en caso de error
+        if (!$Cupon == '') {
+
+            $query = "SELECT idCupon, Monto, CantidadCupones From tbdescuento where idCupon = '$Cupon'";
+
+            $resultado = $this->GetConexion()->query($query);
+
+            if ($resultado) {
+                $nuevoTotal = $montoTotal - ($montoTotal * ($resultado[1] / 100));
+                $nuevoTotalImpuesto = $montoTotalImpuesto - ($montoTotalImpuesto * ($resultado[1] / 100));
+
+                $query2 = "INSERT INTO tbReserva (idUsuario, idInmueble, fechaInicio, fechaFin, montoTotal, montoTotalImpuesto, personasExtra, cantPersonas, colorEvento) VALUES ('$idUsuario', '$idInmueble', '$fechaInicio', '$fechaFin', '$nuevoTotal', '$nuevoTotalImpuesto', '$personasExtra', '$cantPersonas', '#FFFFFF')";
+
+                $resultado2 = $this->GetConexion()->query($query2);
+
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        } else {
+
+            $query3 = "INSERT INTO tbReserva (idUsuario, idInmueble, fechaInicio, fechaFin, montoTotal, montoTotalImpuesto, personasExtra, cantPersonas, colorEvento) VALUES ('$idUsuario', '$idInmueble', '$fechaInicio', '$fechaFin', '$montoTotal', '$montoTotalImpuesto', '$personasExtra', '$cantPersonas', '#FFFFFF')";
+
+            $resultado3 = $this->GetConexion()->query($query3);
+
+            return true;
+        }
+    }
+
+    //fin funcion ReservaLugar
+
+    public function crearCupon($nombreCupon, $montoDescuento, $cantidadCupones, $fechaVencimiento, $tipoDescuento, $idInmueble)
+    {
+        $query = "INSERT INTO tbdescuento (idCupon, Monto, CantidadCupones, tipoDescuento) VALUES ('$nombreCupon', '$montoDescuento', '$cantidadCupones', '$tipoDescuento')";
+
+        $resultado = $this->GetConexion()->query($query);
+
+        $query2 = "INSERT INTO tbinmueblecupon (idInmueble, idCupon, fechaVencimiento, Validez) VALUES ('$idInmueble', '$nombreCupon', '$fechaVencimiento', '1')";
+
+        $resultado2 = $this->GetConexion()->query($query2);
+
+        return true;
     }
 
     public function obtenerNombresInmuebles($idPropietario)
@@ -1542,7 +1580,7 @@ class Master_Class
 
             // Ejecutar la consulta
             $resultado = $conn->query($sql);
-            
+
             // Verificar si se obtuvieron resultados
             if ($resultado->num_rows > 0) {
                 $fila = $resultado->fetch_assoc();
