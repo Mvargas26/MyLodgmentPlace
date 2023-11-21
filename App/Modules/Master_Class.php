@@ -544,7 +544,7 @@ class Master_Class
 
     /*-----------------------------------------------AUNTETINTIFICACION--------------------------------------------------*/
 
-
+//Inicio funcion generarCodigoAleatorio
     function generarCodigoAleatorio($longitud)
     {
         $caracteres = "0123456789";
@@ -556,7 +556,9 @@ class Master_Class
 
         return $codigo;
     }
+//Fin funcion generarCodigoAleatorio
 
+//Inicio funcion almacenarCodigoAutenticacion
     function almacenarCodigoAutenticacion($identificacion, $codigo_autenticacion)
     {
         try {
@@ -577,7 +579,9 @@ class Master_Class
         }
     }
 
+//Fin funcion almacenarCodigoAutenticacion
 
+//Inicio funcion enviarCodigoAutenticacionCorreo
     function enviarCodigoAutenticacionCorreo($destinatario, $codigo_autenticacion)
     {
         $mail = new PHPMailer(true);
@@ -618,7 +622,9 @@ class Master_Class
         }
     }
 
+    //Fin funcion enviarCodigoAutenticacionCorreo
 
+//Inicio funcion enviarMensajesCorreo
     function enviarMensajesCorreo($destinatario, $accion)
     {
         $mail = new PHPMailer(true);
@@ -682,7 +688,9 @@ class Master_Class
         }
     }
 
+//Fin funcion enviarMensajesCorreo
 
+//Inicio funcion verificarCodigoAutenticacion
     function verificarCodigoAutenticacion($identificacion, $codigo_ingresado)
     {
         try {
@@ -703,6 +711,10 @@ class Master_Class
         }
     }
 
+//Fin funcion verificarCodigoAutenticacion
+
+//Inicio funcion eliminarCodigoAutenticacion
+
     function eliminarCodigoAutenticacion($identificacion)
     {
         try {
@@ -722,13 +734,35 @@ class Master_Class
         }
     }
 
+    //Fin funcion eliminarCodigoAutenticacion
 
-    function calcularValorTotal($cantidadDias)
-    {
-        $valorDiario = 20000;
-        $valorTotal = $valorDiario * $cantidadDias;
-        return $valorTotal;
-    }
+//Inicio funcion calcularValorTotal
+
+// public function calcularValorTotal($idInmueble, $cantidadPersonas, $cantidadPersonasExtra, $fechaInicio, $fechaFin, $cuponDescuento) {
+//     // Consulta a la base de datos para obtener los detalles del inmueble por ID
+//     $resultadoConsulta = $this->ConsultarInmueblesPorID($idInmueble);
+//     $datos = json_decode($resultadoConsulta, true);
+
+//     if ($datos) {
+//         foreach ($datos as $dato) {
+//             // Obtener la capacidad máxima de personas permitidas para el lugar
+//             $capacidadMaxima = $dato['capacidadPersonas'];
+
+//             // Validar la cantidad de personas ingresada
+//             if ($cantidadPersonas > $capacidadMaxima) {
+//                 return json_encode(array('error' => 'La cantidad de personas excede la capacidad permitida.'));
+//             }
+//         }
+//     } else {
+//         return json_encode(array('error' => 'No se encontraron datos para este inmueble.'));
+//     }
+
+//     // Continuar con los demás cálculos
+// }
+
+//Fin funcion calcularValorTotal
+
+//Inicio funcion Historial de reservas
 
     public function obtenerHistorialReservasUsuario($idUser)
     {
@@ -760,16 +794,51 @@ class Master_Class
     }
     //fin funcion Historial de reservas
 
+//Inicio funcion validarCupon
+    function validarCupon($idCupon) {
+        try {
+            // Consulta para verificar si el cupón existe y está vigente
+            $query = "SELECT idCupon, Monto, CantidadCupones, TipoDescuento 
+                      FROM tbdescuento 
+                      WHERE idCupon = '$idCupon' AND validez = 1";
+    
+            $result = $this->getConexion()->query($query);
+    
+            if ($result) {
+                // Si se encuentra el cupón y está vigente, retornar los datos del cupón
+                if ($result->num_rows > 0) {
+                    $cupon = $result->fetch_assoc();
+                    return $cupon;
+                } else {
+                    // Si el cupón no está vigente o no existe, retornar null
+                    return null;
+                }
+            } else {
+                throw new Exception("Error en la consulta: " . $this->getConexion()->error);
+            }
+        } catch (Exception $e) {
+            error_log($e->getMessage());
+            return null;
+        }
+    }
+//fin funcion validarCupon
 
-    public function crearCupon($montoDescuento, $cantidadCupones, $fechaVencimiento, $tipoDescuento)
-    {
-        // Aquí realizas la lógica para crear el cupón en la base de datos
-        // Por ejemplo:
-        // $query = "INSERT INTO tbDescuento (monto, cantidadCupones, fechaVencimiento, tipoDescuento) VALUES ('$montoDescuento', '$cantidadCupones', '$fechaVencimiento', '$tipoDescuento')";
-        // Ejecutar la consulta y manejar el resultado
+    public function crearCupon($nombreCupon, $montoDescuento, $cantidadCupones, $fechaVencimiento, $tipoDescuento, $idInmueble) {
+        // Insertar cupón en tbDescuento
+        $Validez = 1;
+        $queryDescuento = "INSERT INTO tbdescuento (idCupon, Monto, CantidadCupones, TipoDescuento) 
+                           VALUES ('$nombreCupon','$montoDescuento', '$cantidadCupones', '$tipoDescuento')";
+        
+        $this->GetConexion()->query($queryDescuento);
+        // $idCupon = $this->GetConexion()->insert_id;
 
-        // Retorna true si la creación fue exitosa o false si hubo algún error
-        return true; // O false en caso de error
+        // Insertar relación en tbInmuebleCupon
+        $queryInmuebleCupon = "INSERT INTO tbinmueblecupon (idInmueble, idCupon,fechaVencimiento, Validez) 
+                               VALUES ('$idInmueble', '$nombreCupon', '$fechaVencimiento', '$Validez')";
+
+        $this->GetConexion()->query($queryInmuebleCupon);
+
+        return array('exito' => true);
     }
 
     public function obtenerNombresInmuebles($idPropietario)

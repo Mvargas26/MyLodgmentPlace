@@ -1,66 +1,96 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
 
-    var valorColonesElement = document.getElementById("valorColones");
+    var valorDiarioElement = document.getElementById("valorColones");
     var valorTotalElement = document.getElementById("valorTotal");
+    var valorTotalImpuestosElement = document.getElementById("valorTotalImpuestos");
 
-    var cantidadDiasInput = document.getElementById("cantidadDias");
-    var cantidadDiasInput2 = document.getElementById("cantidadDias");
+    var cantidadPersonasInput = document.getElementById("cantidadPersonas");
+    var cantidadPersonasExtraInput = document.getElementById("cantidadPersonasExtra");
+    var costoPersonaExtra = parseFloat(document.getElementById("costoPersonaExtra").value);
+    var fechaInicioInput = document.getElementById("fechaInicio");
+    var fechaFinInput = document.getElementById("fechaFin");
 
-    cantidadDiasInput.addEventListener("input", function() {
+    var cantidadDiasTotal;
 
-        var cantidadDias = parseInt(cantidadDiasInput.value);
+    cantidadPersonasInput.addEventListener("change", function () {
+        var capacidadMaxima = parseInt(document.getElementById("capacidadMaxima").value);
+        var cantidadPersonas = parseInt(cantidadPersonasInput.value);
 
-        if (cantidadDias < 1) {
-            alert("La cantidad de días no puede ser menor a 1.");
+        if (cantidadPersonas < 1 || cantidadPersonas > capacidadMaxima) {
+            alert("La cantidad de personas no es válida para este lugar.");
+            cantidadPersonasInput.value = 1;
+        }
 
-            cantidadDiasInput.value = 1;
+        calcularValorTotal();
+    });
+
+    cantidadPersonasExtraInput.addEventListener("change", function () {
+        var cantidadPersonasExtra = parseInt(cantidadPersonasExtraInput.value);
+
+        if (cantidadPersonasExtra < 0 || cantidadPersonasExtra > 5) {
+            alert("La cantidad de personas extra debe estar entre 0 y 5.");
+            cantidadPersonasExtraInput.value = 0;
+        }
+
+        calcularValorTotal();
+    });
+
+    fechaInicioInput.addEventListener("click", function () {
+        console.log("Fecha de inicio cambiada");
+        console.log("Valor de fechaInicioInput:", fechaInicioInput.value);
+        calcularCantidadDias();
+        calcularValorTotal();
+    });
+    
+    fechaFinInput.addEventListener("click", function () {
+        console.log("Fecha de fin cambiada");
+        console.log("Valor de fechaInicioInput:", fechaInicioInput.value);
+        calcularCantidadDias();
+        calcularValorTotal();
+    });
+
+    function calcularCantidadDias() {
+        var fechaInicioString = fechaInicioInput.value;
+        var fechaFinString = fechaFinInput.value;
+
+        var partesFechaInicio = fechaInicioString.split("/");
+        var partesFechaFin = fechaFinString.split("/");
+
+        var fechaInicioFormato = partesFechaInicio[2] + "-" + partesFechaInicio[0] + "-" + partesFechaInicio[1];
+        var fechaFinFormato = partesFechaFin[2] + "-" + partesFechaFin[0] + "-" + partesFechaFin[1];
+
+        var fechaInicio = new Date(fechaInicioFormato);
+        var fechaFin = new Date(fechaFinFormato);
+
+        if (fechaInicio && fechaFin && fechaFin.getTime() > fechaInicio.getTime()) {
+            var unDia = 24 * 60 * 60 * 1000;
+            var diferenciaEnMilisegundos = fechaFin.getTime() - fechaInicio.getTime();
+            var cantidadDias = Math.round(diferenciaEnMilisegundos / unDia);
+
+            cantidadDiasTotal = cantidadDias;
         } else {
-            var valorDiario = 20000;
-            var valorTotal = valorDiario * cantidadDias;
-
-            valorColonesElement.textContent = valorDiario.toLocaleString();
-            valorTotalElement.textContent = valorTotal.toLocaleString();
+            cantidadDiasTotal = 0;
         }
-    });
+    }
 
-    cantidadDiasInput.addEventListener("change", function() {
-        var cantidadDias = parseInt(cantidadDiasInput.value);
+    function calcularValorTotal() {
+        var valorDiario = parseFloat(valorDiarioElement.textContent.replace(/\D/g, ''));
+        var cantidadDias = parseInt(cantidadDiasTotal);
+        var cantidadPersonasExtra = parseInt(cantidadPersonasExtraInput.value);
 
-        if (cantidadDias < 1) {
-
-            alert("La cantidad de días no puede ser menor a 1.");
-            cantidadDiasInput.value = 1;
-            var valorTotal = 20000;
+        var valorTotal = (((costoPersonaExtra * cantidadPersonasExtra) + (valorDiario/100)) * 4);
+        var totalImpuestos = valorTotal + (valorTotal*0.13)
+        // if (cantidadDias > 0) {
             valorTotalElement.textContent = valorTotal.toLocaleString();
-        }
-    });
+            valorTotalImpuestosElement.textContent = totalImpuestos.toLocaleString();
+        // } else {
+        //     valorTotalElement.textContent = 0;
+        // }
 
-    cantidadDiasInput2.addEventListener("input", function() {
-        var cantidadDias = parseInt(cantidadDiasInput.value);
+        
+    }
 
-        $.ajax({
-            type: 'POST',
-            url: '../../App/Modules/CalculoPrevioReserva/CalculoPrevioReserva_Negocios.php',
-            data: {
-                cantidadDias: cantidadDias
-            },
-            dataType: 'json',
-            success: function(response) {
+    // Calcular el valor total inicial al cargar la página
+    calcularValorTotal();
 
-                if(response.cantidadDias == 0){
-                    valorTotalElement.textContent = 0;
-                }
-                else if(response.cantidadDias == 1){
-                    var valorTotal = 20000;
-                    valorTotalElement.textContent = valorTotal.toLocaleString();
-                }
-            },
-            error: function(xhr, status, error) {
-                console.log(xhr);
-                console.log(status);
-                console.log(error);
-                alert('Error al calcular el valor total.');
-            }
-        });
-    });
 });

@@ -1,6 +1,10 @@
 <?php
 include './templates/Header.php';
 session_start();
+if (!isset($_SESSION['Identificacion']) || !isset($_SESSION['Rol']) || empty($_SESSION['Identificacion']) || empty($_SESSION['Rol'])|| $_SESSION['Rol']!=2) {
+    header('Location: ../../');
+    exit();
+}
 require_once('../Modules/Master_Class.php');
 $cedcapturada = 0;
 

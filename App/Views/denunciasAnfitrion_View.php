@@ -1,6 +1,11 @@
 <?php
 include './templates/Header.php';
 require_once('../Modules/Master_Class.php');
+session_start();
+if (!isset($_SESSION['Identificacion']) || !isset($_SESSION['Rol']) || empty($_SESSION['Identificacion']) || empty($_SESSION['Rol'])|| $_SESSION['Rol']!=2) {
+    header('Location: ../../');
+    exit();
+}
 ?>
 <!-- ==============================================Fin header ======= -->
 <main id="mainDenuncia">

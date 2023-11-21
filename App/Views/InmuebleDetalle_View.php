@@ -7,9 +7,11 @@ include('../Modules/fullCalendar/config.php');
 $SqlEventos   = ("SELECT * FROM tbreserva");
 $resulEventos = mysqli_query($con, $SqlEventos);
 
-
-
-session_start();
+// session_start();
+// if (!isset($_SESSION['id']) || !isset($_SESSION['rol']) || empty($_SESSION['id']) || empty($_SESSION['rol'])|| $_SESSION['rol']!=1) {
+//     header('Location: ../../');
+//     exit();
+// }
 
 
 
@@ -18,11 +20,11 @@ if (isset($_GET['id'])) {
   $idInmuebleDetalle = $_GET['id'];
 ?>
 
-    <link rel="stylesheet" type="text/css" href="../assets/css/fullcalendar.min.css">
-	  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="../assets/css/home.css">
+  <link rel="stylesheet" type="text/css" href="../assets/css/fullcalendar.min.css">
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="../assets/css/home.css">
 
   <!-- ==============================================Fin header ======= -->
   <main id="main">
@@ -109,12 +111,12 @@ if (isset($_GET['id'])) {
               <div class="swiper-pagination"></div>
             </div>
             <div class="text-center mt-3" id="bodyDivButton">
-            <?php
-            if (isset($_SESSION["nombre"])) {
-            ?>
-              <button class="botonesListaFavoritos" id="btnAgregarLista" name="btnAgregarFavoritos" type="submit">+ Nueva Lista <i class="fa-solid fa-list" style="color: #ffffff;"></i></button>
-              <button class="botonesListaFavoritos" id="btnAgregarFavoritos" name="btnAgregarFavoritos" type="submit">Agregar favorito <i class="fa-duotone fa-star" style="--fa-primary-color: #e14a09; --fa-secondary-color: #fafafa; --fa-secondary-opacity: 0.4;"></i> </button>
-              <!-- <button id="btnAgregarFavoritos" name="btnAgregarFavoritos" class="custom-button" type="submit">Agregar a Favoritos</button> -->
+              <?php
+              if (isset($_SESSION["nombre"])) {
+              ?>
+                <button class="botonesListaFavoritos" id="btnAgregarLista" name="btnAgregarFavoritos" type="submit">+ Nueva Lista <i class="fa-solid fa-list" style="color: #ffffff;"></i></button>
+                <button class="botonesListaFavoritos" id="btnAgregarFavoritos" name="btnAgregarFavoritos" type="submit">Agregar favorito <i class="fa-duotone fa-star" style="--fa-primary-color: #e14a09; --fa-secondary-color: #fafafa; --fa-secondary-opacity: 0.4;"></i> </button>
+                <!-- <button id="btnAgregarFavoritos" name="btnAgregarFavoritos" class="custom-button" type="submit">Agregar a Favoritos</button> -->
               <?php } ?>
             </div>
           </div>
@@ -281,153 +283,185 @@ if (isset($_GET['id'])) {
         </div>
     </section><!-- End Portfolio Details Section -->
 
-<!-- ================================================================================== -->
+    <!-- ================================================================================== -->
     <!-- CALENDARIO -->
     <!-- ================================================================================== -->
     <div id="CalendarioDiv">
-  <section >
-    <div class="container">
-      <div class="row gy-4">
-        <div class="col-lg-8">
-                  <div class="portfolio-details-slider swiper">
-                      <div class="col msjs">
-                          <?php
-                          include('./msjs.php');
-                          ?>
-                      </div>
+      <section>
+        <div class="container">
+          <div class="row gy-4">
+            <div class="col-lg-8">
+              <div class="portfolio-details-slider swiper">
+                <div class="col msjs">
+                  <?php
+                  include('./msjs.php');
+                  ?>
+                </div>
 
-                      <div id="calendar"></div>
+                <div id="calendar"></div>
 
-                      <?php
-                      include('./modalNuevoEvento.php');
-                      include('./modalUpdateEvento.php');
-                      ?>
+                <?php
+                include('./modalNuevoEvento.php');
+                include('./modalUpdateEvento.php');
+                ?>
 
-                      <script src="../assets/js/FullCalendar/jquery-3.0.0.min.js"></script>
-                      <script src="../assets/js/FullCalendar/popper.min.js"></script>
-                      <script src="../assets/js/FullCalendar/bootstrap.min.js"></script>
-                      
-                      <script type="text/javascript" src="../assets/js/FullCalendar/moment.min.js"></script>
-                      <script type="text/javascript" src="../assets/js/FullCalendar/fullcalendar.min.js"></script>
-                      <script src='../assets/locales/es.js'></script>
+                <script src="../assets/js/FullCalendar/jquery-3.0.0.min.js"></script>
+                <script src="../assets/js/FullCalendar/popper.min.js"></script>
+                <script src="../assets/js/FullCalendar/bootstrap.min.js"></script>
 
-                      <script type="text/javascript">
-                        $(document).ready(function () {
-                              $("#calendar").fullCalendar({
-                                  header: {
-                                    left: "prev,next today",
-                                      center: "title",
-                                      right: "month"
-                                    },
-                                    
-                                  locale: 'es',
+                <script type="text/javascript" src="../assets/js/FullCalendar/moment.min.js"></script>
+                <script type="text/javascript" src="../assets/js/FullCalendar/fullcalendar.min.js"></script>
+                <script src='../assets/locales/es.js'></script>
 
-                                  defaultView: "month",
-                                  navLinks: true,
-                                  editable: true,
-                                  eventLimit: true,
-                                  selectable: true,
-                                  selectHelper: false,
+                <script type="text/javascript">
+                  $(document).ready(function() {
+                    $("#calendar").fullCalendar({
+                      header: {
+                        left: "prev,next today",
+                        center: "title",
+                        right: "month"
+                      },
 
-                                  // Nuevo Evento
-                                  select: function (start, end) {
-                                      $("#exampleModal").modal();
-                                      $("input[name=fechaInicio]").val(start.format('DD-MM-YYYY'));
+                      locale: 'es',
 
-                                      var valorFechaFin = end.format("DD-MM-YYYY");
-                                      var F_final = moment(valorFechaFin, "DD-MM-YYYY").subtract(1, 'days').format('DD-MM-YYYY'); //Le resto 1 dia
-                                      $('input[name=fechaFin]').val(F_final);
+                      defaultView: "month",
+                      navLinks: true,
+                      editable: true,
+                      eventLimit: true,
+                      selectable: true,
+                      selectHelper: false,
 
-                                  },
+                      // Nuevo Evento
+                      select: function(start, end) {
+                        $("#exampleModal").modal();
+                        $("input[name=fechaInicio]").val(start.format('DD-MM-YYYY'));
 
-                                  events: [
-                                      <?php
-                                      while ($dataEvento = mysqli_fetch_array($resulEventos)) { ?>
-                                          {
-                                              _id: '<?php echo $dataEvento['idReserva']; ?>',
-                                              title: '<?php echo 'Reservado'; ?>',
-                                              start: '<?php echo $dataEvento['fechaInicio']; ?>',
-                                              end: '<?php echo $dataEvento['fechaFin']; ?>',
-                                              color: '<?php echo $dataEvento['colorEvento']; ?>'
-                                          },
-                                          
-                                      <?php } ?>
-                                    ],
+                        var valorFechaFin = end.format("DD-MM-YYYY");
+                        var F_final = moment(valorFechaFin, "DD-MM-YYYY").subtract(1, 'days').format('DD-MM-YYYY'); //Le resto 1 dia
+                        $('input[name=fechaFin]').val(F_final);
 
-                                  // Modificar Evento
-                                  eventClick: function (event) {
-                                      var idEvento = event._id;
-                                      console.log("Abriendo modal para el evento con ID:", idEvento);
-                                      $('input[name=idEvento]').val(idEvento);
-                                      $('input[name=fechaInicio]').val(event.start.format('DD-MM-YYYY'));
-                                      $('input[name=fechaFin]').val(event.end.format("DD-MM-YYYY"));
-                                      $("#modalUpdateEvento").modal();
-                                  },
-                              });
-                              
-                              // Oculta mensajes de Notificacion
-                              setTimeout(function () {
-                                  $(".alert").slideUp(300);
-                              }, 3000);
+                      },
 
-                            });
-                      </script>
-                  </div>
+                      events: [
+                        <?php
+                        while ($dataEvento = mysqli_fetch_array($resulEventos)) { ?>
+
+                          _id: '<?php echo $dataEvento['idReserva']; ?>',
+                          title: '<?php echo 'Reservado'; ?>',
+                          start: '<?php echo $dataEvento['fechaInicio']; ?>',
+                          end: '<?php echo $dataEvento['fechaFin']; ?>',
+                          color: '<?php echo $dataEvento['colorEvento']; ?>'
+
+
+                        <?php } ?>
+                      ],
+
+                      // Modificar Evento
+                      eventClick: function(event) {
+                        var idEvento = event._id;
+                        console.log("Abriendo modal para el evento con ID:", idEvento);
+                        $('input[name=idEvento]').val(idEvento);
+                        $('input[name=fechaInicio]').val(event.start.format('DD-MM-YYYY'));
+                        $('input[name=fechaFin]').val(event.end.format("DD-MM-YYYY"));
+                        $("#modalUpdateEvento").modal();
+                      },
+                    });
+
+                    // Oculta mensajes de Notificacion
+                    setTimeout(function() {
+                      $(".alert").slideUp(300);
+                    }, 3000);
+
+                  });
+                </script>
               </div>
-              
+            </div>
+
           </div>
-      </div>
+
+        </div>
+    </div>
     <div class="container">
-      <div class="" id=""  tabindex="-1" role="dialog">
+      <div class="" id="" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Reservar espacio</h5>
+              <h5 class="modal-title">Reservar espacio</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form name="formEvento" id="formEvento" action="nuevoEvento.php" class="form-horizontal" method="POST">
+              <div class="form-group">
+                <div class="col-sm-10">
+                  <h3>Valor por dia del inmueble: <span id="valorColones"><?php echo $dato['valorDiario']?></span> colones</h1>
+                </div>
               </div>
-              <form name="formEvento" id="formEvento" action="nuevoEvento.php" class="form-horizontal" method="POST">
-                  <div class="form-group">
-                    <label for="cantidadPersonas" class="col-sm-12 control-label" >Cantidad de personas</label>
-                    <div class="col-sm-10">
-                      <input type="text" class="form-control" name="cantidadPersonas" id="cantidadPersonas" placeholder="Cantidad de Personas">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="cantidadPersonasExtra" class="col-sm-12 control-label" >Cantidad de personas extra</label>
-                    <div class="col-sm-10">
-                      <input type="text" class="form-control" name="cantidadPersonasExtra" id="cantidadPersonasExtra" placeholder="Cantidad de Personas">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="fechaInicio" class="col-sm-12 control-label" >Fecha Ingreso</label>
-                    <div class="col-sm-10">
-                      <input type="text" class="form-control" name="fechaInicio" id="fechaInicio" placeholder="Fecha Inicio">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="fechaFin" class="col-sm-12 control-label">Fecha Salida</label>
-                    <div class="col-sm-10">
-                      <input type="text" class="form-control" name="fechaFin" id="fechaFin" placeholder="Fecha Final">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="Cupon" class="col-sm-12 control-label">Cupon de descuento</label>
-                    <div class="col-sm-10">
-                      <input type="text" class="form-control" name="Cupon" id="Cupon" placeholder="Cupon de descuento">
-                    </div>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="submit" class="btn btn-success">Guardar Evento</button>
-                  </div>
-              </form>
+              <div class="form-group">
+                <label for="cantidadPersonas" class="col-sm-12 control-label">Cantidad de personas</label>
+                <div class="col-sm-10">
+                  <input type="number" class="form-control" name="cantidadPersonas" id="cantidadPersonas" min="0" value="0" placeholder="Cantidad de Personas">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="cantidadPersonasExtra" class="col-sm-12 control-label">Cantidad de personas extra</label>
+                <div class="col-sm-10">
+                  <input type="number" class="form-control" name="cantidadPersonasExtra" id="cantidadPersonasExtra" min="0" value="0" max="5" placeholder="Cantidad de Personas">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="fechaInicio" class="col-sm-12 control-label">Fecha Ingreso</label>
+                <div class="col-sm-10">
+                  <input type="date" class="form-control" name="fechaInicio" id="fechaInicio" placeholder="Fecha Inicio">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="fechaFin" class="col-sm-12 control-label">Fecha Salida</label>
+                <div class="col-sm-10">
+                  <input type="date" class="form-control" name="fechaFin" id="fechaFin" placeholder="Fecha Final">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="Cupon" class="col-sm-12 control-label">Cupon de descuento</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" name="Cupon" id="Cupon" placeholder="Cupon de descuento">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="col-sm-10">
+                  <!-- inicio campos hidden para el calculo previo -->
+                  <input type="hidden" id="idInmueble" value="<?php echo $dato['id']; ?>">
+                  <input type="hidden" id="valorDiario" value="<?php echo $dato['valorDiario']; ?>">
+                  <input type="hidden" id="capacidadMaxima" value="<?php echo $dato['capacidadPersonas']; ?>">
+                  <input type="hidden" id="costoPersonaExtra" value="<?php echo $dato['costoPersonaExtra']; ?>">
+                  <!-- fin campos hidden para el calculo previo -->
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-10">
+                  <h5>Total sin impuestos: <span id="valorTotal">0</span> colones</h5>
+                  <h5>Total con impuestos: <span id="valorTotalImpuestos">0</span> colones</h5>
+                </div>
+              </div>
+
+
+
+              <!-- Nuevo contenedor para mostrar el valor total -->
+
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-success">Guardar Evento</button>
+              </div>
+            </form>
           </div>
         </div>
       </div>
     </div>
-  </section>
-</div>
+    </section>
+    </div>
 
-<!-- colores -->
-<!-- <div class="col-md-12" id="grupoRadio">
+    <!-- colores -->
+    <!-- <div class="col-md-12" id="grupoRadio">
 
               <input type="radio" name="color_evento" id="orange" value="#FF5722" checked>
               <label for="orange" class="circu" style="background-color: #FF5722;"> </label>
@@ -639,6 +673,7 @@ if (isset($_GET['id'])) {
   <script>
     var identificacion = <?php echo json_encode($_SESSION["Identificacion"]); ?>;
   </script>
+  <script src="../assets/js/calculoPrevioReserva/script.js"></script>
 
 <?php
 } else {

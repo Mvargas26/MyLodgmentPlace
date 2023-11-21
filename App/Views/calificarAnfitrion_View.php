@@ -1,4 +1,10 @@
-<?php include './templates/Header.php'; ?>
+<?php include './templates/Header.php'; 
+session_start();
+if (!isset($_SESSION['Identificacion']) || !isset($_SESSION['Rol']) || empty($_SESSION['Identificacion']) || empty($_SESSION['Rol'])|| $_SESSION['Rol']!=3) {
+    header('Location: ../../');
+    exit();
+}
+?>
 <link href="../assets/css/calificarAnfitrion.css" rel="stylesheet">
 
 <main id="mainA">

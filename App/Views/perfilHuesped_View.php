@@ -3,6 +3,10 @@ require_once('../Modules/Master_Class.php');
 include './templates/Header.php';
 
 session_start();
+if (!isset($_SESSION['Identificacion']) || !isset($_SESSION['Rol']) || empty($_SESSION['Identificacion']) || empty($_SESSION['Rol'])|| $_SESSION['Rol']!=3) {
+    header('Location: ../../');
+    exit();
+}
 $ObjMaster = new Master_Class();
 
 $idUser = $_SESSION['Identificacion'];

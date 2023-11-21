@@ -3,7 +3,7 @@ include './templates/Header.php';
 require_once('../Modules/Master_Class.php');
 
 $idUser = isset($_GET['idUser']) ? $_GET['idUser'] : null;
-
+//tengo duda
 try {
     $ObjMaster = new Master_Class();
 

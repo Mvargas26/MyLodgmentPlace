@@ -1,0 +1,42 @@
+#main {
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+    padding: 20px;
+  }
+  
+  /* Estilos para el contenedor de historial de reservas */
+  #reservas-historial {
+    margin-top: 20px;
+  }
+  
+  /* Estilos para la tabla de historial */
+  #reservas-historial .historial-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  #reservas-historial .historial-table th,
+  #reservas-historial .historial-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  #reservas-historial .historial-table th {
+    background-color: #f2f2f2;
+  }
+  
+  /* Estilos para el botón de volver */
+  #reservas-historial button {
+    padding: 10px 20px;
+    background-color: #ff7f5d;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+  
+  #reservas-historial button:hover {
+    background-color: #fc3700;
+  }
+  

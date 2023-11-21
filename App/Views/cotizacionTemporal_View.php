@@ -10,8 +10,6 @@ session_start();
 
     <label for="cantidadDias">Seleccionar cantidad de días:</label>
     <input type="number" id="cantidadDias" min="1" value="1">
-
-    <!-- Nuevo contenedor para mostrar el valor total -->
     <h2>Total: <span id="valorTotal">20,000</span> colones</h2>
 
 </main>

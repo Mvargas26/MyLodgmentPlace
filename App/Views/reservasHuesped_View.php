@@ -1,12 +1,16 @@
 <?php
 include './templates/Header.php';
-
+session_start();
+if (!isset($_SESSION['Identificacion']) || !isset($_SESSION['Rol']) || empty($_SESSION['Identificacion']) || empty($_SESSION['Rol'])|| $_SESSION['Rol']!=3) {
+    header('Location: ../../');
+    exit();
+}
 ?>
 <!-- ==============================================Fin header ======= -->
 <main id="main">
-    <div class="reservas-historial">
+    <div id="reservas-historial">
         <h2>Historial de Reservas</h2>
-        <table class="historial-table">
+        <table id="tablaReservas" class="historial-table">
             <thead>
                 <tr>
                     <th>Lugar</th>
@@ -17,11 +21,11 @@ include './templates/Header.php';
                     <!-- Agregar más columnas según lo que se desee mostrar -->
                 </tr>
             </thead>
-            <tbody id="tablaReservas">
+            <tbody>
                 <!-- Aquí se llenarán las filas con los datos de las reservas -->
             </tbody>
         </table>
-        <button onclick="window.history.back()">Volver</button>
+        <button id="volverBtn" onclick="window.history.back()">Volver</button>
     </div>
 </main>
 

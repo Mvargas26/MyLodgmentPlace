@@ -1,12 +1,14 @@
 $(document).ready(function() {
-    $('#crearCuponForm').submit(function(e) {
+    $('#formCrearCupon').submit(function(e) {
         e.preventDefault();
 
         // Obtener datos del formulario
+        var nombreCupon = $('#nombreCupon').val();
         var montoDescuento = $('#montoDescuento').val();
         var cantidadCupones = $('#cantidadCupones').val();
         var fechaVencimiento = $('#fechaVencimiento').val();
         var tipoDescuento = $('#tipoDescuento').val();
+        var idInmueble = $('#nombreInmueble').val();
 
         // Validar que los campos no estén vacíos
         if (montoDescuento === '' || cantidadCupones === '' || fechaVencimiento === '' || tipoDescuento === '') {
@@ -28,7 +30,7 @@ $(document).ready(function() {
         }
 
         // Validación de porcentaje máximo
-        if (tipoDescuento === 'procentual' && montoDescuento > 30) {
+        if (tipoDescuento === '1' && montoDescuento > 30) {
             alert("El descuento máximo permitido es del 30%.");
             return;
         }
@@ -42,18 +44,24 @@ $(document).ready(function() {
         // Enviar datos al servidor para crear el cupón
         $.ajax({
             type: 'POST',
-            url: 'ruta_a_tu_archivo_php_para_crear_cupon.php',
+            url: '../../App/Modules/creacionDescuentos/creacion_Descuentos_Negocios.php',
             data: {
                 crearCupon: true,
+                nombreCupon: nombreCupon,
                 montoDescuento: montoDescuento,
                 cantidadCupones: cantidadCupones,
                 fechaVencimiento: fechaVencimiento,
-                tipoDescuento: tipoDescuento
+                tipoDescuento: tipoDescuento,
+                idInmueble: idInmueble // Incluir el ID del inmueble
             },
             dataType: 'json',
             success: function(response) {
                 if (response.exito) {
                     alert('¡Cupón creado exitosamente!');
+                    //reinicia los campos del formulario
+                    $('#formCrearCupon')[0].reset();
+                    // sirve para reiniciar el url sin los ultimos valores
+                    window.history.replaceState({}, document.title, window.location.href.split('?')[0]);
                     // Otras acciones después de crear el cupón si es necesario
                 } else {
                     alert('Hubo un error al crear el cupón. Inténtelo de nuevo.');

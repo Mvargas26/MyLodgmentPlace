@@ -326,6 +326,9 @@ $(document).ready(function () {
         var identificacion = $('input[name=identificacion]').val();
         var password = $('input[name=password]').val();
 
+        $('#loginForm input[type=submit]').prop('disabled', true);
+
+
         // Validar campos
         if (!identificacion || !password) {
             Swal.fire("Error", "Por favor, complete todos los campos.", "error");
@@ -356,6 +359,7 @@ $(document).ready(function () {
                         // Si el usuario hace clic en "Aceptar", redirige
                         if (result.isConfirmed) {
                             window.location.href = 'codigoAutenticacion_view.php?identificacion=' + identificacion + '&password=' + password;
+                            window.history.replaceState({}, document.title, window.location.href.split('?')[0]);
                         }
                     });
                 } else {

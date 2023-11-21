@@ -39,6 +39,12 @@ $base_path = '../assets/';
   <link href="<?php echo $base_path; ?>css/resenias.css" rel="stylesheet">
   <link href="<?php echo $base_path; ?>css/publicarInmueble.css" rel="stylesheet">
   <link href="<?php echo $base_path; ?>css/Registro/styleRegistro.css" rel="stylesheet">
+  <link href="<?php echo $base_path; ?>css/HistorialReservas/HistorialReservas.css" rel="stylesheet">
+  <link href="<?php echo $base_path; ?>css/CreacionDescuentos/creacionDescuentos.css" rel="stylesheet">
+ 
+
+  <!-- Template Main CSS File -->
+
 
 
   <!-- FireBase -->

@@ -1,28 +1,22 @@
 <?php
-
 require_once('../Master_Class.php');
 $ObjMaster = new Master_Class();
 
-class Negocios_CrearCupon {
-    public function crearCupon($montoDescuento, $cantidadCupones, $fechaVencimiento, $tipoDescuento) {
-        global $ObjMaster;
-
-        // Validaciones adicionales aquí si es necesario
-
-        // Llamada a la función del MasterClass para crear el cupón
-        return $ObjMaster->crearCupon($montoDescuento, $cantidadCupones, $fechaVencimiento, $tipoDescuento);
-    }
-}
-
 if (isset($_POST["crearCupon"])) {
-    $negociosCrearCupon = new Negocios_CrearCupon();
-    $resultado = $negociosCrearCupon->crearCupon(
-        $_POST["montoDescuento"],
-        $_POST["cantidadCupones"],
-        $_POST["fechaVencimiento"],
-        $_POST["tipoDescuento"]
-    );
+    try {
+        $nombreCupon = $_POST["nombreCupon"];
+        $montoDescuento = $_POST["montoDescuento"];
+        $cantidadCupones = $_POST["cantidadCupones"];
+        $fechaVencimiento = $_POST["fechaVencimiento"];
+        $tipoDescuento = $_POST["tipoDescuento"];
+        $idInmueble = $_POST["idInmueble"]; // Obtener el ID del inmueble
 
-    echo json_encode($resultado);
+        // Llamada a la función correspondiente en Master_Class para crear el cupón con el ID del inmueble
+        $resultado = $ObjMaster->crearCupon($nombreCupon, $montoDescuento, $cantidadCupones, $fechaVencimiento, $tipoDescuento, $idInmueble);
+
+        echo json_encode($resultado);
+    } catch (Exception $e) {
+        echo json_encode(array('error' => $e->getMessage()));
+    }
 }
 ?>

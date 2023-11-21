@@ -2,9 +2,16 @@
 include './templates/Header.php';
 $identificacion = $_GET['identificacion'];
 $password = $_GET['password'];
+session_start();
+if (!isset($identificacion) || !isset($password) || empty($identificacion) || empty($password)) {
+    header('Location: ../../');
+    exit();
+}
 ?>
 <!-- ==============================================Fin header ======= -->
 <main id="main">
+
+<link href="../assets/css/codigoAutenticacion.css" rel="stylesheet">
 
     <div id="CajaCodigoAutenticacion">
         <h2>Código de Autenticación</h2>
