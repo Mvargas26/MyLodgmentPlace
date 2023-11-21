@@ -7,7 +7,7 @@ include('../Modules/fullCalendar/config.php');
 $SqlEventos   = ("SELECT * FROM tbreserva");
 $resulEventos = mysqli_query($con, $SqlEventos);
 
-// session_start();
+session_start();
 // if (!isset($_SESSION['id']) || !isset($_SESSION['rol']) || empty($_SESSION['id']) || empty($_SESSION['rol'])|| $_SESSION['rol']!=1) {
 //     header('Location: ../../');
 //     exit();
@@ -112,7 +112,7 @@ if (isset($_GET['id'])) {
             </div>
             <div class="text-center mt-3" id="bodyDivButton">
               <?php
-              if (isset($_SESSION["nombre"])) {
+              if (isset($_SESSION["Rol"])) {
               ?>
                 <button class="botonesListaFavoritos" id="btnAgregarLista" name="btnAgregarFavoritos" type="submit">+ Nueva Lista <i class="fa-solid fa-list" style="color: #ffffff;"></i></button>
                 <button class="botonesListaFavoritos" id="btnAgregarFavoritos" name="btnAgregarFavoritos" type="submit">Agregar favorito <i class="fa-duotone fa-star" style="--fa-primary-color: #e14a09; --fa-secondary-color: #fafafa; --fa-secondary-opacity: 0.4;"></i> </button>
