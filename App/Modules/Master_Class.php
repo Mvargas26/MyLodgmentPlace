@@ -9,12 +9,19 @@ use PHPMailer\PHPMailer\SMTP;
 
 class Master_Class
 {
+    ////Plesk Remoto
     // private $server = "tiusr29pl.cuc-carrera-ti.ac.cr";
     // private $username = "sitios";
     // private $password = "Sitios2023*";
     // private $db = "mylodgmentplace";
+    ////----------------------------------------------------------------
+    //pleskLocal
+    // private $server = "localhost:3306";
+    // private $username = "sitios";
+    // private $password = "Sitios2023*";
+    // private $db = "mylodgmentplace";
     private $conn;
-
+////Plesk 
     private $server = "185.211.7.52";
     private $username = "u538860919_sitios";
     private $password = "Sitios2023*";
