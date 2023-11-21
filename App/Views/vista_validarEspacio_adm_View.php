@@ -1,4 +1,10 @@
-<?php include './templates/Header.php'; ?>
+<?php include './templates/Header.php'; 
+session_start();
+if (!isset($_SESSION['Identificacion']) || !isset($_SESSION['Rol']) || empty($_SESSION['Identificacion']) || empty($_SESSION['Rol'])|| $_SESSION['Rol']!=1) {
+    header('Location: ../../');
+    exit();
+}
+?>
 
 <main id="main">
     <meta charset="UTF-8">
