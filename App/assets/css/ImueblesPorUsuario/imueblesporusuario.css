@@ -65,11 +65,7 @@ img {
     #btn:hover span {
         transform: translateX(0.15em);
         background-color: #f45f41; 
-        /* color: #524156;  */
     }
-
-
-
 
 .cards {
   display: flex;
