@@ -17,27 +17,30 @@ session_start();
   ?>  
   <input id="identificacion" type="hidden" value="<?php echo $_SESSION["Identificacion"] ?>" ></input>
   <!-- <input id="identificacion" type="text" value="304710908" ></input> -->
+  <br>
+    <br>
+    <br>
+    <br>
 
 
+      <div id="ContenedorResenias">
+          
+          <section id="DejaTuResenia">
 
-<div id="ContenedorResenias">
-      
-      <section id="DejaTuResenia">
+            <div id="reseniasDiv">
+              <form id="resenaForm" action="" method="post">
+                <h2>Elige un espacio</h2>
+                <br />
 
-        <div id="reseniasDiv">
-          <form id="resenaForm" action="" method="post">
-            <h2>Elige un espacio</h2>
-            <br />
-
-            <select class="form-control" name="LUGARES" id="LUGARES" required>
-                <option value=""></option>
-            </select>
+                <select class="form-control" name="LUGARES" id="LUGARES" required>
+                    <option value=""></option>
+                </select>
 
 
-          </form>
-        </div>
-        <input type="hidden" id="estrellasSeleccionadas" value="1">
-      </section> <!--end section deja tu resena -->
+              </form>
+            </div>
+            <input type="hidden" id="estrellasSeleccionadas" value="1">
+          </section> <!--end section deja tu resena -->
 
 
 
@@ -70,6 +73,10 @@ session_start();
       </section>
 
 </div>
+<br>
+    <br>
+    <br>
+    <br>
 <!-- <script>var identificacion =; </script> -->
 
 <script src="../assets/js/resenas/script_resenas.js"></script>

@@ -13,38 +13,31 @@ session_start();
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
         <link href="../assets/css/validarIdentidad.css" rel="stylesheet">
-        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     </head>
     <body>
         <!-- Contenido principal -->
         <main id="main">
+    <br>
+    <br>
             <h2 class="text-center">Validación de Identidad</h2>
+    <br>
+    <br>
             <div id="leftContainer" class="col-md-6">
-                <p>
-                    Cédula:
-                    <span id="cedulaFromDatabase" class="value-container"></span>
-                </p>
-                <p>
-                    Nombre:
-                    <span id="nameFromDatabase" class="value-container"></span>
-                </p>
-                <p>
-                    Estado de Validacion:
-                    <span id="estadoFromDatabase" class="value-container1"></span>
-                </p>
+                <p>Cédula:<span id="cedulaFromDatabase" class="value-container"></span></p>
+                <p>Nombre:<span id="nameFromDatabase" class="value-container"></span></p>
+                <p>Estado de Validacion:<span id="estadoFromDatabase" class="value-container1"></span></p>
+
                 <button type="button" id="uploadButton" class="btn btn-primary" data-toggle="modal"
                     data-target="#uploadModal">
                     Subir Foto
                 </button>
             </div>
-            <br>
-            <br>
             <div id="rightContainer" class="col-md-6">
-                <!-- Contenedor para mostrar la imagen -->
-                <div id="imageColumn" class="col-md-6 text-center">
-                    <div id="imageContainer"></div>
+                    <div id="imageColumn" class="col-md-6 text-center">
+                        <div id="imageContainer"></div>
+                    </div>
                 </div>
-            </div>
+            <br>
         </main>
         <!-- Modal para subir foto -->
         <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="uploadModalLabel"
@@ -81,6 +74,14 @@ session_start();
     <br>
     <br>
 </main>
+<br>
+    <br>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
 <!-- ==============================================Inicio Footer ======= -->
 <?php
 include './templates/Footer.php';
