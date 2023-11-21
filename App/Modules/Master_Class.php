@@ -21,7 +21,7 @@ class Master_Class
     // private $password = "Sitios2023*";
     // private $db = "mylodgmentplace";
     private $conn;
-////Plesk 
+    ////Plesk 
     private $server = "185.211.7.52";
     private $username = "u538860919_sitios";
     private $password = "Sitios2023*";
@@ -206,18 +206,34 @@ class Master_Class
 
     function GetUsuarios()
     {
-        $sql = "SELECT * FROM tbusuario";
-        $result = $this->conn->query($sql);
+        $sql = "SELECT idUser, nombre, apellido1, apellido2, correo
+        FROM tbusuario";
 
-        if ($result->num_rows > 0) {
-            $users = array();
-            while ($row = $result->fetch_assoc()) {
-                $users[] = $row;
+        $users = array();
+
+        try {
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    // Manejo de valores nulos: Si un valor es nulo, se establece como null en el array
+                    foreach ($row as $key => $value) {
+                        if ($value === null) {
+                            $row[$key] = null;
+                        }
+                    }
+                    $users[] = $row;
+                }
             }
-            return $users;
-        } else {
-            return array();
+        } catch (Exception $e) {
+            // Manejo de errores: Aquí puedes registrar o notificar el error
+            // Por ejemplo: error_log($e->getMessage());
+            return array(); // Devuelve un array vacío si ocurre un error
         }
+
+        return $users;
     }
 
     /* --------------------------- Otras funciones --------------------------- */
@@ -393,11 +409,9 @@ class Master_Class
 
                     if ($this->GetConexion()->query($query)) {
                         return true;
-                    }
-                    else{
+                    } else {
                         return false;
                     }
-
                 } else {
                     return false;
                 }
@@ -446,9 +460,12 @@ class Master_Class
     }
 
 
-    function Insertar_PoliticasInmueble($cancelacion , 
-    $reembolso , $horario , $cargos)
-    {
+    function Insertar_PoliticasInmueble(
+        $cancelacion,
+        $reembolso,
+        $horario,
+        $cargos
+    ) {
         // Obtener el último ID de la tabla tbinmueble
         $query = "SELECT id FROM tbinmueble ORDER BY id DESC LIMIT 1;";
         $result = $this->GetConexion()->query($query);
@@ -535,8 +552,6 @@ class Master_Class
 
     function CargarPoliticas()
     {
-
-
     } //end politicas
 
 
@@ -544,7 +559,7 @@ class Master_Class
 
     /*-----------------------------------------------AUNTETINTIFICACION--------------------------------------------------*/
 
-//Inicio funcion generarCodigoAleatorio
+
     function generarCodigoAleatorio($longitud)
     {
         $caracteres = "0123456789";
@@ -556,9 +571,7 @@ class Master_Class
 
         return $codigo;
     }
-//Fin funcion generarCodigoAleatorio
 
-//Inicio funcion almacenarCodigoAutenticacion
     function almacenarCodigoAutenticacion($identificacion, $codigo_autenticacion)
     {
         try {
@@ -579,9 +592,7 @@ class Master_Class
         }
     }
 
-//Fin funcion almacenarCodigoAutenticacion
 
-//Inicio funcion enviarCodigoAutenticacionCorreo
     function enviarCodigoAutenticacionCorreo($destinatario, $codigo_autenticacion)
     {
         $mail = new PHPMailer(true);
@@ -622,9 +633,7 @@ class Master_Class
         }
     }
 
-    //Fin funcion enviarCodigoAutenticacionCorreo
 
-//Inicio funcion enviarMensajesCorreo
     function enviarMensajesCorreo($destinatario, $accion)
     {
         $mail = new PHPMailer(true);
@@ -688,9 +697,7 @@ class Master_Class
         }
     }
 
-//Fin funcion enviarMensajesCorreo
 
-//Inicio funcion verificarCodigoAutenticacion
     function verificarCodigoAutenticacion($identificacion, $codigo_ingresado)
     {
         try {
@@ -711,10 +718,6 @@ class Master_Class
         }
     }
 
-//Fin funcion verificarCodigoAutenticacion
-
-//Inicio funcion eliminarCodigoAutenticacion
-
     function eliminarCodigoAutenticacion($identificacion)
     {
         try {
@@ -734,35 +737,13 @@ class Master_Class
         }
     }
 
-    //Fin funcion eliminarCodigoAutenticacion
 
-//Inicio funcion calcularValorTotal
-
-// public function calcularValorTotal($idInmueble, $cantidadPersonas, $cantidadPersonasExtra, $fechaInicio, $fechaFin, $cuponDescuento) {
-//     // Consulta a la base de datos para obtener los detalles del inmueble por ID
-//     $resultadoConsulta = $this->ConsultarInmueblesPorID($idInmueble);
-//     $datos = json_decode($resultadoConsulta, true);
-
-//     if ($datos) {
-//         foreach ($datos as $dato) {
-//             // Obtener la capacidad máxima de personas permitidas para el lugar
-//             $capacidadMaxima = $dato['capacidadPersonas'];
-
-//             // Validar la cantidad de personas ingresada
-//             if ($cantidadPersonas > $capacidadMaxima) {
-//                 return json_encode(array('error' => 'La cantidad de personas excede la capacidad permitida.'));
-//             }
-//         }
-//     } else {
-//         return json_encode(array('error' => 'No se encontraron datos para este inmueble.'));
-//     }
-
-//     // Continuar con los demás cálculos
-// }
-
-//Fin funcion calcularValorTotal
-
-//Inicio funcion Historial de reservas
+    function calcularValorTotal($cantidadDias)
+    {
+        $valorDiario = 20000;
+        $valorTotal = $valorDiario * $cantidadDias;
+        return $valorTotal;
+    }
 
     public function obtenerHistorialReservasUsuario($idUser)
     {
@@ -794,51 +775,16 @@ class Master_Class
     }
     //fin funcion Historial de reservas
 
-//Inicio funcion validarCupon
-    function validarCupon($idCupon) {
-        try {
-            // Consulta para verificar si el cupón existe y está vigente
-            $query = "SELECT idCupon, Monto, CantidadCupones, TipoDescuento 
-                      FROM tbdescuento 
-                      WHERE idCupon = '$idCupon' AND validez = 1";
-    
-            $result = $this->getConexion()->query($query);
-    
-            if ($result) {
-                // Si se encuentra el cupón y está vigente, retornar los datos del cupón
-                if ($result->num_rows > 0) {
-                    $cupon = $result->fetch_assoc();
-                    return $cupon;
-                } else {
-                    // Si el cupón no está vigente o no existe, retornar null
-                    return null;
-                }
-            } else {
-                throw new Exception("Error en la consulta: " . $this->getConexion()->error);
-            }
-        } catch (Exception $e) {
-            error_log($e->getMessage());
-            return null;
-        }
-    }
-//fin funcion validarCupon
 
-    public function crearCupon($nombreCupon, $montoDescuento, $cantidadCupones, $fechaVencimiento, $tipoDescuento, $idInmueble) {
-        // Insertar cupón en tbDescuento
-        $Validez = 1;
-        $queryDescuento = "INSERT INTO tbdescuento (idCupon, Monto, CantidadCupones, TipoDescuento) 
-                           VALUES ('$nombreCupon','$montoDescuento', '$cantidadCupones', '$tipoDescuento')";
-        
-        $this->GetConexion()->query($queryDescuento);
-        // $idCupon = $this->GetConexion()->insert_id;
+    public function crearCupon($montoDescuento, $cantidadCupones, $fechaVencimiento, $tipoDescuento)
+    {
+        // Aquí realizas la lógica para crear el cupón en la base de datos
+        // Por ejemplo:
+        // $query = "INSERT INTO tbDescuento (monto, cantidadCupones, fechaVencimiento, tipoDescuento) VALUES ('$montoDescuento', '$cantidadCupones', '$fechaVencimiento', '$tipoDescuento')";
+        // Ejecutar la consulta y manejar el resultado
 
-        // Insertar relación en tbInmuebleCupon
-        $queryInmuebleCupon = "INSERT INTO tbinmueblecupon (idInmueble, idCupon,fechaVencimiento, Validez) 
-                               VALUES ('$idInmueble', '$nombreCupon', '$fechaVencimiento', '$Validez')";
-
-        $this->GetConexion()->query($queryInmuebleCupon);
-
-        return array('exito' => true);
+        // Retorna true si la creación fue exitosa o false si hubo algún error
+        return true; // O false en caso de error
     }
 
     public function obtenerNombresInmuebles($idPropietario)
@@ -871,7 +817,7 @@ class Master_Class
     {
 
         try {
-            
+
             $query = "SELECT
                     mu.id,
                     mu.nombre AS nombre_inmueble,
@@ -1216,7 +1162,7 @@ class Master_Class
         }
     }
 
-    function addNuevaLista($idusuario,$nombreLista)
+    function addNuevaLista($idusuario, $nombreLista)
     {
 
         $query = "INSERT INTO `tblista` (`idusuario`, `nombreLista`) VALUES ($idusuario,'$nombreLista');";
@@ -1505,8 +1451,8 @@ class Master_Class
                     `tbusuario` ON tbreserva.idUsuario = tbusuario.idUser
                     where tbinmueble.Propietario = $identificacion;";
 
-                $result = $this->getConexion()->query($query);
-                $arrayData = array();
+            $result = $this->getConexion()->query($query);
+            $arrayData = array();
 
             if ($result) {
                 while ($row = $result->fetch_assoc()) {
@@ -1520,7 +1466,7 @@ class Master_Class
             error_log($e->getMessage());
             return null;
         }
-    }//fin consultaInfoparaCalificarHuesped
+    } //fin consultaInfoparaCalificarHuesped
 
     function consultaInfoparaCalificarAnfitrion($identificacion)
     {
@@ -1538,8 +1484,8 @@ class Master_Class
             `tbusuario` ON tbinmueble.Propietario = tbusuario.idUser
             where tbreserva.idUsuario = $identificacion;";
 
-                $result = $this->getConexion()->query($query);
-                $arrayData = array();
+            $result = $this->getConexion()->query($query);
+            $arrayData = array();
 
             if ($result) {
                 while ($row = $result->fetch_assoc()) {
@@ -1553,7 +1499,7 @@ class Master_Class
             error_log($e->getMessage());
             return null;
         }
-    }//fin consultaInfoparaCalificarHuesped
+    } //fin consultaInfoparaCalificarHuesped
 
     //----------------------------------------------------------CALIFICACIONES ------------------------------------------
     function InsertarCalificacion($reservaBase, $comentario, $estrellas, $cedulacalificador, $tipoCalificacion)
@@ -1588,10 +1534,9 @@ class Master_Class
             $stmt->close();
             $conexion->close();
         }
-
     }
 
-     //----------------------------------------------------------Validar Perfil ------------------------------------------
+    //----------------------------------------------------------Validar Perfil ------------------------------------------
 
     // función para actualizar el estado en la base de datos
     function actualizarEstado($idUser, $nuevoEstado)
@@ -1601,21 +1546,21 @@ class Master_Class
 
             $idUser = $conn->real_escape_string($idUser);
             $nuevoEstado = $conn->real_escape_string($nuevoEstado);
- 
-           $sql = "UPDATE tbvalidacionperfil SET estadoValidacion = '$nuevoEstado' WHERE nombreImagenUsuario = '$idUser'";
 
-           if ($conn->query($sql) === TRUE) {
-               return true; 
-           } else {
-               return false;
-           }
-       } catch (Exception $e) {
-           echo "Error: " . $e->getMessage();
-           return false; 
-       }
+            $sql = "UPDATE tbvalidacionperfil SET estadoValidacion = '$nuevoEstado' WHERE nombreImagenUsuario = '$idUser'";
+
+            if ($conn->query($sql) === TRUE) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
     }
 
-     // función para Validar la identidad
+    // función para Validar la identidad
 
     function validarIdentidad($idUser)
     {
@@ -1636,17 +1581,17 @@ class Master_Class
             $idUser = $conn->real_escape_string($idUser);
 
             // Consulta SQL para obtener el estado del usuario
-            $sql = "SELECT estadoValidacion FROM tbvalidacionperfil WHERE nombreImagenUsuario = '$idUser'";
+            $sql = "SELECT estadoValidacion FROM tbvalidacionperfil WHERE nombreImagenUsuario = '$idUser' limit 1";
 
             // Ejecutar la consulta
             $resultado = $conn->query($sql);
-
+            
             // Verificar si se obtuvieron resultados
             if ($resultado->num_rows > 0) {
                 $fila = $resultado->fetch_assoc();
                 return $fila['estadoValidacion'];
             } else {
-                return "No se encontró el usuario";
+                return "El usuario no se encuentra validado";
             }
         } catch (Exception $e) {
             echo "Error al obtener el estado del usuario: " . $e->getMessage();
@@ -1680,8 +1625,5 @@ class Master_Class
 
         return array();
     }
-
-
-
 } //fn cl_masterClass
 $ObjMaster = new Master_Class();

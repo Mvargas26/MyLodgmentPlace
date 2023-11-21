@@ -1,9 +1,5 @@
 <?php include './templates/Header.php'; 
-session_start(); //tengo duda
-if (!isset($_SESSION['id']) || !isset($_SESSION['rol']) || empty($_SESSION['id']) || empty($_SESSION['rol'])|| $_SESSION['rol']!=1) {
-    header('Location: ../../');
-    exit();
-}
+
 ?>
 
 <main id="main">

@@ -1,12 +1,12 @@
 <?php
 include './templates/Header.php';
-$identificacion = $_GET['identificacion'];
-$password = $_GET['password'];
+$identificacion = $_POST['identificacion'];
+$password = $_POST['password'];
 session_start();
-if (!isset($identificacion) || !isset($password) || empty($identificacion) || empty($password)) {
-    header('Location: ../../');
-    exit();
-}
+// if (!isset($identificacion) || !isset($password) || empty($identificacion) || empty($password)) {
+//     header('Location: ../../');
+//     exit();
+// }
 ?>
 <!-- ==============================================Fin header ======= -->
 <main id="main">

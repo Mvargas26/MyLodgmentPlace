@@ -3,9 +3,10 @@ require_once('../Master_Class.php');
 
 $master = new Master_Class();
 
-// Obtener la lista de usuarios desde la Master Class
 $users = $master->GetUsuarios();
 
-// Devolver los usuarios como respuesta en formato JSON
+// Configurar el encabezado para indicar que la respuesta es JSON
+header('Content-Type: application/json');
+
 echo json_encode($users);
 ?>

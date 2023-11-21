@@ -56,10 +56,10 @@ const RegistroUsuarios = {
                         var x = JSON.parse(response);
                         if (x.exito == true) {
                             Swal.fire("Éxito", "Se guardaron los datos correctamente. " + x.nombre, "success");//mensaje bonito
-                            setTimeout(function() {
-                                location.href="../../index.php";
-                                },
-                             2000);
+                            setTimeout(function () {
+                                location.href = "../../index.php";
+                            },
+                                2000);
                         } else {
                             console.log(x.response);
                             Swal.fire("Error", "Lo sentimos, ocurrió un error.", "error");
@@ -117,7 +117,7 @@ const Login = {
         const formData = {
             identificacion,
             password
-        }; 
+        };
         $.ajax({
             url: "../../App/Modules/Login/login_Negocios.php",
             type: "POST",
@@ -128,10 +128,10 @@ const Login = {
                 var x = JSON.parse(response);
                 if (x.exito == true) {
                     Swal.fire("Éxito", "Bienvenido " + x.nombre, "success");//mensaje bonito
-                    setTimeout(function() {
-                        location.href="../../index.php";
-                        },
-                     2000);
+                    setTimeout(function () {
+                        location.href = "../../index.php";
+                    },
+                        2000);
                 } else {
                     console.log(x.response);
                     Swal.fire("Error", "Lo sentimos, ocurrió un error.", "error");
@@ -214,21 +214,21 @@ const CargarServicios = {
 document.addEventListener('DOMContentLoaded', function () {
     window.addEventListener('load', function () {
 
-        
+
         var hiddenInputs = document.querySelectorAll('.hiddenInput');
-        
+
         console.log(hiddenInputs);
         console.log("SE ACTIVA EL SCRIPT DE LOS INPUT HIDDEN");
         var valoresSeleccionados = [];
-        
+
         // Función para manejar el cambio en los checkboxes
         function handleCheckboxChange(event) {
-            
+
             // Encuentra el input hidden asociado al checkbox
             var hiddenInput = event.target.parentElement.querySelector('.hiddenInput');
-            
+
             console.log("SE HIZO CLICK EN EL CHECKBOX");
-            
+
             // Verifica si el checkbox está marcado o desmarcado
             if (event.target.checked) {
                 // Si está marcado, agrega el valor al array
@@ -240,14 +240,14 @@ document.addEventListener('DOMContentLoaded', function () {
                     valoresSeleccionados.splice(index, 1);
                 }
             }
-            
+
             var ArrayServicios = document.getElementById("ArrayServicios");
-            
+
             ArrayServicios.value = JSON.stringify(valoresSeleccionados);
             console.log(valoresSeleccionados);
         }
-                
-                
+
+
         hiddenInputs.forEach(function (hiddenInput) {
             var checkbox = hiddenInput.parentElement.querySelector('input[type="checkbox"]');
             checkbox.addEventListener('change', handleCheckboxChange);
@@ -358,8 +358,16 @@ $(document).ready(function () {
                     }).then((result) => {
                         // Si el usuario hace clic en "Aceptar", redirige
                         if (result.isConfirmed) {
-                            window.location.href = 'codigoAutenticacion_view.php?identificacion=' + identificacion + '&password=' + password;
+                            window.location.href = 'codigoAutenticacion_view.php';
+                            // Enviar los datos de forma segura por POST
+                            var form = $('<form action="codigoAutenticacion_view.php" method="post">' +
+                                '<input type="hidden" name="identificacion" value="' + identificacion + '">' +
+                                '<input type="hidden" name="password" value="' + password + '">' +
+                                '</form>');
+                            $('body').append(form);
+                            form.submit();
                             window.history.replaceState({}, document.title, window.location.href.split('?')[0]);
+
                         }
                     });
                 } else {
@@ -407,10 +415,10 @@ $(document).ready(function () {
             success: function (response) {
                 if (response.exito) {
                     Swal.fire("Éxito", "Bienvenido ", "success");//mensaje bonito
-                    setTimeout(function() {
-                        location.href="../../index.php";
-                        },
-                     2000);
+                    setTimeout(function () {
+                        location.href = "../../index.php";
+                    },
+                        2000);
                 } else {
                     // Mostrar el mensaje de error
                     Swal.fire("Error", "Código de autenticación inválido. Inténtelo de nuevo.", "error");

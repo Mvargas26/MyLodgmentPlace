@@ -11,8 +11,14 @@ $(document).ready(function () {
             userList.forEach(function (user) {
                 var userDiv = $('<div class="user"></div>');
 
-                var profileImage = $('<img>').attr('src', user.fotoperfil);
-                userDiv.append(profileImage);
+                //var profileImage = $('<img>').attr('src', user.fotoperfil);
+                var icono = document.createElement("i");
+                icono.className = "bi bi-person-fill";
+                icono.style.fontSize = "50px";
+                icono.style.color = "#ff7f5d";
+                // <i id="perfil" class="bi bi-person-fill"></i>
+
+                userDiv.append(icono);
 
                 var userDetails = $('<div class="user-details"></div>');
 
@@ -42,6 +48,9 @@ $(document).ready(function () {
         },
         error: function (xhr, status, error) {
             console.error('Error al obtener la lista de usuarios:', error);
+            console.log(xhr);
+            console.log(status);
+            console.log(error);
             alert('Error al obtener la lista de usuarios. Por favor, inténtelo de nuevo más tarde.');
         }
     });

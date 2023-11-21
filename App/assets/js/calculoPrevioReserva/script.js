@@ -35,44 +35,30 @@ document.addEventListener("DOMContentLoaded", function () {
         calcularValorTotal();
     });
 
-    fechaInicioInput.addEventListener("click", function () {
+    fechaInicioInput.addEventListener("change", function () {
         console.log("Fecha de inicio cambiada");
-        console.log("Valor de fechaInicioInput:", fechaInicioInput.value);
         calcularCantidadDias();
         calcularValorTotal();
     });
     
-    fechaFinInput.addEventListener("click", function () {
+    fechaFinInput.addEventListener("change", function () {
         console.log("Fecha de fin cambiada");
-        console.log("Valor de fechaInicioInput:", fechaInicioInput.value);
         calcularCantidadDias();
         calcularValorTotal();
     });
 
     function calcularCantidadDias() {
-        var fechaInicioString = fechaInicioInput.value;
-        var fechaFinString = fechaFinInput.value;
+        var fechaInicio = new Date(fechaInicioInput.value);
+        var fechaFin = new Date(fechaFinInput.value);
 
-        var partesFechaInicio = fechaInicioString.split("/");
-        var partesFechaFin = fechaFinString.split("/");
-
-        var fechaInicioFormato = partesFechaInicio[2] + "-" + partesFechaInicio[0] + "-" + partesFechaInicio[1];
-        var fechaFinFormato = partesFechaFin[2] + "-" + partesFechaFin[0] + "-" + partesFechaFin[1];
-
-        var fechaInicio = new Date(fechaInicioFormato);
-        var fechaFin = new Date(fechaFinFormato);
-
-        if (fechaInicio && fechaFin && fechaFin.getTime() > fechaInicio.getTime()) {
+        if (!isNaN(fechaInicio.getTime()) && !isNaN(fechaFin.getTime()) && fechaFin.getTime() > fechaInicio.getTime()) {
             var unDia = 24 * 60 * 60 * 1000;
             var diferenciaEnMilisegundos = fechaFin.getTime() - fechaInicio.getTime();
-            var cantidadDias = Math.round(diferenciaEnMilisegundos / unDia);
-
-            cantidadDiasTotal = cantidadDias;
+            cantidadDiasTotal = Math.round(diferenciaEnMilisegundos / unDia);
         } else {
             cantidadDiasTotal = 0;
         }
     }
-
     function calcularValorTotal() {
         var valorDiario = parseFloat(valorDiarioElement.textContent.replace(/\D/g, ''));
         var cantidadDias = parseInt(cantidadDiasTotal);

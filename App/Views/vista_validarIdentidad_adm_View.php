@@ -4,10 +4,7 @@ include './templates/Header.php';
 require_once '../Modules/Master_Class.php';
 
 session_start();
-if (!isset($_SESSION['Identificacion']) || !isset($_SESSION['Rol']) || empty($_SESSION['Identificacion']) || empty($_SESSION['Rol'])|| $_SESSION['Rol']!=1) {
-    header('Location: ../../');
-    exit();
-}
+
 
 $idUser = isset($_GET['idUser']) ? $_GET['idUser'] : null;
 
