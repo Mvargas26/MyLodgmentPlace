@@ -31,7 +31,7 @@ include './templates/Header.php';
         </div>
         <div class="cards-container">
             <div class="card">
-                <a href="mis_resenasHuesped_View.php">Reseñas y Calificacion de Huesped</a>
+                <a href="mis_resenasAnfitrion_View.php">Reseñas y Calificacion de Huesped</a>
             </div>
             <div class="card">
                 <a href="mi_banco_View.php">Mi Banco</a>
