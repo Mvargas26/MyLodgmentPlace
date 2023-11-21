@@ -6,8 +6,12 @@
     <link rel="stylesheet" href="../assets/css/vistaPerfilUsuarios.css">
     <div class="contener">
         <br>
+            <a href="gestionPerfilUsuarios_View.php" style="margin-left: 10px;">
+                <i class="fa-solid fa-caret-left fa-beat-fade fa-2xl" style="color: #443745;"></i>
+            </a>
+        <br>
         <h2>Perfil de Usuario</h2>
-
+       
         <div class="contiene">
             <img src="" alt="Foto de Perfil" id="userProfileImage">
             <div class="user-details" id="userDetails">

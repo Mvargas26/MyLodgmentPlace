@@ -45,6 +45,9 @@ session_start();
             <div class="card">
                 <a href="mis_resenasHuesped_View.php">Historial de Reseñas</a>
             </div>
+            <div class="card">
+                <a href="calificarHuespedes_View.php">Calificar Anfitrion</a>
+            </div>
             
         </div>
     <br>

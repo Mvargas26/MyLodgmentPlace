@@ -10,7 +10,11 @@
             $estrellasSeleccionadas = $_POST['formData']['estrellasSeleccionadas'];
             $cedAnfitrionCalifica = $_POST['formData']['cedAnfitrionCalifica'];
             //calificar Huesped es 1
-            $tipoCalificacion = 1;
+            if ($_POST['formData']['Rol']==2) {
+                $tipoCalificacion = 1;
+            }else{
+                $tipoCalificacion = 3;
+            }
             
              $resultadoConsulta = $ObjMaster->InsertarCalificacion( $ReservaCalificar, $comentarioCalificacion,
              $estrellasSeleccionadas,$cedAnfitrionCalifica,$tipoCalificacion);

@@ -2,8 +2,7 @@ $(document).ready(function () {
     // Obtener el ID del usuario desde la URL
     var idUser = obtenerParametroUrl('idUser');
     console.log('ID de usuario:', idUser);
-
-    // Obtener la lista de inmuebles del propietario desde el servidor mediante una solicitud AJAX
+    
     $.ajax({
         type: 'POST',
         url: '../../App/Modules/obtenerInmuebles/inmueblesPorPropietario_Negocios.php',
@@ -14,49 +13,54 @@ $(document).ready(function () {
             inmuebleContainer.empty(); // Limpiar contenido existente
 
             if (inmuebleList.length > 0) {
+                // Crear la lista <ul>
+                var inmuebleContainer = $('<ul class="cards"></ul>');
+            
                 inmuebleList.forEach(function (inmueble) {
-                    var inmuebleDiv = $('<div class="inmueble"></div>');
+                    var inmuebleDiv = $('<li class="cards__item"><div class="card"><div class="card__image card__image--fence"></div><div class="card__content"></div></div></li>');
+                    
+                    // Nombre del inmueble
+                    var inmuebleName = $('<div class="card__title"></div>').text(inmueble.nombre);
+                    inmuebleDiv.find('.card__content').append(inmuebleName);
             
-                    var inmuebleName = $('<div></div>').text(inmueble.nombre);
-                    inmuebleDiv.append(inmuebleName);
+                    // Otros detalles del inmueble
+                    var inmuebleDisponibilidad = $('<p></p>').text('Disponibilidad: ' + inmueble.disponibilidad);
+                    inmuebleDiv.find('.card__content').append(inmuebleDisponibilidad);
             
-                    var inmuebleDisponibilidad = $('<div></div>').text('Disponibilidad: ' + inmueble.disponibilidad);
-                    inmuebleDiv.append(inmuebleDisponibilidad);
+                    var inmuebleValorDiario = $('<p></p>').text('Valor Diario: ' + inmueble.valorDiario);
+                    inmuebleDiv.find('.card__content').append(inmuebleValorDiario);
             
-                    var inmuebleValorDiario = $('<div></div>').text('Valor Diario: ' + inmueble.valorDiario);
-                    inmuebleDiv.append(inmuebleValorDiario);
+                    var inmuebleEstrellas = $('<p></p>').text('Estrellas: ' + inmueble.estrellas);
+                    inmuebleDiv.find('.card__content').append(inmuebleEstrellas);
             
-                    var inmuebleEstrellas = $('<div></div>').text('Estrellas: ' + inmueble.estrellas);
-                    inmuebleDiv.append(inmuebleEstrellas);
+                    var inmuebleDireccion = $('<p></p>').text('Dirección: ' + inmueble.direccion);
+                    inmuebleDiv.find('.card__content').append(inmuebleDireccion);
             
-                    var inmuebleDireccion = $('<div></div>').text('Dirección: ' + inmueble.direccion);
-                    inmuebleDiv.append(inmuebleDireccion);
-
-                    var inmuebleCapacidadPersonas = $('<div></div>').text('Capacidad de Personas: ' + inmueble.capacidadPersonas);
-                    inmuebleDiv.append(inmuebleCapacidadPersonas);
+                    var inmuebleCapacidadPersonas = $('<p></p>').text('Capacidad de Personas: ' + inmueble.capacidadPersonas);
+                    inmuebleDiv.find('.card__content').append(inmuebleCapacidadPersonas);
             
-                    var inmuebleCostoPersonaExtra = $('<div></div>').text('Costo por Persona Extra: ' + inmueble.costoPersonaExtra);
-                    inmuebleDiv.append(inmuebleCostoPersonaExtra);
+                    var inmuebleCostoPersonaExtra = $('<p></p>').text('Costo por Persona Extra: ' + inmueble.costoPersonaExtra);
+                    inmuebleDiv.find('.card__content').append(inmuebleCostoPersonaExtra);
             
-                    var inmuebleFechaLimiteDisponibilidad = $('<div></div>').text('Fecha Límite de Disponibilidad: ' + inmueble.fechaLimiteDisponibilidad);
-                    inmuebleDiv.append(inmuebleFechaLimiteDisponibilidad);
+                    var inmuebleFechaLimiteDisponibilidad = $('<p></p>').text('Fecha Límite de Disponibilidad: ' + inmueble.fechaLimiteDisponibilidad);
+                    inmuebleDiv.find('.card__content').append(inmuebleFechaLimiteDisponibilidad);
             
-                    var inmuebleIdValidacionInmueble = $('<div></div>').text('ID Validación de Inmueble: ' + inmueble.idValidacionInmueble);
-                    inmuebleDiv.append(inmuebleIdValidacionInmueble);
-            
-
-                    var validarInmuebleButton = $('<button class="button-validar-inmueble">Validar Inmueble</button>');
+                    // Botón para validar inmueble
+                    var validarInmuebleButton = $('<button class="btn btn--block card__btn">Validar Inmueble</button>');
                     validarInmuebleButton.on('click', function () {
-                        
                         console.log('Validar inmueble con ID:', inmueble.id);
                     });
-                    inmuebleDiv.append(validarInmuebleButton);
-
+                    inmuebleDiv.find('.card__content').append(validarInmuebleButton);
+            
+                    // Agregar la tarjeta del inmueble al contenedor
                     inmuebleContainer.append(inmuebleDiv);
                 });
+            
+                // Agregar la lista al contenedor principal
+                $('.inmueble-list').append(inmuebleContainer);
             } else {
                 // Mostrar mensaje si el propietario no tiene inmuebles
-                inmuebleContainer.append('<p>No tienes inmuebles registrados.</p>');
+                $('.inmueble-list').append('<p>No tienes inmuebles registrados.</p>');
             }
         },
         error: function (xhr, status, error) {

@@ -31,6 +31,10 @@ $estadoUsuario = $masterClass->obtenerEstadoUsuario($idUser);
 
     <body>
     <br>
+            <a href="gestionPerfilUsuarios_View.php" style="margin-left: 10px;">
+                <i class="fa-solid fa-caret-left fa-beat-fade fa-2xl" style="color: #443745;"></i>
+            </a>
+        <br>
     <h1>Validacion de Perfil</h1>
       <ul class="cards">
           <li class="cards__item">

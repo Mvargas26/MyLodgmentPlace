@@ -163,7 +163,7 @@ if (isset($_SESSION['Identificacion'])) {
       </ul>
    
 
-</main>
+</body>
 
 
 
