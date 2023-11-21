@@ -46,6 +46,9 @@ if (isset($_GET['id'])) {
     ?>
     <!-- ----------------------------------------------------- -->
     <!-- ======= Breadcrumbs ======= -->
+    <br>
+    <br>
+    <br>
     <section id="breadcrumbs" class="breadcrumbs">
       <div class="container">
 
