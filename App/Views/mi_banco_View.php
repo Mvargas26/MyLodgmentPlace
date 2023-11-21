@@ -1,6 +1,10 @@
 <?php
 include './templates/Header.php';
 session_start();
+if (!isset($_SESSION['Identificacion']) || !isset($_SESSION['Rol']) || empty($_SESSION['Identificacion']) || empty($_SESSION['Rol'])) {
+    header('Location: ../../');
+    exit();
+}
 
 $apiUrl = 'https://tipodecambio.paginasweb.cr/api';
 $apiResponse = file_get_contents($apiUrl);
