@@ -250,69 +250,68 @@ if (isset($_GET['id'])) {
                   ?><br>
 
                   <!-- ----------------------------------------------------- -->
-                  <strong>Cantidad de Baños: 3</strong>
+                  <strong>Cantidad de Baños: </strong>
                   <?php
 
-                  // foreach ($datos as $dato) {
+                  foreach ($datos as $dato) {
 
-                  //   echo $dato['caracteristica1'];
-                  //   break;
-                  // } 
+                    echo $dato['cantidadBanos'];
+                    break;
+                  } 
                   ?><br>
 
                   <!-- ----------------------------------------------------- -->
-                  <strong>Cantidad de Camas: 8</strong>
+                  <strong>Cantidad de Camas: </strong>
                   <?php
+ 
+                  foreach ($datos as $dato) {
 
-                  
-                  // foreach ($datos as $dato) {
-
-                  //   echo $dato['caracteristica2'];
-                  //   break;
-                  // } 
+                    echo $dato['cantidadCamas'];
+                    break;
+                  } 
                   ?><br>
 
                   <!-- ----------------------------------------------------- -->
-                  <strong>Cantidad de Cuartos: 5</strong>
+                  <strong>Cantidad de Cuartos: </strong>
                   <?php
-                  // foreach ($datos as $dato) {
+                  foreach ($datos as $dato) {
 
-                  //   echo $dato['caracteristica3'];
-                  //   break;
-                  // } 
-
-                  ?><br>
-
-                  <!-- ----------------------------------------------------- -->
-                  <strong>Cocheras: 2</strong>
-                  <?php
-                  // foreach ($datos as $dato) {
-
-                  //   echo $dato['caracteristica3'];
-                  //   break;
-                  // } 
+                    echo $dato['cantidadCuartos'];
+                    break;
+                  } 
 
                   ?><br>
 
                   <!-- ----------------------------------------------------- -->
-                  <strong>Patios: 2</strong>
+                  <strong>Cocheras: </strong>
                   <?php
-                  // foreach ($datos as $dato) {
+                  foreach ($datos as $dato) {
 
-                  //   echo $dato['caracteristica3'];
-                  //   break;
-                  // } 
+                    echo $dato['cantidadVehiculos'];
+                    break;
+                  } 
+
+                  ?><br>
+
+                  <!-- ----------------------------------------------------- -->
+                  <strong>Patios: </strong>
+                  <?php
+                  foreach ($datos as $dato) {
+
+                    echo $dato['cantidadPatios'];
+                    break;
+                  } 
 
                   ?><br>
 
                    <!-- ----------------------------------------------------- -->
-                   <strong>Plantas: 2</strong>
+                   <strong>Plantas: </strong>
                   <?php
-                  // foreach ($datos as $dato) {
+                  foreach ($datos as $dato) {
 
-                  //   echo $dato['caracteristica3'];
-                  //   break;
-                  // } 
+                    echo $dato['cantidadPlantas'];
+                    break;
+                  } 
 
                   ?><br>
                 </p>
