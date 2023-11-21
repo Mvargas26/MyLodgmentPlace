@@ -13,14 +13,14 @@ if (!isset($_SESSION['Identificacion']) || !isset($_SESSION['Rol']) || empty($_S
 if (isset($_SESSION["Identificacion"])) {
     // $ID = $_SESSION["Identificacion"];
     ?>
-    <input type="text" id="PropietarioID" value="<?php echo $_SESSION["Identificacion"] ?>"/>
+    <input type="hidden" id="PropietarioID" value="<?php echo $_SESSION["Identificacion"] ?>"/>
 
 <?php
  }
  else{
     $ID = "NO HAY ID";
     ?>
-        <input type="text" id="PropietarioID" value="N0 HAY ID"/>
+        <input type="hidden" id="PropietarioID" value="N0 HAY ID"/>
 
     <?php
  }
@@ -31,7 +31,9 @@ if (isset($_SESSION["Identificacion"])) {
 <body>
 
 
-
+<br>
+<br>
+<br>
 <div class="form-container">
     <section id="Info_inmueble" class="form-section active">
         <img src="../assets/img/publicarinmueble/PASOS.png" alt="">

@@ -205,7 +205,13 @@ if (isset($_GET['id'])) {
                   <?php
                   foreach ($datos as $dato) {
 
-                    echo $dato['disponibilidad'];
+                    if($dato['disponibilidad'] == 1){
+                      echo "Disponible";
+                    }
+                    else{
+                      echo "No Disponible"; 
+                    }
+                    // echo $dato['disponibilidad'];
                     break;
                   }
                   ?><br>
@@ -244,7 +250,7 @@ if (isset($_GET['id'])) {
                   ?><br>
 
                   <!-- ----------------------------------------------------- -->
-                  <strong>Característica 1:</strong>
+                  <strong>Cantidad de Baños: 3</strong>
                   <?php
 
                   // foreach ($datos as $dato) {
@@ -255,8 +261,10 @@ if (isset($_GET['id'])) {
                   ?><br>
 
                   <!-- ----------------------------------------------------- -->
-                  <strong>Característica 2:</strong>
+                  <strong>Cantidad de Camas: 8</strong>
                   <?php
+
+                  
                   // foreach ($datos as $dato) {
 
                   //   echo $dato['caracteristica2'];
@@ -265,7 +273,40 @@ if (isset($_GET['id'])) {
                   ?><br>
 
                   <!-- ----------------------------------------------------- -->
-                  <strong>Característica 3:</strong>
+                  <strong>Cantidad de Cuartos: 5</strong>
+                  <?php
+                  // foreach ($datos as $dato) {
+
+                  //   echo $dato['caracteristica3'];
+                  //   break;
+                  // } 
+
+                  ?><br>
+
+                  <!-- ----------------------------------------------------- -->
+                  <strong>Cocheras: 2</strong>
+                  <?php
+                  // foreach ($datos as $dato) {
+
+                  //   echo $dato['caracteristica3'];
+                  //   break;
+                  // } 
+
+                  ?><br>
+
+                  <!-- ----------------------------------------------------- -->
+                  <strong>Patios: 2</strong>
+                  <?php
+                  // foreach ($datos as $dato) {
+
+                  //   echo $dato['caracteristica3'];
+                  //   break;
+                  // } 
+
+                  ?><br>
+
+                   <!-- ----------------------------------------------------- -->
+                   <strong>Plantas: 2</strong>
                   <?php
                   // foreach ($datos as $dato) {
 
@@ -381,6 +422,7 @@ if (isset($_GET['id'])) {
 
         </div>
     </div>
+    
     <div class="container">
       <div class="" id="" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">

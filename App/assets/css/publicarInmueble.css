@@ -22,19 +22,11 @@
     display: block;
   }
 
-  /* #nextButton {
-    position: relative;
-    top: 50%;
-    right: 10px;
-    transform: translateY(-50%);
-    background-color: #4CAF50;
+  #nextButton {
+    
     color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    display: none;
-  } */
+    
+  }
   .bar-anchor{
     padding: 20px 10px;
     margin:10px 4px;

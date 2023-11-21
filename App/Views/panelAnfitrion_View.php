@@ -43,7 +43,7 @@ include './templates/Header.php';
                 <a href="mensajesHuesped_View.php">Mensajeria</a>
             </div>  
             <div class="card">
-                <a href="">Creacion de Descuentos</a>
+                <a href="creacion_descuentos_View.php">Creacion de Descuentos</a>
             </div>
         </div>
         <br>
