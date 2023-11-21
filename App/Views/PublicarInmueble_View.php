@@ -270,7 +270,7 @@ if (isset($_SESSION["Identificacion"])) {
                             <hr>
 
                             <p class="description">
-                                <input type="text" id="cancelacionSeleccionada" name="cancelacionSeleccionada" value="">
+                                <input type="hidden" id="cancelacionSeleccionada" name="cancelacionSeleccionada" value="">
                                 <label>
                                     <input type="radio" name="cancelacion" class="opciones-cancelacion" value="2" checked onchange="actualizarInputHidden('cancelacionSeleccionada', this)">
                                     2 dias antes de la fecha programada
@@ -297,7 +297,7 @@ if (isset($_SESSION["Identificacion"])) {
                             <hr>
 
                             <p class="description">
-                                <input type="text" id="reembolsosSeleccionados" name="reembolsosSeleccionados" value="">
+                                <input type="hidden" id="reembolsosSeleccionados" name="reembolsosSeleccionados" value="">
                                 <label>
                                     <input type="radio" name="reembolso" class="opciones-reembolso" value="0" checked onchange="actualizarInputHidden('reembolsosSeleccionados', this)">
                                     Sin Reembolso
@@ -325,7 +325,7 @@ if (isset($_SESSION["Identificacion"])) {
                             <h5>Hora de Entrada y Salida </h5>
                             <hr>
                             <p class="description">
-                                <input type="text" id="horarioSeleccionado" name="horarioSeleccionado" value="">
+                                <input type="hidden" id="horarioSeleccionado" name="horarioSeleccionado" value="">
                                 <label>
                                     <input type="radio" name="horario" class="opciones-horario" value="2:00 pm - 11:00 am" checked onchange="actualizarInputHidden('horarioSeleccionado', this)">
                                     2:00 pm - 11:00 am
@@ -351,7 +351,7 @@ if (isset($_SESSION["Identificacion"])) {
                             <hr>
                         
                             <p class="description">
-                                <input type="text" id="cargosAdicionalesSeleccionados" name="cargosAdicionalesSeleccionados" value="">
+                                <input type="hidden" id="cargosAdicionalesSeleccionados" name="cargosAdicionalesSeleccionados" value="">
                                 <label>
                                     <input type="radio" name="cargosAdicionales" class="opciones-cargos" value="10" checked onchange="actualizarInputHidden('cargosAdicionalesSeleccionados', this)">
                                     Del 10%
@@ -561,7 +561,7 @@ if (isset($_SESSION["Identificacion"])) {
         <form action="" method="post" role="form" enctype="multipart/form-data">
 
             <div class="section-title">
-                <input type="textarea" id="ArrayServicios">
+                <input type="hidden" id="ArrayServicios">
                 <h2>Servicios</h2>
                 <p>¡Los servicios mejorarán la calidad de tu espacio!</p>
 
@@ -626,6 +626,13 @@ if (isset($_SESSION["Identificacion"])) {
     <div style="display: flex; justify-content: center; align-content: center;">
     <h1>AQUI VA AMENIDADES</h1>
     </div>
+
+    <br>
+    <br>
+    <a class="bar-anchor" href="../../" >
+        <span>Finalizar</span>
+        <div class="transition-bar"></div>
+    </a>
     
     
     </section>

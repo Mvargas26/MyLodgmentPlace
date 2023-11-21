@@ -55,7 +55,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-
 function InsertarInmueble() {
     // Validar que los campos no estén vacíos
     var nombreEspacio = document.getElementById('nombreEspacio').value;
@@ -146,18 +145,9 @@ function InsertarInmueble() {
                 Swal.fire("Error", "Ocurrió un error en la comunicación con el servidor.", "error");
             }
         });
-        
-
-
-
-
-
-
-
-
-        
+     
     } else {
-        showNextSection();
+        // showNextSection();
         // Muestra un mensaje de error o realiza alguna acción cuando los campos estén vacíos
         Swal.fire("Error", "Por favor, completa todos los campos antes de continuar." , "error");//mensaje bonito
     }
@@ -208,7 +198,7 @@ function Insertar_ServicioInmueble() {
  
     } else {
         // Muestra un mensaje de error cuando los campos estén vacíos
-        showNextSection();
+        // showNextSection();
         Swal.fire("Error", "Por favor, completa todos los campos antes de continuar." , "error");//mensaje bonito
     }
 }
@@ -225,46 +215,46 @@ function Insertar_PoliticaInmueble() {
     if (Cancelacion !== "" && reembolso !== "" &&
     horario !== "" && cargos !== "") {
         
-        // $.ajax({
-        //     url: "../../App/Modules/inmueble/insertarpoliticas_Negocios.php",
-        //     type: "POST",
-        //     data: {
-        //         Cancelacion: Cancelacion ,
-        //         reembolso: reembolso , 
-        //         horario: horario,
-        //         cargos: cargos
-        //     },
-        //     success: function (response) {
+        $.ajax({
+            url: "../../App/Modules/inmueble/insertarpoliticas_Negocios.php",
+            type: "POST",
+            data: {
+                Cancelacion: Cancelacion ,
+                reembolso: reembolso , 
+                horario: horario,
+                cargos: cargos
+            },
+            success: function (response) {
 
-        //         try {
+                try {
                     
-        //             console.log(response);
-        //             console.log("Si entra en el succes politicas")
+                    console.log(response);
+                    console.log("Si entra en el succes politicas")
                     
                     
-        //             var x = JSON.parse(response);
+                    var x = JSON.parse(response);
                     
-        //             if (x.exito == true) {
-        //                 Swal.fire("Éxito", x.mensaje, "success");
-        //                 showNextSection();
+                    if (x.exito == true) {
+                        Swal.fire("Éxito", x.mensaje, "success");
+                        showNextSection();
                         
-        //             } else {
-        //                 console.log(x.mensaje);
-        //                 Swal.fire("Error", "Lo sentimos, ocurrió un error. " + x.mensaje, "error");
-        //             }
-        //         } catch (error) {
-        //             Swal.fire("Error", "Lo sentimos, ocurrió un error. " + error , "error");
-        //         }
-        //     },
-        //     error: function (xhr, status, error) {
-        //         console.log("Error en la solicitud AJAX:", error);
-        //         Swal.fire("Error", "Ocurrió un error en la comunicación con el servidor.", "error");
-        //     }
-        // });
-        showNextSection()
+                    } else {
+                        console.log(x.mensaje);
+                        Swal.fire("Error", "Lo sentimos, ocurrió un error. " + x.mensaje, "error");
+                    }
+                } catch (error) {
+                    Swal.fire("Error", "Lo sentimos, ocurrió un error. " + error , "error");
+                }
+            },
+            error: function (xhr, status, error) {
+                console.log("Error en la solicitud AJAX:", error);
+                Swal.fire("Error", "Ocurrió un error en la comunicación con el servidor.", "error");
+            }
+        });
+        // showNextSection()
         
     } else {
-        showNextSection()
+        // showNextSection()
         // Muestra un mensaje de error cuando los campos estén vacíos
         Swal.fire("Error", "Vuelve a seleccionar tus politicas" , "error");//mensaje bonito
     }
