@@ -230,7 +230,7 @@ if (isset($_SESSION["Identificacion"])) {
 
         <div style="display: flex; justify-content: center; align-content: center;">
 
-            <h1>AQUI VA EL CALENDARIO</h1>
+            <h1></h1>
         </div>
     
 
@@ -624,7 +624,7 @@ if (isset($_SESSION["Identificacion"])) {
     <section id="Amenidades" class="form-section">
     <img src="../assets/img/publicarinmueble/PASOS5.png" alt="">
     <div style="display: flex; justify-content: center; align-content: center;">
-    <h1>AQUI VA AMENIDADES</h1>
+    <h1></h1>
     </div>
 
     <br>
