@@ -45,12 +45,12 @@ $(document).on('click', '#btnEnviarDenuncia', function () {
         },
         success: function (response) {
             console.log(response);
-            if (response.exito) {
+            if (response) {
                 Swal.fire("Éxito", "Respuesta a Denuncia enviada correctamente", "success");
             }
         },
         error: function (error) {
-            console.error(error);
+            Swal.fire("Error", "Algo paso al momento de responder la denuncia", error);
         }
     });
 });

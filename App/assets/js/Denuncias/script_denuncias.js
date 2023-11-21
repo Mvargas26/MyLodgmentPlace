@@ -29,12 +29,12 @@ $(document).ready(function () {
             },
             success: function (response) {
                 console.log(response);
-                if (response.exito) {
+                if (response) {
                     Swal.fire("Éxito", "Denuncia enviada correctamente", "success");
                 }
              },
             error: function (error) {
-                console.error(error);
+                Swal.fire("Error", "Algo paso al momento de insertar la denuncia", error);
             }
         });
     });
