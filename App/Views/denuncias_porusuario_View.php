@@ -26,6 +26,10 @@ try {
     
     <link href="../assets/css/DenunciaPorUsuario/denunciaporusuario.css" rel="stylesheet">
     <div class="container">
+    <br>
+            <a href="gestionPerfilUsuarios_View.php" style="margin-left: 10px;">
+                <i class="fa-solid fa-caret-left fa-beat-fade fa-2xl" style="color: #443745;"></i>
+            </a>
         <br>
         <br>
         <h2>Denuncias al Usuario</h2>

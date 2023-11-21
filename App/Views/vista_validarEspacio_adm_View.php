@@ -6,6 +6,10 @@
     <link rel="stylesheet" href="../assets/css/ImueblesPorUsuario/imueblesporusuario.css">
 
     <div>
+    <br>
+            <a href="gestionPerfilUsuarios_View.php" style="margin-left: 10px;">
+                <i class="fa-solid fa-caret-left fa-beat-fade fa-2xl" style="color: #443745;"></i>
+            </a>
         <br>
         <h2>Inmuebles del usuario</h2>
         <br>

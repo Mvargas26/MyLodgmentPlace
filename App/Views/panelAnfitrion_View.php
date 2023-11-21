@@ -23,9 +23,7 @@ include './templates/Header.php';
             <div class="card">
                 <a href="mis_resenasAnfitrion_View.php">Historial de Reseñas</a>
             </div>
-            <div class="card">
-                <a href="">Creacion de Descuentos</a>
-            </div>
+
         </div>
         </div>
         <div class="image-container">
@@ -44,6 +42,9 @@ include './templates/Header.php';
             <div class="card">
                 <a href="mensajesHuesped_View.php">Mensajeria</a>
             </div>  
+            <div class="card">
+                <a href="">Creacion de Descuentos</a>
+            </div>
         </div>
         <br>
     </body>
