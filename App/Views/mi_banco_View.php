@@ -99,7 +99,7 @@ if (isset($_SESSION['Identificacion'])) {
             if ($saldoData === null) {
                 echo 'Error decodificando JSON para los datos del saldo';
             } else {
-                $saldo = isset($saldoData['saldo']) ? '₡: ' . $saldoData['saldo'] : 'No disponible';
+                $saldo = isset($saldoData['saldo']) ? '₡' . $saldoData['saldo'] : 'No disponible';
                 
             }
         } else {
@@ -119,59 +119,71 @@ if (isset($_SESSION['Identificacion'])) {
 ?>
 
 <!-- ==============================================Fin header ======= -->
-<main id="main">
 
-<link rel="stylesheet" href="../assets/css/Mybanco/myBanco.css">
-
-<body id="cuerpo">
-
-    <h1>Información del Usuario</h1>
-
-      <ul class="cards">
-          <li class="cards__item">
-            <div class="card">
-                <div class="card__image card__image--fence"></div>
-                    <div class="card__content">
-                    <div class="card__title">Tipo de Cambio</div>
-                        <p for="tipoCambioCompra">Tipo de Cambio de Compra: <span id="tipoCambioCompra"><?php echo $compra; ?></span></p>
-                        <p for="tipoCambioVenta">Tipo de Cambio de Venta: <span id="tipoCambioVenta"><?php echo $venta; ?></span></p>
-                        <p for="fechaTipoCambio">Fecha Actual: <span id="fechaTipoCambio"><?php echo $fecha; ?></span></p>
-                        <p style="font-size: 14px;">Información del Tipo de Cambio es tomada del BCCR</p>
-                    </div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fondo animado</title>
+    <link rel="stylesheet" href="../assets/css/Mybanco/myBanco.css">
+</head>
+<body>
+  <header class="bg_animate">
+    <br>
+    <br>
+        <section class="banner contenedor">
+            <secrion class="banner_title">
+                <div class="card">
+                        <div class="head">
+                            <div class="circle"></div>
+                            <div class="img">
+                                <img src="https://images.unsplash.com/photo-1493666438817-866a91353ca9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1049&q=80" alt="">
+                            </div>
+                        </div>
+                        <div class="description">
+                            <p for="nombre"><span id="nombre"><?php echo $nombre; ?></span> <span id="apellidos"><?php echo $apellido1; ?><?php echo $apellido2; ?></span></p>
+                            <p for="cedula">Cédula: <span id="cedula"><?php echo $id;?></span></p>
+                            <p for="direccion">Correo: <span id="direccion"><?php echo $email;?></span></p>
+                            <p for="CuentaBancario">Numero de Cuenta Bancario: <span id="CuentaBancario"><?php echo $numeroCuenta;?></span></p>
+                            <p for="saldo">Saldo: <span id="saldo"><?php echo $saldo;?></span> </p>
+                            <br>
+                            
+                        </div>
                 </div>
-          </li>
-        <li class="cards__item">
-          <div class="card">
-            <div class="card__image card__image--river"></div>
-              <div class="card__content">
-                <div class="card__title">Datos Personales</div>
-                <p for="nombre">Nombre: <span id="nombre"><?php echo $nombre; ?></span></p>
-                <p for="apellidos">Apellidos: <span id="apellidos"><?php echo $apellido1; ?> <?php echo $apellido2; ?></span></p>
-                <p for="cedula">Cédula: <span id="cedula"><?php echo $id; ?></span></p>
-                <p for="direccion">Correo Electrónico: <span id="direccion"><?php echo $email; ?></span></p>
+
+
+              <div  class="user-info-container">
+                  <div class="contenedor" >
+                    <div class="p"  >Tipo de Cambio Actual</div>
+                    <p class="p" for="tipoCambioCompra">Tipo de Cambio de Compra: ₡<span id="tipoCambioCompra"><?php echo $compra;?></span></p>
+                    <p class="p" for="tipoCambioVenta">Tipo de Cambio de Venta: ₡<span id="tipoCambioVenta"><?php echo $venta;?></span></p>
+                    <p class="p" for="fechaTipoCambio">Fecha Actual: <span id="fechaTipoCambio"><?php echo $fecha; ?></span></p>
+                    <p class="p" style="font-size: 14px;">Información del Tipo de Cambio es tomada del BCCR</p>
+                    <button class="input" onclick="window.location.href='https://tiusr29pl.cuc-carrera-ti.ac.cr/MyBancoWeb/Default'">Ir a Mi Banco</button> 
+                </div>
               </div>
-          </div>
-        </li>
-        <li class="cards__item">
-          <div class="card">
-            <div class="card__image card__image--record"></div>
-              <div class="card__content">
-                <div class="card__title">Saldo</div>
-                <p for="CuentaBancario">Numero de Cuenta Bancario Actual: <span id="CuentaBancario"><?php echo $numeroCuenta; ?></span> </p>
-                <p for="saldo">Saldo Bancario Actual: <span id="saldo"><?php echo $saldo; ?></span> </p>
-
-              <button class="btn btn--block card__btn" onclick="window.location.href='https://tiusr29pl.cuc-carrera-ti.ac.cr/MyBancoWeb/Default'">Ir a Mi Banco</button>
-            </div>
-          </div>
-        </li>
-      </ul>
-   
-
+            </secrion>
+            <div class="banner_img">
+                <img src="../assets/img/logo/logo.png" alt="">
+            </div> 
+        </section>
+        <div class="burbujas">
+            <div class="burbuja"></div>
+            <div class="burbuja"></div>
+            <div class="burbuja"></div>
+            <div class="burbuja"></div>
+            <div class="burbuja"></div>
+            <div class="burbuja"></div>
+            <div class="burbuja"></div>
+            <div class="burbuja"></div>
+            <div class="burbuja"></div>
+            <div class="burbuja"></div>
+            <div class="burbuja"></div>
+            <div class="burbuja"></div>
+            <div class="burbuja"></div>
+        </div>
+    </header>
+  
 </body>
-
-
-
-
 <!-- ==============================================Inicio Footer ======= -->
 <?php
 include './templates/Footer.php';
