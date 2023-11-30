@@ -985,6 +985,7 @@ class Master_Class
         }
     } //fn ConsultarInmueble POR ID
 
+
     function ConsultarResenas_porID($idInmueble)
     {
 
@@ -992,6 +993,7 @@ class Master_Class
             $query = "SELECT 
                     tbresenalugar.Descripcion, 
                     tbresenalugar.fechaResena, 
+                    tbresenalugar.estrellas, 
                     tbusuario.Nombre AS NombreUsuarioResena, 
                     tbusuario.fotoperfil
                     FROM 
@@ -1018,6 +1020,7 @@ class Master_Class
                     $item = array(
                         "Descripcion" => $row['Descripcion'],
                         "fechaResena" => $row["fechaResena"],
+                        "estrellas" => $row["estrellas"],
                         "NombreUsuarioResena" => $row["NombreUsuarioResena"],
                         "fotoperfil" => $urlImagen,
                         // Aquí se guarda la imagen en formato base64
@@ -1078,6 +1081,57 @@ class Master_Class
         } catch (Exception $e) {
             error_log($e->getMessage());
             return null; // Retorna null en caso de error
+        }
+    }
+
+
+    function ConsultarInmuebles_ConResenias()
+    {
+        $arry_Datos = func_get_args();
+
+        $idAnfitrion = $this->GetConexion()->real_escape_string($arry_Datos[0]);
+
+        try {
+            $query = " SELECT id, nombre AS nombre_inmueble,Estado,
+                    CASE disponibilidad
+                           WHEN 1 THEN 'Disponible'
+                           ELSE 'No Disponible' 
+                       END AS disponibilidad
+                   FROM tbinmueble INNER JOIN tbestadolugar ON
+                   tbinmueble.estadoLugar = tbestadolugar.idEstado
+                   WHERE Propietario = $idAnfitrion
+                   AND EXISTS (
+                       SELECT 1
+                       FROM tbresenalugar
+                       WHERE tbresenalugar.idLugarDirigido = tbinmueble.id
+                   )";
+
+
+            $this->conn->set_charset("utf8");
+            $result = $this->getConexion()->query($query);
+
+            if ($result) {
+                $data = array();
+
+                while ($row = $result->fetch_assoc()) {
+                    $item = array(
+                        "id" => $row['id'],
+                        "Nombre_Inmueble" => $row["nombre_inmueble"],
+                        "Estado" => $row["Estado"],
+                        "Disponibilidad" => $row["disponibilidad"]
+                    );
+                    $data[] = $item;
+                }
+                // $this->getConexion()->close();
+
+
+                return json_encode($data);
+            } else {
+                throw new Exception("Error en la consulta: " . $this->getConexion()->error);
+            }
+        } catch (Exception $e) {
+            error_log($e->getMessage());
+            return json_encode(array("error" => "Error en la consulta"));
         }
     }
 
@@ -1171,13 +1225,14 @@ class Master_Class
 
 
     /*----------------------------------------------- Notificaciones --------------------------------------------------*/
-
+    /*----------------------------------------------- Notificaciones --------------------------------------------------*/
+    
     function ConsultaNotificaciones()
     {
         $arry_Datos = func_get_args();
-
+        
         $idAnfitrion = $this->GetConexion()->real_escape_string($arry_Datos[0]);
-
+        
         try {
             $query = " SELECT descripcion, fecha
                     FROM tbnotificaciones
@@ -1188,7 +1243,7 @@ class Master_Class
 
             if ($result) {
                 $data = array();
-
+                
                 while ($row = $result->fetch_assoc()) {
                     $item = array(
                         "descripcion" => $row['descripcion'],
@@ -1207,6 +1262,114 @@ class Master_Class
         }
     }
 
+    function InsertarNotificacion_Registro($idusuario)
+    {
+        $fecha = date("Y-m-d"); 
+        $query = "INSERT INTO `tbnotificaciones` (`descripcion`, `idusuario`, `fecha`)
+        VALUES ('¡Bienvenido a My Lodgment Place! Has creado una cuenta en nuestro sitio.',  
+        '$idusuario', '$fecha')";
+
+        if ($this->getConexion()->query($query)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+
+    function InsertarNotificacion_Reserva($idInmueble, $idusuario)
+    {
+        $fecha = date("Y-m-d"); 
+
+        // Consulta para obtener el nombre del inmueble
+        $queryNombre = "SELECT `nombre` FROM `tbinmueble` WHERE id = $idInmueble"; 
+
+        $resultadoNombre = $this->getConexion()->query($queryNombre);
+
+        if ($resultadoNombre) {
+            // Obtener el nombre del inmueble
+            $fila = $resultadoNombre->fetch_assoc();
+            $nombreInmueble = $fila['nombre'];
+
+            // Consulta de inserción con el nombre del inmueble
+            $query = "INSERT INTO `tbnotificaciones` (`descripcion`, `idusuario`, `fecha`)
+                    VALUES ('Has realizado una Reserva en $nombreInmueble',  
+                            '$idusuario', '$fecha')";
+
+            if ($this->getConexion()->query($query)) {
+                // Verificar si algún registro fue afectado
+                if ($this->getConexion()->affected_rows > 0) {
+                    return true;  // Éxito
+                } else {
+                    return false; // No se insertaron filas (puede ser una inserción duplicada)
+                }
+            } else {
+                return false; // Error en la ejecución de la consulta
+            }
+        } else {
+            return false; // Error en la consulta para obtener el nombre del inmueble
+        }
+    }
+
+    function InsertarNotificacion_PagoAlAnfitrion($idInmueble, $idusuario)
+    {
+        $fecha = date("Y-m-d"); 
+
+        // Consulta para obtener el nombre del inmueble
+        $queryNombre = "SELECT `nombre` FROM `tbinmueble` WHERE id = $idInmueble"; 
+
+        $resultadoNombre = $this->getConexion()->query($queryNombre);
+
+        if ($resultadoNombre) {
+            // Obtener el nombre del inmueble
+            $fila = $resultadoNombre->fetch_assoc();
+            $nombreInmueble = $fila['nombre'];
+
+            // Consulta de inserción con el nombre del inmueble
+            $query = "INSERT INTO `tbnotificaciones` (`descripcion`, `idusuario`, `fecha`)
+                    VALUES ('Has realizado una Reserva en $nombreInmueble',  
+                            '$idusuario', '$fecha')";
+
+            if ($this->getConexion()->query($query)) {
+                // Verificar si algún registro fue afectado
+                if ($this->getConexion()->affected_rows > 0) {
+                    return true;  // Éxito
+                } else {
+                    return false; // No se insertaron filas (puede ser una inserción duplicada)
+                }
+            } else {
+                return false; // Error en la ejecución de la consulta
+            }
+        } else {
+            return false; // Error en la consulta para obtener el nombre del inmueble
+        }
+    }
+
+    function InsertarNotificacion_RealizadaUnaresenia()
+    {
+        $arry_Datos = func_get_args();
+
+        $fecha = date("Y-m-d"); 
+
+        $idInmueble = $this->GetConexion()->real_escape_string($arry_Datos[0]);
+        $idusuario = $this->GetConexion()->real_escape_string($arry_Datos[1]);
+
+        $query = "INSERT INTO `tbnotificaciones` (`descripcion`, `$idusuario`, `$fecha`)
+            VALUES ('¡Bienvenido a My Lodgment Place! Has creado una cuenta en nuestro sitio.',  
+            $idusuario,  $fecha)";
+
+        if ($this->getConexion()->query($query)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+
+/*----------------------------------------------- FIN Notificaciones --------------------------------------------------*/
+/*----------------------------------------------- FIN Notificaciones --------------------------------------------------*/
+    
     //METODOS DE DENUNCIAS
     function ConsultarReservasPorUsuario($identificacion)
     {

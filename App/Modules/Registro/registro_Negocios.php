@@ -24,6 +24,8 @@ if (isset($_POST["imagenData"])) {
         $email,$telefono,$edad,$idRol,$direccion);
 
         $resultado = $ObjMaster->enviarMensajesCorreo($email, 'registro');
+        $notificacion = $ObjMaster->InsertarNotificacion_Registro($identificacion);
+
         // Llama al método para enviar mensajes de correoss
         if ($mensajeDB) {
             echo json_encode(array('exito' => true, 'mensaje' => $mensajeDB));

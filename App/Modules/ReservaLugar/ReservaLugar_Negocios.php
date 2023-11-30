@@ -18,6 +18,7 @@ if (isset($_POST["crearReserva"])) {
 
         $respuestaReserva = $ObjMaster->ReservaLugar($idUsuario, $idInmueble, $fechaInicio, $fechaFin, $Cupon, $valorTotal, $valorTotalImpuestos, $cantidadPersonasExtra, $cantidadPersonas);
 
+        $notificacionReserva = $ObjMaster->InsertarNotificacion_Reserva($idInmueble , $idUsuario);
         if ($respuestaReserva) {
 
             echo json_encode($respuestaReserva);
