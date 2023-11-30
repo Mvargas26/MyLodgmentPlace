@@ -191,15 +191,15 @@ if (isset($_SESSION["Identificacion"])) {
                 <div class="row">
                     <div class="col-md-4 form-group">
                         <i class="bi bi-door-open" style="color:#f4572c; font-size: 2em;"></i>
-                        <input type="number" name="cantCuartos" class="form-control" id="cantCuartos" placeholder="Cantidad de Cuartos" required>
+                        <input type="number" name="cantCuartos" class="form-control shortinput" id="cantCuartos" placeholder="Cantidad de Cuartos" required>
                     </div>
                     <div class="col-md-4 form-group mt-3 mt-md-0">
                         <i class="fas fa-bed" style="color:#f4572c; font-size: 2em; margin:7px;"></i>
-                        <input type="number" class="form-control" name="cantCamas" id="cantCamas" placeholder="Cantidad de Camas" required>
+                        <input type="number" class="form-control shortinput" name="cantCamas" id="cantCamas" placeholder="Cantidad de Camas" required>
                     </div>
                     <div class="col-md-4 form-group mt-3 mt-md-0">
                         <i class="fas fa-restroom" style="color:#f4572c; font-size: 2em;  margin:7px;"></i>
-                        <input type="number" class="form-control" name="cantBanios" id="cantBanios" placeholder="Cantidad de Baños" required>
+                        <input type="number" class="form-control shortinput" name="cantBanios" id="cantBanios" placeholder="Cantidad de Baños" required>
                     </div>
                 </div> <!--end row -->
                 
@@ -208,15 +208,15 @@ if (isset($_SESSION["Identificacion"])) {
                 <div class="row">
                     <div class="col-md-4 form-group">
                         <i class="fas fa-tree" style="color:#f4572c; font-size: 2em;"></i>
-                        <input type="number" name="cantidadPatios" class="form-control" style="margin-top:10px;" id="cantidadPatios" placeholder="Cantidad de Patios" required>
+                        <input type="number" name="cantidadPatios" class="form-control shortinput" style="margin-top:10px;" id="cantidadPatios" placeholder="Cantidad de Patios" required>
                     </div>
                     <div class="col-md-4 form-group mt-3 mt-md-0">
                         <i class="fas fa-car" style="color:#f4572c; font-size: 2em;"></i>
-                        <input type="number" class="form-control" name="cantidadCocheras" style="margin-top:10px;" id="cantidadCocheras" placeholder="Espacios para Carros" required>
+                        <input type="number" class="form-control shortinput" name="cantidadCocheras" style="margin-top:10px;" id="cantidadCocheras" placeholder="Espacios para Carros" required>
                     </div>
                     <div class="col-md-4 form-group mt-3 mt-md-0">
                         <i class="bi bi-buildings-fill" style="color:#f4572c; font-size: 2em;"></i>
-                        <input type="number" class="form-control" name="cantidadPlantas" id="cantidadPlantas" placeholder="Cantidad de Plantas" required>
+                        <input type="number" class="form-control shortinput" name="cantidadPlantas" id="cantidadPlantas" placeholder="Cantidad de Plantas" required>
                     </div>
                 </div><!--end row -->
                 <br/>
@@ -567,7 +567,7 @@ if (isset($_SESSION["Identificacion"])) {
         <form action="" method="post" role="form" enctype="multipart/form-data">
 
             <div class="section-title">
-                <input type="hidden" id="ArrayServicios">
+                <input type="hidden" id="ArrayServicios" value="[{}]">
                 <h2>Servicios</h2>
                 <p>¡Los servicios mejorarán la calidad de tu espacio!</p>
 

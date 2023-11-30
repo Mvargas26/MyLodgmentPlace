@@ -76,6 +76,10 @@ document.addEventListener('DOMContentLoaded', function() {
     
         console.log("evento change!")
         console.log(lugarSeleccionado);
+        $('#idInmueble').val(lugarSeleccionado);
+
+        var idInmueble = document.getElementById("idInmueble").value();
+
     
         $.ajax({
             url: "../../App/Modules/resenas/resenas_Negocios.php",
@@ -164,8 +168,24 @@ document.addEventListener('DOMContentLoaded', function() {
             error: function(jqXHR, textStatus, errorThrown) {
                 console.error('Error en la solicitud AJAX:', textStatus, errorThrown);
             }
-        });
-    });
+        }); // fin ajax 1
+
+        $.ajax({
+            url: "../../App/Modules/resenas/resenas_Negocios.php",
+            type: 'POST',
+            data: {
+                idInmueble: idInmueble
+            },
+            success: function(response) {
+
+               
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.error('Error en la solicitud AJAX:', textStatus, errorThrown);
+            }
+        }); //fin ajax 2
+
+    }); // fin evento on  change
     
 });
 

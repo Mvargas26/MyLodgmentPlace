@@ -985,12 +985,17 @@ class Master_Class
         }
     } //fn ConsultarInmueble POR ID
 
+// =========================================================================================================
+// ============RESEÑAS============RESEÑAS=============RESEÑAS==============RESEÑAS==========================
+// =========================================================================================================
 
-    function ConsultarResenas_porID($idInmueble)
-    {
 
-        try {
-            $query = "SELECT 
+
+function ConsultarResenas_porID($idInmueble)
+{
+    
+    try {
+        $query = "SELECT 
                     tbresenalugar.Descripcion, 
                     tbresenalugar.fechaResena, 
                     tbresenalugar.estrellas, 
@@ -1003,51 +1008,180 @@ class Master_Class
                     WHERE 
                         tbresenalugar.idLugarDirigido = $idInmueble;";
 
-            $this->conn->set_charset("utf8");
-            $result = $this->getConexion()->query($query);
+$this->conn->set_charset("utf8");
+$result = $this->getConexion()->query($query);
 
-            if ($result) {
-                $data = array();
-
-                while ($row = $result->fetch_assoc()) {
-                    // Suponiendo que $row["fotoperfil"] contiene la ruta de la imagen
-                    $imagenPath = $row["fotoperfil"];
-                    $imagenData = file_get_contents($imagenPath);
-                    $imagenBase64 = base64_encode($imagenData);
-
-                    $urlImagen = "data:image/jpeg;base64," . $imagenBase64;
-
-                    $item = array(
-                        "Descripcion" => $row['Descripcion'],
-                        "fechaResena" => $row["fechaResena"],
-                        "estrellas" => $row["estrellas"],
-                        "NombreUsuarioResena" => $row["NombreUsuarioResena"],
-                        "fotoperfil" => $urlImagen,
-                        // Aquí se guarda la imagen en formato base64
-                    );
-
-                    $data[] = $item;
-                }
-                return json_encode($data);
-            } else {
-                throw new Exception("Error en la consulta: " . $this->getConexion()->error);
+if ($result) {
+            $data = array();
+            
+            while ($row = $result->fetch_assoc()) {
+                // Suponiendo que $row["fotoperfil"] contiene la ruta de la imagen
+                $imagenPath = $row["fotoperfil"];
+                $imagenData = file_get_contents($imagenPath);
+                $imagenBase64 = base64_encode($imagenData);
+                
+                $urlImagen = "data:image/jpeg;base64," . $imagenBase64;
+                
+                $item = array(
+                    "Descripcion" => $row['Descripcion'],
+                    "fechaResena" => $row["fechaResena"],
+                    "estrellas" => $row["estrellas"],
+                    "NombreUsuarioResena" => $row["NombreUsuarioResena"],
+                    "fotoperfil" => $urlImagen,
+                    // Aquí se guarda la imagen en formato base64
+                );
+                
+                $data[] = $item;
             }
-        } catch (Exception $e) {
-            error_log($e->getMessage());
-            return null; // Retorna null en caso de error
+            return json_encode($data);
+            
+
+        } else {
+            throw new Exception("Error en la consulta: " . $this->getConexion()->error);
         }
-        // $this->conn->close();
-    } //fn ConsultarResenias POR id
+    } catch (Exception $e) {
+        error_log($e->getMessage());
+        return null; // Retorna null en caso de error
+    }
+    // $this->conn->close();
+} //fn ConsultarResenias POR id
 
 
-    function ConsultaMultipleEspacios()
-    {
-        $arry_Datos = func_get_args();
+function CalcularTotalDeResenas($identificacion)
+{
+    try {
+        $query = "SELECT COUNT(*) as `CantidadResenasTotales`
+                  FROM `tbresenalugar` AS `r`
+                  INNER JOIN `tbinmueble` AS `i` ON r.idLugarDirigido = i.id
+                  WHERE i.Propietario = $identificacion";
 
-        $idAnfitrion = $this->GetConexion()->real_escape_string($arry_Datos[0]);
+$this->conn->set_charset("utf8");
+$result = $this->getConexion()->query($query);
 
-        try {
-            $query = " SELECT id, nombre AS nombre_inmueble,Estado,
+if ($result) {
+    $count = $result->fetch_assoc()["CantidadResenasTotales"];
+    return $count;
+} else {
+    throw new Exception("Error en la consulta: " . $this->getConexion()->error);
+}
+} catch (Exception $e) {
+    error_log($e->getMessage());
+    return null; // Retorna null en caso de error
+}
+}
+
+function CalcularCalificacion_totalResenias($identificacion)
+{
+    try {
+        $query = "SELECT AVG(r.estrellas) as `promedio`
+                  FROM `tbresenalugar` AS `r`
+                  INNER JOIN `tbinmueble` AS `i` ON r.idLugarDirigido = i.id
+                  WHERE i.Propietario = $identificacion";
+
+        $this->conn->set_charset("utf8");
+        $result = $this->getConexion()->query($query);
+
+        if ($result) {
+            $promedio = $result->fetch_assoc()["promedio"];
+            return $promedio;
+        } else {
+            throw new Exception("Error en la consulta: " . $this->getConexion()->error);
+        }
+    } catch (Exception $e) {
+        error_log($e->getMessage());
+        return null; // Retorna null en caso de error
+    }
+}
+
+function CalcularTotalDeResenas_PorInmueble($idInmueble)
+{
+    try {
+        $query = "SELECT COUNT(*) as `CantidadResenasTotales` , 
+                         AVG(estrellas) as `PromedioEstrellas`                
+                  FROM `tbresenalugar` AS `r`
+                  WHERE r.idLugarDirigido = $idInmueble";
+
+        $this->conn->set_charset("utf8");
+        $result = $this->getConexion()->query($query);
+
+        if ($result) {
+            $count = $result->fetch_assoc()["CantidadResenasTotales"];
+            $promedio = $result->fetch_assoc()["PromedioEstrellas"];
+            return $count;
+        } else {
+            throw new Exception("Error en la consulta: " . $this->getConexion()->error);
+            }
+    } catch (Exception $e) {
+        error_log($e->getMessage());
+        return null; // Retorna null en caso de error
+    }
+}
+
+
+
+
+function ConsultarInmuebles_ConResenias()
+{
+    $arry_Datos = func_get_args();
+    
+    $idAnfitrion = $this->GetConexion()->real_escape_string($arry_Datos[0]);
+    
+    try {
+        $query = " SELECT id, nombre AS nombre_inmueble,Estado,
+                CASE disponibilidad
+                       WHEN 1 THEN 'Disponible'
+                       ELSE 'No Disponible' 
+                   END AS disponibilidad
+               FROM tbinmueble INNER JOIN tbestadolugar ON
+               tbinmueble.estadoLugar = tbestadolugar.idEstado
+               WHERE Propietario = $idAnfitrion
+               AND EXISTS (
+                   SELECT 1
+                   FROM tbresenalugar
+                   WHERE tbresenalugar.idLugarDirigido = tbinmueble.id
+               )";
+
+
+$this->conn->set_charset("utf8");
+$result = $this->getConexion()->query($query);
+
+if ($result) {
+    $data = array();
+    
+    while ($row = $result->fetch_assoc()) {
+        $item = array(
+            "id" => $row['id'],
+            "Nombre_Inmueble" => $row["nombre_inmueble"],
+            "Estado" => $row["Estado"],
+            "Disponibilidad" => $row["disponibilidad"]
+        );
+        $data[] = $item;
+    }
+    // $this->getConexion()->close();
+    
+    
+    return json_encode($data);
+} else {
+    throw new Exception("Error en la consulta: " . $this->getConexion()->error);
+}
+} catch (Exception $e) {
+    error_log($e->getMessage());
+    return json_encode(array("error" => "Error en la consulta"));
+    }
+}
+// =========================================================================================================
+// ============FIN RESEÑAS============FIN RESEÑAS=============FIN RESEÑAS==============FINRESEÑAS===========
+// =========================================================================================================
+
+
+function ConsultaMultipleEspacios()
+{
+    $arry_Datos = func_get_args();
+    
+    $idAnfitrion = $this->GetConexion()->real_escape_string($arry_Datos[0]);
+    
+    try {
+        $query = " SELECT id, nombre AS nombre_inmueble,Estado,
                     CASE disponibilidad
                            WHEN 1 THEN 'Disponible'
                            ELSE 'No Disponible'
@@ -1056,12 +1190,12 @@ class Master_Class
                    tbinmueble.estadoLugar = tbestadolugar.idEstado
                    WHERE Propietario = $idAnfitrion;";
 
-            $this->conn->set_charset("utf8");
+$this->conn->set_charset("utf8");
             $result = $this->getConexion()->query($query);
-
+            
             if ($result) {
                 $data = array();
-
+                
                 while ($row = $result->fetch_assoc()) {
                     $item = array(
                         "id" => $row['id'],
@@ -1072,8 +1206,8 @@ class Master_Class
                     $data[] = $item;
                 }
                 // $this->getConexion()->close();
-
-
+                
+                
                 return json_encode($data);
             } else {
                 throw new Exception("Error en la consulta: " . $this->getConexion()->error);
@@ -1083,57 +1217,8 @@ class Master_Class
             return null; // Retorna null en caso de error
         }
     }
-
-
-    function ConsultarInmuebles_ConResenias()
-    {
-        $arry_Datos = func_get_args();
-
-        $idAnfitrion = $this->GetConexion()->real_escape_string($arry_Datos[0]);
-
-        try {
-            $query = " SELECT id, nombre AS nombre_inmueble,Estado,
-                    CASE disponibilidad
-                           WHEN 1 THEN 'Disponible'
-                           ELSE 'No Disponible' 
-                       END AS disponibilidad
-                   FROM tbinmueble INNER JOIN tbestadolugar ON
-                   tbinmueble.estadoLugar = tbestadolugar.idEstado
-                   WHERE Propietario = $idAnfitrion
-                   AND EXISTS (
-                       SELECT 1
-                       FROM tbresenalugar
-                       WHERE tbresenalugar.idLugarDirigido = tbinmueble.id
-                   )";
-
-
-            $this->conn->set_charset("utf8");
-            $result = $this->getConexion()->query($query);
-
-            if ($result) {
-                $data = array();
-
-                while ($row = $result->fetch_assoc()) {
-                    $item = array(
-                        "id" => $row['id'],
-                        "Nombre_Inmueble" => $row["nombre_inmueble"],
-                        "Estado" => $row["Estado"],
-                        "Disponibilidad" => $row["disponibilidad"]
-                    );
-                    $data[] = $item;
-                }
-                // $this->getConexion()->close();
-
-
-                return json_encode($data);
-            } else {
-                throw new Exception("Error en la consulta: " . $this->getConexion()->error);
-            }
-        } catch (Exception $e) {
-            error_log($e->getMessage());
-            return json_encode(array("error" => "Error en la consulta"));
-        }
-    }
+    
+    
 
     function ConsultarCategorias()
     {

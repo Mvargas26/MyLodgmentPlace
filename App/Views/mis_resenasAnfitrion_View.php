@@ -20,6 +20,7 @@ session_start();
     
   ?>  
   <input id="identificacion" type="hidden" value="<?php echo $_SESSION["Identificacion"] ?>" ></input>
+  <input id="idInmueble" type="text" value=""></input>
   <!-- <input id="identificacion" type="text" value="304710908" ></input> -->
   <br>
     <br>
@@ -107,24 +108,82 @@ session_start();
             <!-- ---------------------------------------------------------------- -->
             <!-- $datosResenas = json_decode($resultadoConsulta2, true); -->
 <!--   --------------------------------------------------------------- -->
-        <section id="testimonials" class="testimonials section-bg">
+<?php 
+  require_once '../Modules/Master_Class.php';
+  try {
+    $identificacion = $_SESSION["Identificacion"];
 
+    $count = $ObjMaster->CalcularTotalDeResenas($identificacion);
+    $promedio = $ObjMaster->CalcularCalificacion_totalResenias($identificacion);
 
+  } catch (Exception $e) {
+    echo 'Error1: ' . $e->getMessage();
+  }
+
+?>
+<!--   --------------------------------------------------------------- -->
+<section id="testimonials" class="testimonials section-bg">
+  
+
+    <div class="container">
+
+      <div class="section-title">
+        <h2>Tus Estadisticas</h2>
+      </div>
+      <hr>
+
+      <div id="contenedorEstadisticas">
+
+        <section id="counts" class="counts">
           <div class="container">
 
-            <div class="section-title">
-              <h2>Tus Estadisticas</h2>
+            <div class="row counters">
+                <div class="col-lg-3 col-6 text-center">
+                  <input type="hidden" id="CantidadDeResenastotales" value= "<?php echo  $count ?> ">
+                  <span data-purecounter-start="0" data-purecounter-end="<?php echo $count; ?>" id="ResenasTotales" data-purecounter-duration="2" class="purecounter"></span>
+                  <p id="p">Reseñas Totales</p>
+                </div>
+
+                <div class="col-lg-3 col-6 text-center">
+                  <span data-purecounter-start="0" data-purecounter-end="<?php echo $promedio; ?>" data-purecounter-duration="2" class="purecounter"></span>
+                  <p id="p">Calificación General (Todos los inmuebles)</p>
+                </div>
+            
+                <div class="col-lg-3 col-6 text-center">
+                  <span data-purecounter-start="0" data-purecounter-end="13" data-purecounter-duration="1" class="purecounter"></span>
+                  <p id="p">Calificacion por Inmueble</p>
+                </div>
+                
+                <div class="col-lg-3 col-6 text-center">
+                  <span data-purecounter-start="0" data-purecounter-end="1463" data-purecounter-duration="1" class="purecounter"></span>
+                  <p id="p">Cantidad de Reseñas por Inmueble</p>
+                </div>
+
             </div>
 
-            <div id="testimonials-slider" class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
-            
-              <div class="swiper-wrapper"></div>
-              <div class="swiper-pagination"></div>
-            </div>
+            <script>
+              var decimalCounter = document.getElementById('decimalCounter');
+              var decimalCounter = document.getElementById('');
+
+              var decimalOptions = {
+                start: 0,
+                end: 5.3,  // Número decimal
+                duration: 4
+              };
+              var decimalPureCounter = new PureCounter(decimalCounter, decimalOptions);
+
+              decimalPureCounter.start();
+            </script>
 
           </div>
+        </section><!-- End Counts Section -->
 
-        </section>
+
+      </div>
+
+    </div>
+
+</section>
 
       </div> <!--fin contenedor2 -->
 <br>

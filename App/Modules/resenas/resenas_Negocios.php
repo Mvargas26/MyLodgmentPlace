@@ -42,6 +42,31 @@ try {
             echo 'Error: ' . $e->getMessage();
         }
     }  
+
+    if (isset($_POST['idInmueble'])) {
+
+        $idInmueble = $_POST['idInmueble'];
+        try {
+
+            $lugarSeleccionado = $_POST['lugarSeleccionado'];
+            $datos = $ObjMaster->CalcularTotalDeResenas_PorInmueble($idInmueble);
+
+            // Decodificar el string JSON a un array de PHP
+            // header('Content-Type: application/json; charset=utf-8');
+            if ($datos) {
+
+                // $data = json_encode($resultadoConsulta2, JSON_UNESCAPED_UNICODE);
+            
+                // header('Content-Type: application/json; charset=utf-8');
+                echo $datos;
+        
+            } else {
+                echo json_encode(array('error' => 'No hay datos disponibles'));
+            }
+        } catch (Exception $e) {
+            echo 'Error: ' . $e->getMessage();
+        }
+    }  
     
 } catch (Exception $e) {
     echo json_encode(array('error' => $e->getMessage()));
