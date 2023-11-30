@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log(lugarSeleccionado);
         $('#idInmueble').val(lugarSeleccionado);
 
-        var idInmueble = document.getElementById("idInmueble").value();
+        var idInmueble = document.getElementById("idInmueble").value;
 
     
         $.ajax({
@@ -157,7 +157,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                         nuevoSlide.appendChild(testimonialItem);
                         swiperWrapper.appendChild(nuevoSlide);
-                    });
+                    }); //end foreach
+
                 } else {
                     // No hay reseñas, crear un párrafo indicando esto
                     var noResenasParrafo = document.createElement('p');
@@ -177,7 +178,24 @@ document.addEventListener('DOMContentLoaded', function() {
                 idInmueble: idInmueble
             },
             success: function(response) {
+    
+                console.log("Entra")
+                console.log(response);
+    
+                var promedio = response.PromedioEstrellas;
+                var count = response.CantidadResenasTotales;
 
+                promedio = parseFloat(promedio).toFixed(1);
+
+                console.log(promedio);
+                console.log(count);
+
+                // Actualizar el elemento con id="CalifficacionPorInmueble" con el valor de 'promedio'
+                // document.getElementById("CalifficacionPorInmueble").setAttribute("data-purecounter-end", promedio);
+                document.getElementById("CalifficacionPorInmueble").innerText = promedio;
+
+                // Actualizar el elemento con id="CantidadResenasPorInmueble" con el valor de 'count'
+                document.getElementById("CantidadResenasPorInmueble").innerText = count;
                
             },
             error: function(jqXHR, textStatus, errorThrown) {

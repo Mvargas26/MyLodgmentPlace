@@ -1093,10 +1093,10 @@ function CalcularCalificacion_totalResenias($identificacion)
     }
 }
 
-function CalcularTotalDeResenas_PorInmueble($idInmueble)
+function CalcularTotalDeResenasYPromedio_PorInmueble($idInmueble)
 {
     try {
-        $query = "SELECT COUNT(*) as `CantidadResenasTotales` , 
+        $query = "SELECT COUNT(*) as `CantidadResenasTotales`, 
                          AVG(estrellas) as `PromedioEstrellas`                
                   FROM `tbresenalugar` AS `r`
                   WHERE r.idLugarDirigido = $idInmueble";
@@ -1105,12 +1105,22 @@ function CalcularTotalDeResenas_PorInmueble($idInmueble)
         $result = $this->getConexion()->query($query);
 
         if ($result) {
-            $count = $result->fetch_assoc()["CantidadResenasTotales"];
-            $promedio = $result->fetch_assoc()["PromedioEstrellas"];
-            return $count;
+            if ($result->num_rows > 0) {
+                $row = $result->fetch_assoc();
+
+                // Crear un array asociativo con ambos valores
+                $resenasData = array(
+                    "CantidadResenasTotales" => $row["CantidadResenasTotales"],
+                    "PromedioEstrellas" => $row["PromedioEstrellas"]
+                );
+
+                return $resenasData;
+            } else {
+                return array("error" => "No hay resultados para el ID de inmueble proporcionado");
+            }
         } else {
             throw new Exception("Error en la consulta: " . $this->getConexion()->error);
-            }
+        }
     } catch (Exception $e) {
         error_log($e->getMessage());
         return null; // Retorna null en caso de error

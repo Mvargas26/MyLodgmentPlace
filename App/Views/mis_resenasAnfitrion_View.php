@@ -75,9 +75,7 @@ session_start();
 
       </div>
 <br>
-    <br>
-    <br>
-    <br>
+
 
 
       <!-- CONTENEDOR 2 -->
@@ -150,12 +148,12 @@ session_start();
                 </div>
             
                 <div class="col-lg-3 col-6 text-center">
-                  <span data-purecounter-start="0" data-purecounter-end="13" data-purecounter-duration="1" class="purecounter"></span>
+                  <span data-purecounter-start="0" id="CalifficacionPorInmueble" data-purecounter-end="0" data-purecounter-duration="1" class="purecounter"></span>
                   <p id="p">Calificacion por Inmueble</p>
                 </div>
                 
                 <div class="col-lg-3 col-6 text-center">
-                  <span data-purecounter-start="0" data-purecounter-end="1463" data-purecounter-duration="1" class="purecounter"></span>
+                  <span data-purecounter-start="0" data-purecounter-end="0" id="CantidadResenasPorInmueble" data-purecounter-duration="1" class="purecounter"></span>
                   <p id="p">Cantidad de Reseñas por Inmueble</p>
                 </div>
 
