@@ -6,7 +6,7 @@ $ObjMaster = new Master_Class();
 try {
     if (isset($_POST['identificacion'])) {
         $idAnfitrion = $_POST['identificacion'];
-        $resultadoConsulta = $ObjMaster->ConsultaMultipleEspacios($idAnfitrion);
+        $resultadoConsulta = $ObjMaster->ConsultarInmuebles_ConResenias($idAnfitrion);
 
         if ($resultadoConsulta) {
             header('Content-Type: application/json; charset=utf-8');

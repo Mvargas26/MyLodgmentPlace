@@ -75,3 +75,19 @@
 #testimonials{
     flex: 75%;
 }
+
+
+#p{
+    font-weight: bold;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: large;
+}
+
+.naranja,
+.naranja i {
+  color: #e33a0b;
+}
+
+#h3{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}

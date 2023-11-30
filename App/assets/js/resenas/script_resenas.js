@@ -102,7 +102,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                         var testimonialItem = document.createElement('div');
                         testimonialItem.classList.add('testimonial-item');
+
                         var parrafo = document.createElement('p');
+                        parrafo.id = "p";
                 
                         // Agregar el ícono de comillas izquierdas
                         var iconoIzquierdo = document.createElement('i');
@@ -117,22 +119,37 @@ document.addEventListener('DOMContentLoaded', function() {
                         var iconoDerecho = document.createElement('i');
                         iconoDerecho.classList.add('bx', 'bxs-quote-alt-right', 'quote-icon-right');
                         parrafo.appendChild(iconoDerecho);
-                
+
+                        parrafo.appendChild(iconoDerecho);
+                        
                         var imagen = document.createElement('img');
                         imagen.src = item.fotoperfil;
                         imagen.classList.add('testimonial-img');
                         imagen.alt = '';
-                
+                        
                         var h3Nombre = document.createElement('h3');
                         h3Nombre.textContent = item.NombreUsuarioResena;
-                
+                        h3Nombre.id = "h3";                
                         var h3Fecha = document.createElement('h3');
                         h3Fecha.textContent = item.fechaResena;
+                        h3Fecha.id = "h3";   
+                        
+                        var iconoEstrella = document.createElement('i');
+                        iconoEstrella.classList.add('bi', 'bi-star-fill', 'estrella-icono');
+
+
+                        var h3estrellas = document.createElement('h3');
+                        h3estrellas.classList.add('naranja');
+                        h3estrellas.appendChild(iconoEstrella);  
+                        h3estrellas.innerHTML += " " + item.estrellas; 
+                        h3estrellas.id = "h3";
+  
                 
                         testimonialItem.appendChild(parrafo);
                         testimonialItem.appendChild(imagen);
                         testimonialItem.appendChild(h3Nombre);
                         testimonialItem.appendChild(h3Fecha);
+                        testimonialItem.appendChild(h3estrellas);
                 
                         nuevoSlide.appendChild(testimonialItem);
                         swiperWrapper.appendChild(nuevoSlide);

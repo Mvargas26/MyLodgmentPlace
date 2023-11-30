@@ -1,6 +1,6 @@
 <?php
 include './templates/Header.php';
-// session_start();
+session_start();
 // if (!isset($_SESSION['Identificacion']) || !isset($_SESSION['Rol']) || empty($_SESSION['Identificacion']) || empty($_SESSION['Rol'])|| $_SESSION['Rol']!=2) {
 //     header('Location: ../../');
 //     exit();
@@ -33,7 +33,7 @@ include './templates/Header.php';
 
             <div id="reseniasDiv">
               <form id="resenaForm" action="" method="post">
-                <h2>Elige un espacio</h2>
+                <h2>Tus Inmuebles: </h2>
                 <br />
 
                 <select class="form-control" name="LUGARES" id="LUGARES" required>
@@ -52,35 +52,88 @@ include './templates/Header.php';
             <!-- CONSULTAR RESENAS POR ID -->
             <!-- ---------------------------------------------------------------- -->
             <!-- $datosResenas = json_decode($resultadoConsulta2, true); -->
-
-<!-- ---------------------------------------------------------------- -->
-
-      <section id="testimonials" class="testimonials section-bg">
+<!--   --------------------------------------------------------------- -->
+        <section id="testimonials" class="testimonials section-bg">
 
 
-        <div class="container">
+          <div class="container">
 
-          <div class="section-title">
-            <h2>Reseñas</h2>
-          </div>
-
-          <div id="testimonials-slider" class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
-            <div class="swiper-wrapper">
-              
-
+            <div class="section-title">
+              <h2>Reseñas</h2>
             </div>
-            <div class="swiper-pagination"></div>
+
+            <div id="testimonials-slider" class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
+            
+              <div class="swiper-wrapper"></div>
+              <div class="swiper-pagination"></div>
+            </div>
+
           </div>
 
-        </div>
+        </section>
 
-      </section>
-
-</div>
+      </div>
 <br>
     <br>
     <br>
     <br>
+
+
+      <!-- CONTENEDOR 2 -->
+
+    <div id="ContenedorResenias">
+          
+          <!-- <section id="DejaTuResenia">
+
+            <div id="reseniasDiv">
+              <form id="resenaForm" action="" method="post">
+                <h2>Tus Inmuebles: </h2>
+                <br />
+
+                <select class="form-control" name="LUGARES" id="LUGARES" required>
+                    <option value=""></option>
+                </select>
+
+
+              </form>
+            </div>
+            <input type="hidden" id="estrellasSeleccionadas" value="1">
+          </section> end section deja tu resena -->
+
+
+
+
+            <!-- CONSULTAR RESENAS POR ID -->
+            <!-- ---------------------------------------------------------------- -->
+            <!-- $datosResenas = json_decode($resultadoConsulta2, true); -->
+<!--   --------------------------------------------------------------- -->
+        <section id="testimonials" class="testimonials section-bg">
+
+
+          <div class="container">
+
+            <div class="section-title">
+              <h2>Tus Estadisticas</h2>
+            </div>
+
+            <div id="testimonials-slider" class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
+            
+              <div class="swiper-wrapper"></div>
+              <div class="swiper-pagination"></div>
+            </div>
+
+          </div>
+
+        </section>
+
+      </div> <!--fin contenedor2 -->
+<br>
+<br>
+<br>
+<br>
+
+
+
 <!-- <script>var identificacion =; </script> -->
 
 <script src="../assets/js/resenas/script_resenas.js"></script>
