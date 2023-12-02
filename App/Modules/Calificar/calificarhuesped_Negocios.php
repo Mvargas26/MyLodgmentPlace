@@ -18,15 +18,16 @@
             
              $resultadoConsulta = $ObjMaster->InsertarCalificacion( $ReservaCalificar, $comentarioCalificacion,
              $estrellasSeleccionadas,$cedAnfitrionCalifica,$tipoCalificacion);
-            
-            if ($resultadoConsulta) {
-            
-                echo json_encode(array('exito' => $resultadoConsulta));
 
-            
-                } else {
-                    echo json_encode(array('error' => 'No hay datos disponibles'));
-                }
+             $notificacion_Huesped_y_Anfitrion = $ObjMaster->InsertarNotificacion_CuandoCalificaElAnfitrion($cedAnfitrionCalifica , $ReservaCalificar);
+             
+             if ($resultadoConsulta && $notificacion_Huesped_y_Anfitrion) {
+
+                
+                echo json_encode(array('exito' => true));
+            } else {
+                echo json_encode(array('exito' => false));
+            }
         }else{
            echo json_encode(array('Vacio' =>'No entro al If'));
         }

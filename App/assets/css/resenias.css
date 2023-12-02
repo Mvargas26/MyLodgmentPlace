@@ -6,8 +6,8 @@
     display: flex;
     justify-content: center;
     margin: auto;
-    width: 600px;
-    height: 100%;
+    width: 200px;
+    height: 70%;
     background-color: #ff7f5d;
     /* background: rgba(255, 127, 93, 0.7); */
 }
@@ -73,7 +73,7 @@
   }
 
 #testimonials{
-    flex: 75%;
+    flex: 85%;
 }
 
 

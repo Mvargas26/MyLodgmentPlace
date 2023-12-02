@@ -1,10 +1,12 @@
 document.addEventListener('DOMContentLoaded', function () {
     window.addEventListener('load', function(){
-
+        
+        document.getElementById("CalifficacionPorInmueble").innerText = 0;
+        document.getElementById("CantidadResenasPorInmueble").innerText = 0;
         const identificacion = document.getElementById("identificacion").value;
 
         $.ajax({
-            url: "../../App/Modules/resenas/resenas_Negocios.php",
+            url: "../../App/Modules/resenas/resenasAnfitrion_Negocios.php",
             type: "POST",
             data:{
                 identificacion: identificacion
@@ -82,7 +84,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     
         $.ajax({
-            url: "../../App/Modules/resenas/resenas_Negocios.php",
+            url: "../../App/Modules/resenas/resenasAnfitrion_Negocios.php",
             type: 'POST',
             data: {
                 lugarSeleccionado: lugarSeleccionado
@@ -101,8 +103,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (respuestaJSON && respuestaJSON.length > 0) {
                     respuestaJSON.forEach(function(item) {
                         console.log("Entro al bucle de las reseñas");
+
                         var nuevoSlide = document.createElement('div');
-                        nuevoSlide.classList.add('swiper-slide');
+                        // nuevoSlide.classList.add('swiper-slide');
                 
                         var testimonialItem = document.createElement('div');
                         testimonialItem.classList.add('testimonial-item');
@@ -147,6 +150,9 @@ document.addEventListener('DOMContentLoaded', function() {
                         h3estrellas.appendChild(iconoEstrella);  
                         h3estrellas.innerHTML += " " + item.estrellas; 
                         h3estrellas.id = "h3";
+
+
+
   
                 
                         testimonialItem.appendChild(parrafo);
@@ -172,7 +178,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }); // fin ajax 1
 
         $.ajax({
-            url: "../../App/Modules/resenas/resenas_Negocios.php",
+            url: "../../App/Modules/resenas/resenasAnfitrion_Negocios.php",
             type: 'POST',
             data: {
                 idInmueble: idInmueble
@@ -182,20 +188,20 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.log("Entra")
                 console.log(response);
     
-                var promedio = response.PromedioEstrellas;
-                var count = response.CantidadResenasTotales;
+                var promedioESTRELLAS = response.PromedioEstrellas;
+                var counttotales = response.CantidadResenasTotales;
 
-                promedio = parseFloat(promedio).toFixed(1);
+                promedioESTRELLAS = parseFloat(promedioESTRELLAS).toFixed(1);
 
-                console.log(promedio);
-                console.log(count);
+                console.log(promedioESTRELLAS);
+                console.log(counttotales);
 
                 // Actualizar el elemento con id="CalifficacionPorInmueble" con el valor de 'promedio'
                 // document.getElementById("CalifficacionPorInmueble").setAttribute("data-purecounter-end", promedio);
-                document.getElementById("CalifficacionPorInmueble").innerText = promedio;
+                document.getElementById("CalifficacionPorInmueble").innerText = promedioESTRELLAS;
 
                 // Actualizar el elemento con id="CantidadResenasPorInmueble" con el valor de 'count'
-                document.getElementById("CantidadResenasPorInmueble").innerText = count;
+                document.getElementById("CantidadResenasPorInmueble").innerText = counttotales;
                
             },
             error: function(jqXHR, textStatus, errorThrown) {

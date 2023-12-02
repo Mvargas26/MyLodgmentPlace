@@ -989,8 +989,7 @@ class Master_Class
 // ============RESEÑAS============RESEÑAS=============RESEÑAS==============RESEÑAS==========================
 // =========================================================================================================
 
-
-
+// anfitrion
 function ConsultarResenas_porID($idInmueble)
 {
     
@@ -1008,10 +1007,10 @@ function ConsultarResenas_porID($idInmueble)
                     WHERE 
                         tbresenalugar.idLugarDirigido = $idInmueble;";
 
-$this->conn->set_charset("utf8");
-$result = $this->getConexion()->query($query);
+        $this->conn->set_charset("utf8");
+        $result = $this->getConexion()->query($query);
 
-if ($result) {
+        if ($result) {
             $data = array();
             
             while ($row = $result->fetch_assoc()) {
@@ -1047,7 +1046,64 @@ if ($result) {
 } //fn ConsultarResenias POR id
 
 
-function CalcularTotalDeResenas($identificacion)
+//huesped
+function ConsultarResenas_porID_Huesped($idInmueble , $idHuesped)
+{   
+    try {
+        $query = "SELECT 
+                    tbresenalugar.Descripcion, 
+                    tbresenalugar.fechaResena, 
+                    tbresenalugar.estrellas, 
+                    tbusuario.Nombre AS NombreUsuarioResena, 
+                    tbusuario.fotoperfil
+                    FROM 
+                        tbresenalugar
+                    JOIN 
+                        tbusuario ON tbresenalugar.idUsuarioResena = tbusuario.idUser
+                    WHERE 
+                        tbresenalugar.idLugarDirigido = $idInmueble 
+                        AND tbresenalugar.idUsuarioResena = $idHuesped";
+
+        $this->conn->set_charset("utf8");
+        $result = $this->getConexion()->query($query);
+
+        if ($result) {
+            $data = array();
+            
+            while ($row = $result->fetch_assoc()) {
+                // Suponiendo que $row["fotoperfil"] contiene la ruta de la imagen
+                $imagenPath = $row["fotoperfil"];
+                $imagenData = file_get_contents($imagenPath);
+                $imagenBase64 = base64_encode($imagenData);
+                
+                $urlImagen = "data:image/jpeg;base64," . $imagenBase64;
+                
+                $item = array(
+                    "Descripcion" => $row['Descripcion'],
+                    "fechaResena" => $row["fechaResena"],
+                    "estrellas" => $row["estrellas"],
+                    "NombreUsuarioResena" => $row["NombreUsuarioResena"],
+                    "fotoperfil" => $urlImagen,
+                    // Aquí se guarda la imagen en formato base64
+                );
+                
+                $data[] = $item;
+            }
+            // header('Content-Type: application/json; charset=utf-8');
+            return $data;
+            
+
+        } else {
+            throw new Exception("Error en la consulta: " . $this->getConexion()->error);
+        }
+    } catch (Exception $e) {
+        error_log($e->getMessage());
+        return null; // Retorna null en caso de error
+    }
+} //fn ConsultarResenias POR id
+
+
+function CalcularTotalDeResenas_Anfitrion($identificacion)
 {
     try {
         $query = "SELECT COUNT(*) as `CantidadResenasTotales`
@@ -1055,22 +1111,202 @@ function CalcularTotalDeResenas($identificacion)
                   INNER JOIN `tbinmueble` AS `i` ON r.idLugarDirigido = i.id
                   WHERE i.Propietario = $identificacion";
 
-$this->conn->set_charset("utf8");
-$result = $this->getConexion()->query($query);
+        $this->conn->set_charset("utf8");
+        $result = $this->getConexion()->query($query);
 
-if ($result) {
-    $count = $result->fetch_assoc()["CantidadResenasTotales"];
-    return $count;
-} else {
-    throw new Exception("Error en la consulta: " . $this->getConexion()->error);
-}
-} catch (Exception $e) {
-    error_log($e->getMessage());
-    return null; // Retorna null en caso de error
-}
-}
+        if ($result) {
+            $count = $result->fetch_assoc()["CantidadResenasTotales"];
+            return $count;
+        } else {
+            throw new Exception("Error en la consulta: " . $this->getConexion()->error);
+        }
+    } catch (Exception $e) {
+        error_log($e->getMessage());
+        return null; // Retorna null en caso de error
+    }
+}//end consultar resenas por id
 
-function CalcularCalificacion_totalResenias($identificacion)
+
+//HUEsPED
+function ConsultarTUSResenas_porID_Huesped($idHuesped)
+{
+    try {
+        $query = "SELECT 
+                    tbresenalugar.Descripcion, 
+                    tbresenalugar.fechaResena, 
+                    tbresenalugar.estrellas, 
+                    tbusuario.Nombre AS NombreUsuarioResena, 
+                    tbusuario.fotoperfil
+                    FROM 
+                        tbresenalugar
+                    JOIN 
+                        tbusuario ON tbresenalugar.idUsuarioResena = tbusuario.idUser
+                    WHERE 
+                    tbusuario.idUser = $idHuesped;";
+
+        $this->conn->set_charset("utf8");
+        $result = $this->getConexion()->query($query);
+
+        if ($result) {
+                    $data = array();
+                    
+                    while ($row = $result->fetch_assoc()) {
+                        // Suponiendo que $row["fotoperfil"] contiene la ruta de la imagen
+                        $imagenPath = $row["fotoperfil"];
+                        $imagenData = file_get_contents($imagenPath);
+                        $imagenBase64 = base64_encode($imagenData);
+                        
+                        $urlImagen = "data:image/jpeg;base64," . $imagenBase64;
+                        
+                        $item = array(
+                            "Descripcion" => $row['Descripcion'],
+                            "fechaResena" => $row["fechaResena"],
+                            "estrellas" => $row["estrellas"],
+                            "NombreUsuarioResena" => $row["NombreUsuarioResena"],
+                            "fotoperfil" => $urlImagen,
+                            // Aquí se guarda la imagen en formato base64
+                        );
+                        
+                        $data[] = $item;
+                    }
+                    return json_encode($data);
+                    
+
+        } else {
+            throw new Exception("Error en la consulta: " . $this->getConexion()->error);
+        }
+    } catch (Exception $e) {
+        error_log($e->getMessage());
+        return null; // Retorna null en caso de error
+    }
+    // $this->conn->close();
+} //fn ConsultarResenias POR id Huesped
+
+
+function ConsultarTUSResenasRecibidas_porID_Huesped($idHuesped)
+{
+    try {
+        $query = "SELECT 
+                c.comentario,
+                CONCAT(u.nombre, ' ', u.apellido1) AS nombreAnfitrion,
+                u.fotoPerfil AS fotoPerfilCalificador,
+                c.estrellas,
+                i.nombre AS nombreInmueble
+            FROM
+                tbcalificaciones c
+            JOIN
+                tbreserva r ON c.idReservaBase = r.idReserva
+            JOIN
+                tbinmueble i ON r.idInmueble = i.id
+            JOIN
+                tbusuario u ON c.idCalificador = u.idUser
+            WHERE
+                r.idUsuario = $idHuesped";
+
+        $this->conn->set_charset("utf8");
+        $result = $this->getConexion()->query($query);
+
+        if ($result) {
+                    $data = array();
+                    
+                    while ($row = $result->fetch_assoc()) {
+                        // Suponiendo que $row["fotoPerfilCalificador"] contiene la ruta de la imagen
+                        $imagenPath = $row["fotoPerfilCalificador"];
+                        $imagenData = file_get_contents($imagenPath);
+                        $imagenBase64 = base64_encode($imagenData);
+                        
+                        $urlImagen = "data:image/jpeg;base64," . $imagenBase64;
+                        
+                        $item = array(
+                            "comentario" => $row['comentario'],
+                            "nombreAnfitrion" => $row["nombreAnfitrion"],
+
+                            // Aquí se guarda la imagen en formato base64
+                            "fotoPerfilCalificador" => $urlImagen,
+                            "estrellas" => $row["estrellas"],
+                            "nombreInmueble" => $row["nombreInmueble"],
+                        );
+                        
+                        $data[] = $item;
+                    }
+                    return json_encode($data);
+                    
+
+        } else {
+            throw new Exception("Error en la consulta: " . $this->getConexion()->error);
+        }
+    } catch (Exception $e) {
+        error_log($e->getMessage());
+        return null; // Retorna null en caso de error
+    }
+    // $this->conn->close();
+} //fn ConsultarResenias recibidas POR id Huesped 
+
+
+
+
+
+
+function VERTODAS_RESENAS($idHuesped)
+{
+    try {
+        $query = "SELECT 
+                    tbresenalugar.Descripcion, 
+                    tbresenalugar.fechaResena, 
+                    tbresenalugar.estrellas, 
+                    tbusuario.Nombre AS NombreUsuarioResena, 
+                    tbusuario.fotoperfil
+                    FROM 
+                        tbresenalugar
+                    JOIN 
+                        tbusuario ON tbresenalugar.idUsuarioResena = tbusuario.idUser
+                    WHERE 
+                    tbusuario.idUser = $idHuesped;";
+
+        $this->conn->set_charset("utf8");
+        $result = $this->getConexion()->query($query);
+
+        if ($result) {
+                    $data = array();
+                    
+                    while ($row = $result->fetch_assoc()) {
+                        // Suponiendo que $row["fotoperfil"] contiene la ruta de la imagen
+                        $imagenPath = $row["fotoperfil"];
+                        $imagenData = file_get_contents($imagenPath);
+                        $imagenBase64 = base64_encode($imagenData);
+                        
+                        $urlImagen = "data:image/jpeg;base64," . $imagenBase64;
+                        
+                        $item = array(
+                            "Descripcion" => $row['Descripcion'],
+                            "fechaResena" => $row["fechaResena"],
+                            "estrellas" => $row["estrellas"],
+                            "NombreUsuarioResena" => $row["NombreUsuarioResena"],
+                            "fotoperfil" => $urlImagen,
+                            // Aquí se guarda la imagen en formato base64
+                        );
+                        
+                        $data[] = $item;
+                    }
+                    return $data;
+                    
+
+        } else {
+            throw new Exception("Error en la consulta: " . $this->getConexion()->error);
+        }
+    } catch (Exception $e) {
+        error_log($e->getMessage());
+        return null; // Retorna null en caso de error
+    }
+    // $this->conn->close();
+} //fn ConsultarResenias POR id Huesped
+
+
+
+
+
+
+function CalcularCalificacion_totalResenias_Anfitrion($identificacion)
 {
     try {
         $query = "SELECT AVG(r.estrellas) as `promedio`
@@ -1125,7 +1361,126 @@ function CalcularTotalDeResenasYPromedio_PorInmueble($idInmueble)
         error_log($e->getMessage());
         return null; // Retorna null en caso de error
     }
-}
+}//end metodo calcular resenas y promedio anfitrion
+
+
+// Huesped_Indicadores
+function CalcularPromedioCalificacionRecibida_Huesped($idHuesped)
+{
+    try {
+        $query = "SELECT AVG(c.estrellas) AS `promedio_estrellas`
+                FROM `tbcalificaciones` c
+                JOIN `tbreserva` r ON c.idReservaBase = r.idReserva
+                WHERE r.idUsuario = $idHuesped";
+
+        $this->conn->set_charset("utf8");
+        $result = $this->getConexion()->query($query);
+
+        if ($result) {
+            if ($result->num_rows > 0) {
+                $row = $result->fetch_assoc();
+
+                return $row["promedio_estrellas"];
+            } else {
+                return null; 
+            }
+        } else {
+            throw new Exception("Error en la consulta: " . $this->getConexion()->error);
+        }
+    } catch (Exception $e) {
+        error_log($e->getMessage());
+        return null;
+    }
+}//end metodo calcular promedio HUESPED
+
+
+// CALCULA TODAS LAS RESENAS: ENVIAS + RECIBIDAS
+function CalcularTotalDeResenas_Huesped($idHuesped)
+{
+    try {
+        $query_ResenasEnviadas = "SELECT COUNT(*) as `CantidadResenasEnviadas`
+                  FROM tbresenalugar AS r
+                  WHERE r.idUsuarioResena = $idHuesped";
+
+        $query_ResenasRecibidas = "SELECT COUNT(c.comentario) as `CantidadResenasRecibidas`
+                FROM `tbcalificaciones` AS `c`
+                INNER JOIN `tbreserva` AS `r` ON c.idReservaBase = r.idReserva 
+                WHERE r.idUsuario = $idHuesped";
+
+        $this->conn->set_charset("utf8");
+
+        $resultEnviadas = $this->getConexion()->query($query_ResenasEnviadas);
+        $resultRecibidas = $this->getConexion()->query($query_ResenasRecibidas);
+
+        if ($resultEnviadas && $resultRecibidas) {
+            $count_Enviadas = $resultEnviadas->fetch_assoc()["CantidadResenasEnviadas"];
+            $count_Recibidas = $resultRecibidas->fetch_assoc()["CantidadResenasRecibidas"];
+
+            $Totalresenas = $count_Enviadas + $count_Recibidas;
+
+            return $Totalresenas;
+        } else {
+            throw new Exception("Error en la consulta: " . $this->getConexion()->error);
+        }
+    } catch (Exception $e) {
+        error_log($e->getMessage());
+        return null; // Retorna null en caso de error
+    }
+} // end calcular resenas totales huesped
+
+
+function CalcularResenasEnviadas_Huesped($idHuesped)
+{
+    try {
+        $query_ResenasEnviadas = "SELECT COUNT(*) as `CantidadResenasEnviadas`
+                  FROM tbresenalugar AS r
+                  WHERE r.idUsuarioResena = $idHuesped";
+
+        $this->conn->set_charset("utf8");
+
+        $resultEnviadas = $this->getConexion()->query($query_ResenasEnviadas);
+
+        if ($resultEnviadas) {
+            $count_Enviadas = $resultEnviadas->fetch_assoc()["CantidadResenasEnviadas"];
+
+            return $count_Enviadas;
+        } else {
+            throw new Exception("Error en la consulta: " . $this->getConexion()->error);
+        }
+    } catch (Exception $e) {
+        error_log($e->getMessage());
+        return null; // Retorna null en caso de error
+    }
+}// end calcualr resenas enviadas huesped
+
+
+function CalcularResenasRecibidas_Huesped($idHuesped)
+{
+    try {
+
+        $query_ResenasRecibidas = "SELECT COUNT(c.comentario) as `CantidadResenasRecibidas`
+                FROM `tbcalificaciones` AS `c`
+                INNER JOIN `tbreserva` AS `r` ON c.idReservaBase = r.idReserva 
+                WHERE r.idUsuario = $idHuesped";
+
+        $this->conn->set_charset("utf8");
+
+        $resultRecibidas = $this->getConexion()->query($query_ResenasRecibidas);
+
+        if ($resultRecibidas) {
+            $count_Recibidas = $resultRecibidas->fetch_assoc()["CantidadResenasRecibidas"];
+
+            return $count_Recibidas;
+        } else {
+            throw new Exception("Error en la consulta: " . $this->getConexion()->error);
+        }
+    } catch (Exception $e) {
+        error_log($e->getMessage());
+        return null; // Retorna null en caso de error
+    }
+}//end calcular resenas recibidas huesped
+
+
 
 
 
@@ -1152,33 +1507,93 @@ function ConsultarInmuebles_ConResenias()
                )";
 
 
-$this->conn->set_charset("utf8");
-$result = $this->getConexion()->query($query);
+        $this->conn->set_charset("utf8");
+        $result = $this->getConexion()->query($query);
 
-if ($result) {
-    $data = array();
-    
-    while ($row = $result->fetch_assoc()) {
-        $item = array(
-            "id" => $row['id'],
-            "Nombre_Inmueble" => $row["nombre_inmueble"],
-            "Estado" => $row["Estado"],
-            "Disponibilidad" => $row["disponibilidad"]
-        );
-        $data[] = $item;
+        if ($result) {
+            $data = array();
+            
+            while ($row = $result->fetch_assoc()) {
+                $item = array(
+                    "id" => $row['id'],
+                    "Nombre_Inmueble" => $row["nombre_inmueble"],
+                    "Estado" => $row["Estado"],
+                    "Disponibilidad" => $row["disponibilidad"]
+                );
+                $data[] = $item;
+            }
+            // $this->getConexion()->close();
+            
+            
+            return json_encode($data);
+        } else {
+            throw new Exception("Error en la consulta: " . $this->getConexion()->error);
+        }
+    } catch (Exception $e) {
+        error_log($e->getMessage());
+        return json_encode(array("error" => "Error en la consulta"));
     }
-    // $this->getConexion()->close();
-    
-    
-    return json_encode($data);
-} else {
-    throw new Exception("Error en la consulta: " . $this->getConexion()->error);
 }
-} catch (Exception $e) {
-    error_log($e->getMessage());
-    return json_encode(array("error" => "Error en la consulta"));
+
+function ConsultarInmuebles_ConResenias_Huesped()
+{
+    $arry_Datos = func_get_args();
+    
+    $idHuesped = $this->GetConexion()->real_escape_string($arry_Datos[0]);
+    
+    try {
+        $query = "SELECT i.id AS idInmueble,
+         i.nombre AS nombreInmueble, 
+         i.estadoLugar AS estadoInmueble, 
+         CASE i.disponibilidad
+            WHEN 1 THEN 'Disponible'
+            ELSE 'No Disponible'
+        END AS disponibilidadInmueble
+         FROM tbresenalugar r JOIN tbinmueble i ON r.idLugarDirigido = i.id
+          WHERE r.idUsuarioResena = $idHuesped";
+
+
+        $this->conn->set_charset("utf8");
+        $result = $this->getConexion()->query($query);
+
+        if ($result) {
+            $data = array();
+            
+            while ($row = $result->fetch_assoc()) {
+                $item = array(
+                    "id" => $row['idInmueble'],
+                    "Nombre_Inmueble" => $row["nombreInmueble"],
+                    "Estado" => $row["estadoInmueble"],
+                    "Disponibilidad" => $row["disponibilidadInmueble"]
+                );
+                $data[] = $item;
+            }
+            // $this->getConexion()->close();
+            
+            
+            return json_encode($data);
+        } else {
+            throw new Exception("Error en la consulta: " . $this->getConexion()->error);
+        }
+    } catch (Exception $e) {
+        error_log($e->getMessage());
+        return json_encode(array("error" => "Error en la consulta"));
     }
 }
+
+
+
+// =======================CALIFICACIONES===================================================================
+
+
+
+
+
+
+
+
+
+
 // =========================================================================================================
 // ============FIN RESEÑAS============FIN RESEÑAS=============FIN RESEÑAS==============FINRESEÑAS===========
 // =========================================================================================================
@@ -1376,28 +1791,30 @@ $this->conn->set_charset("utf8");
     {
         $fecha = date("Y-m-d"); 
 
-        // Consulta para obtener el nombre del inmueble
+        // obtiene el nombre del inmueble
         $queryNombre = "SELECT `nombre` FROM `tbinmueble` WHERE id = $idInmueble"; 
 
         $resultadoNombre = $this->getConexion()->query($queryNombre);
 
         if ($resultadoNombre) {
-            // Obtener el nombre del inmueble
+            
             $fila = $resultadoNombre->fetch_assoc();
             $nombreInmueble = $fila['nombre'];
 
-            // Consulta de inserción con el nombre del inmueble
+         
             $query = "INSERT INTO `tbnotificaciones` (`descripcion`, `idusuario`, `fecha`)
                     VALUES ('Has realizado una Reserva en $nombreInmueble',  
                             '$idusuario', '$fecha')";
 
             if ($this->getConexion()->query($query)) {
-                // Verificar si algún registro fue afectado
+                
+
                 if ($this->getConexion()->affected_rows > 0) {
                     return true;  // Éxito
                 } else {
                     return false; // No se insertaron filas (puede ser una inserción duplicada)
                 }
+
             } else {
                 return false; // Error en la ejecución de la consulta
             }
@@ -1408,6 +1825,9 @@ $this->conn->set_charset("utf8");
 
     function InsertarNotificacion_PagoAlAnfitrion($idInmueble, $idusuario)
     {
+            // EN PROCESO ........ 
+
+
         $fecha = date("Y-m-d"); 
 
         // Consulta para obtener el nombre del inmueble
@@ -1439,27 +1859,138 @@ $this->conn->set_charset("utf8");
             return false; // Error en la consulta para obtener el nombre del inmueble
         }
     }
+    
+    // function InsertarNotificacion_CuandoCalificaElAnfitrion($idAnfitrion , $idReserva)
+    // {
 
-    function InsertarNotificacion_RealizadaUnaresenia()
-    {
-        $arry_Datos = func_get_args();
+    //     $fecha = date("Y-m-d"); 
 
-        $fecha = date("Y-m-d"); 
+    //     $queryNombreHuesped_NombreInmueble = "SELECT i.nombre as `NombreInmueble` ,
+    //     CONCAT(u.nombre, ' ', u.apellido1, ' ', u.apellido2) as `NombreHuesped`
+    //     FROM `tbreserva` r 
+    //     JOIN `tbusuario` u ON r.idUsuario = u.idUser 
+    //     JOIN `tbinmueble` i ON i.id = r.idInmueble
+    //     WHERE idReserva = $idReserva";
+        
+    //     $stmt = $this->getConexion()->query($queryNombreHuesped_NombreInmueble);
 
-        $idInmueble = $this->GetConexion()->real_escape_string($arry_Datos[0]);
-        $idusuario = $this->GetConexion()->real_escape_string($arry_Datos[1]);
+    //     if ($stmt) {
+    //         $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        $query = "INSERT INTO `tbnotificaciones` (`descripcion`, `$idusuario`, `$fecha`)
-            VALUES ('¡Bienvenido a My Lodgment Place! Has creado una cuenta en nuestro sitio.',  
-            $idusuario,  $fecha)";
+    //         if ($result) {
+    //             $NombreInmueble = $result['NombreInmueble'];
+    //             $NombreHuesped = $result['NombreHuesped'];
+    //         }else{
+    //             $NombreInmueble = "";
+    //             $NombreHuesped = "";
+    //         }
 
-        if ($this->getConexion()->query($query)) {
-            return true;
-        } else {
-            return false;
+    //     }else{
+    //         $NombreInmueble = "";
+    //         $NombreHuesped = "";
+    //     }
+        
+    //     // NOTIFICACION QUE SE ENVIA AL ANFITRION  
+    //     $queryEnvioNotificacionAnfitrion = "INSERT INTO `tbnotificaciones` (`descripcion`, `idusuario`, `fecha`)
+    //         VALUES ('Hiciste una calificación para la reserva en $NombreInmueble
+    //         alquilado por $NombreHuesped.',  
+    //         `$idAnfitrion`, `$fecha`)";
+
+    //     if ($this->getConexion()->query($queryEnvioNotificacionAnfitrion)) {
+            
+    //         $queryNombreAnfitriron = "SELECT CONCAT(`nombre`, ' ', `apellido1`, ' ', `apellido2`) 
+    //         FROM `tbusuario` WHERE idUser = $idAnfitrion";
+            
+    //         $NombreAnfitrion = $this->getConexion()->query($queryNombreAnfitriron);
+
+
+
+
+    //         $queryEnvioNotificacionHuesped = "INSERT INTO `tbnotificaciones` (`descripcion`, `idusuario`, `fecha`)
+    //         VALUES ('El Anfitrion $NombreAnfitrion ha hecho una calificacion sobre tu estadia 
+    //         en $nombreInmueble.',  
+    //         `$idAnfitrion`, `$fecha`)";
+
+    //         $stmt2 = $this->getConexion()->query($queryEnvioNotificacionHuesped);
+
+    //         if($stmt2){
+    //             return true;
+    //         }else{
+    //             return false;
+    //         }
+        
+
+
+
+    //     } else {
+
+    //         return false;
+    //     }
+        
+    // }
+function InsertarNotificacion_CuandoCalificaElAnfitrion($idAnfitrion, $idReserva)
+{
+
+    $fecha = date("Y-m-d");
+    $NombreInmueble = "";
+    $NombreHuesped = "";
+
+    // nombres de inmueble y huésped
+    $queryNombreHuesped_NombreInmueble = "SELECT i.nombre as `NombreInmueble`,
+        CONCAT(u.nombre, ' ', u.apellido1, ' ', u.apellido2) as `NombreHuesped`
+        FROM `tbreserva` r 
+        JOIN `tbusuario` u ON r.idUsuario = u.idUser 
+        JOIN `tbinmueble` i ON i.id = r.idInmueble
+        WHERE idReserva = $idReserva";
+
+    $stament = $this->getConexion()->query($queryNombreHuesped_NombreInmueble);
+
+    if ($stament) {
+        $result = $stament->fetch_assoc();
+
+        if ($result) {
+            $NombreInmueble = $result['NombreInmueble'];
+            $NombreHuesped = $result['NombreHuesped'];
         }
     }
 
+    // NOTIFICACION QUE SE ENVÍA AL ANFITRIÓN
+    $queryEnvioNotificacionAnfitrion = "INSERT INTO `tbnotificaciones` (`descripcion`, `idUser`, `fecha`)
+        VALUES ('Hiciste una calificación para la reserva en $NombreInmueble
+        alquilado por $NombreHuesped.',  
+        '$idAnfitrion', '$fecha')";
+
+    if ($this->getConexion()->query($queryEnvioNotificacionAnfitrion)) {
+
+        // Obtener nombre del anfitrión
+        $queryNombreAnfitrion = "SELECT CONCAT(`nombre`, ' ', `apellido1`, ' ', `apellido2`) as `NombreAnfitrion`
+        FROM `tbusuario` WHERE idUser = $idAnfitrion";
+
+        $queryObtenerIdHuesped = "SELECT r.idUsuario as `idUsuario`
+        FROM `tbreserva` r 
+        WHERE r.idReserva = $idReserva";
+
+        $stmtNombreAnfitrion = $this->getConexion()->query($queryNombreAnfitrion);
+        $stmtidHuesped = $this->getConexion()->query($queryObtenerIdHuesped);
+
+        if ($stmtNombreAnfitrion && $stmtidHuesped) {
+            $nombreAnfitrion = $stmtNombreAnfitrion->fetch_assoc()['NombreAnfitrion'];
+            $idHuesped = $stmtidHuesped->fetch_assoc()['idUsuario'];
+
+            // NOTIFICACION QUE SE ENVÍA AL HUÉSPED
+            $queryEnvioNotificacionHuesped = "INSERT INTO `tbnotificaciones` (`descripcion`, `idUser`, `fecha`)
+                VALUES ('El Anfitrion $nombreAnfitrion ha hecho una calificación sobre tu estadia en $NombreInmueble.',  
+                '$idHuesped', '$fecha')";
+
+            if ( $this->getConexion()->query($queryEnvioNotificacionHuesped)) {
+                return true;
+            }
+        }
+    }
+    else{
+        return false;
+    }
+}
 
 
 /*----------------------------------------------- FIN Notificaciones --------------------------------------------------*/
@@ -1784,8 +2315,8 @@ $this->conn->set_charset("utf8");
             return false;
         } finally {
             // Cerrar la consulta preparada y la conexión
-            $stmt->close();
-            $conexion->close();
+            // $stmt->close();
+            // $conexion->close();
         }
     }
 

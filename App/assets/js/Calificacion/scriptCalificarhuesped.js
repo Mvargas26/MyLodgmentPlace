@@ -20,6 +20,8 @@ document.addEventListener('DOMContentLoaded', function () {
             const cedAnfitrionCalifica = identificacion;
             const Rol = rol;
 
+            console.log(ReservaCalificar);
+            console.log(cedAnfitrionCalifica);
 
             const formData = {
                 ReservaCalificar,
@@ -36,6 +38,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 data: {formData: formData},              
                 success: function(response) 
                 {
+
+                    console.log(response);
                     var x = JSON.parse(response);
                     if (x.exito ) {
                         Swal.fire("Éxito", "Se guardó la calificación correctamente. ", "success");//mensaje bonito
