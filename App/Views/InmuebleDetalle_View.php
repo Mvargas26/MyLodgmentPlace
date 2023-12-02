@@ -4,7 +4,7 @@ require_once('../Modules/Master_Class.php');
 
 include('../Modules/fullCalendar/config.php');
 
-$SqlEventos   = ("SELECT * FROM tbreserva");
+$SqlEventos = ("SELECT * FROM tbreserva");
 $resulEventos = mysqli_query($con, $SqlEventos);
 
 session_start();
@@ -18,7 +18,7 @@ session_start();
 // Verificar si se proporcionó un nombre de inmueble en la URL
 if (isset($_GET['id'])) {
   $idInmuebleDetalle = $_GET['id'];
-?>
+  ?>
 
   <link rel="stylesheet" type="text/css" href="../assets/css/fullcalendar.min.css">
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -30,7 +30,9 @@ if (isset($_GET['id'])) {
   <main id="main">
 
 
-    <h1 hidden><?php echo $idInmuebleDetalle ?></h1>
+    <h1 hidden>
+      <?php echo $idInmuebleDetalle ?>
+    </h1>
     <!-- ----------------------------------------------------- -->
     <!-- PRIMERO HACE LA CONSULTA DE LOS DATOS DEL INMUEBLE -->
     <!-- SEGUN EL ID QUE RECIBIO POR URL -->
@@ -76,12 +78,12 @@ if (isset($_GET['id'])) {
                 if ($datos) {
                   // $datosAgrupados = array();
                   foreach ($datos as $dato) {
-                ?>
+                    ?>
                     <div class="swiper-slide">
                       <img src="../../App/assets/img/ImagenesInmuebles/<?php echo $dato['nameImagen'] ?> " alt="">
                     </div>
 
-                  <?php
+                    <?php
 
                   } //end for 
                 } //end if
@@ -90,7 +92,7 @@ if (isset($_GET['id'])) {
                   <div class="swiper-slide">
                     <p>No se encontraron imagenes para este inmueble</p>
                   </div>
-                <?php
+                  <?php
                 }
                 ?>
 
@@ -113,16 +115,20 @@ if (isset($_GET['id'])) {
             <div class="text-center mt-3" id="bodyDivButton">
               <?php
               if (isset($_SESSION["Rol"])) {
-              ?>
-                <button class="botonesListaFavoritos" id="btnAgregarLista" name="btnAgregarFavoritos" type="submit">+ Nueva Lista <i class="fa-solid fa-list" style="color: #ffffff;"></i></button>
-                <button class="botonesListaFavoritos" id="btnAgregarFavoritos" name="btnAgregarFavoritos" type="submit">Agregar favorito <i class="fa-duotone fa-star" style="--fa-primary-color: #e14a09; --fa-secondary-color: #fafafa; --fa-secondary-opacity: 0.4;"></i> </button>
+                ?>
+                <button class="botonesListaFavoritos" id="btnAgregarLista" name="btnAgregarFavoritos" type="submit">+ Nueva
+                  Lista <i class="fa-solid fa-list" style="color: #ffffff;"></i></button>
+                <button class="botonesListaFavoritos" id="btnAgregarFavoritos" name="btnAgregarFavoritos"
+                  type="submit">Agregar favorito <i class="fa-duotone fa-star"
+                    style="--fa-primary-color: #e14a09; --fa-secondary-color: #fafafa; --fa-secondary-opacity: 0.4;"></i>
+                </button>
                 <!-- <button id="btnAgregarFavoritos" name="btnAgregarFavoritos" class="custom-button" type="submit">Agregar a Favoritos</button> -->
               <?php } ?>
             </div>
           </div>
 
           <div class="col-lg-4">
-            <div class="portfolio-info">
+            <div id="divFixed" class="position-fixed">
               <!-- <h3>Cabaña El Sueño</h3>
               <ul>
                 <li><strong>Precio:</strong>: Web design</li>
@@ -139,33 +145,33 @@ if (isset($_GET['id'])) {
                 //   $resultadoConsulta = $ObjMaster->ConsultarInmuebles();
                 //   // Decodificar el string JSON a un array de PHP
                 //   $datos = json_decode($resultadoConsulta, true);
-
+              
                 //   if ($datos) {
                 //     // $datosAgrupados = array();
-
+              
 
                 //     foreach ($datos as $dato) {
                 ?>
                 <!-- <div class="col-lg-4 col-md-6 portfolio-item filter-<?php //echo $dato['Categoria_Inmueble'] 
-                                                                          ?>">
+                  ?>">
                         <div class="portfolio-img"><img src="./App/assets/img/ImagenesInmuebles/<?php //echo $dato['nameImagen'] 
-                                                                                                ?>" class="img-fluid" alt=""></div>
+                          ?>" class="img-fluid" alt=""></div>
                         <div class="portfolio-info">
                           <h4><?php  //echo $dato['Nombre_Inmueble'] 
-                              ?></h4>
+                            ?></h4>
                           <p> ₡ <?php //echo $dato['valorDiario'] 
-                                ?></p>
+                            ?></p>
                           <a href="./App/assets/img/ImagenesInmuebles/<?php //echo $dato['nameImagen'] 
-                                                                      ?>" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="// $dato['Nombre_Inmueble'] ?>"><i class="bx bx-plus"></i></a>
+                            ?>" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="// $dato['Nombre_Inmueble'] ?>"><i class="bx bx-plus"></i></a>
                           <a href="./App/Views/InmuebleDetalle_View.php?nombre=<?php //echo urlencode($dato['Nombre_Inmueble']); 
-                                                                                ?>" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+                            ?>" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
                         </div>
                       </div> -->
                 <?php
                 // function obtenerPrimerValorUnico($columna) {
                 //   return reset(array_unique(array_column($datos, $columna)));
                 // }
-
+              
                 ?>
 
                 <h2>Características del espacio:</h2>
@@ -205,11 +211,10 @@ if (isset($_GET['id'])) {
                   <?php
                   foreach ($datos as $dato) {
 
-                    if($dato['disponibilidad'] == 1){
+                    if ($dato['disponibilidad'] == 1) {
                       echo "Disponible";
-                    }
-                    else{
-                      echo "No Disponible"; 
+                    } else {
+                      echo "No Disponible";
                     }
                     // echo $dato['disponibilidad'];
                     break;
@@ -257,18 +262,18 @@ if (isset($_GET['id'])) {
 
                     echo $dato['cantidadBanos'];
                     break;
-                  } 
+                  }
                   ?><br>
 
                   <!-- ----------------------------------------------------- -->
                   <strong>Cantidad de Camas: </strong>
                   <?php
- 
+
                   foreach ($datos as $dato) {
 
                     echo $dato['cantidadCamas'];
                     break;
-                  } 
+                  }
                   ?><br>
 
                   <!-- ----------------------------------------------------- -->
@@ -278,7 +283,7 @@ if (isset($_GET['id'])) {
 
                     echo $dato['cantidadCuartos'];
                     break;
-                  } 
+                  }
 
                   ?><br>
 
@@ -289,7 +294,7 @@ if (isset($_GET['id'])) {
 
                     echo $dato['cantidadVehiculos'];
                     break;
-                  } 
+                  }
 
                   ?><br>
 
@@ -300,18 +305,18 @@ if (isset($_GET['id'])) {
 
                     echo $dato['cantidadPatios'];
                     break;
-                  } 
+                  }
 
                   ?><br>
 
-                   <!-- ----------------------------------------------------- -->
-                   <strong>Plantas: </strong>
+                  <!-- ----------------------------------------------------- -->
+                  <strong>Plantas: </strong>
                   <?php
                   foreach ($datos as $dato) {
 
                     echo $dato['cantidadPlantas'];
                     break;
-                  } 
+                  }
 
                   ?><br>
                 </p>
@@ -354,7 +359,7 @@ if (isset($_GET['id'])) {
                 <script src='../assets/locales/es.js'></script>
 
                 <script type="text/javascript">
-                  $(document).ready(function() {
+                  $(document).ready(function () {
                     $("#calendar").fullCalendar({
                       header: {
                         left: "prev,next today",
@@ -372,7 +377,7 @@ if (isset($_GET['id'])) {
                       selectHelper: false,
 
                       // Nuevo Evento
-                      select: function(start, end) {
+                      select: function (start, end) {
                         $("#exampleModal").modal();
                         $("input[name=fechaInicio]").val(start.format('DD-MM-YYYY'));
 
@@ -385,19 +390,19 @@ if (isset($_GET['id'])) {
                       events: [
                         <?php
                         while ($dataEvento = mysqli_fetch_array($resulEventos)) { ?>
-                         {
-                          _id: '<?php echo $dataEvento['idReserva']; ?>',
-                          title: '<?php echo 'Reservado'; ?>',
-                          start: '<?php echo $dataEvento['fechaInicio']; ?>',
-                          end: '<?php echo $dataEvento['fechaFin']; ?>',
-                          color: '<?php echo $dataEvento['colorEvento']; ?>'
-                        },
+                                                                                     {
+                            _id: '<?php echo $dataEvento['idReserva']; ?>',
+                            title: '<?php echo 'Reservado'; ?>',
+                            start: '<?php echo $dataEvento['fechaInicio']; ?>',
+                            end: '<?php echo $dataEvento['fechaFin']; ?>',
+                            color: '<?php echo $dataEvento['colorEvento']; ?>'
+                          },
 
                         <?php } ?>
                       ],
 
                       // Modificar Evento
-                      eventClick: function(event) {
+                      eventClick: function (event) {
                         var idEvento = event._id;
                         console.log("Abriendo modal para el evento con ID:", idEvento);
                         $('input[name=idEvento]').val(idEvento);
@@ -408,7 +413,7 @@ if (isset($_GET['id'])) {
                     });
 
                     // Oculta mensajes de Notificacion
-                    setTimeout(function() {
+                    setTimeout(function () {
                       $(".alert").slideUp(300);
                     }, 3000);
 
@@ -421,7 +426,7 @@ if (isset($_GET['id'])) {
 
         </div>
     </div>
-    
+
     <div class="container">
       <div class="" id="" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
@@ -435,19 +440,23 @@ if (isset($_GET['id'])) {
             <form name="formEvento" id="formEvento" action="nuevoEvento.php" class="form-horizontal" method="POST">
               <div class="form-group">
                 <div class="col-sm-10">
-                  <h3>Valor por dia del inmueble: <span id="valorColones"><?php echo $dato['valorDiario']?></span> colones</h1>
+                  <h3>Valor por dia del inmueble: <span id="valorColones">
+                      <?php echo $dato['valorDiario'] ?>
+                    </span> colones</h1>
                 </div>
               </div>
               <div class="form-group">
                 <label for="cantidadPersonas" class="col-sm-12 control-label">Cantidad de personas</label>
                 <div class="col-sm-10">
-                  <input type="number" class="form-control" name="cantidadPersonas" id="cantidadPersonas" min="0" value="0" placeholder="Cantidad de Personas">
+                  <input type="number" class="form-control" name="cantidadPersonas" id="cantidadPersonas" min="0"
+                    value="0" placeholder="Cantidad de Personas">
                 </div>
               </div>
               <div class="form-group">
                 <label for="cantidadPersonasExtra" class="col-sm-12 control-label">Cantidad de personas extra</label>
                 <div class="col-sm-10">
-                  <input type="number" class="form-control" name="cantidadPersonasExtra" id="cantidadPersonasExtra" min="0" value="0" max="5" placeholder="Cantidad de Personas">
+                  <input type="number" class="form-control" name="cantidadPersonasExtra" id="cantidadPersonasExtra"
+                    min="0" value="0" max="5" placeholder="Cantidad de Personas">
                 </div>
               </div>
               <div class="form-group">
@@ -545,22 +554,23 @@ if (isset($_GET['id'])) {
 
             <br />
 
-            <textarea id="resenaTextarea" name="resena" rows="3" placeholder="Escribe tu reseña aquí..." maxlength="100"></textarea>
+            <textarea id="resenaTextarea" name="resena" rows="3" placeholder="Escribe tu reseña aquí..."
+              maxlength="100"></textarea>
 
             <!--  -->
             <?php
             if (isset($_SESSION["nombre"])) {
-            ?>
+              ?>
               <button class="custom-button" type="button">Publicar Reseña</button>
-            <?php
+              <?php
 
             } else {
-            ?>
+              ?>
               <p style="font-family: inherit;">Debes tener una cuenta para comentar!
                 <a class="nav-link scrollto" style="color: #f4572c;" href="Login_View.php">Iniciar Sesion</a>
                 <a class="nav-link scrollto" style="color: #f4572c;" href="registro_View.php">Registrarse</a>
               </p>
-            <?php
+              <?php
 
             }
             ?>
@@ -607,7 +617,7 @@ if (isset($_GET['id'])) {
               if ($datosResenas) {
 
                 foreach ($datosResenas as $item) {
-              ?>
+                  ?>
                   <div class="swiper-slide">
                     <div class="testimonial-item">
                       <p>
@@ -616,18 +626,22 @@ if (isset($_GET['id'])) {
                         <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                       </p>
                       <img src="<?php echo $item["fotoperfil"] ?>" class="testimonial-img" alt="">
-                      <h3><?php echo $item["NombreUsuarioResena"] ?></h3>
-                      <h3><?php echo $item["fechaResena"] ?></h3>
+                      <h3>
+                        <?php echo $item["NombreUsuarioResena"] ?>
+                      </h3>
+                      <h3>
+                        <?php echo $item["fechaResena"] ?>
+                      </h3>
                     </div>
                   </div><!-- End testimonial item -->
-                <?php
+                  <?php
                 } //end FOR 
                 ?>
-              <?php
+                <?php
               } else {
-              ?>
+                ?>
                 <p style="margin-top:10%; margin-left:40%">Aún no hay reseñas para este lugar</p>
-              <?php
+                <?php
 
               }
               ?>
@@ -672,15 +686,42 @@ if (isset($_GET['id'])) {
     });
 </script> -->
     <script>
-      document.addEventListener("DOMContentLoaded", function() {
+      document.addEventListener("DOMContentLoaded", function () {
+        var fixedDiv = document.getElementById('divFixed');
+        if (!fixedDiv) {
+          console.error("El elemento 'divFixed' no se encontró.");
+          return;
+        }
+
+        // Obtén la posición inicial del elemento fijo
+        var initialOffset = fixedDiv.offsetTop;
+
+        // Define el límite máximo permitido para el desplazamiento hacia abajo
+        var maxScroll = initialOffset + 525; // Puedes ajustar este valor según tus necesidades
+
+        // Agrega el evento de desplazamiento
+        window.addEventListener('scroll', function () {
+          // Obtén la posición actual del desplazamiento
+          var scrollPosition = window.scrollY;
+          // Ajusta el estilo del elemento fijo
+          if (scrollPosition > maxScroll) {
+            fixedDiv.style.position = 'fixed';
+            fixedDiv.style.top = initialOffset - (scrollPosition - maxScroll) + 'px';
+          } else {
+            fixedDiv.style.position = 'static';
+          }
+        });
+      });
+
+      document.addEventListener("DOMContentLoaded", function () {
         var estrellas = document.querySelectorAll('.estrellas');
         var inputEstrellas = document.getElementById('estrellasSeleccionadas');
 
         // Inicializar la primera estrella como llena
         marcarEstrellas(0);
 
-        estrellas.forEach(function(estrella) {
-          estrella.addEventListener('click', function() {
+        estrellas.forEach(function (estrella) {
+          estrella.addEventListener('click', function () {
             var index = parseInt(this.dataset.index, 10);
             marcarEstrellas(index);
             inputEstrellas.value = index + 1;
@@ -718,7 +759,7 @@ if (isset($_GET['id'])) {
   <script src="../assets/js/calculoPrevioReserva/script.js"></script>
   <script src="../assets/js/ReservarLugar/script.js"></script>
 
-<?php
+  <?php
 } else {
   echo "Nombre del inmueble no proporcionado en la URL.";
 }

@@ -8,6 +8,7 @@ session_start();
 ?>
 <!-- ==============================================Fin header ======= -->
 <main id="main">
+
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,14 +19,15 @@ session_start();
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
         <link href="../assets/css/validarIdentidad.css" rel="stylesheet">
     </head>
+
     <body>
         <!-- Contenido principal -->
         <main id="main">
-    <br>
-    <br>
+            <br>
+            <br>
             <h2 class="text-center">Validación de Identidad</h2>
-    <br>
-    <br>
+            <br>
+            <br>
             <div id="leftContainer" class="col-md-6">
                 <p>Cédula:<span id="cedulaFromDatabase" class="value-container"></span></p>
                 <p>Nombre:<span id="nameFromDatabase" class="value-container"></span></p>
@@ -37,10 +39,10 @@ session_start();
                 </button>
             </div>
             <div id="rightContainer" class="col-md-6">
-                    <div id="imageColumn" class="col-md-6 text-center">
-                        <div id="imageContainer"></div>
-                    </div>
+                <div id="imageColumn" class="col-md-6 text-center">
+                    <div id="imageContainer"></div>
                 </div>
+            </div>
             <br>
         </main>
         <!-- Modal para subir foto -->
@@ -79,13 +81,13 @@ session_start();
     <br>
 </main>
 <br>
-    <br>
+<br>
 
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <!-- ==============================================Inicio Footer ======= -->
 <?php
 include './templates/Footer.php';

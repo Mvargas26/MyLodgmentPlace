@@ -72,3 +72,12 @@
   padding: 5px;
   font-size: 14px;
 }
+
+.portfolio-description{
+  position: fixed; 
+  width: 400px;
+  background-color: #f8debd; /* Color de fondo */
+  padding: 20px;
+  border-bottom: 1px solid #ffffff; /* Borde inferior */
+  border-radius: 10px;
+} 
