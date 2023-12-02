@@ -11,7 +11,7 @@ session_start();
 <?php
 
 if (isset($_SESSION["Identificacion"])) {
-    // $ID = $_SESSION["Identificacion"];
+    
     ?>
     <input type="hidden" id="PropietarioID" value="<?php echo $_SESSION["Identificacion"] ?>"/>
 

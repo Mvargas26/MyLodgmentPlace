@@ -75,7 +75,6 @@ if (isset($_SESSION['Identificacion'])) {
           echo 'Cédula no disponible para el usuario';
       }
       
-
       if (!empty($numeroCuenta)) {
         $saldoApiUrl = 'https://tiusr29pl.cuc-carrera-ti.ac.cr/Mybanco/api/Saldos/' . $numeroCuenta;
         
@@ -114,8 +113,6 @@ if (isset($_SESSION['Identificacion'])) {
 } else {
     echo 'ID de usuario no establecido en la sesión';
 }
-
-
 ?>
 
 <!-- ==============================================Fin header ======= -->
@@ -132,57 +129,53 @@ if (isset($_SESSION['Identificacion'])) {
     <br>
         <section class="banner contenedor">
             <secrion class="banner_title">
-                <div class="card">
-                        <div class="head">
-                            <div class="circle"></div>
-                            <div class="img">
-                                <img src="https://images.unsplash.com/photo-1493666438817-866a91353ca9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1049&q=80" alt="">
-                            </div>
-                        </div>
-                        <div class="description">
-                            <p for="nombre"><span id="nombre"><?php echo $nombre; ?></span> <span id="apellidos"><?php echo $apellido1; ?><?php echo $apellido2; ?></span></p>
-                            <p for="cedula">Cédula: <span id="cedula"><?php echo $id;?></span></p>
-                            <p for="direccion">Correo: <span id="direccion"><?php echo $email;?></span></p>
-                            <p for="CuentaBancario">Numero de Cuenta Bancario: <span id="CuentaBancario"><?php echo $numeroCuenta;?></span></p>
-                            <p for="saldo">Saldo: <span id="saldo"><?php echo $saldo;?></span> </p>
-                            <br>
-                            
-                        </div>
-                </div>
 
+                <div class="blog-card spring-fever">
+                    <div class="title-content">
 
-              <div  class="user-info-container">
-                  <div class="contenedor" >
-                    <div class="p"  >Tipo de Cambio Actual</div>
-                    <p class="p" for="tipoCambioCompra">Tipo de Cambio de Compra: ₡<span id="tipoCambioCompra"><?php echo $compra;?></span></p>
-                    <p class="p" for="tipoCambioVenta">Tipo de Cambio de Venta: ₡<span id="tipoCambioVenta"><?php echo $venta;?></span></p>
-                    <p class="p" for="fechaTipoCambio">Fecha Actual: <span id="fechaTipoCambio"><?php echo $fecha; ?></span></p>
-                    <p class="p" style="font-size: 14px;">Información del Tipo de Cambio es tomada del BCCR</p>
-                    <button class="input" onclick="window.location.href='https://tiusr29pl.cuc-carrera-ti.ac.cr/MyBancoWeb/Default'">Ir a Mi Banco</button> 
-                </div>
-              </div>
-            </secrion>
-            <div class="banner_img">
-                <img src="../assets/img/logo/logo.png" alt="">
-            </div> 
+                        <p>Tipo de cambio</p>
+                        <p><span class="licon icon-com"></span><a for="tipoCambioCompra"> Compra: ₡</a><span id="tipoCambioCompra"><?php echo $compra;?><a for="tipoCambioVenta"> Venta: ₡</a><span id="tipoCambioVenta"><?php echo $venta;?></span></li> 
+                        <p class="p" style="font-size: 14px;">Información del Tipo de Cambio es tomada del BCCR</p>
+                        <p for="nombre"><span id="nombre"><?php echo $nombre; ?></span> <span id="apellidos"><?php echo $apellido1; ?><?php echo $apellido2; ?></span></p>
+                        <p for="cedula">Cédula: <span id="cedula"><?php echo $id;?></span></p>
+                        <p for="direccion">Correo: <span id="direccion"><?php echo $email;?></span></p>
+                        
+                    </div>
+                    <div class="card-info">
+                        <button class="input" onclick="window.location.href='https://tiusr29pl.cuc-carrera-ti.ac.cr/MyBancoWeb/Default'">Ir a Mi Banco</button> 
+                    </div>
+                    <div class="utility-info">
+                        <ul class="utility-list">
+                            <li><i class="fa-regular fa-sack-dollar fa-shake" style="color: #370b2c;"></i></span><a>Numero de cuenta: </a><span id="CuentaBancario"><?php echo $numeroCuenta;?></span></li>
+                            <li><i class="fa-regular fa-sack-dollar fa-shake" style="color: #370b2c;"></i></span><a for="saldo">Saldo: </a><span id="saldo"><?php echo $saldo;?></span></li> 
+                        </ul>
+                    </div>
+                    <div class="gradient-overlay"></div>
+                    <div class="color-overlay"></div>
+                </div> 
+                </secrion>
+                <div class="banner_img">
+                    <img src="../assets/img/logo/logo.png" alt="">
+                </div>     
         </section>
-        <div class="burbujas">
-            <div class="burbuja"></div>
-            <div class="burbuja"></div>
-            <div class="burbuja"></div>
-            <div class="burbuja"></div>
-            <div class="burbuja"></div>
-            <div class="burbuja"></div>
-            <div class="burbuja"></div>
-            <div class="burbuja"></div>
-            <div class="burbuja"></div>
-            <div class="burbuja"></div>
-            <div class="burbuja"></div>
-            <div class="burbuja"></div>
-            <div class="burbuja"></div>
-        </div>
+            <div class="burbujas">
+                
+                <div class="burbuja"></div>
+                <div class="burbuja"></div>
+                <div class="burbuja"></div>
+                <div class="burbuja"></div>
+                <div class="burbuja"></div>
+                <div class="burbuja"></div>
+                <div class="burbuja"></div>
+                <div class="burbuja"></div>
+                <div class="burbuja"></div>
+                <div class="burbuja"></div>
+                <div class="burbuja"></div>
+                <div class="burbuja"></div>
+                <div class="burbuja"></div>
+
+            </div>
     </header>
-  
 </body>
 <!-- ==============================================Inicio Footer ======= -->
 <?php

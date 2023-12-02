@@ -1,6 +1,8 @@
 <?php
 require_once('../Modules/Master_Class.php');
 include './templates/Header.php';
+session_start();
+
 
 $ObjMaster = new Master_Class();
 

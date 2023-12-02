@@ -14,9 +14,7 @@ session_start();
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <body id="body">
-
-    <p>Panel Administrativo de Seguridad </p>   
-
+        
         <div class="contener">   
         <!-- Sección para cambiar la contraseña -->
         <div id="seccionCambiarContrasena">
