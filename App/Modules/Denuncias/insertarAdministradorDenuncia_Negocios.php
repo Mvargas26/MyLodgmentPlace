@@ -7,6 +7,7 @@ if (isset($_POST['idDenuncia'])) {
     $identificacion = $_POST['identificacionAdm'];
     $respuestaDenunciaAdm = $_POST['RespuestaDenunciaAdmin'];
     $estadoNuevo = $_POST['estadoNuevo'];
+    $veredicto = $_POST['veredicto'];
 
     $mensajeDB = $ObjMaster->modificarDenunciaAdm($idDenuncia, $identificacion, $respuestaDenunciaAdm, $estadoNuevo);
     $data = array("exito" => $mensajeDB);

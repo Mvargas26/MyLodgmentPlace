@@ -61,6 +61,7 @@ session_start();
                     <th>Nombre Usuario</th>
                     <th>Nombre Denunciado</th>
                     <th>Tipo Denuncia</th>
+                    <th>Veredicto</th>
                     <th>Estado</th>
                 </tr>
             </thead>
@@ -69,12 +70,14 @@ session_start();
                 if ($datos) {
                     $contadorFila = 0;
                     foreach ($datos as $dato) {
+                        $veredicto = !empty($dato['AFavorDe']) ? $dato['AFavorDe'] : "--";
                         echo "<tr data-fila='$contadorFila'>" .
                             "<td style='display:none;'>" . $dato['idDenuncia'] . "</td>" .
                             "<td>" . $dato['nombreC_Usu'] . "</td>" .
                             "<td>" . $dato['nombreC_Denunciado'] . "</td>" .
                             "<td>" . $dato['tipoDenuncia'] . "</td>" .
                             "<td style='display:none;'>" . $dato['detalleDenuncia'] . "</td>" .
+                            "<td>" . $veredicto . "</td>" .
                             "<td><button type='button' class='btn btn-outline-secondary btn-emoji' data-toggle='modal' data-target='#myModal' data-fila='$contadorFila'><i class='bi bi-shield-fill-exclamation'></i></button></td>" .
                             "</tr>";
                         $contadorFila++;

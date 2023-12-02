@@ -41,6 +41,8 @@ $(document).ready(function () {
         var estadoDenuncia = $('#estadoDenuncia').val();
         var respuestaDenunciaAdm = $('#campo1').val();
         var idDenuncia = $('#idDenuncia').val();
+        var veredicto = $('#veredicto').val();
+
         $.ajax({
             type: 'POST',
             url: '../../App/Modules/Denuncias/insertarAdministradorDenuncia_Negocios.php',
@@ -49,6 +51,7 @@ $(document).ready(function () {
                 identificacionAdm: identificacion,
                 RespuestaDenunciaAdmin: respuestaDenunciaAdm,
                 estadoNuevo: estadoDenuncia,
+                veredicto: veredicto,
             },
             success: function (response) {
                 console.log(response);

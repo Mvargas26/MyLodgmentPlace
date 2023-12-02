@@ -1588,7 +1588,7 @@ $this->conn->set_charset("utf8");
         }
     }
 
-    function modificarDenunciaAdm($idDenuncia, $identificacion, $respuestaDenunciaAdm, $estadoNuevo)
+    function modificarDenunciaAdm($idDenuncia, $identificacion, $respuestaDenunciaAdm, $estadoNuevo, $veredicto)
     {
         try {
             // Obtener la conexión
@@ -1600,11 +1600,11 @@ $this->conn->set_charset("utf8");
             }
 
             // Preparar la sentencia SQL
-            $query = "UPDATE tbdenuncia SET RespuestaDenunciaAdmin = ?, idAdminAtiende = ?, estado = ? WHERE idDenuncia = ?";
+            $query = "UPDATE tbdenuncia SET RespuestaDenunciaAdmin = ?, idAdminAtiende = ?, estado = ?, AFavorDe = ? WHERE idDenuncia = ?";
             $stmt = $conexion->prepare($query);
 
             // Vincular parámetros
-            $stmt->bind_param("sssi", $respuestaDenunciaAdm, $identificacion, $estadoNuevo, $idDenuncia);
+            $stmt->bind_param("sssi", $respuestaDenunciaAdm, $identificacion, $estadoNuevo, $veredicto, $idDenuncia);
 
             // Ejecutar la consulta
             $resultado = $stmt->execute();
@@ -1633,7 +1633,7 @@ $this->conn->set_charset("utf8");
             $query = "SELECT tbdenuncia.*, 
             CONCAT(tbusuario.nombre, ' ', tbusuario.apellido1, ' ', tbusuario.apellido2) AS nombreC_Usu, 
             CONCAT(usuariosADenunciar.nombre, ' ', usuariosADenunciar.apellido1, ' ', usuariosADenunciar.apellido2) AS nombreC_Denunciado,  
-            tbtipodenuncia.tipoDenuncia
+            tbtipodenuncia.tipoDenuncia, AFavorDe
             FROM tbdenuncia
             JOIN tbusuario ON tbdenuncia.IdUsuarioQD = tbusuario.idUser
             JOIN tbusuario AS usuariosADenunciar ON tbdenuncia.idUsuarioADenunciar = usuariosADenunciar.idUser
