@@ -372,11 +372,13 @@ $(document).ready(function () {
                     });
                 } else {
                     // Mostrar el mensaje de error Swal
+                    $('#loginForm input[type=submit]').prop('disabled', false);
                     Swal.fire("Error", "Hubo un problema al verificar las credenciales. Por favor, inténtelo de nuevo más tarde.", "error");
                 }
             },
             error: function () {
                 alert('Error en la verificación de credenciales.');
+                $('#loginForm input[type=submit]').prop('disabled', false);
             }
         });
     });
