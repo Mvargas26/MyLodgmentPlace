@@ -223,23 +223,29 @@ if (isset($_SESSION["Identificacion"])) {
                 <br/>
             </form>
     </section>
+    
+    <!-- ========================================================================== -->
+    <!-- Calendario -->
+    <!-- ========================================================================== -->
+    
 
     <section id="Calendario" class="form-section">
-        <img src="../assets/img/publicarinmueble/PASOS2.png" alt="">
-    
-        <div class="section-title">
-            <a class="bar-anchor" onclick="showNextSection()">
-                <span>Siguiente</span>
-                <div class="transition-bar"></div>
-            </a>
-        </div>
+        <link rel="stylesheet" type="text/css" href="../assets/css/calendario anfitrion/calendario.css">
 
-        <div style="display: flex; justify-content: center; align-content: center;">
+            <img src="../assets/img/publicarinmueble/PASOS.png" alt="">
 
-            <h1></h1>
-        </div>
-    
+                <div class="section-title">
+                    <a class="bar-anchor" onclick="showNextSection()">
+                        <span>Siguiente</span>
+                        <div class="transition-bar"></div>
+                    </a>
+                </div>
 
+                <div>
+                    <div id="calendar"></div>
+                    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment.min.js"></script>
+                    <link href='https://fonts.googleapis.com/css?family=Exo+2:400,100' rel='stylesheet' type='text/css'>
+                </div>
     </section>
         
     
@@ -397,18 +403,6 @@ if (isset($_SESSION["Identificacion"])) {
             }
             
         </script>
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 <!-- 
@@ -658,6 +652,7 @@ if (isset($_SESSION["Identificacion"])) {
 <!-- ==============================================Inicio Footer ======= -->
 <script src="../assets/js/inmueble/script_inmueble.js"></script>
 <script async src="../assets/js/Servicios/script_servicios.js"></script>
+<script src="../assets/js/calendario anfitrion/calendarioafi.js"></script>
 
 
 <?php

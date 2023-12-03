@@ -41,7 +41,7 @@ h2 {
     font-size: 25px;
     width: 8em;
     height: 2em;
-    color: black;
+    color: rgb(255, 255, 255);
     border-left: 0.08em solid;
     position: relative;
     margin-top: 0.8em;
@@ -78,7 +78,7 @@ h2 {
     top: -10%;
     box-sizing: border-box;
     border: 0.08em solid;
-    background-color: #524156;
+    background-color: #f45f41;
     display: flex;
     align-items: center;
     justify-content: center;

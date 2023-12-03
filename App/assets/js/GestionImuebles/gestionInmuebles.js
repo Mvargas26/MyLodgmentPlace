@@ -24,8 +24,8 @@ $(document).ready(function () {
                     inmuebleDiv.find('.card__content').append(inmuebleName);
             
                     // Otros detalles del inmueble
-                    var inmuebleDisponibilidad = $('<p></p>').text('Disponibilidad: ' + inmueble.disponibilidad);
-                    inmuebleDiv.find('.card__content').append(inmuebleDisponibilidad);
+                    // var inmuebleDisponibilidad = $('<p></p>').text('Disponibilidad: ' + inmueble.disponibilidad);
+                    // inmuebleDiv.find('.card__content').append(inmuebleDisponibilidad);
             
                     var inmuebleValorDiario = $('<p></p>').text('Valor Diario: ' + inmueble.valorDiario);
                     inmuebleDiv.find('.card__content').append(inmuebleValorDiario);

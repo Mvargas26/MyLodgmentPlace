@@ -13,12 +13,12 @@ session_start();
 //     exit();
 // }
 
-
-
 // Verificar si se proporcionó un nombre de inmueble en la URL
 if (isset($_GET['id'])) {
   $idInmuebleDetalle = $_GET['id'];
-  ?>
+
+
+?>
 
   <link rel="stylesheet" type="text/css" href="../assets/css/fullcalendar.min.css">
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -427,6 +427,7 @@ if (isset($_GET['id'])) {
         </div>
     </div>
 
+    
     <div class="container">
       <div class="" id="" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
@@ -459,6 +460,7 @@ if (isset($_GET['id'])) {
                     min="0" value="0" max="5" placeholder="Cantidad de Personas">
                 </div>
               </div>
+
               <div class="form-group">
                 <label for="fechaInicio" class="col-sm-12 control-label">Fecha Ingreso</label>
                 <div class="col-sm-10">
@@ -471,6 +473,7 @@ if (isset($_GET['id'])) {
                   <input type="date" class="form-control" name="fechaFin" id="fechaFin" placeholder="Fecha Final">
                 </div>
               </div>
+
               <div class="form-group">
                 <label for="Cupon" class="col-sm-12 control-label">Cupon de descuento</label>
                 <div class="col-sm-10">

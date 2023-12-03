@@ -132,22 +132,21 @@ if (isset($_SESSION['Identificacion'])) {
 
                 <div class="blog-card spring-fever">
                     <div class="title-content">
-
                         <p>Tipo de cambio</p>
-                        <p><span class="licon icon-com"></span><a for="tipoCambioCompra"> Compra: ₡</a><span id="tipoCambioCompra"><?php echo $compra;?><a for="tipoCambioVenta"> Venta: ₡</a><span id="tipoCambioVenta"><?php echo $venta;?></span></li> 
+                        <p><i class="fa-regular fa-sack-dollar fa-shake fa-lg" style="color: #ff7f5d; "> </i> </span><a for="tipoCambioCompra"> Compra: ₡</a><span id="tipoCambioCompra"><?php echo $compra;?><a for="tipoCambioVenta"> Venta: ₡</a><span id="tipoCambioVenta"><?php echo $venta;?></span></li> 
                         <p class="p" style="font-size: 14px;">Información del Tipo de Cambio es tomada del BCCR</p>
                         <p for="nombre"><span id="nombre"><?php echo $nombre; ?></span> <span id="apellidos"><?php echo $apellido1; ?><?php echo $apellido2; ?></span></p>
                         <p for="cedula">Cédula: <span id="cedula"><?php echo $id;?></span></p>
                         <p for="direccion">Correo: <span id="direccion"><?php echo $email;?></span></p>
-                        
                     </div>
                     <div class="card-info">
-                        <button class="input" onclick="window.location.href='https://tiusr29pl.cuc-carrera-ti.ac.cr/MyBancoWeb/Default'">Ir a Mi Banco</button> 
+                         <button class="input" onclick="abrirNuevaVentana()">Ir a Mi Banco</button>
                     </div>
                     <div class="utility-info">
                         <ul class="utility-list">
-                            <li><i class="fa-regular fa-sack-dollar fa-shake" style="color: #370b2c;"></i></span><a>Numero de cuenta: </a><span id="CuentaBancario"><?php echo $numeroCuenta;?></span></li>
-                            <li><i class="fa-regular fa-sack-dollar fa-shake" style="color: #370b2c;"></i></span><a for="saldo">Saldo: </a><span id="saldo"><?php echo $saldo;?></span></li> 
+                            <li><i class="fa-regular fa-sack-dollar fa-shake fa-lg" style="color: #ff7f5d; "> </i> </span><a for="Numero de cuenta "> Numero de cuenta: </a><span id="CuentaBancario"><?php echo $numeroCuenta;?></span></li>
+                            <br>
+                            <li><i class="fa-regular fa-sack-dollar fa-shake fa-lg" style="color: #ff7f5d; "> </i> </span><a for="saldo "> Saldo: </a><span id="saldo"><?php echo $saldo;?></span></li> 
                         </ul>
                     </div>
                     <div class="gradient-overlay"></div>
@@ -176,7 +175,14 @@ if (isset($_SESSION['Identificacion'])) {
 
             </div>
     </header>
+
 </body>
+
+<script>
+        function abrirNuevaVentana() {
+            window.open('https://tiusr29pl.cuc-carrera-ti.ac.cr/MyBancoWeb/Default', '_blank');
+        }
+    </script>
 <!-- ==============================================Inicio Footer ======= -->
 <?php
 include './templates/Footer.php';
