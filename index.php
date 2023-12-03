@@ -144,7 +144,6 @@ try {
       <div class="container">
         <div class="section-title">
           <h2>¡Nuestras Estadísticas!</h2>
-          <?php if (!isset($_SESSION["nombre"])) {           ?>
             <div id="ContenedorResenias">
               <section id="testimonials" class="testimonials section-bg">
                 <div class="container">
@@ -180,7 +179,6 @@ try {
                 </div>
               </section>
             </div> <!--fin contenedor1 -->
-          <?php } ?>
         </div>
       </div>
     </section> <!--End Counts Section -->
