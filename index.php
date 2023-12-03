@@ -45,6 +45,8 @@ try {
 
   <link href="./App/assets/css/style.css" rel="stylesheet">
 
+  <script src="https://kit.fontawesome.com/964c59f858.js" crossorigin="anonymous"></script>
+
 </head>
 
 <body>
@@ -52,7 +54,10 @@ try {
   <!-- ======= Hero Section ======= -->
   <section id="hero">
     <div class="hero-container">
-      <h1>My Lodgment Place</h1>
+      <!-- <h1>My Lodgment Place</h1> -->
+      <div class="divImagen">
+        <img id="imgLogo" src="./App/assets/img/logo/logo_Blanco.png" alt="" >
+      </div>
     </div>
   </section><!-- End Hero -->
 
@@ -68,7 +73,8 @@ try {
       <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>
           <li><a class="nav-link scrollto active" href="#">Inicio</a></li>
-          <li><a class="nav-link scrollto" href="#portfolio">Lugares</a></li>
+          <li><a class="nav-link scrollto active" href="#counts">Estadísticas</a></li>
+          <li><a class="nav-link scrollto" href="#portfolio">Inmuebles</a></li>
           <!-- <li><a class="nav-link scrollto" href="#contact">Contactenos</a></li> -->
           <!-- <li><a class="nav-link scrollto" href="#about"> -->
           <?php
@@ -98,21 +104,20 @@ try {
 
             if ($_SESSION["Rol"] == 1) {
             ?>
-<<<<<<< Updated upstream
-                <li><a class="nav-link scrollto" href="./App/Views/gestionPerfilUsuarios_View.php">Panel Administrador</a></li>
+              <<<<<<< Updated upstream <li><a class="nav-link scrollto" href="./App/Views/gestionPerfilUsuarios_View.php">Panel Administrador</a></li>
                 <li><a class="nav-link scrollto" href="./App/Views/gestionCorreos_View.php">Mantenimiento Correo</a></li>
-=======
-              <li><a class="nav-link scrollto" href="./App/Views/gestionPerfilUsuarios_View.php">Panel Administrador</a></li>
->>>>>>> Stashed changes
+                =======
+                <li><a class="nav-link scrollto" href="./App/Views/gestionPerfilUsuarios_View.php">Panel Administrador</a></li>
+                >>>>>>> Stashed changes
 
-          <?php };
+            <?php };
           }; ?>
 
 
 
-          <?php if (isset($_SESSION["nombre"])) {  ?>
-            <li><a class="nav-link scrollto" href="./App/Modules/Login/cerrarSesion_Negocios.php">Cerrar Sesion</a></li>
-          <?php  } ?>
+            <?php if (isset($_SESSION["nombre"])) {  ?>
+              <li><a class="nav-link scrollto" href="./App/Modules/Login/cerrarSesion_Negocios.php">Cerrar Sesion</a></li>
+            <?php  } ?>
 
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
@@ -134,254 +139,15 @@ try {
   </header><!-- End Header -->
 
   <main id="main">
-
-    <!-- ======= About Section ======= -->
-    <!-- <section id="about" class="about">
-      <div class="container">
-
-        <div class="section-title">
-          <h2>Acerca de Nosotros</h2>
-        </div>
-
-        <div class="row content">
-          <div class="col-lg-6">
-            <p>
-              Somos una empresa Costarricense que nos preocupamos por que cualquier extranjero tenga una visita:
-            </p>
-            <ul>
-              <li><i class="ri-check-double-line"></i> Segura</li>
-              <li><i class="ri-check-double-line"></i> Cómoda</li>
-              <li><i class="ri-check-double-line"></i> Tranquila</li>
-            </ul>
-          </div>
-          <div class="col-lg-6 pt-4 pt-lg-0">
-            <p>
-              A su vez, para la persona nacional tenemos excelentes recomendaciones para que termine de conocer nuestra hermosa Tierra.
-            </p>
-            <a href="#" class="btn-learn-more">Leer Más</a>
-          </div>
-        </div>
-
-      </div>
-    </section>End About Section -->
-
     <!-- ======= Counts Section ======= -->
-    <!-- <section id="counts" class="counts">
+    <section id="counts" class="counts">
       <div class="container">
-
-        <div class="row counters">
-
-          <div class="col-lg-3 col-6 text-center">
-            <span data-purecounter-start="0" data-purecounter-end="232" data-purecounter-duration="1" class="purecounter"></span>
-            <p>Clientes Registrados</p>
-          </div>
-
-          <div class="col-lg-3 col-6 text-center">
-            <span data-purecounter-start="0" data-purecounter-end="521" data-purecounter-duration="1" class="purecounter"></span>
-            <p>Lugares Publicados</p>
-          </div>
-
-          <div class="col-lg-3 col-6 text-center">
-            <span data-purecounter-start="0" data-purecounter-end="1463" data-purecounter-duration="1" class="purecounter"></span>
-            <p>Horas de Soporte</p>
-          </div>
-
-          <div class="col-lg-3 col-6 text-center">
-            <span data-purecounter-start="0" data-purecounter-end="15" data-purecounter-duration="1" class="purecounter"></span>
-            <p>Reseñas</p>
-          </div>
-
-        </div>
-
-      </div>
-    </section>End Counts Section -->
-
-
-    <!-- ======= Clients Section ======= -->
-    <!-- <section id="clients" class="clients section-bg">
-      <div class="container">
-
-        <div class="row">
-
-          <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-            <img src="assets/img/clients/client-1.png" class="img-fluid" alt="">
-          </div>
-
-          <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-            <img src="assets/img/clients/client-2.png" class="img-fluid" alt="">
-          </div>
-
-          <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-            <img src="assets/img/clients/client-3.png" class="img-fluid" alt="">
-          </div>
-
-          <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-            <img src="assets/img/clients/client-4.png" class="img-fluid" alt="">
-          </div>
-
-          <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-            <img src="assets/img/clients/client-5.png" class="img-fluid" alt="">
-          </div>
-
-          <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-            <img src="assets/img/clients/client-6.png" class="img-fluid" alt="">
-          </div>
-
-        </div>
-
-      </div>
-    </section>End Clients Section -->
-
-    <!-- ======= Services Section ======= -->
-    <!-- <section id="services" class="services">
-      <div class="container">
-
         <div class="section-title">
-          <h2>Servicios de Nuestros Espacios</h2>
-          <p>Nuestros Espacios estan equipados con distintos servicios los cuales brindaran una experiencia unica en cada lugar que tú elijas.</p>
-        </div>
-
-        <div class="row">
-          <div class="col-lg-4 col-md-6">
-            <div class="icon-box">
-              <div class="icon"><i class="bi bi-briefcase" style="color: #ff689b;"></i></div>
-              <h4 class="title"><a href="">Giras de Trabajo</a></h4>
-              <p class="description">Algunos espacios cuentan con Oficinas para esas reuniones en las provincias fuera del Area Metropolitana</p>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 mt-4 mt-md-0">
-            <div class="icon-box">
-              <div class="icon"><i class="bi bi-card-checklist" style="color: #e9bf06;"></i></div>
-              <h4 class="title"><a href="">Internet de Alta Velocidad</a></h4>
-              <p class="description">La mayoria de nuestor sespacios cuentan con una buena conexion a Internet</p>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 mt-4 mt-lg-0">
-            <div class="icon-box">
-              <div class="icon"><i class="bi bi-bar-chart" style="color: #3fcdc7;"></i></div>
-              <h4 class="title"><a href="">Alto Estandar de Limpieza</a></h4>
-              <p class="description">Nuestros espacios cumplen con un Aklto estandar en medidas de Higiene</p>
-            </div>
-          </div>
-
-    </section>End Services Section -->
-
-    <!-- ======= Testimonials Section ======= -->
-    <!-- <section id="testimonials" class="testimonials section-bg">
-      <div class="container">
-
-        <div class="section-title">
-          <h2>Reseñas</h2>
-          <p>Nos intereza mucho saber tu opinion y que la comunidad de My Lodgment Place tambien la conozca</p>
-        </div>
-
-        <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
-          <div class="swiper-wrapper">
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <p>
-                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  Disfrute mucho en una cabaña de montaña.
-                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-                <img src="./App/assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
-                <h3>Saul Gomez</h3>
-              </div>
-            </div>
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <p>
-                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  Estuvimos el fin de semana en una hermasa casa con acceso privado a la Playa.
-                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-                <img src="./App/assets/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
-                <h3>Sara Rodriguez</h3>
-              </div>
-            </div>
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <p>
-                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  Alquilamos la Hacienda con Rancho para nuestra boda y todo salio de Maravilla
-                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-                <img src="./App/assets/img/testimonials/testimonials-3.jpg" class="testimonial-img" alt="">
-                <h3>Jena Karlis</h3>
-              </div>
-            </div>
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <p>
-                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  La mejor opcion en alojamientos para los diferentes gustos de cada persona.
-                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-                <img src="./App/assets/img/testimonials/testimonials-5.jpg" class="testimonial-img" alt="">
-                <h3>John Larson</h3>
-                <h4>Entrepreneur</h4>
-              </div>
-            </div>
-
-          </div>
-          <div class="swiper-pagination"></div>
-        </div>
-
-      </div>
-    </section> -->
-
-
-    <!-- ======= Portfolio Section ======= -->
-    <section id="portfolio" class="portfolio">
-      <div class="container">
-
-        <div class="section-title">
-          <h2>Espacios</h2>
+          <h2>¡Nuestras Estadísticas!</h2>
           <?php if (!isset($_SESSION["nombre"])) {           ?>
-
             <div id="ContenedorResenias">
-
-              <!-- <section id="DejaTuResenia">
-
-  <div id="reseniasDiv">
-    <form id="resenaForm" action="" method="post">
-      <h2>Tus Inmuebles: </h2>
-      <br />
-
-      <select class="form-control" name="LUGARES" id="LUGARES" required>
-          <option value=""></option>
-      </select>
-
-
-    </form>
-  </div>
-  <input type="hidden" id="estrellasSeleccionadas" value="1">
-</section> end section deja tu resena -->
-
-
-
-
-              <!-- CONSULTAR RESENAS POR ID -->
-              <!-- ---------------------------------------------------------------- -->
-              <!-- $datosResenas = json_decode($resultadoConsulta2, true); -->
-              <!--   --------------------------------------------------------------- -->
-
-              <!--   --------------------------------------------------------------- -->
               <section id="testimonials" class="testimonials section-bg">
-
-
                 <div class="container">
-
-                  <!-- <div class="section-title">
-<h2>Tus Estadisticas</h2>
-</div>
-<hr> -->
-
                   <div id="contenedorEstadisticas">
 
                     <section id="counts" class="counts">
@@ -410,23 +176,29 @@ try {
                         </div>
                       </div>
                     </section><!-- End Counts Section -->
-
-
                   </div>
-
                 </div>
-
               </section>
-
             </div> <!--fin contenedor1 -->
+          <?php } ?>
+        </div>
+      </div>
+    </section> <!--End Counts Section -->
 
-            <!-- Comentario de iniciar sesion -->
+
+    <!-- ======= Portfolio Section ======= -->
+    <section id="portfolio" class="portfolio">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>Inmuebles</h2>
+          <?php if (!isset($_SESSION["nombre"])) {           ?>
             <p>¡Para una Experiencia Mas Personalizada inicia Sesion !</p>
           <?php } ?>
         </div>
 
         <ul id="portfolio-flters" class="d-flex justify-content-center">
-          <li data-filter="*" class="filter-active">TODAS</li>
+          <li data-filter="*" class="filter-active">TODAS <i class="fa-solid fa-layer-group"></i></li>
           <?php
           try {
             $resultadoConsulta = $ObjMaster->ConsultarCategorias();
@@ -436,7 +208,7 @@ try {
             if ($datos) {
               foreach ($datos as $dato) {
           ?>
-                <li data-filter=".filter-<?php echo $dato['Nombre_Cat'] ?>"> <?php echo $dato['Nombre_Cat'] ?> </li>
+                <li data-filter=".filter-<?php echo $dato['Nombre_Cat'] ?>"> <?php echo $dato['Nombre_Cat'] ?> <?php echo $dato['icono'] ?> </li>
           <?php
               }
             } else {
@@ -548,7 +320,7 @@ try {
   <script src="./App/assets/js/script_Index.js"></script>
 
   <!-- vistaIndicadores -->
-  
+
 
 </body>
 
