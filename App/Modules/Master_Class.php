@@ -1775,6 +1775,7 @@ public function ObtenerCantidadUsuarios() {
                     $item = array(
                         "idCat" => $row['idcategoria'],
                         "Nombre_Cat" => $row["categoria"],
+                        "icono" => $row["nombreFavicon"],
                     );
                     $data[] = $item;
                 }
