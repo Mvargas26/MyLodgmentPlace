@@ -83,6 +83,7 @@ session_start();
           if ($_SESSION["Rol"] == 1) {
             ?>
                 <li><a class="nav-link scrollto" href="./App/Views/gestionPerfilUsuarios_View.php">Panel Administrador</a></li>
+                <li><a class="nav-link scrollto" href="./App/Views/gestionCorreos_View.php">Mantenimiento Correo</a></li>
 
           <?php }; 
       
