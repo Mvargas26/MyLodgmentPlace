@@ -10,6 +10,22 @@ document.addEventListener("DOMContentLoaded", function () {
     var fechaInicioInput = document.getElementById("fechaInicio");
     var fechaFinInput = document.getElementById("fechaFin");
 
+
+    var fechaActual = new Date();
+    var fechaManana = new Date(); 
+    
+    fechaManana.setDate(fechaActual.getDate() + 1);
+
+    var fechaMananaMas4Dias = new Date(); 
+    
+    fechaMananaMas4Dias.setDate(fechaManana.getDate() + 4);
+
+    fechaInicioInput.value = fechaManana;
+    fechaFinInput.value = fechaMananaMas4Dias;
+    // var fechaEntrada = fechaInicio1;
+
+    // console.log(fechaInicio1 + " fecha inicio");
+
     var cantidadDiasTotal;
 
     cantidadPersonasInput.addEventListener("change", function () {

@@ -918,6 +918,51 @@ class Master_Class
 
     //fin funcion obtener nombres de inmuebles
 
+//Inicio funcion ObtenerCantidadReservas
+
+public function ObtenerCantidadReservas() {
+    $query = "SELECT COUNT(*) as total_reservas FROM tbreserva";
+    $result = $this->GetConexion()->query($query);
+    $row = $result->fetch_assoc();
+    return $row['total_reservas'];
+}
+
+//fin funcion ObtenerCantidadReservas
+
+//Inicio funcion ObtenerCantidadEspacios
+
+public function ObtenerCantidadEspacios() {
+    $query = "SELECT COUNT(*) as total_espacios FROM tbinmueble";
+    $result = $this->GetConexion()->query($query);
+    $row = $result->fetch_assoc();
+    return $row['total_espacios'];
+}
+
+
+//fin funcion ObtenerCantidadEspacios
+
+//Inicio funcion ObtenerCantidadAnfitriones
+
+public function ObtenerCantidadAnfitriones() {
+    $query = "SELECT COUNT(*) as total_anfitriones FROM tbusuario WHERE idrol = 2";
+    $result = $this->GetConexion()->query($query);
+    $row = $result->fetch_assoc();
+    return $row['total_anfitriones'];
+}
+
+//fin funcion ObtenerCantidadAnfitriones
+
+//Inicio funcion ObtenerCantidadUsuarios
+
+public function ObtenerCantidadUsuarios() {
+    $query = "SELECT COUNT(*) as total_usuarios FROM tbusuario WHERE idrol = 3";
+    $result = $this->GetConexion()->query($query);
+    $row = $result->fetch_assoc();
+    return $row['total_usuarios'];
+}
+
+//fin funcion ObtenerCantidadUsuarios
+
     /*----------------------------------------------- INMUEBLES --------------------------------------------------*/
 
     function ConsultarInmuebles()
