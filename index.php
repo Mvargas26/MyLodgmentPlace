@@ -1,6 +1,22 @@
 <?php
 require("App/Modules/Master_Class.php");
 session_start();
+
+// inicio de elementos de prueba para la vista de indicadores
+
+try {
+  $ObjMaster = new Master_Class(); // Crear una instancia de la clase Master_Class
+
+  // Obtener la cantidad de reservas, espacios, anfitriones y usuarios
+  $cantidadReservas = $ObjMaster->ObtenerCantidadReservas();
+  $cantidadEspacios = $ObjMaster->ObtenerCantidadEspacios();
+  $cantidadAnfitriones = $ObjMaster->ObtenerCantidadAnfitriones();
+  $cantidadUsuarios = $ObjMaster->ObtenerCantidadUsuarios();
+} catch (Exception $e) {
+  echo 'Error: ' . $e->getMessage();
+}
+
+// fin de elementos de prueba para la vista de indicadores
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -45,7 +61,7 @@ session_start();
     <div class="container-fluid d-flex align-items-center justify-content-lg-between">
 
       <h1 class="logo me-auto me-lg-0"><a href="#">
-      <i class="bi bi-house-door-fill" style="font-size: 1.5em; color:#ffff;"></i>
+          <i class="bi bi-house-door-fill" style="font-size: 1.5em; color:#ffff;"></i>
         </a></h1>
 
 
@@ -55,54 +71,57 @@ session_start();
           <li><a class="nav-link scrollto" href="#portfolio">Lugares</a></li>
           <!-- <li><a class="nav-link scrollto" href="#contact">Contactenos</a></li> -->
           <!-- <li><a class="nav-link scrollto" href="#about"> -->
-            <?php 
-                if (isset($_SESSION["nombre"])) {
-                   //echo  $_SESSION["nombre"];
-                } else {
-            ?>
-                  <li><a class="nav-link scrollto " href="./App/Views/Login_View.php">Iniciar Sesión</a></li>
-                  <li><a class="nav-link scrollto" href="./App/Views/registro_View.php">Registrarse</a></li>
-                  <?php
-
-            }
-                if (isset($_SESSION["Rol"])) {
-                  if ($_SESSION["Rol"] == 2) {
-          ?>
-                            <li><a class="nav-link scrollto" href="./App/Views/PanelAnfitrion_View.php">Panel Anfitrión</a></li>
-
           <?php
-
-          };
-
-         if ($_SESSION["Rol"] == 3) {
+          if (isset($_SESSION["nombre"])) {
+            //echo  $_SESSION["nombre"];
+          } else {
           ?>
+            <li><a class="nav-link scrollto " href="./App/Views/Login_View.php">Iniciar Sesión</a></li>
+            <li><a class="nav-link scrollto" href="./App/Views/registro_View.php">Registrarse</a></li>
+            <?php
+
+          }
+          if (isset($_SESSION["Rol"])) {
+            if ($_SESSION["Rol"] == 2) {
+            ?>
+              <li><a class="nav-link scrollto" href="./App/Views/PanelAnfitrion_View.php">Panel Anfitrión</a></li>
+
+            <?php
+
+            };
+
+            if ($_SESSION["Rol"] == 3) {
+            ?>
               <li><a class="nav-link scrollto" href="./App/Views/PanelUsuario_View.php">Panel Huésped</a></li>
 
-        <?php }; 
+            <?php };
 
-          if ($_SESSION["Rol"] == 1) {
+            if ($_SESSION["Rol"] == 1) {
             ?>
+<<<<<<< Updated upstream
                 <li><a class="nav-link scrollto" href="./App/Views/gestionPerfilUsuarios_View.php">Panel Administrador</a></li>
                 <li><a class="nav-link scrollto" href="./App/Views/gestionCorreos_View.php">Mantenimiento Correo</a></li>
+=======
+              <li><a class="nav-link scrollto" href="./App/Views/gestionPerfilUsuarios_View.php">Panel Administrador</a></li>
+>>>>>>> Stashed changes
 
-          <?php }; 
-      
-      }; ?>
+          <?php };
+          }; ?>
 
-    
 
-        <?php if (isset($_SESSION["nombre"])) {  ?>
-        <li><a class="nav-link scrollto" href="./App/Modules/Login/cerrarSesion_Negocios.php">Cerrar Sesion</a></li>
-     <?php  } ?>
+
+          <?php if (isset($_SESSION["nombre"])) {  ?>
+            <li><a class="nav-link scrollto" href="./App/Modules/Login/cerrarSesion_Negocios.php">Cerrar Sesion</a></li>
+          <?php  } ?>
 
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
       <?php
-         if (isset($_SESSION["nombre"])) { ?> 
-               <a  id="aDelNombreSesion" href="#" class="twitter">Bienvenido(a): <?php  echo  $_SESSION["nombre"]; ?> <i class=""></i></a>
-     
-     <?php } ?>
+      if (isset($_SESSION["nombre"])) { ?>
+        <a id="aDelNombreSesion" href="#" class="twitter">Bienvenido(a): <?php echo  $_SESSION["nombre"]; ?> <i class=""></i></a>
+
+      <?php } ?>
 
       <div class="header-social-links d-flex align-items-center">
         <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
@@ -323,31 +342,109 @@ session_start();
 
         <div class="section-title">
           <h2>Espacios</h2>
-          <?php  if(!isset($_SESSION["nombre"])){           ?>
-          <p>¡Para una Experiencia Mas Personalizada inicia Sesion !</p>
+          <?php if (!isset($_SESSION["nombre"])) {           ?>
+
+            <div id="ContenedorResenias">
+
+              <!-- <section id="DejaTuResenia">
+
+  <div id="reseniasDiv">
+    <form id="resenaForm" action="" method="post">
+      <h2>Tus Inmuebles: </h2>
+      <br />
+
+      <select class="form-control" name="LUGARES" id="LUGARES" required>
+          <option value=""></option>
+      </select>
+
+
+    </form>
+  </div>
+  <input type="hidden" id="estrellasSeleccionadas" value="1">
+</section> end section deja tu resena -->
+
+
+
+
+              <!-- CONSULTAR RESENAS POR ID -->
+              <!-- ---------------------------------------------------------------- -->
+              <!-- $datosResenas = json_decode($resultadoConsulta2, true); -->
+              <!--   --------------------------------------------------------------- -->
+
+              <!--   --------------------------------------------------------------- -->
+              <section id="testimonials" class="testimonials section-bg">
+
+
+                <div class="container">
+
+                  <!-- <div class="section-title">
+<h2>Tus Estadisticas</h2>
+</div>
+<hr> -->
+
+                  <div id="contenedorEstadisticas">
+
+                    <section id="counts" class="counts">
+                      <div class="container">
+                        <div class="row counters">
+                          <div class="col-lg-3 col-6 text-center">
+                            <input type="hidden" id="CantidadDeResenastotales" value="<?php echo $cantidadReservas; ?>">
+                            <span data-purecounter-start="0" data-purecounter-end="<?php echo $cantidadReservas; ?>" id="ResenasTotales" data-purecounter-duration="2" class="purecounter"></span>
+                            <p id="p">Reseñas Totales</p>
+                          </div>
+
+                          <div class="col-lg-3 col-6 text-center">
+                            <span data-purecounter-start="0" data-purecounter-end="<?php echo $cantidadEspacios; ?>" data-purecounter-duration="2" class="purecounter"></span>
+                            <p id="p">Espacios Totales</p>
+                          </div>
+
+                          <div class="col-lg-3 col-6 text-center">
+                            <span data-purecounter-start="0" data-purecounter-end="<?php echo $cantidadAnfitriones; ?>" data-purecounter-duration="2" class="purecounter"></span>
+                            <p id="p">Anfitriones Totales</p>
+                          </div>
+
+                          <div class="col-lg-3 col-6 text-center">
+                            <span data-purecounter-start="0" data-purecounter-end="<?php echo $cantidadUsuarios; ?>" data-purecounter-duration="2" class="purecounter"></span>
+                            <p id="p">Usuarios Totales</p>
+                          </div>
+                        </div>
+                      </div>
+                    </section><!-- End Counts Section -->
+
+
+                  </div>
+
+                </div>
+
+              </section>
+
+            </div> <!--fin contenedor1 -->
+
+            <!-- Comentario de iniciar sesion -->
+            <p>¡Para una Experiencia Mas Personalizada inicia Sesion !</p>
           <?php } ?>
         </div>
 
         <ul id="portfolio-flters" class="d-flex justify-content-center">
           <li data-filter="*" class="filter-active">TODAS</li>
           <?php
-             try {
-              $resultadoConsulta = $ObjMaster->ConsultarCategorias();
-              // Decodificar el string JSON a un array de PHP
-              $datos = json_decode($resultadoConsulta, true);
+          try {
+            $resultadoConsulta = $ObjMaster->ConsultarCategorias();
+            // Decodificar el string JSON a un array de PHP
+            $datos = json_decode($resultadoConsulta, true);
 
-              if ($datos) {
-                foreach ($datos as $dato) {
+            if ($datos) {
+              foreach ($datos as $dato) {
           ?>
-              <li data-filter=".filter-<?php echo $dato['Nombre_Cat'] ?>"> <?php echo $dato['Nombre_Cat'] ?> </li>
+                <li data-filter=".filter-<?php echo $dato['Nombre_Cat'] ?>"> <?php echo $dato['Nombre_Cat'] ?> </li>
           <?php
-               }
-              } else {
-                echo 'Error al decodificar el JSON';
               }
-            } catch (Exception $e) {
-              echo 'Error: ' . $e->getMessage();
+            } else {
+              echo 'Error al decodificar el JSON';
             }
+          } catch (Exception $e) {
+            echo 'Error: ' . $e->getMessage();
+          }
 
           ?>
           <!-- <li data-filter=".filter-app">Cabañas</li>
@@ -357,44 +454,52 @@ session_start();
 
         <div class="row portfolio-container" id="portfolioContainer">
 
-            <?php
+          <?php
 
-            try {
-              $resultadoConsulta = $ObjMaster->ConsultarInmuebles();
-              // Decodificar el string JSON a un array de PHP
-              $datos = json_decode($resultadoConsulta, true);
-              
-              if ($datos) {
-                // $datosAgrupados = array();
-                
+          try {
+            $resultadoConsulta = $ObjMaster->ConsultarInmuebles();
+            // Decodificar el string JSON a un array de PHP
+            $datos = json_decode($resultadoConsulta, true);
 
-                foreach ($datos as $dato) {
-            ?>
-                  <div class="col-lg-4 col-md-6 portfolio-item filter-<?php echo $dato['Categoria_Inmueble'] ?>">
-                    <div class="portfolio-img"><img src="./App/assets/img/ImagenesInmuebles/<?php echo $dato['nameImagen'] ?>" class="img-fluid" alt=""></div>
-                    <div class="portfolio-info">
-                      <h4><?php  echo $dato['Nombre_Inmueble'] ?></h4>
-                      <p> ₡ <?php echo $dato['valorDiario'] ?></p>
-                      <a href="./App/assets/img/ImagenesInmuebles/<?php echo $dato['nameImagen'] ?>" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="<?php $dato['Nombre_Inmueble'] ?>"><i class="bx bx-plus"></i></a>
-                      <a href="./App/Views/InmuebleDetalle_View.php?id=<?php echo urlencode($dato['id']); ?>" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
-                    </div>
+            if ($datos) {
+              // $datosAgrupados = array();
+
+
+              foreach ($datos as $dato) {
+          ?>
+                <div class="col-lg-4 col-md-6 portfolio-item filter-<?php echo $dato['Categoria_Inmueble'] ?>">
+                  <div class="portfolio-img"><img src="./App/assets/img/ImagenesInmuebles/<?php echo $dato['nameImagen'] ?>" class="img-fluid" alt=""></div>
+                  <div class="portfolio-info">
+                    <h4><?php echo $dato['Nombre_Inmueble'] ?></h4>
+                    <p> ₡ <?php echo $dato['valorDiario'] ?></p>
+                    <a href="./App/assets/img/ImagenesInmuebles/<?php echo $dato['nameImagen'] ?>" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="<?php $dato['Nombre_Inmueble'] ?>"><i class="bx bx-plus"></i></a>
+                    <a href="./App/Views/InmuebleDetalle_View.php?id=<?php echo urlencode($dato['id']); ?>" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
                   </div>
-            <?php
-                }
-              } else {
-                echo 'Error al decodificar el JSON';
+                </div>
+          <?php
               }
-            } catch (Exception $e) {
-              echo 'Error: ' . $e->getMessage();
+            } else {
+              echo 'Error al decodificar el JSON';
             }
-            ?>
+          } catch (Exception $e) {
+            echo 'Error: ' . $e->getMessage();
+          }
+          ?>
         </div>
 
       </div>
     </section>
     <!-- End Portfolio Section -->
 
+    <br>
+
+
+
+
+
   </main><!-- End #main -->
+
+
 
   <!-- ======= Footer ======= -->
   <footer id="footer">
@@ -441,6 +546,9 @@ session_start();
   <!-- Template Main JS File -->
   <script src="./App/assets/js/main.js"></script>
   <script src="./App/assets/js/script_Index.js"></script>
+
+  <!-- vistaIndicadores -->
+  
 
 </body>
 
