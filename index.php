@@ -56,7 +56,7 @@ try {
     <div class="hero-container">
       <!-- <h1>My Lodgment Place</h1> -->
       <div class="divImagen">
-        <img id="imgLogo" src="./App/assets/img/logo/logo_Blanco.png" alt="" >
+        <img id="imgLogo" src="./App/assets/img/logo/Logo_blanco2.png" alt="" >
       </div>
     </div>
   </section><!-- End Hero -->
