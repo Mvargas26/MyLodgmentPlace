@@ -596,46 +596,37 @@ class Master_Class
     function enviarCodigoAutenticacionCorreo($destinatario, $codigo_autenticacion)
     {
         $mail = new PHPMailer(true);
-        $datosCorreo = $this->gestionarCorreo('consultar', ['idCorreo' => 1]); // Cambia '1' por el ID del correo que necesitas
-        if ($datosCorreo) {
-            $host = $datosCorreo[0]['Host'];
-            $usuario = $datosCorreo[0]['Usuario'];
-            $contra = $datosCorreo[0]['Password']; // Asegúrate de usar la clave correcta
-            $puerto = $datosCorreo[0]['Puerto'];
+        try {
+
+            $mail->SMTPOptions = array('ssl' => array('verify_peer' => false, 'verify_peer_name' => false, 'allow_self_signed' => true));
             try {
+                $mail->isSMTP();
+                $mail->Host = 'smtp.titan.email';
+                $mail->SMTPAuth = true;
+                $mail->Username = 'pruebas@tritechno.net';
+                $mail->Password = 'Pruebas1234*';
+                $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+                $mail->Port = 587;
 
-                $mail->SMTPOptions = array('ssl' => array('verify_peer' => false, 'verify_peer_name' => false, 'allow_self_signed' => true));
+                $mail->setFrom('pruebas@tritechno.net', 'My Lodgment Place');
+                $mail->addAddress($destinatario);
+                $mail->isHTML(true);
+                $mail->Subject = 'Este es tu codigo de autenticacion para el inicio de sesion';
+                $mail->Body = $codigo_autenticacion;
+                //$mail->send();
 
-                try {
-                    $mail->isSMTP();
-                    $mail->Host = $host;
-                    $mail->SMTPAuth = true;
-                    $mail->Username = $usuario;
-                    $mail->Password = $contra;
-                    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-                    $mail->Port = $puerto;
-
-                    $mail->setFrom('pruebas@tritechno.net', 'My Lodgment Place');
-                    $mail->addAddress($destinatario);
-                    $mail->isHTML(true);
-                    $mail->Subject = 'Este es tu codigo de autenticacion para el inicio de sesion';
-                    $mail->Body = $codigo_autenticacion;
-                    //$mail->send();
-
-                    if (!$mail->send()) {
-                        echo 'Error al enviar el correo electrónico: ' . $mail->ErrorInfo;
-                    } else {
-                    }
-                } catch (\Exception $th) {
-                    echo 'MEnsaje de Error: ' . $mail->ErrorInfo;
+                if (!$mail->send()) {
+                    echo 'Error al enviar el correo electrónico: ' . $mail->ErrorInfo;
+                } else {
                 }
-
-                return true;
-            } catch (Exception $e) {
-                error_log("Error al enviar el correo: {$mail->ErrorInfo}");
-                return false;
+            } catch (\Exception $th) {
+                echo 'MEnsaje de Error: ' . $mail->ErrorInfo;
             }
-        } else {
+
+            return true;
+        } catch (Exception $e) {
+            error_log("Error al enviar el correo: {$mail->ErrorInfo}");
+            return false;
         }
     }
 
@@ -918,50 +909,54 @@ class Master_Class
 
     //fin funcion obtener nombres de inmuebles
 
-//Inicio funcion ObtenerCantidadReservas
+    //Inicio funcion ObtenerCantidadReservas
 
-public function ObtenerCantidadReservas() {
-    $query = "SELECT COUNT(*) as total_reservas FROM tbreserva";
-    $result = $this->GetConexion()->query($query);
-    $row = $result->fetch_assoc();
-    return $row['total_reservas'];
-}
+    public function ObtenerCantidadReservas()
+    {
+        $query = "SELECT COUNT(*) as total_reservas FROM tbreserva";
+        $result = $this->GetConexion()->query($query);
+        $row = $result->fetch_assoc();
+        return $row['total_reservas'];
+    }
 
-//fin funcion ObtenerCantidadReservas
+    //fin funcion ObtenerCantidadReservas
 
-//Inicio funcion ObtenerCantidadEspacios
+    //Inicio funcion ObtenerCantidadEspacios
 
-public function ObtenerCantidadEspacios() {
-    $query = "SELECT COUNT(*) as total_espacios FROM tbinmueble";
-    $result = $this->GetConexion()->query($query);
-    $row = $result->fetch_assoc();
-    return $row['total_espacios'];
-}
+    public function ObtenerCantidadEspacios()
+    {
+        $query = "SELECT COUNT(*) as total_espacios FROM tbinmueble";
+        $result = $this->GetConexion()->query($query);
+        $row = $result->fetch_assoc();
+        return $row['total_espacios'];
+    }
 
 
-//fin funcion ObtenerCantidadEspacios
+    //fin funcion ObtenerCantidadEspacios
 
-//Inicio funcion ObtenerCantidadAnfitriones
+    //Inicio funcion ObtenerCantidadAnfitriones
 
-public function ObtenerCantidadAnfitriones() {
-    $query = "SELECT COUNT(*) as total_anfitriones FROM tbusuario WHERE idrol = 2";
-    $result = $this->GetConexion()->query($query);
-    $row = $result->fetch_assoc();
-    return $row['total_anfitriones'];
-}
+    public function ObtenerCantidadAnfitriones()
+    {
+        $query = "SELECT COUNT(*) as total_anfitriones FROM tbusuario WHERE idrol = 2";
+        $result = $this->GetConexion()->query($query);
+        $row = $result->fetch_assoc();
+        return $row['total_anfitriones'];
+    }
 
-//fin funcion ObtenerCantidadAnfitriones
+    //fin funcion ObtenerCantidadAnfitriones
 
-//Inicio funcion ObtenerCantidadUsuarios
+    //Inicio funcion ObtenerCantidadUsuarios
 
-public function ObtenerCantidadUsuarios() {
-    $query = "SELECT COUNT(*) as total_usuarios FROM tbusuario WHERE idrol = 3";
-    $result = $this->GetConexion()->query($query);
-    $row = $result->fetch_assoc();
-    return $row['total_usuarios'];
-}
+    public function ObtenerCantidadUsuarios()
+    {
+        $query = "SELECT COUNT(*) as total_usuarios FROM tbusuario WHERE idrol = 3";
+        $result = $this->GetConexion()->query($query);
+        $row = $result->fetch_assoc();
+        return $row['total_usuarios'];
+    }
 
-//fin funcion ObtenerCantidadUsuarios
+    //fin funcion ObtenerCantidadUsuarios
 
     /*----------------------------------------------- INMUEBLES --------------------------------------------------*/
 
