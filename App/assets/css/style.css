@@ -1683,7 +1683,10 @@ section {
   background-size: cover;
   color: #fff;
   font-size: 14px;
-  position: relative;
+  position: sticky;
+  max-height: 200px;
+  margin-top: 250px;
+
 }
 
 #footer::before {
@@ -1793,6 +1796,7 @@ section {
   position: relative;
   padding-top: 40px;
   padding-bottom: 40px;
+
 }
 
 #footer .copyright {
