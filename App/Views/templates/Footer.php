@@ -4,7 +4,7 @@
 
   <div class="footer-top">
 
-    <div class="container">
+    <!-- <div class="container">
 
      
 
@@ -17,7 +17,7 @@
       </div>
 
     </div>
-  </div>
+  </div> -->
 
   <div class="container footer-bottom clearfix">
     <div class="copyright">
