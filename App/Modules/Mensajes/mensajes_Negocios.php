@@ -32,6 +32,7 @@ try {
         }
     }
 
+    
     if (isset($_POST['idEmisor']) && isset($_POST['idReceptor']) && isset($_POST['mensaje'])) {
         $idEmisor = $_POST['idEmisor'];
         $idReceptor = $_POST['idReceptor'];
