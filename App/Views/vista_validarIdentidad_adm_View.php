@@ -42,7 +42,8 @@ $estadoUsuario = $masterClass->obtenerEstadoUsuario($idUser);
       <ul class="cards">
           <li class="cards__item">
             <div class="card">
-                <div class="card__image card__image--fence"></div>
+                <div>
+                    <img id="userProfileImage" src="" alt="User Profile Image">
                     <div class="card__content">
                     <div class="card__title">Usuario</div>
                     <br>
@@ -61,6 +62,7 @@ $estadoUsuario = $masterClass->obtenerEstadoUsuario($idUser);
       </ul> 
         <!-- Incluye tu archivo JavaScript si es necesario -->
         <script src="../assets/js/VistaPerfilUsuarios/vistaPerfilUsuario.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     </body>
 </main>
 

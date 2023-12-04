@@ -15,6 +15,12 @@ document.addEventListener('DOMContentLoaded', function () {
             if (userDetails && userDetails.fotoperfil) {
                 // Llenar los detalles del usuario en la página
                 $('#userProfileImage').attr('src', userDetails.fotoperfil);
+
+                $('#userProfileImage').css({
+                    'width': '100%',  // Ajusta el ancho según tus preferencias
+                    'height': '250px'  // Ajusta la altura según tus preferencias
+                });
+
                 $('#userDetails').html(`
                     <h3>${userDetails.nombre} ${userDetails.apellido1} ${userDetails.apellido2}</h3>
                     <p><strong>Correo Electrónico:</strong> ${userDetails.correo || 'N/A'}</p>
