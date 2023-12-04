@@ -4,7 +4,11 @@ require_once('../Modules/Master_Class.php');
 
 include('../Modules/fullCalendar/config.php');
 
-$SqlEventos = ("SELECT * FROM tbreserva");
+if (isset($_GET['id'])) {
+  $idInmueble = $_GET['id'];
+}
+$SqlEventos = "SELECT * FROM tbreserva WHERE idInmueble = $idInmueble";
+
 $resulEventos = mysqli_query($con, $SqlEventos);
 
 $fechaInicio = date('Y-m-d');
@@ -19,6 +23,7 @@ session_start();
 // Verificar si se proporcionó un nombre de inmueble en la URL
 if (isset($_GET['id'])) {
   $idInmuebleDetalle = $_GET['id'];
+
 
 ?>
 
@@ -331,6 +336,7 @@ if (isset($_GET['id'])) {
     <!-- ================================================================================== -->
     <!-- CALENDARIO -->
     <!-- ================================================================================== -->
+    
     <div id="CalendarioDiv">
       <section>
         <div class="container">
