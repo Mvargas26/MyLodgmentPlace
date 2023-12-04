@@ -932,6 +932,14 @@ section {
   min-height: 320px;
 }
 
+.swiper-slide{
+  max-width: 400px;
+  margin: 10px;
+  z-index: 2;
+  position: relative;
+}
+
+
 .testimonials .testimonial-item .testimonial-img {
   width: 90px;
   border-radius: 50%;
@@ -982,6 +990,8 @@ section {
   border-radius: 6px;
   position: relative;
   z-index: 1;
+  width: 370px;
+  text-align: justify;
 }
 
 .testimonials .swiper-pagination {
@@ -992,13 +1002,26 @@ section {
 .testimonials .swiper-pagination .swiper-pagination-bullet {
   width: 12px;
   height: 12px;
-  background-color: #fff;
+  background-color: #ffffff;
   opacity: 1;
   border: 1px solid #ff7f5d;
 }
 
 .testimonials .swiper-pagination .swiper-pagination-bullet-active {
   background-color: #ff7f5d;
+}
+
+/* .disable-transition{
+  transition: none;
+} */
+
+.ajustetamanio{
+  width: 1500px;
+}
+
+.flexwrap{
+  display: flex;
+  flex-wrap: wrap;
 }
 
 /*--------------------------------------------------------------
