@@ -315,11 +315,8 @@ class Master_Class
         $arry_Datos = func_get_args();
 
         $idInmueble = $this->GetConexion()->real_escape_string($arry_Datos[0]);
-
         $data = null;
-
         $query = "SELECT * FROM `tbfotoinmueble`;";
-
         if ($sql = $this->conn->query($query)) {
             while ($row = mysqli_fetch_assoc($sql)) {
                 $data[] = $row;
@@ -1690,23 +1687,294 @@ class Master_Class
         }
     }
 
-
-
+    
+    
     // =======================CALIFICACIONES===================================================================
-
-
-
-
-
-
-
-
-
-
+    
+    
+    
+    
     // =========================================================================================================
-// ============FIN RESEÑAS============FIN RESEÑAS=============FIN RESEÑAS==============FINRESEÑAS===========
+    // ============FIN RESEÑAS============FIN RESEÑAS=============FIN RESEÑAS==============FINRESEÑAS===========
+    // =========================================================================================================
+
+// =========================================================================================================    
+// ============MENSAJES============MENSAJES=============MENSAJES==============MENSAJES===========
 // =========================================================================================================
 
+function ConsultarlistaDeContactosDisponible_Huesped($idHuesped)
+{
+    try {
+        $query = "SELECT 
+                i.Propietario,
+                CONCAT(u.nombre, ' ', u.apellido1) AS nombreAnfitrion,
+                u.fotoPerfil AS fotoPerfilAnfitrion,
+                i.nombre AS nombreInmueble
+            FROM
+                tbreserva r
+            JOIN
+                tbinmueble i ON r.idInmueble = i.id
+            JOIN
+                tbusuario u ON i.Propietario = u.idUser
+            WHERE
+                r.idUsuario = $idHuesped";            
+
+        $this->conn->set_charset("utf8");
+        $result = $this->getConexion()->query($query);
+
+        if ($result) {
+                    $data = array();
+                    
+                    while ($row = $result->fetch_assoc()) {
+                        // Suponiendo que $row["fotoPerfilCalificador"] contiene la ruta de la imagen
+                        $imagenPath = $row["fotoPerfilAnfitrion"];
+                        $imagenData = file_get_contents($imagenPath);
+                        $imagenBase64 = base64_encode($imagenData);
+                        
+                        $urlImagen = "data:image/jpeg;base64," . $imagenBase64;
+                        
+                        $item = array(
+                            "idPropietario" => $row['Propietario'],
+                            "nombreAnfitrion" => $row["nombreAnfitrion"],
+                            // Aquí se guarda la imagen en formato base64
+                            "fotoPerfilAnfitrion" => $urlImagen,
+                            "nombreInmueble" => $row["nombreInmueble"],
+                        );    
+                        
+                        $data[] = $item;
+                    }    
+                    return json_encode($data);
+                    
+
+        } else {        
+            throw new Exception("Error en la consulta: " . $this->getConexion()->error);
+        }    
+    } catch (Exception $e) {
+        error_log($e->getMessage());
+        return null; // Retorna null en caso de error
+    }    
+    // $this->conn->close();
+} //fn ConsultarResenias recibidas POR id Huesped     
+
+function ConsultarlistaDeContactosDisponible_Anfitrion($idAnfitrion)
+{
+    try {
+        $query = "    SELECT 
+                h.idUser AS idHuesped,
+                CONCAT(h.nombre, ' ', h.apellido1) AS nombreHuesped,
+                h.fotoPerfil AS fotoPerfilHuesped,
+                i.nombre AS nombreInmueble
+            FROM
+                tbreserva r
+            JOIN
+                tbinmueble i ON r.idInmueble = i.id
+            JOIN
+                tbusuario u ON i.Propietario = u.idUser
+            JOIN
+                tbusuario h ON r.idUsuario = h.idUser  
+            WHERE
+               i.Propietario = $idAnfitrion";            
+
+        $this->conn->set_charset("utf8");
+        $result = $this->getConexion()->query($query);
+
+        if ($result) {
+                    $data = array();
+                    
+                    while ($row = $result->fetch_assoc()) {
+                        // Suponiendo que $row["fotoPerfilCalificador"] contiene la ruta de la imagen
+                        $imagenPath = $row["fotoPerfilHuesped"];
+                        $imagenData = file_get_contents($imagenPath);
+                        $imagenBase64 = base64_encode($imagenData);
+                        
+                        $urlImagen = "data:image/jpeg;base64," . $imagenBase64;
+                        
+                        $item = array(
+                            "idHuesped" => $row['idHuesped'],
+                            "nombreHuesped" => $row["nombreHuesped"],
+                            // Aquí se guarda la imagen en formato base64
+                            "fotoPerfilHuesped" => $urlImagen,
+                            "nombreInmueble" => $row["nombreInmueble"],
+                        );    
+                        
+                        $data[] = $item;
+                    }    
+                    return json_encode($data);
+                    
+
+        } else {        
+            throw new Exception("Error en la consulta: " . $this->getConexion()->error);
+        }    
+    } catch (Exception $e) {
+        error_log($e->getMessage());
+        return null; // Retorna null en caso de error
+    }    
+    // $this->conn->close();
+} //fn ConsultarResenias recibidas POR id Huesped    
+
+
+
+
+
+public function ObtenerChatsHuesped($idUsuarioElegido, $idUsuarioLogueado)
+{
+    $output = "";
+    // $idUsuarioElegido = $this->conn->real_escape_string($idUsuarioElegido);
+    // $idUsuarioLogueado = $this->conn->real_escape_string($idUsuarioLogueado);
+
+    $sql = "SELECT m.idUsuarioEnvia, m.Mensaje, u.fotoperfil , m.hora
+            FROM tbmensajes m
+            LEFT JOIN tbusuario u ON u.idUser = m.idUsuarioEnvia
+            WHERE (m.idUsuarioEnvia = $idUsuarioLogueado AND m.idUsuarioRecibe = $idUsuarioElegido)
+            OR (m.idUsuarioEnvia = $idUsuarioElegido AND m.idUsuarioRecibe = $idUsuarioLogueado)
+            ORDER BY m.idmensaje";
+    
+    $query = $this->conn->query($sql);
+
+    if ($query->num_rows > 0) {
+        while ($row = $query->fetch_assoc()) {
+
+            $imagenPath = $row['fotoperfil'];
+            $imagenData = file_get_contents($imagenPath);
+            $imagenBase64 = base64_encode($imagenData);
+
+            $urlImagen = "data:image/jpeg;base64," . $imagenBase64;
+
+            if ($row['idUsuarioEnvia'] != $idUsuarioLogueado) {
+                $output .= '<div class="mensaje">
+                                <br>
+                                <div class="avatar">
+                                    <img src="'.$urlImagen.'" alt="img">
+                                </div>
+                                <div class="cuerpo">
+                                    <div class="texto">
+                                        '.$row['Mensaje'].'
+                                        <span class="tiempo">
+                                            <i class="far fa-clock"></i>
+                                            '.$row['hora'].'
+                                        </span>
+                                    </div>            
+                                </div>
+                            </div>';
+
+                            // $output .= '<div class="chat outgoing">
+                            //                 <div class="details">
+                            //                     <p>' . $row['msg'] . '</p>
+                            //                 </div>
+                            //             </div>';
+                        } else {
+                $output .= '<div class="mensaje left">
+                                <div class="cuerpo">
+                                    <div class="texto">
+                                    '.$row['Mensaje'].'
+                                        <span class="tiempo">
+                                            <i class="far fa-clock"></i>
+                                            '.$row['hora'].'
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="avatar">
+                                    <img src="'.$urlImagen.'" style="margin-top:5px;" alt="img">
+                                </div>
+                            </div>';
+
+                // $output .= '<div class="chat incoming">
+                //                 <img src="php/images/' . $row['img'] . '" alt="">
+                //                 <div class="details">
+                //                     <p>' . $row['msg'] . '</p>
+                //                 </div>
+                //             </div>';
+            }
+        }
+    } else {
+        $output .= '<div class="text">No hay mensajes disponibles MASTER CLASS. Una vez que envíe el mensaje, aparecerán aquí.</div>';
+    }
+
+    return $output;
+} 
+
+
+
+public function ObtenerChatsAnfitrion($idUsuarioElegido, $idUsuarioLogueado)
+{
+    $output = "";
+    // $idUsuarioElegido = $this->conn->real_escape_string($idUsuarioElegido);
+    // $idUsuarioLogueado = $this->conn->real_escape_string($idUsuarioLogueado);
+
+    $sql = "SELECT m.idUsuarioEnvia, m.Mensaje, u.fotoperfil , m.hora
+            FROM tbmensajes m
+            LEFT JOIN tbusuario u ON u.idUser = m.idUsuarioEnvia
+            WHERE (m.idUsuarioEnvia = $idUsuarioLogueado AND m.idUsuarioRecibe = $idUsuarioElegido)
+            OR (m.idUsuarioEnvia = $idUsuarioElegido AND m.idUsuarioRecibe = $idUsuarioLogueado)
+            ORDER BY m.idmensaje";
+    
+    $query = $this->conn->query($sql);
+
+    if ($query->num_rows > 0) {
+        while ($row = $query->fetch_assoc()) {
+
+            $imagenPath = $row['fotoperfil'];
+            $imagenData = file_get_contents($imagenPath);
+            $imagenBase64 = base64_encode($imagenData);
+
+            $urlImagen = "data:image/jpeg;base64," . $imagenBase64;
+
+            if ($row['idUsuarioEnvia'] != $idUsuarioLogueado) {
+                $output .= '<div class="mensaje">
+                                <br>
+                                <div class="avatar">
+                                    <img src="'.$urlImagen.'" alt="img">
+                                </div>
+                                <div class="cuerpo">
+                                    <div class="texto">
+                                        '.$row['Mensaje'].'
+                                        <span class="tiempo">
+                                            <i class="far fa-clock"></i>
+                                            '.$row['hora'].'
+                                        </span>
+                                    </div>            
+                                </div>
+                            </div>';
+
+                            // $output .= '<div class="chat outgoing">
+                            //                 <div class="details">
+                            //                     <p>' . $row['msg'] . '</p>
+                            //                 </div>
+                            //             </div>';
+                        } else {
+                $output .= '<div class="mensaje left">
+                                <div class="cuerpo">
+                                    <div class="texto">
+                                    '.$row['Mensaje'].'
+                                        <span class="tiempo">
+                                            <i class="far fa-clock"></i>
+                                            '.$row['hora'].'
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="avatar">
+                                    <img src="'.$urlImagen.'" style="margin-top:5px;" alt="img">
+                                </div>
+                            </div>';
+
+                // $output .= '<div class="chat incoming">
+                //                 <img src="php/images/' . $row['img'] . '" alt="">
+                //                 <div class="details">
+                //                     <p>' . $row['msg'] . '</p>
+                //                 </div>
+                //             </div>';
+            }
+        }
+    } else {
+        $output .= '<div class="text">No hay mensajes disponibles MASTER CLASS. Una vez que envíe el mensaje, aparecerán aquí.</div>';
+    }
+
+    return $output;
+}
+
+// ==================================================================================================
+    // FIN MENSAJES==========FIN MENSAJES=======================FIN MENSAJES=================
+// ==================================================================================================    
 
     function ConsultaMultipleEspacios()
     {

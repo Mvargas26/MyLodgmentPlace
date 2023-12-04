@@ -40,7 +40,7 @@ include './templates/Header.php';
                 <a href="calificarHuespedes_View.php">Calificacion a Huespedes</a>
             </div>
             <div class="card">
-                <a href="mensajesHuesped_View.php">Mensajeria</a>
+                <a href="mensajesAnfitrion_View.php">Mensajeria</a>
             </div>  
             <div class="card">
                 <a href="creacion_descuentos_View.php">Creacion de Descuentos</a>

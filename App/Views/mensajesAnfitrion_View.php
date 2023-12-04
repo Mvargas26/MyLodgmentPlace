@@ -37,7 +37,7 @@ session_start();
             <hr>
             <div class="usuario">
                 <div class="avatar">
-                    <img src="ruta_img" alt="img">
+                    <img src="" alt="">
                     <!-- <span class="estado-usuario enlinea"></span> -->
                 </div>
                 <div class="cuerpo">
@@ -66,8 +66,8 @@ session_start();
                 <img id="idFotoPerfil_chatseleccionado" src="ruta_img" alt="img">
             </div>
             <div class="cuerpo">
-                <span id="NombreAnfitrionSeleccionado"></span>
-                <input type="hidden" id="idPropietario_Elegido">
+                <span id="NombrHuespedSeleccionado"></span>
+                <input type="hidden" id="idHuesped_Elegido">
             </div>
         </div>
 
@@ -98,7 +98,7 @@ session_start();
 
 </main>
 
-<script>
+<!-- <script>
     document.addEventListener("DOMContentLoaded", function() {
         var idPropietario_INPUT = document.getElementById("idPropietario");
 
@@ -107,11 +107,11 @@ session_start();
             // Agrega aquí la lógica que deseas ejecutar cuando cambie el valor
         });
     });
-</script>
+</script> -->
 
 
   
-<script src="../assets/js/Mensajes/script_mensajesHuesped.js"></script>
+<script src="../assets/js/Mensajes/script_mensajesAnfitrion.js"></script>
 <script src="../assets/js/Mensajes/chat.js"></script>
 
 <!-- ==============================================Inicio Footer ======= -->
