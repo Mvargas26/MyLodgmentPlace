@@ -191,11 +191,22 @@ if (isset($_GET['id'])) {
                   ?><br>
                   <!-- ----------------------------------------------------- -->
 
-                  <strong>Capacidad de Personas:</strong>
+                  <strong>Capacidad de Personas Maxima:</strong>
                   <?php
                   foreach ($datos as $dato) {
 
                     echo $dato['capacidadPersonas'];
+                    break;
+                  }
+                  ?><br>
+                  
+                  <!-- ----------------------------------------------------- -->
+
+                  <strong>Costo x Persona:</strong>
+                  <?php
+                  foreach ($datos as $dato) {
+
+                    echo $dato['costoPersonaExtra'];
                     break;
                   }
                   ?><br>

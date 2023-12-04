@@ -691,6 +691,63 @@ class Master_Class
         }
     }
 
+    function gestionarMensajes($accion, $datos)
+    {
+        try {
+            $idM = isset($datos['ID']) ? $datos['ID'] : null;
+            $Mensaje = isset($datos['Mensaje']) ? $datos['Mensaje'] : null;
+            $TipoM = isset($datos['TipoM']) ? $datos['TipoM'] : null; 
+            switch ($accion) {
+                case 'insertar':
+                    $query = "INSERT INTO tbmensajescorreo (Mensaje, TipoMensaje) VALUES ('$Mensaje', '$TipoM')";
+                    break;
+
+                case 'modificar':
+                    $query = "UPDATE tbmensajescorreo SET Mensaje = '$Mensaje', TipoMensaje = '$TipoM' WHERE ID = '$idM'";
+                    break;
+
+                case 'consultar':
+                    $query = "SELECT * FROM tbmensajescorreo";
+                    if (!empty($idCorreo)) {
+                        $query .= " WHERE TipoM = '$TipoM'";
+                    }
+                    $result = $this->GetConexion()->query($query);
+
+                    if ($result) {
+                        $data = array();
+
+                        while ($row = $result->fetch_assoc()) {
+                            $item = array(
+                                "Id" => $row['ID'],
+                                "Mensaje" => $row['Mensaje'],
+                                "TipoM" => $row['TipoMensaje'],
+                            );
+                            $data[] = $item;
+                        }
+
+                        return json_encode($data);
+                    } else {
+                        throw new Exception("Error en la consulta: " . $this->GetConexion()->error);
+                    }
+                    break;
+
+                case 'eliminar':
+                    $query = "DELETE FROM tbmensajescorreo WHERE ID = '$idM'";
+                    break;
+
+                default:
+                    throw new Exception("Acción no válida: $accion");
+            }
+
+            $this->GetConexion()->query($query);
+
+            return $this->GetConexion()->affected_rows > 0;
+        } catch (Exception $e) {
+            error_log($e->getMessage());
+            return false;
+        }
+    }
+
     function enviarMensajesCorreo($destinatario, $accion)
     {
         $mail = new PHPMailer(true);
@@ -1043,6 +1100,7 @@ class Master_Class
                 tc.cantidadPatios,
                 tc.cantidadVehiculos,
                 tc.cantidadPlantas
+
             FROM tbinmueble as mu
             INNER JOIN tbusuario as us ON mu.Propietario = us.idUser
             INNER JOIN tbcategoriainmueble ON mu.id = tbcategoriainmueble.idInmueble

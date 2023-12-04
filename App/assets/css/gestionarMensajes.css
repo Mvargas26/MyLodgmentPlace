@@ -1,0 +1,58 @@
+#CajaCorreo.contenedor-principal {
+    display: flex;
+    flex-direction: row; /* Cambiado a fila */
+    justify-content: center; /* Centra los contenedores horizontalmente */
+    flex-wrap: wrap; /* Permite que los contenedores se envuelvan en una nueva línea si no hay suficiente espacio */
+}
+
+.contenedor {
+    width: 450px;
+    height: 50px; /* Establece una altura más pequeña */
+    background-color: #ff7f5d;
+    margin-right: 20px;
+    cursor: pointer;
+    overflow: hidden;
+    transition: height 0.5s ease;
+    margin-bottom: 10px;
+}
+
+.formulario {
+    display: none;
+    padding: 10px;
+    background-color: #ff9f86;
+    overflow: hidden;
+    margin-top: 10px;
+}
+
+.input-formulario {
+    width: calc(100% - 16px);
+    margin-bottom: 10px;
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+.boton-formulario {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+} 
+
+/* Consulta de medios para cambiar a columnas en pantallas más pequeñas */
+@media (max-width: 768px) {
+    #CajaCorreo.contenedor-principal {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .contenedor {
+        width: 100%;
+        margin-right: 0;
+    }
+}
+
+.titulo-contenedor {
+    font-weight: bold;
+    padding: 10px;
+} 
