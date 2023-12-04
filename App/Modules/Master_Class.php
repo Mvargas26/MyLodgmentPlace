@@ -1907,9 +1907,13 @@ public function ObtenerChatsHuesped($idUsuarioElegido, $idUsuarioLogueado)
                                 <div class="cuerpo">
                                     <div class="texto">
                                         '.$row['Mensaje'].'
-                                        <span class="tiempo">
+                                        <span class="tiempo hidden-span">
                                             <i class="far fa-clock"></i>
                                             '.$row['hora'].'
+                                        </span>
+                                        <span class="tiempo other-span">
+                                            <i class="far fa-clock"></i>
+                                            '.date('H:i:s', strtotime($row['hora'])).'
                                         </span>
                                     </div>            
                                 </div>
@@ -1925,9 +1929,13 @@ public function ObtenerChatsHuesped($idUsuarioElegido, $idUsuarioLogueado)
                                 <div class="cuerpo">
                                     <div class="texto">
                                     '.$row['Mensaje'].'
-                                        <span class="tiempo">
+                                        <span class="tiempo hidden-span">
                                             <i class="far fa-clock"></i>
                                             '.$row['hora'].'
+                                        </span>
+                                        <span class="tiempo other-span">
+                                            <i class="far fa-clock"></i>
+                                            '.date('H:i:s', strtotime($row['hora'])).'
                                         </span>
                                     </div>
                                 </div>
@@ -1986,29 +1994,32 @@ public function ObtenerChatsAnfitrion($idUsuarioElegido, $idUsuarioLogueado)
                                 <div class="cuerpo">
                                     <div class="texto">
                                         '.$row['Mensaje'].'
-                                        <span class="tiempo">
+                                        <span class="tiempo hidden-span">
                                             <i class="far fa-clock"></i>
                                             '.$row['hora'].'
+                                        </span>
+                                        <span class="tiempo other-span">
+                                            <i class="far fa-clock"></i>
+                                            '.date('H:i:s', strtotime($row['hora'])).'
                                         </span>
                                     </div>            
                                 </div>
                             </div>';
 
-                            // $output .= '<div class="chat outgoing">
-                            //                 <div class="details">
-                            //                     <p>' . $row['msg'] . '</p>
-                            //                 </div>
-                            //             </div>';
                         } else {
                 $output .= '<div class="mensaje left">
                                 <div class="cuerpo">
                                     <div class="texto">
-                                    '.$row['Mensaje'].'
-                                        <span class="tiempo">
+                                        '.$row['Mensaje'].'
+                                        <span class="tiempo hidden-span">
                                             <i class="far fa-clock"></i>
                                             '.$row['hora'].'
                                         </span>
-                                    </div>
+                                        <span class="tiempo other-span">
+                                            <i class="far fa-clock"></i>
+                                            '.date('H:i:s', strtotime($row['hora'])).'
+                                        </span>
+                                    </div> 
                                 </div>
                                 <div class="avatar">
                                     <img src="'.$urlImagen.'" style="margin-top:5px;" alt="img">
@@ -2024,11 +2035,53 @@ public function ObtenerChatsAnfitrion($idUsuarioElegido, $idUsuarioLogueado)
             }
         }
     } else {
-        $output .= '<div class="text">No hay mensajes disponibles MASTER CLASS. Una vez que envíe el mensaje, aparecerán aquí.</div>';
+        $output .= '<div class="text">Se el primero en enviar un mensaje.</div>';
     }
 
     return $output;
 }
+
+
+function InsertarMensajes($idEmisor, $idReceptor, $mensaje)
+{
+    try {
+        // Utiliza consultas preparadas para prevenir inyecciones SQL
+        $query = "INSERT INTO `tbmensajes` (`Mensaje`, `idUsuarioEnvia`, `idUsuarioRecibe`, `hora`) VALUES (?, ?, ?, ?)";
+        
+        $stmt = $this->getConexion()->prepare($query);
+        
+        if ($stmt) {
+            // Utiliza el objeto DateTime para obtener la fecha y hora actual
+            $currentDateTime = new DateTime();
+            $formattedDateTime = $currentDateTime->format('Y-m-d H:i:s');
+
+            // Vincula los parámetros
+            $stmt->bind_param("ssss", $mensaje, $idEmisor, $idReceptor, $formattedDateTime);
+
+            // Ejecuta la consulta
+            $stmt->execute();
+
+            // Verifica si la inserción fue exitosa
+            if ($stmt->affected_rows > 0) {
+                return true;
+            } else {
+                // Si no se afectaron filas, algo salió mal
+                throw new Exception("Error al insertar mensaje en la base de datos");
+            }
+        } else {
+            // Si la preparación de la consulta falla, lanza una excepción
+            throw new Exception("Error al preparar la consulta");
+        }
+    } catch (Exception $e) {
+        // Captura y maneja cualquier excepción lanzada
+        error_log("Error en InsertarMensajes: " . $e->getMessage());
+        return false;
+    }
+}
+
+
+
+
 
 // ==================================================================================================
     // FIN MENSAJES==========FIN MENSAJES=======================FIN MENSAJES=================

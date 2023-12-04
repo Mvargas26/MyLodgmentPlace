@@ -11,7 +11,7 @@ session_start();
     <link rel="stylesheet" href="../assets/css/mensajes.css">
     <input id="identificacion" type="hidden" value="<?php echo $_SESSION["Identificacion"] ?>" ></input>
 
-<body id="body">
+<body id="bodyMensaje">
 <section class="body-chat">
     <div class="seccion-titulo">
         <h3>
@@ -35,56 +35,46 @@ session_start();
         <!-- DEBERA SER CREADO DINAMICAMENTE -->
         <div class="seccion-lista-usuarios">
             <hr>
-            <div class="usuario">
-                <div class="avatar">
-                    <img src="" alt="">
-                    <!-- <span class="estado-usuario enlinea"></span> -->
-                </div>
-                <div class="cuerpo">
-                    <span id=""> Nombre apellido</span>
-                    <span>detalles de mensaje</span>
+
+            <div class="contenedorSpinner">
+                <div class="spinner">
                 </div>
             </div>
-
-            <!-- <div class="usuario">
-                <div class="avatar">
-                    <img src="ruta_img" alt="img">
-                    <span class="estado-usuario enlinea"></span> 
-                </div>
-                <div class="cuerpo">
-                    <span id=""> Nombre apellido</span>
-                    <span>detalles de mensaje</span>
-                </div>
-            </div> -->
+ 
         </div>
 
     </div>
     <div class="seccion-chat">
 
         <div class="usuario-seleccionado">
-            <div class="avatar">
-                <img id="idFotoPerfil_chatseleccionado" src="ruta_img" alt="img">
+            <div class="avatar" id="avatarEspecial">
+                <img id="idFotoPerfil_chatseleccionado" src="../assets/img/usuarios/icono-usuarioVacio.png" alt="">
             </div>
             <div class="cuerpo">
                 <span id="NombrHuespedSeleccionado"></span>
                 <input type="hidden" id="idHuesped_Elegido">
             </div>
+            <button id="RecargarMensajes" class="transparent-button">
+                <i class="bi bi-arrow-clockwise"></i>
+            </button>
         </div>
 
 
         <div class="panel-chat">
 
             <div >
-            <div class="text">Elige un contacto para enviar mensajes</div>
+            <div class="text" style="margin-left:240px;">   Selecciona un contacto para chatear</div>
             </div> 
-        
+      
         </div><!-- end panel chat -->
 
 
-        <div class="panel-escritura">
-            <form class="textarea">
-                <textarea id="mensaje" placeholder="Escribir mensaje"></textarea>
-                <button type="button" class="enviar">
+        <div class="panel-escritura" style="display:none;">
+            <form id="formEnviaMensaje" class="textarea">   
+                <input type="hidden" id="idEmisor" name="idEmisor">          
+                <input type="hidden" id="idReceptor" name="idReceptor">          
+                <textarea id="mensaje" name="mensaje" placeholder="Escribir mensaje"></textarea>
+                <button type="button" id="SendBtn" class="enviar">
                     <i class="fas fa-paper-plane"></i>
                 </button>
             </form>
@@ -112,7 +102,7 @@ session_start();
 
   
 <script src="../assets/js/Mensajes/script_mensajesAnfitrion.js"></script>
-<script src="../assets/js/Mensajes/chat.js"></script>
+<!-- <script src="../assets/js/Mensajes/chat.js"></script> -->
 
 <!-- ==============================================Inicio Footer ======= -->
 <?php
