@@ -106,6 +106,7 @@ try {
             ?>
               <li><a class="nav-link scrollto" href="./App/Views/gestionPerfilUsuarios_View.php">Panel Administrador</a></li>
                 <li><a class="nav-link scrollto" href="./App/Views/gestionCorreos_View.php">Mantenimiento Correo</a></li>
+                <li><a class="nav-link scrollto" href="./App/Views/gestionarMensajes_View.php">Mantenimiento Mensajes</a></li>
                 
                 <li><a class="nav-link scrollto" href="./App/Views/gestionPerfilUsuarios_View.php">Panel Administrador</a></li>
                 
