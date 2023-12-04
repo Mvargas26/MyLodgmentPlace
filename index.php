@@ -104,11 +104,11 @@ try {
 
             if ($_SESSION["Rol"] == 1) {
             ?>
-              <<<<<<< Updated upstream <li><a class="nav-link scrollto" href="./App/Views/gestionPerfilUsuarios_View.php">Panel Administrador</a></li>
+              <li><a class="nav-link scrollto" href="./App/Views/gestionPerfilUsuarios_View.php">Panel Administrador</a></li>
                 <li><a class="nav-link scrollto" href="./App/Views/gestionCorreos_View.php">Mantenimiento Correo</a></li>
-                =======
+                
                 <li><a class="nav-link scrollto" href="./App/Views/gestionPerfilUsuarios_View.php">Panel Administrador</a></li>
-                >>>>>>> Stashed changes
+                
 
             <?php };
           }; ?>
