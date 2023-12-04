@@ -24,17 +24,36 @@ try {
                 $output = $ObjMaster->ObtenerChatsAnfitrion($idUsuarioElegido, $idUsuarioLogueadovar);
             }
         }
-
-
-        if ($output) {
-            
+        if ($output) {            
             // header('Content-Type: application/json; charset=utf-8');
-            echo $output;
-            
+            echo $output;         
         } else {
             echo json_encode(array('error' => 'No hay datos disponibles'));
         }
     }
+
+    if (isset($_POST['idEmisor']) && isset($_POST['idReceptor']) && isset($_POST['mensaje'])) {
+        $idEmisor = $_POST['idEmisor'];
+        $idReceptor = $_POST['idReceptor'];
+        $mensaje = $_POST['mensaje'];
+    
+        $resultadoConsulta = $ObjMaster->InsertarMensajes($idEmisor, $idReceptor, $mensaje);
+        
+        if ($resultadoConsulta !== false) {
+            // Operación exitosa
+            echo json_encode(array('exito' => true));
+        } else {
+            // Error o fallo en la operación
+            echo json_encode(array('exito' => false, 'error' => 'Error al insertar mensaje en la base de datos.'));
+        }
+    } 
+    // else {
+    //     // Faltan parámetros en la solicitud
+    //     echo json_encode(array('exito' => false, 'error' => 'Faltan parametros en la solicitud.'));
+    // }
+
+
+
 
 } catch (Exception $e) {
     echo json_encode(array('errortry' => $e->getMessage()));
