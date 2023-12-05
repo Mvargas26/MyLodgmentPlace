@@ -4,15 +4,42 @@ $ObjMaster = new Master_Class();
 
 if (isset($_POST["crearReserva"])) {
     try {
+        $cedulaDuenno = $_POST["cedulaDuenno"];
         $idUsuario = $_POST["idUsuario"];
         $idInmueble = $_POST["idInmueble"];
         $valorTotal = $_POST["valorTotal"];
+        $CuponDescuento = $_POST["Cupon"];
+        $fechInicio = $_POST["fechaInicio"];
+        $fechaFin = $_POST["fechaFin"];
+        $valorTotalImpuestos = $_POST["valorTotalImpuestos"];
+        $cantidadPersonasExtra = $_POST["cantidadPersonasExtra"];
+        $cantidadPersonas = $_POST["cantidadPersonas"];
 
         // Llamada a la función correspondiente en Master_Class para crear el cupón con el ID del inmueble
-        // $resultado = $ObjMaster->ModificarSaldos($idUsuario, $idInmueble, $valorTotal);
+        // $idDuenno = $ObjMaster->obteneridDuenno($idInmueble);
+
+        $a = intval($idUsuario);
+        $B = intval($cedulaDuenno);
+        $c = floatval($valorTotal);
         
-        
-        $resultado = consumirEndpointPOST($idUsuario, 305420603, $valorTotal);
+        // if ($CuponDescuento != "") {
+
+        //     $Cupon = $ObjMaster->VerificarCupon($idInmueble, $CuponDescuento, $fechInicio);
+
+        //     if ($Cupon === false) {
+        //         echo json_encode(array('error' => 'Cupón no válido'));
+        //     } else {
+        //         $valorTotal = $valorTotal - ($valorTotal * (($Cupon + 5) / 100));
+        //     }
+        // }
+
+        // $valorTotal = $valorTotal - ($valorTotal * ((5)/100));
+
+        $resultado = consumirEndpointPOST($a, $B, $c);
+
+        // $resultado2 = $ObjMaster->InsertarReserva($idUsuario, $idInmueble,$fechInicio, $fechaFin, $valorTotal, $valorTotalImpuestos, $cantidadPersonasExtra, $cantidadPersonas);
+
+        header('Content-Type: application/json; charset=utf-8');
 
         echo json_encode($resultado);
     } catch (Exception $e) {

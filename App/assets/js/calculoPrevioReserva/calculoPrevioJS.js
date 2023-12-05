@@ -42,14 +42,14 @@ document.addEventListener('DOMContentLoaded', function () {
             var cantidadPersonasExtra = parseInt(cantidadPersonasExtraInput.value);
     
             if (cantidadPersonasExtra == 0 || cantidadPersonasInput.value == 0) {
-                var valorTotal = (valorDiario/100) * cantidadDias;
+                var valorTotal = ((valorDiario+(valorDiario*0.05))/100) * cantidadDias;
                 var totalImpuestos = (valorTotal + (valorTotal * 0.13));
     
                 valorTotalElement.textContent = valorTotal.toLocaleString();
                 valorTotalImpuestosElement.textContent = totalImpuestos.toLocaleString();
             }
             else {
-                var valorTotal = (((costoPersonaExtra * cantidadPersonasExtra) + (valorDiario / 100)) * cantidadDias);
+                var valorTotal = (((costoPersonaExtra * cantidadPersonasExtra) + ((valorDiario+(valorDiario*0.05)) / 100)) * cantidadDias);
                 var totalImpuestos = valorTotal + (valorTotal * 0.13)
                 // if (cantidadDias > 0) {
                 valorTotalElement.textContent = valorTotal.toLocaleString();
@@ -92,7 +92,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
         function ReservaLugar() {
 
-            var idUsuario = 304810232;
+            // var cedulaDuenno = parseInt($('#cedulaDuenno').val()).value;
+            var cedulaDuenno = 305420603;
+            var idUsuario = $('#idUsuario').val();
             var idInmueble = $('#idInmueble').val();
             var cantidadPersonas = $('#cantidadPersonas').val();
             var cantidadPersonasExtra = $('#cantidadPersonasExtra').val();
@@ -101,23 +103,23 @@ document.addEventListener('DOMContentLoaded', function () {
             var Cupon = $('#Cupon').val();
             var valorTotal =  parseInt(valorTotalElement.textContent)*1000; // Cambiado de .val() a .text()
             var valorTotalImpuestos = parseInt(valorTotalImpuestosElement.textContent)*1000; // Cambiado de .val() a .text()
-            var Saldo = parseFloat($('#saldo').val().value);
+            var Saldo = $('#saldo').val();
 
             if (cantidadPersonas === '0') { // Corregida la validación
                 alert("Debe ingresar la cantidad de personas.");
                 return;
             }
 
-            if (saldo < valorTotal) { // Corregida la validación
+            if (Saldo < valorTotal) { // Corregida la validación
                 alert("No tienes suficiente saldo");
                 return;
             }
 
-            AJAXModficiarSaldos(idUsuario,idInmueble, valorTotal);
+            AJAXModficiarSaldos(idUsuario,idInmueble, valorTotal, Cupon, fechaInicio, fechaFin, valorTotalImpuestos, cantidadPersonasExtra, cantidadPersonas, cedulaDuenno);
         }
 
         
-        function AJAXModficiarSaldos(idUsuario,idInmueble, valorTotal) {
+        function AJAXModficiarSaldos(idUsuario,idInmueble, valorTotal, Cupon, fechaInicio, fechaFin, valorTotalImpuestos, cantidadPersonasExtra, cantidadPersonas, cedulaDuenno) {
 
             $.ajax({
                 type: 'POST',
@@ -126,22 +128,24 @@ document.addEventListener('DOMContentLoaded', function () {
                     crearReserva: true,
                     idUsuario: idUsuario,
                     idInmueble: idInmueble,
-                    // cantidadPersonas: cantidadPersonas,
-                    // cantidadPersonasExtra: cantidadPersonasExtra,
-                    // fechaInicio: fechaInicio,
-                    // fechaFin: fechaFin,
-                    // Cupon: Cupon,
-                    valorTotal: valorTotal
-                    // valorTotalImpuestos: valorTotalImpuestos
+                    cantidadPersonas: cantidadPersonas,
+                    cantidadPersonasExtra: cantidadPersonasExtra,
+                    fechaInicio: fechaInicio,
+                    fechaFin: fechaFin,
+                    Cupon: Cupon,
+                    valorTotal: valorTotal,
+                    valorTotalImpuestos: valorTotalImpuestos,
+                    cedulaDuenno: cedulaDuenno
                 },
                 dataType: 'json',
                 success: function(response) {
-                    if (response) {
-                        alert('¡Reserva creada exitosamente!');
+                    if (response.error) {
+                        alert(response.error); // Muestra el mensaje de error del cupón no válido
                     } else {
-                        alert('Hubo un error al reservar el lugar. Inténtelo de nuevo.');
+                        alert('¡Reserva creada exitosamente!');
                     }
                 },
+                // console.log(),
                 error: function(xhr, status, error) {
                     console.log(xhr);
                     console.log(status);
