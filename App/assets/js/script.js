@@ -14,6 +14,7 @@ const RegistroUsuarios = {
         // Captura los valores del formulario
         const identificacion = document.getElementById("identificacion").value;
         const Clave = document.getElementById("Clave").value;
+        const verificarClave = document.getElementById("verificarClave").value;
         const nombre = document.getElementById("nombre").value;
         const primerApellido = document.getElementById("primerApellido").value;
         const segundoApellido = document.getElementById("segundoApellido").value;
@@ -28,6 +29,7 @@ const RegistroUsuarios = {
         const formData = {
             identificacion,
             Clave,
+            verificarClave,
             nombre,
             primerApellido,
             segundoApellido,
@@ -38,7 +40,9 @@ const RegistroUsuarios = {
             idRol
         };
 
-        if (inputImagen.files && inputImagen.files[0]) {
+        var verificoContrasena = verificarContrasena(Clave,verificarClave);
+
+        if (inputImagen.files && inputImagen.files[0] && verificoContrasena) {
 
             var file = inputImagen.files[0];
 
@@ -496,3 +500,17 @@ RegistroUsuarios.init();
 Login.init();
 //  CargarServicios.init();
 //  CargarNotificaciones.init();
+
+
+
+function verificarContrasena(contrasena,verificarContrasena){
+
+    if (contrasena !=verificarContrasena) {
+        
+        Swal.fire("Error", "La contraseña y la confirmación no son iguales", "error");//mensaje bonito
+        return false;
+    }
+
+    return true;
+
+}

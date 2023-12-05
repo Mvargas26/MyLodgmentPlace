@@ -17,6 +17,7 @@ include './templates/Header.php';
                 <div class="all-steps" id="all-steps"> 
                   <span class="step"><i class="fa-solid fa-id-card"></i></span> 
                   <span class="step"><i class="fa-solid fa-lock"></i></span> 
+                  <span class="step"><i class="fa-solid fa-lock"></i></span> 
                   <span class="step"><i class="fa fa-user"></i></span> 
                   <span class="step"><i class="fa fa-user-pen"></i></span> 
                   <span class="step"><i class="fa fa-user-pen"></i></span> 
@@ -33,11 +34,15 @@ include './templates/Header.php';
                     <p>
                     <input type="number" name="identificacion" class="inputformRegistro" id="identificacion" placeholder="301110222" required>
                       <!-- <input placeholder="Name..." oninput="this.className = ''" name="fname"></p> -->
-                    
                 </div>
                 <div class="tab">
                   <h6 >¿Cúal será su contraseña?</h6>
                   <input type="password" name="Clave" class="inputformRegistro" id="Clave"  required>
+                    <!-- <p><input placeholder="City" oninput="this.className = ''" name="dd"></p> -->
+                </div>
+                <div class="tab">
+                  <h6 >¿Confirme su contraseña?</h6>
+                  <input type="password" name="Clave" class="inputformRegistro" id="verificarClave"  required>
                     <!-- <p><input placeholder="City" oninput="this.className = ''" name="dd"></p> -->
                 </div>
                 <div class="tab">
