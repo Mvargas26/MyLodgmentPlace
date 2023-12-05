@@ -9,7 +9,7 @@ if (isset($_POST['idDenuncia'])) {
     $estadoNuevo = $_POST['estadoNuevo'];
     $veredicto = $_POST['veredicto'];
 
-    $mensajeDB = $ObjMaster->modificarDenunciaAdm($idDenuncia, $identificacion, $respuestaDenunciaAdm, $estadoNuevo);
+    $mensajeDB = $ObjMaster->modificarDenunciaAdm($idDenuncia, $identificacion, $respuestaDenunciaAdm, $estadoNuevo, $veredicto);
     $data = array("exito" => $mensajeDB);
     echo json_encode($data);
 } else {
