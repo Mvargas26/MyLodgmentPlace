@@ -14,13 +14,22 @@ function showTab(n) {
     } else {
         document.getElementById("prevBtn").style.display = "inline";
     }
+    // if (n == (x.length - 1)) {
+    //     document.getElementById("nextBtn").innerHTML = '<i class="fa fa-angle-double-right"></i>';
+    //     document.getElementById("btnRegistar").style.display = "inline";
+    // } else {
+    //     document.getElementById("nextBtn").innerHTML = '<i class="fa fa-angle-double-right"></i>';
+    //     document.getElementById("btnRegistar").style.display = "none";
+    // }
+
     if (n == (x.length - 1)) {
-        document.getElementById("nextBtn").innerHTML = '<i class="fa fa-angle-double-right"></i>';
+        document.getElementById("nextBtn").style.display = "none"; 
         document.getElementById("btnRegistar").style.display = "inline";
     } else {
-        document.getElementById("nextBtn").innerHTML = '<i class="fa fa-angle-double-right"></i>';
+        document.getElementById("nextBtn").style.display = "inline"; 
         document.getElementById("btnRegistar").style.display = "none";
     }
+
     fixStepIndicator(n)
 }
 
