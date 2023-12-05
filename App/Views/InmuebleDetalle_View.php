@@ -202,6 +202,10 @@ if (isset($_GET['id'])) {
                   
                   <!-- ----------------------------------------------------- -->
 
+                  <strong>Capacidad de Personas Extra: 4</strong>
+                  
+                  <!-- ----------------------------------------------------- -->
+
                   <strong>Costo x Persona:</strong>
                   <?php
                   foreach ($datos as $dato) {
