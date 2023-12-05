@@ -11,18 +11,20 @@ document.addEventListener("DOMContentLoaded", function () {
     var fechaInicioBC = document.getElementById("fechaInicioBC");
     var fechaFinBC = document.getElementById("fechaFinBC");
 
+    var fechaVencimiento = $('#fechaInicio').val();
 
-    var fechaActual = new Date();
-    var fechaManana = new Date(); 
+
+    // var fechaActual = new Date();
+    // var fechaManana = new Date(); 
     
-    fechaManana.setDate(fechaActual.getDate() + 1);
+    // fechaManana.setDate(fechaActual.getDate() + 1);
 
-    var fechaMananaMas4Dias = new Date(); 
+    // var fechaMananaMas4Dias = new Date(); 
     
-    fechaMananaMas4Dias.setDate(fechaManana.getDate() + 4);
+    // fechaMananaMas4Dias.setDate(fechaManana.getDate() + 4);
 
-    fechaInicioInput.value = fechaManana;
-    fechaFinInput.value = fechaMananaMas4Dias;
+    // fechaInicioInput.value = fechaManana;
+    // fechaFinInput.value = fechaMananaMas4Dias;
     // var fechaEntrada = fechaInicio1;
 
     // console.log(fechaInicio1 + " fecha inicio");
@@ -55,6 +57,9 @@ document.addEventListener("DOMContentLoaded", function () {
     fechaInicioInput.addEventListener("click", function () {
         console.log("Fecha de inicio cambiada");
         console.log("Valor de fechaInicioInput:", fechaInicioInput.value);
+
+        fechaInicioInput = $('#fechaInicio').val();
+        fechaFinInput = $('#fechaFin').val();
         calcularCantidadDias();
         calcularValorTotal();
     });
@@ -62,6 +67,9 @@ document.addEventListener("DOMContentLoaded", function () {
     fechaFinInput.addEventListener("click", function () {
         console.log("Fecha de fin cambiada");
         console.log("Valor de fechaInicioInput:", fechaInicioInput.value);
+
+        fechaInicioInput = $('#fechaInicio').val();
+        fechaFinInput = $('#fechaFin').val();
         calcularCantidadDias();
         calcularValorTotal();
     });

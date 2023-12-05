@@ -608,8 +608,8 @@ class Master_Class
                 $mail->setFrom('pruebas@tritechno.net', 'My Lodgment Place');
                 $mail->addAddress($destinatario);
                 $mail->isHTML(true);
-                $mail->Subject = 'Este es tu codigo de autenticacion para el inicio de sesion';
-                $mail->Body = $codigo_autenticacion;
+                $mail->Subject = 'Codigo de autenticacion para el inicio de sesion';
+                $mail->Body = 'Bienvenido a My Lodgment Place, este es tu codigo de autenticacion: ' . $codigo_autenticacion;
                 //$mail->send();
 
                 if (!$mail->send()) {
@@ -934,6 +934,8 @@ class Master_Class
 
     //fin funcion ReservaLugar
 
+    //inicio funcion crearCupon
+
     public function crearCupon($nombreCupon, $montoDescuento, $cantidadCupones, $fechaVencimiento, $tipoDescuento, $idInmueble)
     {
         $query = "INSERT INTO tbdescuento (idCupon, Monto, CantidadCupones, tipoDescuento) VALUES ('$nombreCupon', '$montoDescuento', '$cantidadCupones', '$tipoDescuento')";
@@ -947,6 +949,100 @@ class Master_Class
         return true;
     }
 
+    //fin funcion crearCupon
+
+    //inicio funcion modificarCupon
+
+    public function modificarCupon($nombreCupon, $montoDescuento, $cantidadCupones, $fechaVencimiento, $tipoDescuento, $idInmueble)
+    {
+        // Implementa aquí la lógica para modificar el cupón en la base de datos
+        $query = "UPDATE tbdescuento 
+              SET Monto = '$montoDescuento', CantidadCupones = '$cantidadCupones', tipoDescuento = '$tipoDescuento'
+              WHERE idCupon = '$nombreCupon'";
+
+        $resultado = $this->GetConexion()->query($query);
+
+        $query2 = "UPDATE tbinmueblecupon 
+               SET fechaVencimiento = '$fechaVencimiento' 
+               WHERE idInmueble = '$idInmueble' AND idCupon = '$nombreCupon'";
+
+        $resultado2 = $this->GetConexion()->query($query2);
+
+        return true; // Cambiar si necesitas retornar otra cosa para confirmar la modificación
+    }
+    //fin funcion modificarCupon
+
+    //inicio funcion obtenerInmueblesConCupon
+
+    public function obtenerInmueblesConCupon($idPropietario)
+    {
+        $query = "SELECT DISTINCT i.id, i.nombre 
+              FROM tbinmueble i 
+              INNER JOIN tbinmueblecupon c ON i.id = c.idInmueble 
+              WHERE i.Propietario = $idPropietario";
+
+        $result = $this->GetConexion()->query($query);
+
+        $inmuebles = array();
+
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $inmueble = array(
+                    'id' => $row['id'],
+                    'nombre' => $row['nombre']
+                );
+                $inmuebles[] = $inmueble;
+            }
+        }
+
+        return $inmuebles;
+    }
+    //fin funcion obtenerInmueblesConCupon
+
+    //inicio funcion obtenerInmueblesporIdDuenno
+    public function obtenerInmueblesporIdDuenno($idPropietario)
+    {
+        $query = "SELECT DISTINCT i.id, i.nombre 
+              FROM tbinmueble i 
+              WHERE i.Propietario = $idPropietario";
+
+        $result = $this->GetConexion()->query($query);
+
+        $inmuebles = array();
+
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $inmueble = array(
+                    'id' => $row['id'],
+                    'nombre' => $row['nombre']
+                );
+                $inmuebles[] = $inmueble;
+            }
+        }
+
+        return $inmuebles;
+    }
+    //fin funcion obtenerInmueblesporIdDuenno
+
+    //inicio funcion obtenerCuponesPorInmueble
+    public function obtenerCuponesPorInmueble($idInmueble)
+    {
+        $query = "SELECT idCupon FROM tbinmueblecupon WHERE idInmueble = '$idInmueble'";
+        $result = $this->GetConexion()->query($query);
+
+        $cupones = array();
+
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $cupones[] = $row['idCupon'];
+            }
+        }
+
+        return $cupones;
+    }
+    //fin funcion obtenerCuponesPorInmueble
+
+    //inicio funcion obtenerNombresInmuebles
     public function obtenerNombresInmuebles($idPropietario)
     {
         $idPropietario = $this->GetConexion()->real_escape_string($idPropietario);
@@ -969,10 +1065,157 @@ class Master_Class
         return $nombresInmuebles;
     }
 
-    //fin funcion obtener nombres de inmuebles
+    //fin funcion obtener obtenerNombresInmuebles
+
+    //inicio funcion obtenerDatosCupon
+    public function obtenerDatosCupon($nombreCupon) {
+        $query = "SELECT d.Monto, d.CantidadCupones, d.TipoDescuento, c.fechaVencimiento 
+                  FROM tbdescuento d
+                  JOIN tbinmueblecupon c ON c.idCupon = d.idCupon
+                  WHERE d.idCupon = '$nombreCupon'";
+    
+        $result = $this->GetConexion()->query($query);
+    
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            return array(
+                'monto' => $row['Monto'],
+                'cantidad' => $row['CantidadCupones'],
+                'nombre' =>$nombreCupon,
+                'fecha' => $row['fechaVencimiento']
+            );
+        } else {
+            return null;
+        }
+    }
+    //fin funcion obtenerDatosCupon
+
+    //inicio funcion obtenerCaracteristicasInmueble
+    public function obtenerCaracteristicasInmueble($idInmueble)
+    {
+        $query = "SELECT cantidadCuartos, cantidadCamas, cantidadBanos, cantidadPatios, cantidadVehiculos, cantidadPlantas
+              FROM tbcaracteristicasinmueble
+              WHERE idInmueble = '$idInmueble'";
+
+        $result = $this->GetConexion()->query($query);
+
+        if ($result->num_rows > 0
+        ) {
+            $row = $result->fetch_assoc();
+            return array(
+                'cantidadCuartos' => $row['cantidadCuartos'],
+                'cantidadCamas' => $row['cantidadCamas'],
+                'cantidadBanos' => $row['cantidadBanos'],
+                'cantidadPatios' => $row['cantidadPatios'],
+                'cantidadVehiculos' => $row['cantidadVehiculos'],
+                'cantidadPlantas' => $row['cantidadPlantas']
+            );
+        } else {
+            return null;
+        }
+    }
+        //fin funcion obtenerCaracteristicasInmueble
+
+    //inicio funcion modificarDatosCupon
+    public function modificarDatosCupon($idInmueble, $idCuponActual, $nuevoNombre, $nuevoMonto, $nuevaCantidad, $nuevaFechaVencimiento)
+    {
+        $conexion = $this->GetConexion();
+    
+        // Verificar si el nombre del cupón ha cambiado
+        if ($idCuponActual !== $nuevoNombre) {
+            // Obtener los datos del cupón actual en tbinmueblecupon
+            $querySelectOldCupon = "SELECT fechaVencimiento, validez FROM tbinmueblecupon WHERE idInmueble = ? AND idCupon = ?";
+            $stmtSelectOldCupon = $conexion->prepare($querySelectOldCupon);
+            $stmtSelectOldCupon->bind_param("ss", $idInmueble, $idCuponActual);
+            $stmtSelectOldCupon->execute();
+            $resultSelect = $stmtSelectOldCupon->get_result();
+    
+            // Almacenar los datos del cupón actual antes de eliminarlos
+            $oldCuponData = $resultSelect->fetch_assoc();
+    
+            // Eliminar el registro antiguo en tbinmueblecupon
+            $queryDeleteOldCupon = "DELETE FROM tbinmueblecupon WHERE idInmueble = ? AND idCupon = ?";
+            $stmtDeleteOldCupon = $conexion->prepare($queryDeleteOldCupon);
+            $stmtDeleteOldCupon->bind_param("ss", $idInmueble, $idCuponActual);
+            $resultDelete = $stmtDeleteOldCupon->execute();
+    
+            // Si se eliminó correctamente, proceder a actualizar los datos
+            if ($resultDelete) {
+                // Actualizar el nombre del cupón, monto y cantidad en tbdescuento
+                $queryUpdateDescuento = "UPDATE tbdescuento SET idCupon = ?, Monto = ?, CantidadCupones = ? WHERE idCupon = ?";
+                $stmtUpdateDescuento = $conexion->prepare($queryUpdateDescuento);
+                $stmtUpdateDescuento->bind_param("sdis", $nuevoNombre, $nuevoMonto, $nuevaCantidad, $idCuponActual);
+                $resultUpdateDescuento = $stmtUpdateDescuento->execute();
+    
+                // Insertar los nuevos datos del cupón en tbinmueblecupon
+                $queryInsertNewCupon = "INSERT INTO tbinmueblecupon (idInmueble, idCupon, fechaVencimiento, validez) VALUES (?, ?, ?, ?)";
+                $stmtInsertNewCupon = $conexion->prepare($queryInsertNewCupon);
+                $validez = ($nuevaFechaVencimiento >= date('Y-m-d')) ? 1 : 2;
+                $stmtInsertNewCupon->bind_param("sssi", $idInmueble, $nuevoNombre, $nuevaFechaVencimiento, $validez);
+                $resultInsertNew = $stmtInsertNewCupon->execute();
+    
+                // Verificar si las consultas se ejecutaron correctamente
+                if ($resultUpdateDescuento && $resultInsertNew) {
+                    return true; // Todo se actualizó correctamente
+                } else {
+                    return false; // Hubo un error al actualizar los datos
+                }
+            } else {
+                return false; // Hubo un error al eliminar el registro antiguo
+            }
+        } else {
+            // Actualizar otros datos sin cambiar el idCupon
+            $queryUpdateOnlyDescuento = "UPDATE tbdescuento SET Monto = ?, CantidadCupones = ? WHERE idCupon = ?";
+            $stmtUpdateOnlyDescuento = $conexion->prepare($queryUpdateOnlyDescuento);
+            $stmtUpdateOnlyDescuento->bind_param("dis", $nuevoMonto, $nuevaCantidad, $idCuponActual);
+    
+            $queryUpdateOnlyInmuebleCupon = "UPDATE tbinmueblecupon SET fechaVencimiento = ?, validez = ? WHERE idCupon = ?";
+            $stmtUpdateOnlyInmuebleCupon = $conexion->prepare($queryUpdateOnlyInmuebleCupon);
+            $validez = ($nuevaFechaVencimiento >= date('Y-m-d')) ? 1 : 2;
+            $stmtUpdateOnlyInmuebleCupon->bind_param("sii", $nuevaFechaVencimiento, $validez, $idCuponActual);
+    
+            // Ejecutar las consultas
+            $resultUpdateOnlyDescuento = $stmtUpdateOnlyDescuento->execute();
+            $resultUpdateOnlyInmuebleCupon = $stmtUpdateOnlyInmuebleCupon->execute();
+    
+            // Verificar si las consultas se ejecutaron correctamente
+            if ($resultUpdateOnlyDescuento && $resultUpdateOnlyInmuebleCupon) {
+                return true; // Todo se actualizó correctamente
+            } else {
+                return false; // Hubo un error al actualizar los datos
+            }
+        }
+    }
+    //fin funcion modificarDatosCupon
+
+//inicio funcion eliminarCupon
+
+public function eliminarCupon($idInmueble, $idCupon) {
+    $conexion = $this->GetConexion();
+
+    // Eliminar el cupón de la tabla tbinmueblecupon
+    $queryDeleteInmuebleCupon = "DELETE FROM tbinmueblecupon WHERE idInmueble = ? AND idCupon = ?";
+    $stmtDeleteInmuebleCupon = $conexion->prepare($queryDeleteInmuebleCupon);
+    $stmtDeleteInmuebleCupon->bind_param("ss", $idInmueble, $idCupon);
+    $resultDeleteInmuebleCupon = $stmtDeleteInmuebleCupon->execute();
+
+    // Eliminar el cupón de la tabla tbdescuento
+    $queryDeleteDescuento = "DELETE FROM tbdescuento WHERE idCupon = ?";
+    $stmtDeleteDescuento = $conexion->prepare($queryDeleteDescuento);
+    $stmtDeleteDescuento->bind_param("s", $idCupon);
+    $resultDeleteDescuento = $stmtDeleteDescuento->execute();
+
+    // Verificar si se eliminó correctamente de ambas tablas
+    if ($resultDeleteInmuebleCupon && $resultDeleteDescuento) {
+        return true; // Cupón eliminado correctamente
+    } else {
+        return false; // Hubo un problema al eliminar el cupón
+    }
+}
+
+//fin funcion eliminarCupon
 
     //Inicio funcion ObtenerCantidadReservas
-
     public function ObtenerCantidadReservas()
     {
         $query = "SELECT COUNT(*) as total_reservas FROM tbreserva";
@@ -1205,8 +1448,6 @@ class Master_Class
                     $data[] = $item;
                 }
                 return json_encode($data);
-
-
             } else {
                 throw new Exception("Error en la consulta: " . $this->getConexion()->error);
             }
@@ -1263,8 +1504,6 @@ class Master_Class
                 }
                 // header('Content-Type: application/json; charset=utf-8');
                 return $data;
-
-
             } else {
                 throw new Exception("Error en la consulta: " . $this->getConexion()->error);
             }
@@ -1342,8 +1581,6 @@ class Master_Class
                     $data[] = $item;
                 }
                 return json_encode($data);
-
-
             } else {
                 throw new Exception("Error en la consulta: " . $this->getConexion()->error);
             }
@@ -1402,8 +1639,6 @@ class Master_Class
                     $data[] = $item;
                 }
                 return json_encode($data);
-
-
             } else {
                 throw new Exception("Error en la consulta: " . $this->getConexion()->error);
             }
@@ -1461,8 +1696,6 @@ class Master_Class
                     $data[] = $item;
                 }
                 return $data;
-
-
             } else {
                 throw new Exception("Error en la consulta: " . $this->getConexion()->error);
             }
@@ -1810,8 +2043,6 @@ function ConsultarlistaDeContactosDisponible_Huesped($idHuesped)
                         $data[] = $item;
                     }    
                     return json_encode($data);
-                    
-
         } else {        
             throw new Exception("Error en la consulta: " . $this->getConexion()->error);
         }    
@@ -1877,8 +2108,6 @@ function ConsultarlistaDeContactosDisponible_Anfitrion($idAnfitrion)
     }    
     // $this->conn->close();
 } //fn ConsultarResenias recibidas POR id Huesped    
-
-
 
 
 
@@ -2013,7 +2242,6 @@ public function ObtenerChatsAnfitrion($idUsuarioElegido, $idUsuarioLogueado)
                                     </div>            
                                 </div>
                             </div>';
-
                         } else {
                 $output .= '<div class="mensaje left">
                                 <div class="cuerpo">
@@ -2045,7 +2273,6 @@ public function ObtenerChatsAnfitrion($idUsuarioElegido, $idUsuarioLogueado)
     } else {
         $output .= '<div class="text">Se el primero en enviar un mensaje.</div>';
     }
-
     return $output;
 }
 

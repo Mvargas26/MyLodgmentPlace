@@ -582,7 +582,7 @@ if (isset($_SESSION["Identificacion"])) {
         <form action="" method="post" role="form" enctype="multipart/form-data">
 
             <div class="section-title">
-                <input type="hidden" id="ArrayServicios" value="[{}]">
+                <input type="text" id="ArrayServicios" value="[{}]">
                 <h2>Servicios</h2>
                 <p>¡Los servicios mejorarán la calidad de tu espacio!</p>
 
