@@ -11,20 +11,19 @@ session_start();
 <?php
 
 if (isset($_SESSION["Identificacion"])) {
-    
-    ?>
-    <input type="hidden" id="PropietarioID" value="<?php echo $_SESSION["Identificacion"] ?>"/>
 
-<?php
- }
- else{
-    $ID = "NO HAY ID";
     ?>
-        <input type="hidden" id="PropietarioID" value="N0 HAY ID"/>
+        <input type="hidden" id="PropietarioID" value="<?php echo $_SESSION["Identificacion"] ?>"/>
 
     <?php
- }
- 
+} else {
+    $ID = "NO HAY ID";
+    ?>
+            <input type="hidden" id="PropietarioID" value="N0 HAY ID"/>
+
+        <?php
+}
+
 
 ?>
 
@@ -35,7 +34,7 @@ if (isset($_SESSION["Identificacion"])) {
 <br>
 <br>
 <div class="form-container">
-    <section id="Info_inmueble" class="form-section ">
+<section id="Info_inmueble" class="form-section active">
         <img src="../assets/img/publicarinmueble/PASOS.png" alt="">
 
         <div id="tituloPublicarInmueble">
@@ -229,7 +228,7 @@ if (isset($_SESSION["Identificacion"])) {
     <!-- ========================================================================== -->
     
 
-    <section id="Info_inmueble" class="form-section active">
+    <section id="Calendario" class="form-section">        
         <link rel="stylesheet" type="text/css" href="../assets/css/calendario anfitrion/calendario.css">
 
             <img src="../assets/img/publicarinmueble/PASOS.png" alt="">
