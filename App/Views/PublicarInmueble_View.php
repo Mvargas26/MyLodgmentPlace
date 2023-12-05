@@ -35,7 +35,7 @@ if (isset($_SESSION["Identificacion"])) {
 <br>
 <br>
 <div class="form-container">
-    <section id="Info_inmueble" class="form-section active">
+    <section id="Info_inmueble" class="form-section ">
         <img src="../assets/img/publicarinmueble/PASOS.png" alt="">
 
         <div id="tituloPublicarInmueble">
@@ -229,7 +229,7 @@ if (isset($_SESSION["Identificacion"])) {
     <!-- ========================================================================== -->
     
 
-    <section id="Calendario" class="form-section">
+    <section id="Info_inmueble" class="form-section active">
         <link rel="stylesheet" type="text/css" href="../assets/css/calendario anfitrion/calendario.css">
 
             <img src="../assets/img/publicarinmueble/PASOS.png" alt="">
@@ -240,12 +240,34 @@ if (isset($_SESSION["Identificacion"])) {
                         <div class="transition-bar"></div>
                     </a>
                 </div>
+                <div>
+        <div id="calendar"></div>
+        <button id="saveButton">Guardar Reserva</button>
+    </div>
 
                 <div>
                     <div id="calendar"></div>
                     <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment.min.js"></script>
                     <link href='https://fonts.googleapis.com/css?family=Exo+2:400,100' rel='stylesheet' type='text/css'>
                 </div>
+
+                <script>
+    
+                    $('#saveButton').on('click', function () {
+                        calendar.saveReservation();
+                    });
+
+                
+                    function getUserId() {
+                        
+                        return $_SESSION; 
+                    }
+
+                    function getInmuebleId() {
+                        
+                        return '1'; 
+                    }
+                </script>
     </section>
         
     

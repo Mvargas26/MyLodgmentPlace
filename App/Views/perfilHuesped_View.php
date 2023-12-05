@@ -43,7 +43,7 @@ if ($informacionUsuario) {
 <main id="main">
 <br>
         <br>
-    <div class="container mt-5">
+    <div class="container ">
         <h2>Datos Personales</h2>
 
         <div>
@@ -60,6 +60,11 @@ if ($informacionUsuario) {
         <button type="button" class="btn btn-primary mt-3" data-toggle="modal" data-target="#updateModal">
             Actualizar Datos
         </button>
+
+        <!-- <div class="banner_img">
+            <img src="../assets/img/logo/logo.png" alt="">
+        </div>  -->
+
     </div>
 
     <!-- Modal para actualizar datos -->
