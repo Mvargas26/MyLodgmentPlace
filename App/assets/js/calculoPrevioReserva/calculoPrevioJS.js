@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
         var costoPersonaExtra = parseFloat(document.getElementById("costoPersonaExtra").value);
         var fechaInicioBC = document.getElementById("fechaInicioBC");
         var fechaFinBC = document.getElementById("fechaFinBC");
+        var crearReserva2 = document.getElementById("crearReserva2");
 
         var cantidadDiasTotal=0;
 
@@ -25,6 +26,12 @@ document.addEventListener('DOMContentLoaded', function () {
             // console.log('La fecha ha cambiado fin:', fechaFinBC.value);
             calcularValorTotal();
         });
+
+        crearReserva2.addEventListener('click', function () {
+            // console.log('La fecha ha cambiado fin:', fechaFinBC.value);
+            ReservaLugar();
+        });
+
 
     //    *******************************************************************************************
         //metodos internos
@@ -82,6 +89,68 @@ document.addEventListener('DOMContentLoaded', function () {
             return false;
         };
         
+
+        function ReservaLugar() {
+
+            var idUsuario = 304810232;
+            var idInmueble = $('#idInmueble').val();
+            var cantidadPersonas = $('#cantidadPersonas').val();
+            var cantidadPersonasExtra = $('#cantidadPersonasExtra').val();
+            var fechaInicio = fechaInicioBC.value;
+            var fechaFin = fechaFinBC.value;
+            var Cupon = $('#Cupon').val();
+            var valorTotal =  parseInt(valorTotalElement.textContent)*1000; // Cambiado de .val() a .text()
+            var valorTotalImpuestos = parseInt(valorTotalImpuestosElement.textContent)*1000; // Cambiado de .val() a .text()
+            var Saldo = parseFloat($('#saldo').val().value);
+
+            if (cantidadPersonas === '0') { // Corregida la validación
+                alert("Debe ingresar la cantidad de personas.");
+                return;
+            }
+
+            if (saldo < valorTotal) { // Corregida la validación
+                alert("No tienes suficiente saldo");
+                return;
+            }
+
+            AJAXModficiarSaldos(idUsuario,idInmueble, valorTotal);
+        }
+
+        
+        function AJAXModficiarSaldos(idUsuario,idInmueble, valorTotal) {
+
+            $.ajax({
+                type: 'POST',
+                url: '../../App/Modules/ModificarSaldos/modificarSaldos_Negocios.php',
+                data: {
+                    crearReserva: true,
+                    idUsuario: idUsuario,
+                    idInmueble: idInmueble,
+                    // cantidadPersonas: cantidadPersonas,
+                    // cantidadPersonasExtra: cantidadPersonasExtra,
+                    // fechaInicio: fechaInicio,
+                    // fechaFin: fechaFin,
+                    // Cupon: Cupon,
+                    valorTotal: valorTotal
+                    // valorTotalImpuestos: valorTotalImpuestos
+                },
+                dataType: 'json',
+                success: function(response) {
+                    if (response) {
+                        alert('¡Reserva creada exitosamente!');
+                    } else {
+                        alert('Hubo un error al reservar el lugar. Inténtelo de nuevo.');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.log(xhr);
+                    console.log(status);
+                    console.log(error);
+                    alert('Error en la solicitud. Por favor, inténtelo más tarde.');
+                }
+            });
+        }
+
 
     });//fin load
 });//fin loaded

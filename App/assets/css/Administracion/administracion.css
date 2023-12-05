@@ -1,0 +1,65 @@
+#mantenimiento-container {
+    width: 90%; /* Ancho del contenedor al 90% del viewport */
+    max-width: 600px; /* Ancho máximo */
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    margin: 100px auto 20px auto; /* Margen simplificado */
+    text-align: center;
+}
+
+#mantenimiento-container h1 {
+    margin-top: 0;
+    margin-bottom: 30px;
+}
+
+#tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap; /* Permitir que los botones se envuelvan en pantallas pequeñas */
+}
+
+#tabs button {
+    margin: 0 10px;
+    margin-bottom: 10px; /* Espaciado entre botones */
+    width: calc(50% - 20px); /* Ancho del 50% con espacio para el margen */
+}
+
+#modificarForm,
+#eliminarForm {
+    display: none;
+    margin-top: 20px;
+}
+
+#modificarForm select,
+#modificarForm input[type="text"],
+#modificarForm input[type="number"],
+#modificarForm input[type="date"],
+#modificarForm button,
+#eliminarForm select,
+#eliminarForm button {
+    width: calc(100% - 20px);
+}
+
+#aplicarModificacionBtn,
+#confirmarEliminarBtn,
+#guardarCambiosBtn {
+    margin-top: 15px;
+}
+
+#caracteristicas,
+#caracteristicas {
+    display: none;
+    margin-top: 20px;
+}
+
+#caracteristicas select,
+#caracteristicas input[type="text"],
+#caracteristicas input[type="number"],
+#caracteristicas button,
+#caracteristicas select,
+#caracteristicas button {
+    width: calc(100% - 5px);
+}

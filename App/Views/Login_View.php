@@ -17,7 +17,6 @@
                         <input type="number" name="identificacion" placeholder="Identificación" required>
                         <input type="password" name="password" placeholder="Contraseña" required>
                         <input type="submit" value="Entrar">
-                        <a href="#">Forgot password?</a>
                     </form>
                 </div>
             </div>

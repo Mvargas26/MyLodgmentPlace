@@ -4,18 +4,82 @@ require_once('../Modules/Master_Class.php');
 
 include('../Modules/fullCalendar/config.php');
 
+session_start();
+
 if (isset($_GET['id'])) {
   $idInmueble = $_GET['id'];
-}
 
-$SqlEventos = "SELECT * FROM tbreserva WHERE idInmueble = $idInmueble";
+  $SqlEventos = "SELECT * FROM tbreserva WHERE idInmueble = $idInmueble";
 
 $resulEventos = mysqli_query($con, $SqlEventos);
 
 $fechaInicio = date('Y-m-d');
 $fechaFin = date('Y-m-d');
 
-session_start();
+
+}
+//---------------------------CONSUMO DE API---------------------------
+if (1 == 1) {
+  $numeroCuentaAPIurl = 'https://tiusr29pl.cuc-carrera-ti.ac.cr/Mybanco/api/Cuentas/GetNumeroCuenta/' . 304810232;
+
+  $numeroCuentaAPI = curl_init($numeroCuentaAPIurl);
+  curl_setopt($numeroCuentaAPI, CURLOPT_RETURNTRANSFER, true);
+
+  // Deshabilita la verificación del certificado SSL (para desarrollo local)
+  curl_setopt($numeroCuentaAPI, CURLOPT_SSL_VERIFYPEER, false);
+
+  $numeroCuenta = curl_exec($numeroCuentaAPI);
+
+  if (curl_errno($numeroCuentaAPI)) {
+    echo 'Error cURL: ' . curl_error($numeroCuentaAPI);
+  }
+
+  $httpCode = curl_getinfo($numeroCuentaAPI, CURLINFO_HTTP_CODE);
+
+  if ($httpCode == 200) {
+  } else {
+    echo 'Error en la solicitud a la API de cuentas. Código de estado HTTP: ' . $httpCode;
+    $mensaje2 = 'Número de Cuenta no disponible para el usuario';
+  }
+}
+
+if (!empty($numeroCuenta)) {
+  $saldoApiUrl = 'https://tiusr29pl.cuc-carrera-ti.ac.cr/Mybanco/api/Saldos/' . 66158725;
+
+  $chSaldo = curl_init($saldoApiUrl);
+  curl_setopt($chSaldo, CURLOPT_RETURNTRANSFER, true);
+
+  // Deshabilita la verificación del certificado SSL (para desarrollo local)
+  curl_setopt($chSaldo, CURLOPT_SSL_VERIFYPEER, false);
+
+  $saldoApiResponse = curl_exec($chSaldo);
+
+  if (curl_errno($chSaldo)) {
+    echo 'Error cURL: ' . curl_error($chSaldo);
+  }
+
+  $httpCode = curl_getinfo($chSaldo, CURLINFO_HTTP_CODE);
+
+  $saldo = 123;
+
+  if ($httpCode == 200) {
+    $saldoData = json_decode($saldoApiResponse, true);
+
+    if ($saldoData === null) {
+      echo 'Error decodificando JSON para los datos del saldo';
+    } else {
+      $saldo = isset($saldoData['saldo']) ? $saldoData['saldo'] : 'No disponible';
+    }
+  } else {
+    echo 'Error en la solicitud a la API de saldos. Código de estado HTTP: ' . $httpCode;
+  }
+} else {
+  echo 'Número de Cuenta no disponible para el usuario';
+  $mensaje2 = 'Número de Cuenta no disponible para el usuario';
+}
+
+//---------------------------CONSUMO DE API---------------------------
+
 // if (!isset($_SESSION['id']) || !isset($_SESSION['rol']) || empty($_SESSION['id']) || empty($_SESSION['rol'])|| $_SESSION['rol']!=1) {
 //     header('Location: ../../');
 //     exit();
@@ -40,6 +104,7 @@ if (isset($_GET['id'])) {
     <h1 hidden>
       <?php echo $idInmuebleDetalle ?>
     </h1>
+    <input id='saldo' type="text" value="<?php echo $saldo ?>"></input>
     <!-- ----------------------------------------------------- -->
     <!-- PRIMERO HACE LA CONSULTA DE LOS DATOS DEL INMUEBLE -->
     <!-- SEGUN EL ID QUE RECIBIO POR URL -->
@@ -495,7 +560,6 @@ if (isset($_GET['id'])) {
                 ?> 
                 <input type="date" id="fechaFin" name="fechaFin" value="<?php echo $fechaMas4Dias; ?>" hidden>
                 <input type="date" id="fechaFinBC" name="fechaFinBC" value="<?php echo $fechaMas4Dias; ?>" >
-                
                   <!-- <input type="date" class="form-control" name="fechaFin" id="fechaFin" placeholder="Fecha Final"> -->
                 </div>
               </div>
@@ -530,7 +594,8 @@ if (isset($_GET['id'])) {
               <!-- Nuevo contenedor para mostrar el valor total -->
 
               <div class="modal-footer">
-                <button type="submit" id="crearReserva" class="btn btn-success">Reservar lugar</button>
+                <button type="submit" id="crearReserva" class="btn btn-success" hidden>Reservar lugar</button>
+                <button type="button" id="crearReserva2" class="btn btn-success" onclick="ReservaLugar()">Reservar lugar</button>
               </div>
             </form>
           </div>
@@ -572,7 +637,7 @@ if (isset($_GET['id'])) {
     <!-- RESEÑAS
         RESEÑAS -->
     <div id="ContenedorResenias">
-      <section id="DejaTuResenia">
+      <!-- <section id="DejaTuResenia">
 
         <div id="reseniasDiv">
           <form id="resenaForm" action="" method="post">
@@ -584,32 +649,32 @@ if (isset($_GET['id'])) {
 
             <br />
 
-            <textarea id="resenaTextarea" name="resena" rows="3" placeholder="Escribe tu reseña aquí..." maxlength="100"></textarea>
+            <textarea id="resenaTextarea" name="resena" rows="3" placeholder="Escribe tu reseña aquí..." maxlength="100"></textarea> -->
 
             <!--  -->
             <?php
-            if (isset($_SESSION["nombre"])) {
+            // if (isset($_SESSION["nombre"])) {
             ?>
-              <button class="custom-button" type="button">Publicar Reseña</button>
+              <!-- <button class="custom-button" type="button">Publicar Reseña</button> -->
             <?php
 
-            } else {
+            // } else {
             ?>
-              <p style="font-family: inherit;">Debes tener una cuenta para comentar!
+              <!-- <p style="font-family: inherit;">Debes tener una cuenta para comentar!
                 <a class="nav-link scrollto" style="color: #f4572c;" href="Login_View.php">Iniciar Sesion</a>
                 <a class="nav-link scrollto" style="color: #f4572c;" href="registro_View.php">Registrarse</a>
-              </p>
+              </p> -->
             <?php
 
-            }
+            // }
             ?>
 
 
 
-          </form>
+          <!-- </form>
         </div>
         <input type="hidden" id="estrellasSeleccionadas" value="1">
-      </section> <!--end section deja tu resena -->
+      </section> end section deja tu resena -->
 
 
 
@@ -684,6 +749,19 @@ if (isset($_GET['id'])) {
 
     </div>
 
+<!-- consumo de api -->
+
+
+<!-- //ASD -->
+
+
+<script>alert(<?php echo $saldo ?>);</script>
+
+
+<!-- //ASD -->
+
+
+<!-- -->
 
     <!-- <script>
     document.addEventListener("DOMContentLoaded", function () {
@@ -789,10 +867,12 @@ if (isset($_GET['id'])) {
     var fechaInicio1 = <?php echo json_encode($fechaMas1Dia); ?>;
     // var fechaFin = <?php echo json_encode($_SESSION["Identificacion"]); ?>;
   </script>
-  <script src="../assets/js/ReservarLugar/script.js"></script>
+  <script src="../assets/js/ReservarLugar/realizarReserva.js"></script>
   <!-- <script src="../assets/js/FechaReservaDefault/script.js"></script> -->
   <!-- <script src="../assets/js/calculoPrevioReserva/script.js"></script> -->
   <script src="../assets/js/calculoPrevioReserva/calculoPrevioJS.js"></script>
+
+  
 
 <?php
 } else {
