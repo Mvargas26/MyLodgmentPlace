@@ -662,7 +662,7 @@ class Master_Class
                                 "idCorreo" => $row['IdEmail'],
                                 "Host" => $row['Host'],
                                 "Usuario" => $row['Usuario'],
-                                "Contra" => $row['Password'],
+                                "Contra" => $row['Contrasenna'],
                                 "Puerto" => $row['Puerto'],
                             );
                             $data[] = $item;
