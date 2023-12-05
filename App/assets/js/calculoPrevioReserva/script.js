@@ -8,7 +8,8 @@ document.addEventListener("DOMContentLoaded", function () {
     var cantidadPersonasExtraInput = document.getElementById("cantidadPersonasExtra");
     var costoPersonaExtra = parseFloat(document.getElementById("costoPersonaExtra").value);
     var fechaInicioInput = document.getElementById("fechaInicio");
-    var fechaFinInput = document.getElementById("fechaFin");
+    var fechaInicioBC = document.getElementById("fechaInicioBC");
+    var fechaFinBC = document.getElementById("fechaFinBC");
 
 
     var fechaActual = new Date();
@@ -96,7 +97,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (cantidadPersonasExtra == 0 || cantidadPersonasInput.value == 0) {
             var valorTotal = valorDiario/100;
-            var totalImpuestos = valorTotal + (valorTotal * 0.13)
+            var totalImpuestos = (valorTotal + (valorTotal * 0.13))*4;
 
             valorTotalElement.textContent = valorTotal.toLocaleString();
             valorTotalImpuestosElement.textContent = totalImpuestos.toLocaleString();
