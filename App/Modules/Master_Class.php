@@ -1024,6 +1024,64 @@ class Master_Class
     }
     //fin funcion obtenerInmueblesporIdDuenno
 
+    //inicio funcion obteneridDuenno
+    public function obteneridDuenno($espacio)
+    {
+        $query = "SELECT `Propietario` FROM `tbinmueble` WHERE id = $espacio";
+
+        $result = $this->GetConexion()->query($query);
+
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            return $row['Propietario'];
+        }
+
+        return false;
+    }
+    //fin funcion obteneridDuenno
+
+    //inicio funcion VerificarCupon
+    public function VerificarCupon($idInmueble, $CuponDescuento, $fechaInicio)
+    {
+        // Consulta para verificar el cupón y obtener su descuento
+        $query = "SELECT d.Monto AS Descuento
+        FROM tbdescuento d
+        INNER JOIN tbinmueblecupon ic ON d.idCupon = ic.idCupon
+        WHERE ic.idInmueble = $idInmueble
+        AND ic.idCupon = '$CuponDescuento'
+        AND ic.fechaVencimiento >= '$fechaInicio'
+        AND d.CantidadCupones > 1
+        AND ic.validez = 1;";
+
+        $result = $this->GetConexion()->query($query);
+
+        if ($result->num_rows > 0) {
+            // El cupón es válido, se puede aplicar, se devuelve el porcentaje de descuento
+            $row = $result->fetch_assoc();
+            return $row['Descuento'];
+        } else {
+            // El cupón no es válido para el inmueble o no cumple con las condiciones
+            return false;
+        }
+    }
+    //fin funcion VerificarCupon
+
+    //inicio funcion insertarReserva
+    public function insertarReserva($idUsuario, $idInmueble, $fechaInicio, $fechaFin, $montoTotal, $montoTotalImpuesto, $personasExtra, $cantPersonas)
+    {
+        $query = "INSERT INTO tbreserva (idUsuario, idInmueble, fechaInicio, fechaFin, montoTotal, montoTotalImpuesto, personasExtra, cantPersonas) VALUES ('$idUsuario', '$idInmueble', '$fechaInicio', '$fechaFin', '$montoTotal', '$montoTotalImpuesto', '$personasExtra', '$cantPersonas')";
+
+        $result = $this->GetConexion()->query($query);
+
+        if ($result) {
+            return "Reserva creada correctamente";
+        } else {
+            return "Error al realizar la reserva: " . $this->GetConexion()->error;
+        }
+    }
+    //fin funcion insertarReserva
+
+
     //inicio funcion obtenerCuponesPorInmueble
     public function obtenerCuponesPorInmueble($idInmueble)
     {

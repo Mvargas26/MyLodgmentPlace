@@ -8,6 +8,8 @@ session_start();
 
 if (isset($_GET['id'])) {
   $idInmueble = $_GET['id'];
+  
+  $idUsuario = $_SESSION['Identificacion'];
 
   $SqlEventos = "SELECT * FROM tbreserva WHERE idInmueble = $idInmueble";
 
@@ -16,8 +18,22 @@ $resulEventos = mysqli_query($con, $SqlEventos);
 $fechaInicio = date('Y-m-d');
 $fechaFin = date('Y-m-d');
 
-
 }
+
+if(1===1){
+  $query = "SELECT `Propietario` FROM `tbinmueble` WHERE id = $idInmueble";
+
+  $resultadoConsulta = mysqli_query($con, $query);
+  
+  if ($resultadoConsulta) {
+      $fila = mysqli_fetch_assoc($resultadoConsulta);
+      $propietario = $fila['Propietario'];
+      // Usar $propietario según sea necesario
+  } else {
+      // Manejar el caso en que la consulta falle
+  }
+}
+
 //---------------------------CONSUMO DE API---------------------------
 if (1 == 1) {
   $numeroCuentaAPIurl = 'https://tiusr29pl.cuc-carrera-ti.ac.cr/Mybanco/api/Cuentas/GetNumeroCuenta/' . 304810232;
@@ -60,8 +76,6 @@ if (!empty($numeroCuenta)) {
 
   $httpCode = curl_getinfo($chSaldo, CURLINFO_HTTP_CODE);
 
-  $saldo = 123;
-
   if ($httpCode == 200) {
     $saldoData = json_decode($saldoApiResponse, true);
 
@@ -92,7 +106,7 @@ if (isset($_GET['id'])) {
 ?>
 
   <link rel="stylesheet" type="text/css" href="../assets/css/fullcalendar.min.css">
-  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <!-- <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons"> -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="../assets/css/home.css">
@@ -105,6 +119,9 @@ if (isset($_GET['id'])) {
       <?php echo $idInmuebleDetalle ?>
     </h1>
     <input id='saldo' type="text" value="<?php echo $saldo ?>"></input>
+    <input id='idUsuario' type="text" value="<?php echo $idUsuario ?>"></input>
+    <input id='cedulaDuenno' type="text" value="<?php echo $propietario ?>"></input>
+    
     <!-- ----------------------------------------------------- -->
     <!-- PRIMERO HACE LA CONSULTA DE LOS DATOS DEL INMUEBLE -->
     <!-- SEGUN EL ID QUE RECIBIO POR URL -->
@@ -448,13 +465,13 @@ if (isset($_GET['id'])) {
                 include('./modalUpdateEvento.php');
                 ?>
 
-                <script src="../assets/js/FullCalendar/jquery-3.0.0.min.js"></script>
+                <!-- <script src="../assets/js/FullCalendar/jquery-3.0.0.min.js"></script>
                 <script src="../assets/js/FullCalendar/popper.min.js"></script>
                 <script src="../assets/js/FullCalendar/bootstrap.min.js"></script>
 
                 <script type="text/javascript" src="../assets/js/FullCalendar/moment.min.js"></script>
                 <script type="text/javascript" src="../assets/js/FullCalendar/fullcalendar.min.js"></script>
-                <script src='../assets/locales/es.js'></script>
+                <script src='../assets/locales/es.js'></script> -->
 
                 <script type="text/javascript">
                   $(document).ready(function() {
