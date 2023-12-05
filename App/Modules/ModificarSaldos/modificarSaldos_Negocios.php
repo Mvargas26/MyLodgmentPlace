@@ -41,7 +41,12 @@ if (isset($_POST["crearReserva"])) {
 
         header('Content-Type: application/json; charset=utf-8');
 
-        echo json_encode($resultado);
+        if ($resultado) {
+            echo json_encode(array('exito' => true, 'mensaje' => $notificacion));
+        } else {
+            echo json_encode(array('error' => true, 'mensaje' => $notificacion));
+        }
+
     } catch (Exception $e) {
         echo json_encode(array('error' => $e->getMessage()));
     }
