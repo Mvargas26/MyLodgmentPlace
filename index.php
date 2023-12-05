@@ -42,8 +42,13 @@ try {
   <link href="./App/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="./App/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
   <link href="./App/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-
+  <link href="./App/assets/css/nieve/nieve.css" rel="stylesheet">
   <link href="./App/assets/css/style.css" rel="stylesheet">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@800&display=swap" rel="stylesheet">  
+    
 
   <script src="https://kit.fontawesome.com/964c59f858.js" crossorigin="anonymous"></script>
 
@@ -314,6 +319,8 @@ try {
   <!-- Template Main JS File -->
   <script src="./App/assets/js/main.js"></script>
   <script src="./App/assets/js/script_Index.js"></script>
+  <script src="./App/assets/js/nieve/nieve.js"></script>
+
 
   <!-- vistaIndicadores -->
 
