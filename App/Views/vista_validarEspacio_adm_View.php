@@ -44,30 +44,34 @@ $inmuebles = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <h2>Inmuebles del usuario</h2>
         <br>
         <hr>
-        <div class="contiene">
-            <div class="inmueble-list">
-                <?php foreach ($inmuebles as $inmueble) : ?>
-                    <div class="card">
-                        <div class="card__image">
-                            <img src="../assets/img/ImagenesInmuebles/<?php echo $inmueble['nombreImagen']; ?>" alt="Imagen del inmueble" style="max-width: 100%; height: auto;">
+
+        <?php if (empty($inmuebles)) : ?>
+            <p>Tu usuario no tiene inmuebles disponibles ya que no eres anfitrión.</p>
+        <?php else : ?>
+            <div class="contiene">
+                <div class="inmueble-list">
+                    <?php foreach ($inmuebles as $inmueble) : ?>
+                        <div class="card">
+                            <div class="card__image">
+                                <img src="../assets/img/ImagenesInmuebles/<?php echo $inmueble['nombreImagen']; ?>" alt="Imagen del inmueble" style="max-width: 100%; height: auto;">
+                            </div>
+                            <div class="card__content">
+                                <h3 class="card__title"><?php echo $inmueble['nombre']; ?></h3>
+                                <p>Valor Diario: <?php echo $inmueble['valorDiario']; ?></p>
+                                <p>Estrellas: <?php echo $inmueble['estrellas']; ?></p>
+                                <p>Dirección: <?php echo $inmueble['direccion']; ?></p>
+                                <p>Capacidad de Personas: <?php echo $inmueble['capacidadPersonas']; ?></p>
+                                <p>Costo por Persona Extra: <?php echo $inmueble['costoPersonaExtra']; ?></p>
+                                <p>Fecha Límite de Disponibilidad: <?php echo $inmueble['fechaLimiteDisponibilidad']; ?></p>
+                                <button class="btn btn--block card__btn" onclick="validarInmueble(<?php echo $inmueble['id']; ?>)">Validar Inmueble</button>
+                            </div>
                         </div>
-                        <div class="card__content">
-                            <h3 class="card__title"><?php echo $inmueble['nombre']; ?></h3>
-                            <p>Valor Diario: <?php echo $inmueble['valorDiario']; ?></p>
-                            <p>Estrellas: <?php echo $inmueble['estrellas']; ?></p>
-                            <p>Dirección: <?php echo $inmueble['direccion']; ?></p>
-                            <p>Capacidad de Personas: <?php echo $inmueble['capacidadPersonas']; ?></p>
-                            <p>Costo por Persona Extra: <?php echo $inmueble['costoPersonaExtra']; ?></p>
-                            <p>Fecha Límite de Disponibilidad: <?php echo $inmueble['fechaLimiteDisponibilidad']; ?></p>
-                            <button class="btn btn--block card__btn" onclick="validarInmueble(<?php echo $inmueble['id']; ?>)">Validar Inmueble</button>
-                        </div>
-                    </div>
-                <?php endforeach; ?>
+                    <?php endforeach; ?>
+                </div>
             </div>
-        </div>
+        <?php endif; ?>
     </div>
 </main>
-
 
 <script src="../assets/js/GestionImuebles/gestionInmuebles.js"></script>
 
