@@ -487,7 +487,8 @@ if (isset($_GET['id'])) {
                 $fechaMas1Dia = date('Y-m-d', strtotime('+1 days'));         
                 ?> 
                   <!-- <input type="date" class="form-control" name="fechaInicio" id="fechaInicio" placeholder="Fecha Inicio"> -->
-                  <input type="date" id="fechaInicio" name="fechaInicio" value="<?php echo $fechaMas1Dia; ?>">
+                  <input type="date" id="fechaInicio" name="fechaInicio" value="<?php echo $fechaMas1Dia; ?>" hidden>
+                  <input type="date" id="fechaInicioBC" name="fechaInicioBC" value="<?php echo $fechaMas1Dia; ?>" >
 
                 </div>
               </div>
@@ -498,7 +499,8 @@ if (isset($_GET['id'])) {
                 // Obtener la fecha actual y sumarle 4 días
                 $fechaMas4Dias = date('Y-m-d', strtotime('+4 days'));
                 ?> 
-                <input type="date" id="fechaFin" name="fechaFin" value="<?php echo $fechaMas4Dias; ?>">
+                <input type="date" id="fechaFin" name="fechaFin" value="<?php echo $fechaMas4Dias; ?>" hidden>
+                <input type="date" id="fechaFinBC" name="fechaFinBC" value="<?php echo $fechaMas4Dias; ?>" >
                 
                   <!-- <input type="date" class="form-control" name="fechaFin" id="fechaFin" placeholder="Fecha Final"> -->
                 </div>
@@ -794,7 +796,8 @@ if (isset($_GET['id'])) {
   </script>
   <script src="../assets/js/ReservarLugar/script.js"></script>
   <!-- <script src="../assets/js/FechaReservaDefault/script.js"></script> -->
-  <script src="../assets/js/calculoPrevioReserva/script.js"></script>
+  <!-- <script src="../assets/js/calculoPrevioReserva/script.js"></script> -->
+  <script src="../assets/js/calculoPrevioReserva/calculoPrevioJS.js"></script>
 
 <?php
 } else {
