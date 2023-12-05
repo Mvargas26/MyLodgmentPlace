@@ -9,6 +9,7 @@ session_start();
 if (isset($_GET['id'])) {
   $idInmueble = $_GET['id'];
   
+  
   $idUsuario = $_SESSION['Identificacion'];
 
   $SqlEventos = "SELECT * FROM tbreserva WHERE idInmueble = $idInmueble";
@@ -54,8 +55,8 @@ if (1 == 1) {
 
   if ($httpCode == 200) {
   } else {
-    echo 'Error en la solicitud a la API de cuentas. Código de estado HTTP: ' . $httpCode;
-    $mensaje2 = 'Número de Cuenta no disponible para el usuario';
+    // echo 'Error en la solicitud a la API de cuentas. Código de estado HTTP: ' . $httpCode;
+    // $mensaje2 = 'Número de Cuenta no disponible para el usuario';
   }
 }
 
@@ -85,11 +86,11 @@ if (!empty($numeroCuenta)) {
       $saldo = isset($saldoData['saldo']) ? $saldoData['saldo'] : 'No disponible';
     }
   } else {
-    echo 'Error en la solicitud a la API de saldos. Código de estado HTTP: ' . $httpCode;
+    // echo 'Error en la solicitud a la API de saldos. Código de estado HTTP: ' . $httpCode;
   }
 } else {
-  echo 'Número de Cuenta no disponible para el usuario';
-  $mensaje2 = 'Número de Cuenta no disponible para el usuario';
+  // echo 'Número de Cuenta no disponible para el usuario';
+  // $mensaje2 = 'Número de Cuenta no disponible para el usuario';
 }
 
 //---------------------------CONSUMO DE API---------------------------
@@ -118,9 +119,9 @@ if (isset($_GET['id'])) {
     <h1 hidden>
       <?php echo $idInmuebleDetalle ?>
     </h1>
-    <input id='saldo' type="text" value="<?php echo $saldo ?>"></input>
-    <input id='idUsuario' type="text" value="<?php echo $idUsuario ?>"></input>
-    <input id='cedulaDuenno' type="text" value="<?php echo $propietario ?>"></input>
+    <input id='saldo' type="text" value="<?php echo $saldo ?>"  hidden></input>
+    <input id='idUsuario' type="text" value="<?php echo $idUsuario ?>" hidden></input>
+    <input id='cedulaDuenno' type="text" value="<?php echo $propietario ?>" hidden></input>
     
     <!-- ----------------------------------------------------- -->
     <!-- PRIMERO HACE LA CONSULTA DE LOS DATOS DEL INMUEBLE -->
