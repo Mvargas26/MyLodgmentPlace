@@ -23,14 +23,14 @@ if (isset($_POST["imagenData"])) {
         $mensajeDB = $ObjMaster->InsertarUsuario($img,$identificacion,$Clave,$nombre,$primerApellido,$segundoApellido,
         $email,$telefono,$edad,$idRol,$direccion);
 
-        $resultado = $ObjMaster->enviarMensajesCorreo($email, 'registro');
-        $notificacion = $ObjMaster->InsertarNotificacion_Registro($identificacion);
+         $resultado = $ObjMaster->enviarMensajesCorreo($email, 'registro');
+         $notificacion = $ObjMaster->InsertarNotificacion_Registro($identificacion);
 
         // Llama al método para enviar mensajes de correoss
-        if ($mensajeDB) {
-            echo json_encode(array('exito' => true, 'mensaje' => $mensajeDB));
+        if ($notificacion) {
+            echo json_encode(array('exito' => true, 'mensaje' => $notificacion));
         } else {
-            echo json_encode(array('exito' => true, 'mensaje' => $mensajeDB));
+            echo json_encode(array('exito' => true, 'mensaje' => $notificacion));
         }
     } catch (Throwable $th) {
         echo json_encode(array('error' => false, 'mensaje' => $th));
