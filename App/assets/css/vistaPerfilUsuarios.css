@@ -1,5 +1,5 @@
 .contiene {
-    max-width: 800px;
+    max-width: 600px;
     margin: 20px auto;
     /* background-color: #524156; */
     border-radius: 8px;
@@ -8,9 +8,20 @@
     text-align: center; /* Center the buttons within the div */
 }
 
+.contiene2 {
+    max-width: 300px;
+    margin: 20px auto;
+    /* background-color: #524156; */
+    border-radius: 8px;
+    /* box-shadow: 0 0 10px rgba(234, 119, 18, 6.9); */
+    padding: 20px;
+    text-align: center; /* Center the buttons within the div */
+}
+
+
 /* Estilos para los detalles del usuario */
 #userProfileImage {
-    width: 100px;
+    width: 50px;
     height: 100px;
     object-fit: cover;
     border-radius: 8px;

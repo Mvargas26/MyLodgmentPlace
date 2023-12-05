@@ -38,13 +38,17 @@ $estadoUsuario = $masterClass->obtenerEstadoUsuario($idUser);
                 <i class="fa-solid fa-caret-left fa-beat-fade fa-2xl" style="color: #443745;"></i>
             </a>
         <br>
-    <h1>Validacion de Perfil</h1>
-      <ul class="cards">
-          <li class="cards__item">
-            <div class="card">
-                <div>
-                    <img id="userProfileImage" src="" alt="User Profile Image">
-                    <div class="card__content">
+
+        <h2>Validacion de Perfil</h2>
+
+        <div class="contiene">
+
+            <div class="contiene2">
+                <img id="userProfileImage" src="" alt="User Profile Image" style="border-radius: 15px;">
+            </div>
+
+            <div class="contiene">
+                <ul>
                     <div class="card__title">Usuario</div>
                     <br>
                     <p>Cedula del Usuario: <?php echo $idUser; ?></p>
@@ -55,11 +59,10 @@ $estadoUsuario = $masterClass->obtenerEstadoUsuario($idUser);
                         <input type="hidden" name="idValidacionPerfil" value="<?php echo $idUser; ?>">
                         <button type="submit">Validar Identidad</button>
                     </form>
+                </ul>
+            </div>
 
-                    </div>
-                </div>
-          </li>
-      </ul> 
+        </div>
         <!-- Incluye tu archivo JavaScript si es necesario -->
         <script src="../assets/js/VistaPerfilUsuarios/vistaPerfilUsuario.js"></script>
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>

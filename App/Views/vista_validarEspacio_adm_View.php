@@ -34,7 +34,6 @@ $inmuebles = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../assets/css/ImueblesPorUsuario/imueblesporusuario.css">
-
     <div>
         <br>
         <a href="gestionPerfilUsuarios_View.php" style="margin-left: 10px;">
@@ -48,14 +47,14 @@ $inmuebles = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <?php if (empty($inmuebles)) : ?>
             <p>Tu usuario no tiene inmuebles disponibles ya que no eres anfitrión.</p>
         <?php else : ?>
-            <div class="contiene">
+            
                 <div class="inmueble-list">
                     <?php foreach ($inmuebles as $inmueble) : ?>
-                        <div class="card">
-                            <div class="card__image">
-                                <img src="../assets/img/ImagenesInmuebles/<?php echo $inmueble['nombreImagen']; ?>" alt="Imagen del inmueble" style="max-width: 100%; height: auto;">
+                        <div class="contiene">
+                            <div class="contiene2">
+                                <img src="../assets/img/ImagenesInmuebles/<?php echo $inmueble['nombreImagen']; ?>" alt="Imagen del inmueble" style="max-width: 100%; height: auto;" style="border-radius: 15px;">
                             </div>
-                            <div class="card__content">
+                            <div class="contiene">
                                 <h3 class="card__title"><?php echo $inmueble['nombre']; ?></h3>
                                 <p>Valor Diario: <?php echo $inmueble['valorDiario']; ?></p>
                                 <p>Estrellas: <?php echo $inmueble['estrellas']; ?></p>
@@ -68,7 +67,7 @@ $inmuebles = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         </div>
                     <?php endforeach; ?>
                 </div>
-            </div>
+           
         <?php endif; ?>
     </div>
 </main>

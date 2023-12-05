@@ -1,9 +1,22 @@
 .contiene {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
+  max-width: 600px;
+  margin: 20px auto;
+  /* background-color: #524156; */
+  border-radius: 8px;
+  /* box-shadow: 0 0 10px rgba(234, 119, 18, 6.9); */
+  padding: 20px;
+  text-align: center; /* Center the buttons within the div */
 }
 
+.contiene2 {
+  max-width: 400px;
+  margin: 20px auto;
+  /* background-color: #524156; */
+  border-radius: 8px;
+  /* box-shadow: 0 0 10px rgba(234, 119, 18, 6.9); */
+  padding: 20px;
+  text-align: center; /* Center the buttons within the div */
+}
 h2{
   text-align: center;
 }

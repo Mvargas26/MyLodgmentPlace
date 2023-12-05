@@ -16,7 +16,11 @@ session_start();
         <h2>Perfil de Usuario</h2>
        
         <div class="contiene">
-            <img src="" alt="Foto de Perfil" id="userProfileImage">
+
+                <div class="contiene2">
+                <img src="" alt="Foto de Perfil" id="userProfileImage">
+                </div>
+                
             <div class="user-details" id="userDetails">
                 
             </div>
