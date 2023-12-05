@@ -751,23 +751,31 @@ class Master_Class
     function enviarMensajesCorreo($destinatario, $accion)
     {
         $mail = new PHPMailer(true);
-        $datosCorreo = $this->gestionarCorreo('consultar', ['idCorreo' => 1]); // Cambia '1' por el ID del correo que necesitas
-        if ($datosCorreo) {
-            $host = $datosCorreo[0]['Host'];
-            $usuario = $datosCorreo[0]['Usuario'];
-            $contra = $datosCorreo[0]['Password']; // Asegúrate de usar la clave correcta
-            $puerto = $datosCorreo[0]['Puerto'];
+        // $datosCorreo = $this->gestionarCorreo('consultar', ['idCorreo' => 1]); // Cambia '1' por el ID del correo que necesitas
+        // if ($datosCorreo) {
+        //     $host = $datosCorreo[0]['Host'];
+        //     $usuario = $datosCorreo[0]['Usuario'];
+        //     $contra = $datosCorreo[0]['Password']; // Asegúrate de usar la clave correcta
+        //     $puerto = $datosCorreo[0]['Puerto'];
 
             $mail->SMTPOptions = array('ssl' => array('verify_peer' => false, 'verify_peer_name' => false, 'allow_self_signed' => true));
 
             try {
                 $mail->isSMTP();
-                $mail->Host = $host;
+                $mail->Host = 'smtp.titan.email';
                 $mail->SMTPAuth = true;
-                $mail->Username = $usuario;
-                $mail->Password = $contra;
+                $mail->Username = 'pruebas@tritechno.net';
+                $mail->Password = 'Pruebas1234*';
                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-                $mail->Port = $puerto;
+                $mail->Port = 587;
+
+                // $mail->isSMTP();
+                // $mail->Host = $host;
+                // $mail->SMTPAuth = true;
+                // $mail->Username = $usuario;
+                // $mail->Password = $contra;
+                // $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+                // $mail->Port = $puerto;
 
                 $mail->setFrom('pruebas@tritechno.net', 'My Lodgment Place');
                 $mail->addAddress($destinatario);
@@ -809,8 +817,8 @@ class Master_Class
                 echo 'Mensaje de Error: ' . $th->getMessage();
                 return false;
             }
-        } else {
-        }
+        // } else {
+        // }
     }
 
 
@@ -2264,7 +2272,7 @@ function InsertarMensajes($idEmisor, $idReceptor, $mensaje)
     function InsertarNotificacion_Registro($idusuario)
     {
         $fecha = date("Y-m-d");
-        $query = "INSERT INTO `tbnotificaciones` (`descripcion`, `idusuario`, `fecha`)
+        $query = "INSERT INTO `tbnotificaciones` (`descripcion`, `idUser`, `fecha`)
         VALUES ('¡Bienvenido a My Lodgment Place! Has creado una cuenta en nuestro sitio.',  
         '$idusuario', '$fecha')";
 
