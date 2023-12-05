@@ -203,10 +203,10 @@ if (isset($_GET['id'])) {
                   <!-- ----------------------------------------------------- -->
 
                   <strong>Capacidad de Personas Extra: 4</strong>
-                  
+                  <br>
                   <!-- ----------------------------------------------------- -->
 
-                  <strong>Costo x Persona:</strong>
+                  <strong>Costo x Persona Extra:</strong>
                   <?php
                   foreach ($datos as $dato) {
 
@@ -216,6 +216,18 @@ if (isset($_GET['id'])) {
                   ?><br>
 
                   <!-- ----------------------------------------------------- -->
+
+                  <strong>Costo x Noche:</strong>
+                  <?php
+                  foreach ($datos as $dato) {
+
+                    echo $dato['valorDiario'];
+                    break;
+                  }
+                  ?><br>
+
+                  <!-- ----------------------------------------------------- -->
+
                   <strong>Dirección:</strong>
                   <?php
                   foreach ($datos as $dato) {
