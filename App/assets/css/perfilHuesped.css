@@ -30,9 +30,9 @@ button:hover {
 }
 
 .modal-header {
-    background-color: #524156;
+    background-color: #f45f41;
     color: #ffffff;
-    border-bottom: 1px solid #524156;
+    border-bottom: 1px solid #f45f41;
 }
 
 .modal-title {
@@ -51,20 +51,20 @@ button:hover {
 .form-control {
     width: 100%;
     padding: 10px;
-    border: 1px solid #524156;
+    border: 1px solid #f45f41;
     border-radius: 4px;
     box-sizing: border-box;
     transition: border-color 0.3s ease;
 }
 
 .form-control:focus {
-    border-color: #524156;
+    border-color: #f45f41;
     outline: none;
 }
 
 
 .btn-primary {
-    background-color: #524156;
+    background-color: #f45f41;
     color: #ffffff;
     border: none;
     padding: 10px 20px;

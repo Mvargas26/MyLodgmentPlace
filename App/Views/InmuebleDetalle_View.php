@@ -7,6 +7,7 @@ include('../Modules/fullCalendar/config.php');
 if (isset($_GET['id'])) {
   $idInmueble = $_GET['id'];
 }
+
 $SqlEventos = "SELECT * FROM tbreserva WHERE idInmueble = $idInmueble";
 
 $resulEventos = mysqli_query($con, $SqlEventos);
@@ -24,7 +25,6 @@ session_start();
 if (isset($_GET['id'])) {
   $idInmuebleDetalle = $_GET['id'];
 
-
 ?>
 
   <link rel="stylesheet" type="text/css" href="../assets/css/fullcalendar.min.css">
@@ -34,8 +34,8 @@ if (isset($_GET['id'])) {
   <link rel="stylesheet" type="text/css" href="../assets/css/home.css">
 
   <!-- ==============================================Fin header ======= -->
-  <main id="main">
 
+  <main id="main">
 
     <h1 hidden>
       <?php echo $idInmuebleDetalle ?>
@@ -397,11 +397,9 @@ if (isset($_GET['id'])) {
                       select: function(start, end) {
                         $("#exampleModal").modal();
                         $("input[name=fechaInicio]").val(start.format('DD-MM-YYYY'));
-
                         var valorFechaFin = end.format("DD-MM-YYYY");
                         var F_final = moment(valorFechaFin, "DD-MM-YYYY").subtract(1, 'days').format('DD-MM-YYYY'); //Le resto 1 dia
                         $('input[name=fechaFin]').val(F_final);
-
                       },
 
                       events: [
@@ -413,7 +411,6 @@ if (isset($_GET['id'])) {
                             end: '<?php echo $dataEvento['fechaFin']; ?>',
                             color: '<?php echo $dataEvento['colorEvento']; ?>'
                           },
-
                         <?php } ?>
                       ],
 
@@ -427,7 +424,6 @@ if (isset($_GET['id'])) {
                         $("#modalUpdateEvento").modal();
                       },
                     });
-
                     // Oculta mensajes de Notificacion
                     setTimeout(function() {
                       $(".alert").slideUp(300);
@@ -437,9 +433,7 @@ if (isset($_GET['id'])) {
                 </script>
               </div>
             </div>
-
           </div>
-
         </div>
     </div>
 
@@ -537,6 +531,7 @@ if (isset($_GET['id'])) {
         </div>
       </div>
     </div>
+
     </section>
     </div>
 
