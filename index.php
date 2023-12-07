@@ -18,6 +18,8 @@ try {
 
 // fin de elementos de prueba para la vista de indicadores
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -56,15 +58,53 @@ try {
 
 <body>
 
-  <!-- ======= Hero Section ======= -->
-  <section id="hero">
-    <div class="hero-container">
-      <!-- <h1>My Lodgment Place</h1> -->
-      <div class="divImagen">
-        <img id="imgLogo" src="./App/assets/img/logo/Logo_blanco2.png" alt="" >
-      </div>
+<!-- ======= Hero Section ======= -->
+<section id="hero">
+  <div class="hero-container">
+    <!-- <h1>My Lodgment Place</h1> -->
+    <div class="divImagen">
+      <img id="imgLogo" src="./App/assets/img/logo/Logo_blanco2.png" alt="">
     </div>
-  </section><!-- End Hero -->
+    <audio id="hidden-audio" controls loop style="display: none;">
+      <source src="./App/assets/we.mp3" type="audio/mp3">
+      Tu navegador no soporta la etiqueta de audio.
+    </audio>
+  </div>
+</section><!-- End Hero -->
+
+<script>
+
+  var audio = document.getElementById("hidden-audio");
+
+  // Establecer volumen fijo al cargar la página
+  document.addEventListener("DOMContentLoaded", function() {
+    audio.volume = 0.02;
+    audio.play();
+  });
+
+  document.getElementById("imgLogo").addEventListener("click", function() {
+    if (audio.paused) {
+      audio.play();
+    } else {
+      audio.pause();
+    }
+  });
+
+  // Control de volumen
+  document.getElementById("imgLogo").addEventListener("wheel", function(event) {
+    if (event.deltaY > 0) {
+
+      // Disminuir volumen al hacer scroll hacia abajo
+      audio.volume = Math.max(0, audio.volume - 0.1);
+    } else {
+      // Aumentar volumen al hacer scroll hacia arriba
+      audio.volume = Math.min(1, audio.volume + 0.1);
+
+    }
+  });
+</script>
+
+
 
   <!-- ======= Header ======= -->
   <header id="header" class="d-flex align-items-center ">
