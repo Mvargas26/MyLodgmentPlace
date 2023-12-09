@@ -39,7 +39,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 success: function(response) 
                 {
 
-                    console.log(response);
                     var x = JSON.parse(response);
                     if (x.exito ) {
                         Swal.fire("Éxito", "Se guardó la calificación correctamente. ", "success");//mensaje bonito

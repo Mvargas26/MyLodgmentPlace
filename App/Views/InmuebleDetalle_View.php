@@ -625,7 +625,8 @@ if (isset($_GET['id'])) {
 
               <div class="modal-footer">
                 <button type="submit" id="crearReserva" class="btn btn-success" hidden>Reservar lugar</button>
-                <button type="button" id="crearReserva2" class="btn btn-success" onclick="ReservaLugar()">Reservar lugar</button>
+                <button type="button" id="calcularReserva" name="calcularReserva"  class="btn btn-success">Calcular</button>
+                <button type="button" id="crearReserva2" class="btn btn-success" >Reservar lugar</button>
               </div>
             </form>
           </div>
@@ -785,7 +786,7 @@ if (isset($_GET['id'])) {
 <!-- //ASD -->
 
 
-<script>alert(<?php echo $saldo ?>);</script>
+<!-- <script>alert(<?php echo $saldo ?>);</script> -->
 
 
 <!-- //ASD -->
@@ -900,7 +901,7 @@ if (isset($_GET['id'])) {
   <script src="../assets/js/ReservarLugar/realizarReserva.js"></script>
   <!-- <script src="../assets/js/FechaReservaDefault/script.js"></script> -->
   <!-- <script src="../assets/js/calculoPrevioReserva/script.js"></script> -->
-  <script src="../assets/js/calculoPrevioReserva/calculoPrevioJS.js"></script>
+  <!-- <script src="../assets/js/calculoPrevioReserva/calculoPrevioJS.js"></script> -->
 
   
 
