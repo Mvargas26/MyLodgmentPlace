@@ -12,10 +12,19 @@ document.addEventListener('DOMContentLoaded', function () {
         var valorTotalElement = document.getElementById("valorTotal");
         var valorTotalImpuestosElement = document.getElementById("valorTotalImpuestos");
         var btnCalcularReserva = document.getElementById("calcularReserva");
+        var crearReserva2 = document.getElementById("crearReserva2");
         var costoPersonaExtra = parseFloat(document.getElementById("costoPersonaExtra").value);
+
+        //VALIDACIONES
+        //----oculta el boton reservar
+        crearReserva2.style.display = 'none';  // Ocultar el botón
+
+
 
 
         //EVENTOS
+
+      
          //aqui capturamos la fecha inicio y fecha fin
         //  fechaInicioBC.addEventListener('change', function () {
         //     var fechaMenor = fechaEsMenorAHoy(fechaInicioBC.value);
@@ -32,6 +41,8 @@ document.addEventListener('DOMContentLoaded', function () {
         btnCalcularReserva.addEventListener('click', function () {
             calcularValorTotal(valorDiarioElement,cantidadPersonasInput,cantidadPersonasExtraInput,
                 valorTotalElement,valorTotalImpuestosElement,costoPersonaExtra,fechaInicioBC,fechaFinBC);
+
+                muestraOcultaBtnReservar2(valorTotalElement,valorTotalImpuestosElement);
 
         });
 
@@ -130,6 +141,7 @@ function fechaEsMenorAHoy(fechaStr){
     return false;
 };
 
+//realiza los calculos por cada botonazo a calcular
 function calcularValorTotal(valorDiarioElement,cantidadPersonasInput,cantidadPersonasExtraInput,valorTotalElement,
     valorTotalImpuestosElement,costoPersonaExtra,fechaInicioBC,fechaFinBC) {
     var valorDiario = parseFloat(valorDiarioElement.textContent.replace(/\D/g, ''));
@@ -152,6 +164,13 @@ function calcularValorTotal(valorDiarioElement,cantidadPersonasInput,cantidadPer
     }
 }//fin calcularValorTotal
 
-
+function muestraOcultaBtnReservar2(valorTotalElement,valorTotalImpuestosElement) {
+    // Verificar si ambos valores son 0 y ocultar o mostrar el botón
+    if (valorTotalElement.innerText === '0' && valorTotalImpuestosElement.innerText === '0') {
+      crearReserva2.style.display = 'none';  // Ocultar el botón
+    } else {
+        crearReserva2.style.display = 'block'; // Mostrar el botón
+    }
+  }
 
 
