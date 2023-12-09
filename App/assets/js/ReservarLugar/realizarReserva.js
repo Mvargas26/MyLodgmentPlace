@@ -25,25 +25,36 @@ document.addEventListener('DOMContentLoaded', function () {
         //EVENTOS
 
       
-         //aqui capturamos la fecha inicio y fecha fin
-        //  fechaInicioBC.addEventListener('change', function () {
-        //     var fechaMenor = fechaEsMenorAHoy(fechaInicioBC.value);
-        //     if (!fechaMenor) {
-        //         calcularValorTotal();
-        //     };
-        // });
+         ////aqui capturamos la fecha inicio y fecha fin
+         fechaInicioBC.addEventListener('change', function () {
+            var fechaMenor = fechaEsMenorAHoy(fechaInicioBC.value);
+            if (fechaMenor) {
+                Swal.fire("Error", "la fecha no puede ser menor a la fecha actual.", "error");
+                return; // Utiliza el mensaje decodificado
+            };
+        });
 
-        // fechaFinBC.addEventListener('change', function () {
-        //     // console.log('La fecha ha cambiado fin:', fechaFinBC.value);
-        //     calcularValorTotal();
-        // });
+        fechaFinBC.addEventListener('change', function () {
+            var fechaMenor = fechaEsMenorAHoy(fechaFinBC.value);
+            if (fechaMenor) {
+                Swal.fire("Error", "la fecha no puede ser menor a la fecha actual.", "error");
+                return; // Utiliza el mensaje decodificado
+            };
+        });
 
         btnCalcularReserva.addEventListener('click', function () {
+            var bol_fechaInicioEsMenor = fechaEsMenorAHoy(fechaInicioBC.value);
+            var bol_fechaFinEsMenor = fechaEsMenorAHoy(fechaFinBC.value);
+            
+            if (bol_fechaInicioEsMenor || bol_fechaFinEsMenor) {
+                Swal.fire("Error", "la fecha no puede ser menor a la fecha actual.", "error");
+                return; // Utiliza el mensaje decodificado
+            }else{
             calcularValorTotal(valorDiarioElement,cantidadPersonasInput,cantidadPersonasExtraInput,
                 valorTotalElement,valorTotalImpuestosElement,costoPersonaExtra,fechaInicioBC,fechaFinBC);
 
                 muestraOcultaBtnReservar2(valorTotalElement,valorTotalImpuestosElement);
-
+            };
         });
 
         crearReserva2.addEventListener('click', function () {
