@@ -12,6 +12,8 @@ document.addEventListener('DOMContentLoaded', function () {
         var valorTotalElement = document.getElementById("valorTotal");
         var valorTotalImpuestosElement = document.getElementById("valorTotalImpuestos");
         var btnCalcularReserva = document.getElementById("calcularReserva");
+        var costoPersonaExtra = parseFloat(document.getElementById("costoPersonaExtra").value);
+
 
         //EVENTOS
          //aqui capturamos la fecha inicio y fecha fin
@@ -28,7 +30,8 @@ document.addEventListener('DOMContentLoaded', function () {
         // });
 
         btnCalcularReserva.addEventListener('click', function () {
-            calcularValorTotal();
+            calcularValorTotal(valorDiarioElement,cantidadPersonasInput,cantidadPersonasExtraInput,
+                valorTotalElement,valorTotalImpuestosElement,costoPersonaExtra,fechaInicioBC,fechaFinBC);
 
         });
 
@@ -65,19 +68,20 @@ document.addEventListener('DOMContentLoaded', function () {
                 data: data,              
                 success: function(response) 
                 {
+                    // let respuestaSinEspacios = response.split(' ');
 
-                    var x = JSON.parse(response);
-                    if (x.exito == true ) {
-                        Swal.fire("Éxito", "Reserva creada Correctamente. ", "success");//mensaje bonito
-                        setTimeout(function() {
+                    // var x = JSON(respuestaSinEspacios[0]);
+
+                    // if (x.exito === 'true') {
+                        Swal.fire("Éxito", "Reserva creada exitosamente", "success"); // Utiliza el mensaje decodificado
+                        setTimeout(function () {
                             location.reload(true);
-                            },
-                         2000);
-                    } else {
-                        console.log(x.response);
-                        Swal.fire("Error", "Lo sentimos, ocurrió un error.", "error");
-                    }
-    
+                        }, 2000);
+                    // } else {
+                    //     console.log(x.response);
+                    //     Swal.fire("Error", "Lo sentimos, ocurrió un error.", "error");
+                    // }
+                   
                 },
                 error: function(textStatus, errorThrown) {
                     console.error('Error en la solicitud AJAX:', textStatus, errorThrown);
@@ -89,48 +93,6 @@ document.addEventListener('DOMContentLoaded', function () {
            
         });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        function calcularValorTotal() {
-            var valorDiario = parseFloat(valorDiarioElement.textContent.replace(/\D/g, ''));
-            var cantidadDias = calcularDiferenciaDias(fechaInicioBC.value,fechaFinBC.value);
-            var cantidadPersonasExtra = parseInt(cantidadPersonasExtraInput.value);
-    
-            if (cantidadPersonasExtra == 0 || cantidadPersonasInput.value == 0) {
-                var valorTotal = ((valorDiario+(valorDiario*0.05))/100) * cantidadDias;
-                var totalImpuestos = (valorTotal + (valorTotal * 0.13));
-    
-                valorTotalElement.textContent = valorTotal.toLocaleString();
-                valorTotalImpuestosElement.textContent = totalImpuestos.toLocaleString();
-            }
-            else {
-                var valorTotal = (((costoPersonaExtra * cantidadPersonasExtra) + ((valorDiario+(valorDiario*0.05)) / 100)) * cantidadDias);
-                var totalImpuestos = valorTotal + (valorTotal * 0.13)
-                // if (cantidadDias > 0) {
-                valorTotalElement.textContent = valorTotal.toLocaleString();
-                valorTotalImpuestosElement.textContent = totalImpuestos.toLocaleString();
-            }
-        }//fin calcularValorTotal
 
     });
 });//fin dom
@@ -167,6 +129,28 @@ function fechaEsMenorAHoy(fechaStr){
 
     return false;
 };
+
+function calcularValorTotal(valorDiarioElement,cantidadPersonasInput,cantidadPersonasExtraInput,valorTotalElement,
+    valorTotalImpuestosElement,costoPersonaExtra,fechaInicioBC,fechaFinBC) {
+    var valorDiario = parseFloat(valorDiarioElement.textContent.replace(/\D/g, ''));
+    var cantidadDias = calcularDiferenciaDias(fechaInicioBC.value,fechaFinBC.value);
+    var cantidadPersonasExtra = parseInt(cantidadPersonasExtraInput.value);
+
+    if (cantidadPersonasExtra == 0 || cantidadPersonasInput.value == 0) {
+        var valorTotal = ((valorDiario+(valorDiario*0.05))/100) * cantidadDias;
+        var totalImpuestos = (valorTotal + (valorTotal * 0.13));
+
+        valorTotalElement.textContent = valorTotal.toLocaleString();
+        valorTotalImpuestosElement.textContent = totalImpuestos.toLocaleString();
+    }
+    else {
+        var valorTotal = (((costoPersonaExtra * cantidadPersonasExtra) + ((valorDiario+(valorDiario*0.05)) / 100)) * cantidadDias);
+        var totalImpuestos = valorTotal + (valorTotal * 0.13)
+        // if (cantidadDias > 0) {
+        valorTotalElement.textContent = valorTotal.toLocaleString();
+        valorTotalImpuestosElement.textContent = totalImpuestos.toLocaleString();
+    }
+}//fin calcularValorTotal
 
 
 

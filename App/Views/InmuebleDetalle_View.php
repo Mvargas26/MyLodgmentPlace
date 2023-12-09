@@ -95,11 +95,6 @@ if (!empty($numeroCuenta)) {
 
 //---------------------------CONSUMO DE API---------------------------
 
-// if (!isset($_SESSION['id']) || !isset($_SESSION['rol']) || empty($_SESSION['id']) || empty($_SESSION['rol'])|| $_SESSION['rol']!=1) {
-//     header('Location: ../../');
-//     exit();
-// }
-
 // Verificar si se proporcionó un nombre de inmueble en la URL
 if (isset($_GET['id'])) {
   $idInmuebleDetalle = $_GET['id'];
