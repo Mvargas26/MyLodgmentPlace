@@ -67,8 +67,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 {
 
                     var x = JSON.parse(response);
-                    if (x.exito ) {
-                        Swal.fire("Éxito", "Se guardó la calificación correctamente. ", "success");//mensaje bonito
+                    if (x.exito == true ) {
+                        Swal.fire("Éxito", "Reserva creada Correctamente. ", "success");//mensaje bonito
                         setTimeout(function() {
                             location.reload(true);
                             },
