@@ -27,12 +27,16 @@
                 $resultadoInsert = $ObjMaster->InsertarReserva($idUsuario, $idInmueble,$fechaInicio, $fechaFin, $valorTotal, $valorTotalImpuestos, $cantidadPersonasExtra, $cantidadPersonas);
 
 
+                $jsonRespuesta = '{"exito": true}';
 
-                if ($resultado) {
-                    echo json_encode(array('exito' => true, 'mensajeAPI' => $resultado,'mensajeReserva' => $resultadoInsert));
-                } else {
-                    echo json_encode(array('error' => true, 'mensajeAPI' => $resultado,'mensajeReserva' => $resultadoInsert));
-                }
+                echo json_encode($jsonRespuesta);
+                
+                // if ($resultado) {
+                //     // echo json_encode(array("exito" =>true));
+                //     echo "exito";
+                // } else {
+                //     echo json_encode(array("exito" => false));
+                // }
 
     } catch (Exception $e) {
         echo json_encode(array('error' => $e->getMessage()));
