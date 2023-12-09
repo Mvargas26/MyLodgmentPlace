@@ -461,13 +461,13 @@ if (isset($_GET['id'])) {
                 include('./modalUpdateEvento.php');
                 ?>
 
-                <!-- <script src="../assets/js/FullCalendar/jquery-3.0.0.min.js"></script>
+                <script src="../assets/js/FullCalendar/jquery-3.0.0.min.js"></script>
                 <script src="../assets/js/FullCalendar/popper.min.js"></script>
                 <script src="../assets/js/FullCalendar/bootstrap.min.js"></script>
 
                 <script type="text/javascript" src="../assets/js/FullCalendar/moment.min.js"></script>
                 <script type="text/javascript" src="../assets/js/FullCalendar/fullcalendar.min.js"></script>
-                <script src='../assets/locales/es.js'></script> -->
+                <script src='../assets/locales/es.js'></script>
 
                 <script type="text/javascript">
                   $(document).ready(function() {
