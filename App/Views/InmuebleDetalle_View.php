@@ -620,8 +620,8 @@ if (isset($_GET['id'])) {
 
               <div class="modal-footer">
                 <button type="submit" id="crearReserva" class="btn btn-success" hidden>Reservar lugar</button>
-                <button type="button" id="calcularReserva" name="calcularReserva"  class="btn btn-success">Calcular</button>
-                <button type="button" id="crearReserva2" class="btn btn-success" >Reservar lugar</button>
+                <button type="button" id="calcularReserva" name="calcularReserva"  class="btn btn-info">Calcular <i class="fa-solid fa-calculator"></i> </button>
+                <button type="button" id="crearReserva2" class="btn btn-success" >Reservar <i class="fa-solid fa-check"></i> </button>
               </div>
             </form>
           </div>
