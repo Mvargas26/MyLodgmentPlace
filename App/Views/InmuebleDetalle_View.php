@@ -35,65 +35,7 @@ if(1===1){
   }
 }
 
-//---------------------------CONSUMO DE API---------------------------
-if (1 == 1) {
-  $numeroCuentaAPIurl = 'https://tiusr29pl.cuc-carrera-ti.ac.cr/Mybanco/api/Cuentas/GetNumeroCuenta/' . 304810232;
 
-  $numeroCuentaAPI = curl_init($numeroCuentaAPIurl);
-  curl_setopt($numeroCuentaAPI, CURLOPT_RETURNTRANSFER, true);
-
-  // Deshabilita la verificación del certificado SSL (para desarrollo local)
-  curl_setopt($numeroCuentaAPI, CURLOPT_SSL_VERIFYPEER, false);
-
-  $numeroCuenta = curl_exec($numeroCuentaAPI);
-
-  if (curl_errno($numeroCuentaAPI)) {
-    echo 'Error cURL: ' . curl_error($numeroCuentaAPI);
-  }
-
-  $httpCode = curl_getinfo($numeroCuentaAPI, CURLINFO_HTTP_CODE);
-
-  if ($httpCode == 200) {
-  } else {
-    // echo 'Error en la solicitud a la API de cuentas. Código de estado HTTP: ' . $httpCode;
-    // $mensaje2 = 'Número de Cuenta no disponible para el usuario';
-  }
-}
-
-if (!empty($numeroCuenta)) {
-  $saldoApiUrl = 'https://tiusr29pl.cuc-carrera-ti.ac.cr/Mybanco/api/Saldos/' . 66158725;
-
-  $chSaldo = curl_init($saldoApiUrl);
-  curl_setopt($chSaldo, CURLOPT_RETURNTRANSFER, true);
-
-  // Deshabilita la verificación del certificado SSL (para desarrollo local)
-  curl_setopt($chSaldo, CURLOPT_SSL_VERIFYPEER, false);
-
-  $saldoApiResponse = curl_exec($chSaldo);
-
-  if (curl_errno($chSaldo)) {
-    echo 'Error cURL: ' . curl_error($chSaldo);
-  }
-
-  $httpCode = curl_getinfo($chSaldo, CURLINFO_HTTP_CODE);
-
-  if ($httpCode == 200) {
-    $saldoData = json_decode($saldoApiResponse, true);
-
-    if ($saldoData === null) {
-      echo 'Error decodificando JSON para los datos del saldo';
-    } else {
-      $saldo = isset($saldoData['saldo']) ? $saldoData['saldo'] : 'No disponible';
-    }
-  } else {
-    // echo 'Error en la solicitud a la API de saldos. Código de estado HTTP: ' . $httpCode;
-  }
-} else {
-  // echo 'Número de Cuenta no disponible para el usuario';
-  // $mensaje2 = 'Número de Cuenta no disponible para el usuario';
-}
-
-//---------------------------CONSUMO DE API---------------------------
 
 // Verificar si se proporcionó un nombre de inmueble en la URL
 if (isset($_GET['id'])) {
