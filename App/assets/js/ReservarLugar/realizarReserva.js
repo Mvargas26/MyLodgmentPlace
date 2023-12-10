@@ -1,11 +1,8 @@
 document.addEventListener('DOMContentLoaded', function () {
     window.addEventListener('load', function () {
 
-        //OBJETOS EN HTML
         var fechaInicioBC = document.getElementById("fechaInicioBC");
         var fechaFinBC = document.getElementById("fechaFinBC");
-
-        //VARIABLES CON TEXTO
         var valorDiarioElement = document.getElementById("valorColones");
         var cantidadPersonasInput = document.getElementById("cantidadPersonas");
         var cantidadPersonasExtraInput = document.getElementById("cantidadPersonasExtra");
@@ -19,33 +16,28 @@ document.addEventListener('DOMContentLoaded', function () {
         //----oculta el boton reservar
         crearReserva2.style.display = 'none';  // Ocultar el botón
 
-
-
-
         //EVENTOS
-
-      
          ////aqui capturamos la fecha inicio y fecha fin
-         fechaInicioBC.addEventListener('change', function () {
-            var fechaMenor = fechaEsMenorAHoy(fechaInicioBC.value);
-            if (fechaMenor) {
-                Swal.fire("Error", "la fecha no puede ser menor a la fecha actual.", "error");
-                return; // Utiliza el mensaje decodificado
-            };
-        });
+        //  fechaInicioBC.addEventListener('change', function () {
+        //     var fechaMenor = fechaEsMenorAHoy(fechaInicioBC.value);
+        //     if (fechaMenor) {
+        //         Swal.fire("Error", "la fecha no puede ser menor a la fecha actual.", "error");
+        //         return; // Utiliza el mensaje decodificado
+        //     };
+        // });
 
-        fechaFinBC.addEventListener('change', function () {
-            var fechaMenor = fechaEsMenorAHoy(fechaFinBC.value);
-            if (fechaMenor) {
-                Swal.fire("Error", "la fecha no puede ser menor a la fecha actual.", "error");
-                return; // Utiliza el mensaje decodificado
-            };
-        });
+        // fechaFinBC.addEventListener('change', function () {
+        //     var fechaMenor = fechaEsMenorAHoy(fechaFinBC.value);
+        //     if (fechaMenor) {
+        //         Swal.fire("Error", "la fecha no puede ser menor a la fecha actual.", "error");
+        //         return; // Utiliza el mensaje decodificado
+        //     };
+        // });
 
         btnCalcularReserva.addEventListener('click', function () {
             var bol_fechaInicioEsMenor = fechaEsMenorAHoy(fechaInicioBC.value);
             var bol_fechaFinEsMenor = fechaEsMenorAHoy(fechaFinBC.value);
-            
+
             if (bol_fechaInicioEsMenor || bol_fechaFinEsMenor) {
                 Swal.fire("Error", "la fecha no puede ser menor a la fecha actual.", "error");
                 return; // Utiliza el mensaje decodificado
@@ -90,28 +82,34 @@ document.addEventListener('DOMContentLoaded', function () {
                 data: data,              
                 success: function(response) 
                 {
-                    // let respuestaSinEspacios = response.split(' ');
+                     if (response!="") {
 
-                    // var x = JSON(respuestaSinEspacios[0]);
+                        //si la cadena trae esta palabra, no tiene cuenta o el saldo era menor al total
+                         if (buscadorPalabra(response, "saldoEsMenor")) {
+                             Swal.fire("Error", "Lo sentimos, no cuenta con saldo suficiente en su cuenta.", "error");
+                             setTimeout(function () {
+                                 location.reload(true);
+                             }, 2000);
+                         }else{
 
-                    // if (x.exito === 'true') {
-                        Swal.fire("Éxito", "Reserva creada exitosamente", "success"); // Utiliza el mensaje decodificado
+                            Swal.fire("Éxito", "Reserva creada exitosamente", "success"); // Utiliza el mensaje decodificado
                         setTimeout(function () {
                             location.reload(true);
                         }, 2000);
-                    // } else {
-                    //     console.log(x.response);
-                    //     Swal.fire("Error", "Lo sentimos, ocurrió un error.", "error");
-                    // }
+
+                         }
+                        
+
+                     } else {
+                         console.log(x.response);
+                        Swal.fire("Error", "Lo sentimos, ocurrió un error.", "error");
+                     }
                    
                 },
                 error: function(textStatus, errorThrown) {
                     console.error('Error en la solicitud AJAX:', textStatus, errorThrown);
                  }
             });
-
-
-
            
         });
 
@@ -183,5 +181,16 @@ function muestraOcultaBtnReservar2(valorTotalElement,valorTotalImpuestosElement)
         crearReserva2.style.display = 'block'; // Mostrar el botón
     }
   }
+
+  //buscara si hay una palabra x en el response
+function buscadorPalabra(cadena, palabra) {
+    const cadenaEnMinusculas = cadena.toLowerCase();
+    const palabraEnMinusculas = palabra.toLowerCase();
+
+    // Busca la palabra en la cadena
+    const estaPresente = cadenaEnMinusculas.includes(palabraEnMinusculas);
+
+    return estaPresente;
+}//fin buscadorPalabra
 
 
