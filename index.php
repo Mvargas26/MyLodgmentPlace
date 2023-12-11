@@ -89,19 +89,6 @@ try {
       audio.pause();
     }
   });
-
-  // Control de volumen
-  document.getElementById("imgLogo").addEventListener("wheel", function(event) {
-    if (event.deltaY > 0) {
-
-      // Disminuir volumen al hacer scroll hacia abajo
-      audio.volume = Math.max(0, audio.volume - 0.1);
-    } else {
-      // Aumentar volumen al hacer scroll hacia arriba
-      audio.volume = Math.min(1, audio.volume + 0.1);
-
-    }
-  });
 </script>
 
 
@@ -121,7 +108,7 @@ try {
           <li><a class="nav-link scrollto active" href="#counts">Estadísticas</a></li>
           <li><a class="nav-link scrollto" href="#portfolio">Inmuebles</a></li>
           <!-- <li><a class="nav-link scrollto" href="#contact">Contactenos</a></li> -->
-          <!-- <li><a class="nav-link scrollto" href="#about"> -->
+          <li><a class="nav-link scrollto" href="./App/Views/acerca_de_View.php">Acerca de</a></li>
           <?php
           if (isset($_SESSION["nombre"])) {
             //echo  $_SESSION["nombre"];
