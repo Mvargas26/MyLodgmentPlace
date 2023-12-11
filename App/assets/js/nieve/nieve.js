@@ -22,4 +22,4 @@ const crearNeive = () => {
     }, anima * 1000)
 }
 
-setInterval(crearNeive, 100)
+setInterval(crearNeive, 50)
