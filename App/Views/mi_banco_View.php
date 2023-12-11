@@ -154,7 +154,7 @@ if (isset($_SESSION['Identificacion'])) {
                 </div> 
                 </secrion>
                 <div class="banner_img">
-                    <img src="../assets/img/logo/logo.png" alt="">
+                    <img src="../assets/img/logo/Logo_blanco2.png" alt="">
                 </div>     
         </section>
             <div class="burbujas">
