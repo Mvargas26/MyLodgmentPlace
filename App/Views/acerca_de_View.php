@@ -25,7 +25,7 @@
         <div class="person">
             <div class="contiene">
                 <div class="contiene-inner">
-                    <img class="circle" src="../assets/img/team/team-4.jpg">
+                    <img class="circle" src="../assets/img/team/team-3.jpg">
                 </div>
             </div>
             <div class="divider"></div>
@@ -35,7 +35,7 @@
         <div class="person">
             <div class="contiene">
                 <div class="contiene-inner">
-                    <img class="circle" src="../assets/img/team/team-3.jpg">
+                    <img class="circle" src="../assets/img/team/team-1.jpg">
                 </div>
             </div>
             <div class="divider"></div>
@@ -45,7 +45,7 @@
         <div class="person">
             <div class="contiene">
                 <div class="contiene-inner">
-                    <img class="circle" src="../assets/img/team/team-2.jpg">
+                    <img class="circle" src="../assets/img/team/team-3.jpg">
                 </div>
             </div>
             <div class="divider"></div>
