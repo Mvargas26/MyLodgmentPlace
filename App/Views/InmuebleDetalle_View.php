@@ -214,8 +214,11 @@ if (isset($_GET['id'])) {
                   <strong>Capacidad de Personas Maxima:</strong>
                   <?php
                   foreach ($datos as $dato) {
+                    $nuevoValor = $dato['capacidadPersonas'] - 4;
 
-                    echo $dato['capacidadPersonas'];
+                    echo $nuevoValor;?>
+                      <input id='capacidadPersonas' type="text" value="<?php echo $nuevoValor ?>"  hidden></input>
+                    <?php
                     break;
                   }
                   ?><br>
@@ -840,7 +843,7 @@ if (isset($_GET['id'])) {
   <!-- <script src="../assets/js/calculoPrevioReserva/script.js"></script> -->
   <!-- <script src="../assets/js/calculoPrevioReserva/calculoPrevioJS.js"></script> -->
 
-  
+   
 
 <?php
 } else {

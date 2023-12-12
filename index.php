@@ -200,7 +200,7 @@ try {
 
                           <div class="col-lg-3 col-6 text-center">
                             <span data-purecounter-start="0" data-purecounter-end="<?php echo $cantidadUsuarios; ?>" data-purecounter-duration="2" class="purecounter"></span>
-                            <p id="p">Usuarios Totales</p>
+                            <p id="p">Huespedes Totales</p>
                           </div>
                         </div>
                       </div>
