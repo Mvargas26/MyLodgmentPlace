@@ -95,3 +95,29 @@ p{
     grid-template-columns: repeat(1, 1fr); /* Cambiado a 1 columna para pantallas más estrechas */
   }
 }
+
+
+
+/**/
+
+#formValidarInmueble {
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para etiquetas y elementos de formulario */
+label {
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+select, button {
+  padding: 10px;
+  margin-bottom: 16px;
+}

@@ -3136,6 +3136,45 @@ function InsertarMensajes($idEmisor, $idReceptor, $mensaje)
             return false; // Error general
         }
     }
+
+
+    
+    //----------------------------------------------------------Validar imueble ------------------------------------------
+
+    // función para actualizar el estado en la base de datos
+    function actualizarEstadoimueble($idValidacionimueble, $nuevoEstado)
+    {
+        try {
+            $conn = $this->GetConexion();
+
+            $idValidacionimueble = $conn->real_escape_string($idValidacionimueble);
+            $nuevoEstado = $conn->real_escape_string($nuevoEstado);
+
+            $sql = "UPDATE tbestadolugar SET Estado = '$nuevoEstado' WHERE nombreImagenUsuario = '$idValidacionimueble'";
+
+            if ($conn->query($sql) === TRUE) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
+    }
+
+    // función para validar el inmueble
+    function validarInmueble($idValidacionimueble)
+    {
+        try {
+            return $this->actualizarEstadoimueble($idValidacionimueble, 'Aprobado');
+        } catch (Exception $e) {
+            echo "Error al validar el inmueble: " . $e->getMessage();
+            return false; // Error general
+        }
+    }
+
+
     // función para obtener el estado del usuario
     function obtenerEstadoUsuario($idUser)
     {

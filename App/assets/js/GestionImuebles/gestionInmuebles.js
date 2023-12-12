@@ -1,78 +1,37 @@
-// $(document).ready(function () {
-//     // Obtener el ID del usuario desde la URL
-//     var idUser = obtenerParametroUrl('idUser');
-//     console.log('ID de usuario:', idUser);
+document.addEventListener("DOMContentLoaded", function () {
+    var formValidarInmueble = document.getElementById("formValidarInmueble");
 
-//     $.ajax({
-//         type: 'POST',
-//         url: '../../App/Modules/obtenerInmuebles/inmueblesPorPropietario_Negocios.php',
-//         data: { idUser: idUser },
-//         dataType: 'json',
-//         success: function (inmuebleList) {
-//             var inmuebleContainer = $('.inmueble-list');
-//             inmuebleContainer.empty(); // Limpiar contenido existente
+    formValidarInmueble.addEventListener("submit", function (event) {
+        event.preventDefault(); 
 
-//             if (inmuebleList.length > 0) {
-//                 // Crear la lista <ul>
-//                 // var inmuebleContainer = $('<ul class="cards"></ul>');
+        var idValidacionimueble = formValidarInmueble.querySelector('input[name="idValidacionimueble"]').value;
+        var nuevoEstadoSelect = formValidarInmueble.querySelector('#nuevoEstado');
+        var nuevoEstado = nuevoEstadoSelect.options[nuevoEstadoSelect.selectedIndex].value;
 
-//                 // inmuebleList.forEach(function (inmueble) {
-//                 //     var inmuebleDiv = $('<li class="cards__item"><div class="card"><div class="card__image card__image--fence"></div><div class="card__content"></div></div></li>');
+        console.log("ID de Validación de Inmueble:", idValidacionimueble);
+        console.log("Nuevo Estado:", nuevoEstado);
 
-//                 //     // Imagen del inmueble
-//                 //     var inmuebleImagen = $('<img class="card__image" src="../assets/img/ImagenesInmuebles/' + inmueble.nombreImagen + '" alt="Imagen del inmueble">');
-//                 //     inmuebleDiv.find('.card__content').append(inmuebleImagen);
+        // Enviar la solicitud al servidor
+        enviarSolicitudAlServidorI(idValidacionimueble, nuevoEstado);
+    });
+});
 
-//                 //     // Nombre del inmueble
-//                 //     var inmuebleName = $('<div class="card__title"></div>').text(inmueble.nombre);
-//                 //     inmuebleDiv.find('.card__content').append(inmuebleName);
+function enviarSolicitudAlServidorI(idValidacionimueble, nuevoEstado) {
+    var xhr = new XMLHttpRequest();
 
-//                 //     // Otros detalles del inmueble
-//                 //     var inmuebleValorDiario = $('<p></p>').text('Valor Diario: ' + inmueble.valorDiario);
-//                 //     inmuebleDiv.find('.card__content').append(inmuebleValorDiario);
+    xhr.open("POST", "../actualizarestado/actualizar_estado_Negocios.php", true);
 
-//                 //     var inmuebleEstrellas = $('<p></p>').text('Estrellas: ' + inmueble.estrellas);
-//                 //     inmuebleDiv.find('.card__content').append(inmuebleEstrellas);
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
-//                 //     var inmuebleDireccion = $('<p></p>').text('Dirección: ' + inmueble.direccion);
-//                 //     inmuebleDiv.find('.card__content').append(inmuebleDireccion);
+    xhr.onload = function () {
+        if (xhr.status >= 200 && xhr.status < 300) {
+            console.log(xhr.responseText);
+        } else {
+            console.error("Error en la solicitud al servidor");
+        }
+    };
 
-//                 //     var inmuebleCapacidadPersonas = $('<p></p>').text('Capacidad de Personas: ' + inmueble.capacidadPersonas);
-//                 //     inmuebleDiv.find('.card__content').append(inmuebleCapacidadPersonas);
+    var datos = "idValidacionimueble=" + encodeURIComponent(idValidacionimueble) + "&nuevoEstado=" + encodeURIComponent(nuevoEstado);
 
-//                 //     var inmuebleCostoPersonaExtra = $('<p></p>').text('Costo por Persona Extra: ' + inmueble.costoPersonaExtra);
-//                 //     inmuebleDiv.find('.card__content').append(inmuebleCostoPersonaExtra);
-
-//                 //     var inmuebleFechaLimiteDisponibilidad = $('<p></p>').text('Fecha Límite de Disponibilidad: ' + inmueble.fechaLimiteDisponibilidad);
-//                 //     inmuebleDiv.find('.card__content').append(inmuebleFechaLimiteDisponibilidad);
-
-//                 //     // Botón para validar inmueble
-//                 //     var validarInmuebleButton = $('<button class="btn btn--block card__btn">Validar Inmueble</button>');
-//                 //     validarInmuebleButton.on('click', function () {
-//                 //         console.log('Validar inmueble con ID:', inmueble.id);
-//                 //     });
-//                 //     inmuebleDiv.find('.card__content').append(validarInmuebleButton);
-
-//                 //     // Agregar la tarjeta del inmueble al contenedor
-//                 //     inmuebleContainer.append(inmuebleDiv);
-//                 // });
-
-//                 // Agregar la lista al contenedor principal
-//                 // $('.inmueble-list').append(inmuebleContainer);
-//             } else {
-//                 // Mostrar mensaje si el propietario no tiene inmuebles
-//                 // $('.inmueble-list').append('<p>No tienes inmuebles registrados.</p>');
-//             }
-//         },
-//         error: function (xhr, status, error) {
-//             console.error('Error al obtener la lista de inmuebles:', error);
-//             alert('Error al obtener la lista de inmuebles. Por favor, inténtelo de nuevo más tarde.');
-//         }
-//     });
-
-//     // Función para obtener parámetros de la URL
-//     function obtenerParametroUrl(parametro) {
-//         var url = new URL(window.location.href);
-//         return url.searchParams.get(parametro);
-//     }
-// });
+    xhr.send(datos);
+}

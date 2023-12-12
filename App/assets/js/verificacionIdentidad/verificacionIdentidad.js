@@ -10,11 +10,8 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-// Función para obtener el ID de la validación de perfil (debe implementarse según tu lógica)
 function obtenerIdValidacionPerfil() {
-    // Implementa la lógica para obtener el ID de la validación de perfil
-    // Puede ser a través de algún elemento en la página o mediante AJAX
-    // Retorna el ID obtenido
+   
 }
 
 
