@@ -17,9 +17,10 @@ try {
     exit();
 }
 
-$sql = "SELECT tbinmueble.*, tbfotoinmueble.nombreImagen
+$sql = "SELECT tbinmueble.*, tbfotoinmueble.nombreImagen, tbestadolugar.Estado as nombreEstado
         FROM tbinmueble
         LEFT JOIN tbfotoinmueble ON tbinmueble.id = tbfotoinmueble.idFotoInmueble
+        LEFT JOIN tbestadolugar ON tbinmueble.estadoLugar = tbestadolugar.idEstado
         WHERE tbinmueble.Propietario = :idUser";
 
 $stmt = $pdo->prepare($sql);
@@ -28,6 +29,7 @@ $stmt->execute();
 
 // Obtener los resultados como un array asociativo
 $inmuebles = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
 ?>
 
 <main id="main">
@@ -62,7 +64,25 @@ $inmuebles = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 <p>Capacidad de Personas: <?php echo $inmueble['capacidadPersonas']; ?></p>
                                 <p>Costo por Persona Extra: <?php echo $inmueble['costoPersonaExtra']; ?></p>
                                 <p>Fecha Límite de Disponibilidad: <?php echo $inmueble['fechaLimiteDisponibilidad']; ?></p>
-                                <button class="btn btn--block card__btn" onclick="validarInmueble(<?php echo $inmueble['id']; ?>)">Validar Inmueble</button>
+                                <p>Estado del Inmueble:</p> <?php echo $inmueble['nombreEstado']; ?></p>
+                                <!-- <button class="btn btn--block card__btn" onclick="validarInmueble(<?php echo $inmueble['id']; ?>)">Validar Inmueble</button> -->
+                                <!-- Agrega un identificador único al formulario para poder seleccionarlo fácilmente -->
+
+                                <form id="formValidarInmueble" method="post" action="">
+                                    <input type="hidden" name="idValidacionimueble" value="<?php echo $inmueble['id']; ?>">
+                                    <label for="nuevoEstado">Nuevo Estado:</label>
+                                    <br>
+                                    <div class="box">
+                                        <select id="nuevoEstado" name="nuevoEstado">
+                                            <option value="Aprobado">Aprobado</option>
+                                            <option value="Pendiente">Pendiente</option>
+                                            <!-- <option value="Bloqueado">Bloqueado</option> -->
+                                        </select>
+                                    </div>
+                                    <button type="submit">Validar Inmueble</button>
+                                </form>
+
+
                             </div>
                         </div>
                     <?php endforeach; ?>

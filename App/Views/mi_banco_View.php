@@ -115,7 +115,7 @@ if (isset($_SESSION['Identificacion'])) {
 }
 ?>
 
-<!-- ==============================================Fin header ======= -->
+<!-- =========================Fin header ======= -->
 
 <head>
     <meta charset="UTF-8">
