@@ -96,12 +96,12 @@ session_start();
               </div>
           
               <div class="col-lg-3 col-6 text-center">
-                <span data-purecounter-start="0" id="CalifficacionPorInmueble"></span>
+                <span data-purecounter-start="0" id="CalifficacionPorInmueble">0</span>
                 <p id="p">Calificacion por Inmueble</p>
               </div>
               
               <div class="col-lg-3 col-6 text-center">
-                <span data-purecounter-start="0" id="CantidadResenasPorInmueble"></span>
+                <span data-purecounter-start="0" id="CantidadResenasPorInmueble">0</span>
                 <p id="p">Cantidad de Reseñas por Inmueble</p>
               </div>
     

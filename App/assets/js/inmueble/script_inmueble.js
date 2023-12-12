@@ -82,7 +82,6 @@ function InsertarInmueble() {
     console.log(capacidadPersonas);
     console.log(valorDiario);
 
-    // Puedes agregar más campos según sea necesario
 
     if (
         nombreEspacio !== '' &&
@@ -309,83 +308,141 @@ function showSummaryDialog() {
     var fechaLimiteDisponible = document.getElementById('fechalimiteDisponible').value;
     var dropdown = document.getElementById("categoriaInmueble");
     var categoria = dropdown.selectedIndex;
+    
+    var inputImagen = document.getElementById('fotoInmueble');
+
+    // caracteristicas
+    var cantidad_Cuartos = document.getElementById('cantCuartos').value;
+    var cantidad_Camas = document.getElementById('cantCamas').value;
+    var cantidad_Banios = document.getElementById('cantBanios').value;
+    var cantidad_Patios = document.getElementById('cantidadPatios').value;
+    var cantidad_Cocheras = document.getElementById('cantidadCocheras').value;
+    var cantidad_Plantas = document.getElementById('cantidadPlantas').value;
+
+
+    // Servicios
     var ArrayServicios = document.getElementById('ArrayServicios').value;
+
+    // Politicas
     var Cancelacion = document.getElementById('cancelacionSeleccionada').value;
     var reembolso = document.getElementById('reembolsosSeleccionados').value;
     var horario = document.getElementById('horarioSeleccionado').value;
     var cargos = document.getElementById('cargosAdicionalesSeleccionados').value;
-    var inputImagen = document.getElementById('fotoInmueble');
+
     
     // Construir el formulario en el cuadro de diálogo
     var formContent = `
-        <style>
-            #summaryForm {
-                max-width: 400px;
-                margin: auto;
-                padding: 20px;
-                border: 1px solid #ccc;
-                border-radius: 5px;
-                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-                font-family: Arial, sans-serif;
-            }
+    <style>
+    #summaryForm {
+        max-width: 1000px;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        font-family: Arial, sans-serif;
+        display: grid;
+        gap: 10px;
+        grid-template-columns: repeat(2, 1fr);
+    }
 
-            #summaryForm label {
-                display: block;
-                margin-bottom: 5px;
-                font-weight: bold;
-            }
+    #summaryForm label {
+        font-weight: bold;
+    }
 
-            #summaryForm input {
-                width: 100%;
-                padding: 8px;
-                margin-bottom: 15px;
-                box-sizing: border-box;
-                border: 1px solid #ccc;
-                border-radius: 4px;
-            }
+    #summaryForm input {
+        width: 100%;
+        padding: 8px;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
 
-            #summaryForm button {
-                background-color: #4CAF50;
-                color: white;
-                padding: 10px 15px;
-                border: none;
-                border-radius: 4px;
-                cursor: pointer;
-            }
+    #summaryForm button {
+        grid-column: span 2;
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
 
-            #summaryForm button:hover {
-                background-color: #45a049;
-            }
-        </style>
-        <form id="summaryForm">
-            <label for="nombreEspacioU">Nombre del espacio:</label>
-            <input type="text" id="nombreEspacioU" value="${nombreEspacio}" required>
-            <br>
-            <label for="valorDiarioU">Valor diario:</label>
-            <input type="text" id="valorDiarioU" value="${valorDiario}" required>
-            <br>
-            <label for="estrellasU">Estrellas:</label>
-            <input type="text" id="estrellasU" value="${estrellas}" required>
-            <br>
-            <label for="direccionU">Direccion:</label>
-            <input type="text" id="direccionU" value="${direccion}" required>
-            <br>
-            <label for="capaPersonasU">Capacidad Personas:</label>
-            <input type="text" id="capaPersonasU" value="${capacidadPersonas}" required>
-            <br>
-            <label for="costoPersonaEU">Costo Persona Extra:</label>
-            <input type="text" id="costoPersonaEU" value="${costoPersonaExtra}" required>
-            <br>
-            <label for="fechaDisponibleU">Fecha Disponibilidad:</label>
-            <input type="text" id="fechaDisponibleU" value="${fechaLimiteDisponible}" required>
-            <br> 
-            <label for="horarioU">Horario:</label>
-            <input type="text" id="horarioU" value="${horario}" required>
-            <br>
-            <label for="cargosU">Cargos:</label>
-            <input type="text" id="cargosU" value="${cargos}" required>
-        </form>
+    #summaryForm button:hover {
+        background-color: #45a049;
+    }
+
+    .flexo{
+        display: flex;
+      }
+
+</style>
+
+<form id="summaryForm">
+
+        <label for="nombreEspacioU">Nombre del espacio:</label>
+        <input type="text" id="nombreEspacioU" value="${nombreEspacio}" required>
+
+        <label for="valorDiarioU">Valor diario:</label>
+        <input type="text" id="valorDiarioU" value="${valorDiario}" required>
+
+        <label for="estrellasU">Estrellas:</label>
+        <input type="text" id="estrellasU" value="${estrellas}" required>
+
+        <label for="direccionU">Direccion:</label>
+        <input type="text" id="direccionU" value="${direccion}" required>
+
+        <label for="capaPersonasU">Capacidad Personas:</label>
+        <input type="text" id="capaPersonasU" value="${capacidadPersonas}" required>
+
+        <label for="costoPersonaEU">Costo Persona Extra:</label>
+        <input type="text" id="costoPersonaEU" value="${costoPersonaExtra}" required>
+
+        <label for="fechaDisponibleU">Fecha Disponibilidad:</label>
+        <input type="text" id="fechaDisponibleU" value="${fechaLimiteDisponible}" required>
+
+        <label for="cancelacionU">Cancelación:</label>
+        <input type="text" id="cancelacionU" value="${Cancelacion}" required>
+
+        <label for="reembolsoU">Reembolso:</label>
+        <input type="text" id="reembolsoU" value="${reembolso}" required>
+
+        <label for="horarioU">Horario:</label>
+        <input type="text" id="horarioU" value="${horario}" required>
+
+        <label for="cargosU">Cargos:</label>
+        <input type="text" id="cargosU" value="${cargos}" required>
+
+        <label for="cantCuartosU">Cantidad de Cuartos:</label>
+        <input type="text" id="cantCuartosU" value="${cantidad_Cuartos}" required>
+
+        <label for="cantCamasU">Cantidad de Camas:</label>
+        <input type="text" id="cantCamasU" value="${cantidad_Camas}" required>
+
+        <label for="cantBaniosU">Cantidad de Baños:</label>
+        <input type="text" id="cantBaniosU" value="${cantidad_Banios}" required>
+
+        <label for="cantPatiosU">Cantidad de Patios:</label>
+        <input type="text" id="cantPatiosU" value="${cantidad_Patios}" required>
+
+        <label for="cantCocherasU">Cantidad de Vehiculos:</label>
+        <input type="text" id="cantCocherasU" value="${cantidad_Cocheras}" required>     
+
+        <label for="cantPlantasU">Cantidad de Plantas:</label>
+        <input type="text" id="cantPlantasU" value="${cantidad_Plantas}" required>    
+    
+
+</form>
     `;
+
+    // var cantidad_Cuartos = document.getElementById('cantCuartos').value;
+    // var cantidad_Camas = document.getElementById('cantCamas').value;
+    // var cantidad_Banios = document.getElementById('cantBanios').value;
+    // var cantidad_Patios = document.getElementById('cantidadPatios').value;
+    // var cantidad_Cocheras = document.getElementById('cantidadCocheras').value;
+    // var cantidad_Plantas = document.getElementById('cantidadPlantas').value;
+
+
 
     // Mostrar el cuadro de diálogo de SweetAlert con el formulario
     Swal.fire({
@@ -405,16 +462,35 @@ function showSummaryDialog() {
             capacidadPersonasU = document.getElementById('capaPersonasU').value;
             costoPersonaExtraU = document.getElementById('costoPersonaEU').value;
             fechaLimiteDisponibleU = document.getElementById('fechaDisponibleU').value;
+            cancelacionU = document.getElementById('cancelacionU').value;
+            reembolsoU = document.getElementById('reembolsoU').value;
             horarioU = document.getElementById('horarioU').value;
             cargosU = document.getElementById('cargosU').value;
+
+            // caracteristicas
             
+            cantCuartosU = document.getElementById('cantCuartosU').value;
+            cantCamasU = document.getElementById('cantCamasU').value;
+            cantBaniosU = document.getElementById('cantBaniosU').value;
+            cantPatiosU = document.getElementById('cantPatiosU').value;
+            cantCocherasU = document.getElementById('cantCocherasU').value;
+            cantPlantasU = document.getElementById('cantPlantasU').value;
+
+            
+            
+
             sendDataToServer(nombreEspacioU,disponibilidad, valorDiarioU, estadoLugar, Propietario, estrellasU, direccionU, capacidadPersonasU, costoPersonaExtraU, fechaLimiteDisponibleU,
-                categoria, ArrayServicios, Cancelacion, reembolso, horarioU, cargosU, inputImagen);
-                Swal.fire('Enviado', 'La información del inmueble ha sido enviada con éxito.', 'success')
-                .then(() => {
-                    // Redirigir a la página deseada en caso de éxito
-                    window.location.href = '../../index.php';
-                });
+                categoria, ArrayServicios, Cancelacion, reembolso, horarioU, cargosU, inputImagen,
+                cantCuartosU, cantCamasU, cantBaniosU, cantPatiosU ,cantCocherasU,cantPlantasU 
+            );
+
+
+
+            Swal.fire('Enviado', 'La información del inmueble ha sido enviada con éxito.', 'success')
+            .then(() => {
+                // Redirigir a la página deseada en caso de éxito
+                window.location.href = '../../index.php';
+            });
         } else {
             // El usuario canceló, puedes realizar alguna acción si es necesario
             Swal.fire('Cancelado', 'El inmueble no fue insertado.')
@@ -427,8 +503,14 @@ function showSummaryDialog() {
 }
 
 function sendDataToServer(nombreEspacioU, disponibilidad, valorDiarioU, estadoLugar, Propietario, estrellasU, direccionU, capacidadPersonasU, costoPersonaExtraU, fechaLimiteDisponibleU,
-    categoria, ArrayServicios, Cancelacion, reembolso, horarioU, cargosU, inputImagenU) {
+    categoria, ArrayServicios, Cancelacion, reembolso, horarioU, cargosU, inputImagenU, 
+    cantCuartosU, cantCamasU, cantBaniosU, cantPatiosU ,cantCocherasU,cantPlantasU) {
+
+
     var NuevoEspacio = new FormData();
+    var Caracteristicas = new FormData();
+
+
     NuevoEspacio.append('nombreEspacio', nombreEspacioU);
     NuevoEspacio.append('disponibilidad', disponibilidad);
     NuevoEspacio.append('valorDiario', valorDiarioU);
@@ -439,12 +521,28 @@ function sendDataToServer(nombreEspacioU, disponibilidad, valorDiarioU, estadoLu
     NuevoEspacio.append('capacidadPersonas', capacidadPersonasU);
     NuevoEspacio.append('costoPersonaExtra', costoPersonaExtraU);
     NuevoEspacio.append('fechaLimiteDisponible', fechaLimiteDisponibleU);
+    
     // Agregar imágenes al NuevoEspacio
     for (var i = 0; i < inputImagenU.files.length; i++) {
         console.log('Archivo ' + (i + 1) + ':', inputImagenU.files[i]);
         NuevoEspacio.append('inputImagen[]', inputImagenU.files[i]);
     }
     NuevoEspacio.append('categoria', categoria);
+
+
+    // caracteristicas
+
+    // SE DEBE LLAMAR DE OTRA FORMA 
+    // SCRIPT DIFERENTE
+
+    Caracteristicas.append('cantCuartosU', cantCuartosU);
+    Caracteristicas.append('cantCamasU', cantCamasU);
+    Caracteristicas.append('cantBaniosU', cantBaniosU);
+    Caracteristicas.append('cantPatiosU', cantPatiosU);
+    Caracteristicas.append('cantCocherasU', cantCocherasU);
+    Caracteristicas.append('cantPlantasU', cantPlantasU);
+
+
     $.ajax({
         url: "../../App/Modules/inmueble/publicarInmueble_Negocios.php",
         type: "POST",
@@ -468,37 +566,63 @@ function sendDataToServer(nombreEspacioU, disponibilidad, valorDiarioU, estadoLu
         }
     });
 
+    $.ajax({
+        url: "../../App/Modules/inmueble/insertarCaracteristicas_Negocios.php",
+        type: "POST",
+        data: Caracteristicas,
+        contentType: false, // No establecer contentType
+        processData: false, // No procesar datos
+        success: function (response) {
+            console.log(response);
+            console.log("Si entra en el succes")
+            var x = JSON.parse(response);
+            if (x.exito == true) {
+                
+                Swal.fire("Éxito", x.mensaje, "success");
 
-    if (ArrayServicios && ArrayServicios.length > 0) {
-        $.ajax({
-            url: "../../App/Modules/inmueble/insertarservicios_Negocios.php",
-            type: "POST",
-            data: {
-                ArrayServicios: ArrayServicios
-            },
-            success: function (response) {
-                try {
-                    console.log(response);
-                    console.log("Si entra en el succes")
-                    var x = JSON.parse(response);
-                    if (x.exito == true) {
-                        Swal.fire("Éxito", x.mensaje, "success");
-                    } else {
-                        console.log(x.mensaje);
-                        Swal.fire("Error", "Lo sentimos, ocurrió un error. " + x.mensaje, "error");
-                    }
-                } catch (error) {
-                    Swal.fire("Error", "Lo sentimos, ocurrió un error. " + error, "error");
-                }
-            },
-            error: function (xhr, status, error) {
-                console.log("Error en la solicitud AJAX servicios:", error);
-                Swal.fire("Error", "Ocurrió un error en la comunicación con el servidor.", "error");
+
+            } else {
+                console.log(x.mensaje);
+                Swal.fire("Error", "Lo sentimos, ocurrió un error. " + x.mensaje, "error");
             }
-        });
-    } else {
-        Swal.fire("Error", "Por favor, completa todos los campos antes de continuar.", "error");//mensaje bonito
-    }
+        },
+        error: function (xhr, status, error) {
+            console.log("Error en la solicitud AJAX inmueble:", error);
+            Swal.fire("Error", "Ocurrió un error en la comunicación con el servidor.", "error");
+        }
+    });
+
+
+    // if (ArrayServicios && ArrayServicios.length > 0) {
+    //     $.ajax({
+    //         url: "../../App/Modules/inmueble/insertarservicios_Negocios.php",
+    //         type: "POST",
+    //         data: {
+    //             ArrayServicios: ArrayServicios
+    //         },
+    //         success: function (response) {
+    //             try {
+    //                 console.log(response);
+    //                 console.log("Si entra en el succes")
+    //                 var x = JSON.parse(response);
+    //                 if (x.exito == true) {
+    //                     Swal.fire("Éxito", x.mensaje, "success");
+    //                 } else {
+    //                     console.log(x.mensaje);
+    //                     Swal.fire("Error", "Lo sentimos, ocurrió un error. " + x.mensaje, "error");
+    //                 }
+    //             } catch (error) {
+    //                 Swal.fire("Error", "Lo sentimos, ocurrió un error. " + error, "error");
+    //             }
+    //         },
+    //         error: function (xhr, status, error) {
+    //             console.log("Error en la solicitud AJAX servicios:", error);
+    //             Swal.fire("Error", "Ocurrió un error en la comunicación con el servidor.", "error");
+    //         }
+    //     });
+    // } else {
+    //     Swal.fire("Error", "Por favor, completa todos los campos antes de continuar.", "error");//mensaje bonito
+    // }
 
 
     if (Cancelacion !== "" && reembolso !== "" &&

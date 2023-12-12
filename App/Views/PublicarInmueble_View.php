@@ -228,7 +228,7 @@ if (isset($_SESSION["Identificacion"])) {
     <!-- ========================================================================== -->
     
 
-    <section id="Calendario" class="form-section">        
+    <!-- <section id="Calendario" class="form-section">        
         <link rel="stylesheet" type="text/css" href="../assets/css/calendario anfitrion/calendario.css">
 
             <img src="../assets/img/publicarinmueble/PASOS.png" alt="">
@@ -267,7 +267,7 @@ if (isset($_SESSION["Identificacion"])) {
                         return '1'; 
                     }
                 </script>
-    </section>
+    </section> -->
         
     
     <!-- ========================================================================== -->
@@ -275,13 +275,14 @@ if (isset($_SESSION["Identificacion"])) {
     <!-- ========================================================================== -->
     
     <section id="politicas" class="form-section">
+
+        <img src="../assets/img/publicarinmueble/PASOS.png" alt="">
         <img src="../assets/img/publicarinmueble/PASOS3.png" alt="">
         
         
         <div class="politicasgrid">
             <form action="forms/contact.php" method="post" role="form" class="php-email-form">
-                
-                
+                        
                 <div class="section-title">
                     <h2>Políticas</h2>
                     <p>Cuales van a ser tus políticas en cuanto a... </p>
@@ -299,7 +300,7 @@ if (isset($_SESSION["Identificacion"])) {
                         <div class="icon"><i class="i bi-house-slash-fill" style="color: #ff689b;"></i></div>
                         <h2 class="title">Cancelacion</h2>                          
                         <div class="info">
-                            <h5>cancelacion</h5>
+                            <h5>Cancelacion</h5>
                             <hr>
 
                             <p class="description">
@@ -401,7 +402,7 @@ if (isset($_SESSION["Identificacion"])) {
                         </div>
                     </div>
 
-                <br/>
+                    <br/>
               
                     <!-- <div class="icon-box">
                         <div class="icon"><i class="bi bi-three-dots" style="color: #3fcdc7;"></i></div>
@@ -413,169 +414,21 @@ if (isset($_SESSION["Identificacion"])) {
                                 <strong>segura</strong> y <strong>ética</strong></p>
                             </div>
                     </div> -->
-        </div>
-        <script>
-            // Función para actualizar el valor del input hidden
-            function actualizarInputHidden(inputHiddenId, radioButton) {
-                if (radioButton.checked) {
-                    // Si el radio button está seleccionado, actualiza el valor del input hidden correspondiente
-                    $("#" + inputHiddenId).val(radioButton.value);
-                }
-            }
-            
-        </script>
-
-
-<!-- 
-
-                <div class="section-title">
-                    <h2>Políticas</h2>
-                    <p>Cada uno de nuestros espacios ofrece una experiencia única, 
-                        respaldada por políticas cuidadosamente diseñadas para hacer de tu elección un momento inolvidable.</p>
-                    </div>
+                </div>
+                <script>
+                    // Función para actualizar el valor del input hidden
+                    function actualizarInputHidden(inputHiddenId, radioButton) {
+                        if (radioButton.checked) {
+                            // Si el radio button está seleccionado, actualiza el valor del input hidden correspondiente
+                            $("#" + inputHiddenId).val(radioButton.value);
+                        }
+                    }
                     
-                    <br/>
-                    <div id="subtituloPoliticas">
+                </script>
 
-                        <br/>
-                        <h3>Cancelación</h5>
-                        <i class="i bi-house-slash-fill" style="color: #ff689b; margin-left:-100px; margin-top:-20px;" id="iconoInfo"></i>
-                    </div>
-                </div>
-                
-                
-                <div class="row" style="display:flex; justify-content: center; align-content: center; margin:55px;">
-                    <div class="col-md-5 form-group">
-                        <p><strong>Los clientes podrán cancelar sus reservas sin cargo adicional hasta</strong>
-                    </p>
-                </div>
-                    <div class="col-md-3 form-group mt-2 mt-md-0">
-                        <select class="form-control" name="horas" id="horasCancelacion" required>
-                            <option value="24">24 horas</option>
-                            <option value="48">48 horas</option>
-                            <option value="72">72 horas</option>
-                        </select>
-                    </div>
-                    
-                    <div class="col-md-4 form-group mt-3 mt-md-0">
-                        <p>
-                            <strong>
-                                antes de la fecha programada.
-                            </strong>
-                        </p>              
-                    </div>
-                </div>
-
-                <br/>
-                <div id="subtituloPoliticas">
-                    <br/>
-                    <h3>Reembolso</h5>
-                    <i class="bi bi-wallet" style="color: #e9bf06; margin-left:-100px; margin-top:-20px;" id="iconoInfo"></i>
-                </div>
-                <
-                
-                <div class="row" style="display:flex; justify-content: center; align-content: center; margin:55px;">
-                    <div class="col-md-5 form-group">
-                        <p><strong>Al cancelar fuera del plazo establecido se devolverá el</strong>
-                    </p>
-                    </div>
-                    <div class="col-md-3 form-group mt-2 mt-md-0">
-                        <select class="form-control" name="horas" id="horasCancelacion" required>
-                            <option value="25">  25%</option>
-                            <option value="50">  50%</option>
-                            <option value="70">  70%</option>
-                        </select>
-                    </div>
-                    
-                    <div class="col-md-4 form-group mt-3 mt-md-0">
-                        <p>
-                            <strong>
-                                del costo de la reserva
-                            </strong>
-                        </p>              
-                    </div>
-                </div> -->
             </form>
-        </div>
-
-            
-            
+        </div>       
     </section>
-
-        
-        <!-- POLITICAS QUE SE VAN A MOSTRAR EN EL VIEW DE CADA INMUEBLE -->
-        <!-- <section id="services" class="services">
-            <hr/>
-        <div class="container">
-            
-            <div class="section-title">
-                <h2>Políticas</h2>
-                <p>Cada uno de nuestros espacios ofrece una experiencia única, 
-                    respaldada por políticas cuidadosamente diseñadas para hacer de tu elección un momento inolvidable.</p>
-                </div>
-                
-                <div class="row">
-                    <div class="col-lg-4 col-md-6">
-                        
-                        <div class="icon-box">
-                            <div class="icon"><i class="i bi-house-slash-fill" style="color: #ff689b;"></i></div>
-                            <h2 class="title">Cancelacion</h2>
-                            
-                            <div class="info">
-                                <p class="description">Nuestra política de cancelación de reservas establece que los clientes 
-                                    pueden cancelar sus reservas sin cargo adicional hasta <strong>48 horas</strong> antes de la fecha programada.
-                                </p>
-                            </div>
-                        </div>
-                        
-                    </div>
-                    <div class="col-lg-4 col-md-6 mt-4 mt-md-0">
-                        <div class="icon-box">
-                        <div class="icon"><i class="bi bi-wallet" style="color: #e9bf06;"></i></div>
-                        <h4 class="title">Reembolsos</h4>
-                        <div class="info">
-                            <p class="description">Al cancelar <strong>dentro</strong> del plazo establecido recibirá un 
-                            reembolso completo sin cargos adicionales.</p>
-                        </div>
-                        <div class="info">
-                            <p class="description">Al cancelar <strong>fuera</strong> del plazo establecido aplicará 
-                            cargos al costo total de la reserva.</p>
-                        </div>
-                        <br>    
-                        
-                </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6 mt-4 mt-lg-0">
-                    <div class="icon-box">
-                        <div class="icon"><i class="bi bi-three-dots" style="color: #3fcdc7;"></i></div>
-                        <h4 class="title">Otras</h4>
-                        
-                        <div class="info">
-                            <p class="description">Otras políticas como privacidad y protección de los datos está diseñada
-                                para garantizar que tu información se maneje de manera 
-                                <strong>segura</strong> y <strong>ética</strong></p>
-                            </div>
-                    </div>
-                </div>
-                <br/>
-                
-                <div class="col-lg-4 col-md-6 mt-4 mt-lg-0">
-                    <div class="icon-box">
-                        <div class="icon"><i class="bi bi-three-dots" style="color: #3fcdc7;"></i></div>
-                        <h4 class="title">Otras</h4>
-                        
-                        <div class="info">
-                            <p class="description">Otras políticas como privacidad y protección de los datos está diseñada
-                                para garantizar que tu información se maneje de manera 
-                                <strong>segura</strong> y <strong>ética</strong></p>
-                            </div>
-                    </div>
-                </div>
-            </div>
-            
-    </section>End Services Section -->
-    <!-- <hr/> -->
 
     <section id="services" class="form-section">
         <img src="../assets/img/publicarinmueble/PASOS4.png" alt="">
@@ -600,6 +453,7 @@ if (isset($_SESSION["Identificacion"])) {
                 <!-- ========================================================= -->
                 
             </div>
+            
         </form>
         
             <hr/>
@@ -672,7 +526,7 @@ if (isset($_SESSION["Identificacion"])) {
 
 <!-- ==============================================Inicio Footer ======= -->
 <script src="../assets/js/inmueble/script_inmueble.js"></script>
-<script async src="../assets/js/Servicios/script_servicios.js"></script>
+<script src="../assets/js/Servicios/script_servicios.js"></script>
 <script src="../assets/js/calendario anfitrion/calendarioafi.js"></script>
 
 

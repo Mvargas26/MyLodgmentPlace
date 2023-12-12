@@ -81,7 +81,8 @@ if (isset($_GET['id'])) {
     <br>
     <br>
     <section id="breadcrumbs" class="breadcrumbs">
-      <div class="container">
+
+
 
         <h1>Informacion del espacio</h1>
 
@@ -381,6 +382,7 @@ if (isset($_GET['id'])) {
           </div>
 
         </div>
+
     </section><!-- End Portfolio Details Section -->
 
     <!-- ================================================================================== -->
@@ -478,6 +480,12 @@ if (isset($_GET['id'])) {
 
     
     <div class="container">
+        <div id="CardTarifaEspecial">
+          <h4><i class="fas fa-tree" style="color: #045400"></i> Tarifa Especial: Descuento del 5% por fecha navideña</h4>
+        </div>
+
+
+      <div class="container">
       <div class="" id="" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
           <div class="modal-content">

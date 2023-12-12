@@ -421,20 +421,75 @@ class Master_Class
     } //fin Insertar Inmueble
 
 
+    function Insertar_Caracteristicas(
+        $cantCuartosU,
+        $cantCamasU,
+        $cantBaniosU,
+        $cantPatiosU,
+        $cantCocherasU,
+        $cantPlantasU,
+        $idInmueble
+    ) {
 
-    function Insertar_ServiciosInmueble($ArrayServicios)
-    {
-        // Obtener el último ID de la tabla tbinmueble
-        $query = "SELECT id FROM tbinmueble ORDER BY id DESC LIMIT 1;";
+        $query = "SELECT `id` FROM `tbinmueble` WHERE 
+        Order By id DESC 
+        LIMIT 1";
+
+        // Ejecutar la consulta
         $result = $this->GetConexion()->query($query);
 
-        if ($result && $result->num_rows > 0) {
+        // Verificar si la consulta fue exitosa
+        if ($result) {
+        // Obtener el ID si hay resultados
+        if ($result->num_rows > 0) {
             $row = $result->fetch_assoc();
-            $idInmuebleNuevo = $row['id'];
+            $idInmueble = $row['id'];
         } else {
-            // Manejar el caso cuando no se encuentra ningún ID
-            return false;
+            // No se encontraron resultados
+            $idInmueble = null;
         }
+        } else {
+        // Hubo un error en la consulta
+        $idInmueble = null;
+        }
+
+        if($idInmueble !== null){
+            
+            $query = "INSERT INTO `tbcaracteristicasinmueble`(`cantidadCuartos`, `cantidadCamas`, 
+            `cantidadBanos`, `cantidadPatios`, `cantidadVehiculos`, `cantidadPlantas`, `idInmueble`) 
+            VALUES ('$cantCuartosU', '$cantCamasU', '$cantBaniosU', '$cantPatiosU','$cantCocherasU',
+            '$cantPlantasU','$idInmueble')";
+    
+            if ($this->getConexion()->query($query)) {
+
+                return true;
+    
+            } else {
+                return false;
+            }
+
+        }
+        else{
+            return false; 
+        }
+
+    } //fin Insertar Inmueble
+
+
+
+    function Insertar_ServiciosInmueble($ArrayServicios , $idInmueble)
+    {
+        // Obtener el último ID de la tabla tbinmueble
+        // $query = "SELECT id FROM tbinmueble ORDER BY id DESC LIMIT 1;";
+        // $result = $this->GetConexion()->query($query);
+
+        // if ($result && $result->num_rows > 0) {
+        //     $row = $result->fetch_assoc();
+        //     $idInmuebleNuevo = $row['id'];
+        // } else {
+        //     // Manejar el caso cuando no se encuentra ningún ID
+        //     return false;
+        // }
 
         // Construir la consulta para insertar servicios
         $query = "INSERT INTO `tbinmuebleservicio` (`idServicio`, `idInmueble`, `disponibilidad`) VALUES ";
@@ -443,7 +498,7 @@ class Master_Class
         foreach ($ArrayServicios as $idServicio) {
             $idServicio = $this->GetConexion()->real_escape_string($idServicio);
             // Añadir un valor fijo para 'disponibilidad', puedes ajustarlo según tus necesidades
-            $query .= "('$idServicio', '$idInmuebleNuevo', 'disponible'),";
+            $query .= "('$idServicio', '$idInmueble', 'disponible'),";
         }
         $query = rtrim($query, ',');
 

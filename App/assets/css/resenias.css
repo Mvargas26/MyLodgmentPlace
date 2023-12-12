@@ -1,5 +1,26 @@
 
 
+#CardTarifaEspecial{
+    background-color: #ffffff; /* Fondo de la tarjeta */
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    margin: 20px;
+    padding: 20px;
+    width: 80%;
+    font-size: medium;
+}
+
+#h2TarifaEspecial{
+    color: #333333;
+}
+
+
+
+
+
+
+
+
 #DejaTuResenia{
     position: sticky;
     flex:35%;
