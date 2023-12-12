@@ -196,6 +196,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.log(promedioESTRELLAS);
                 console.log(counttotales);
 
+                promedioESTRELLAS = (isNaN(parseFloat(promedioESTRELLAS)) ? 0 : parseFloat(promedioESTRELLAS)).toFixed(1);
+                counttotales = (isNaN(counttotales) ? 0 : counttotales);
+
+                
                 // Actualizar el elemento con id="CalifficacionPorInmueble" con el valor de 'promedio'
                 // document.getElementById("CalifficacionPorInmueble").setAttribute("data-purecounter-end", promedio);
                 document.getElementById("CalifficacionPorInmueble").innerText = promedioESTRELLAS;

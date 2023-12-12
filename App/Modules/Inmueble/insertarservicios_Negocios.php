@@ -11,7 +11,7 @@
             throw new Exception('Error al decodificar la información de servicios.');
         }
     
-        $resultadoConsulta = $ObjMaster->Insertar_ServiciosInmueble($ArrayServicios);
+        $resultadoConsulta = $ObjMaster->Insertar_ServiciosInmueble($ArrayServicios , $idInmueble);
     
         if ($resultadoConsulta) {
             echo json_encode(array('exito' => true, 'mensaje' => 'Servicios de inmueble agregados correctamente'));

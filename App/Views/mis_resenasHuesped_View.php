@@ -99,7 +99,7 @@ session_start();
         
             <div class="col-lg-3 col-6 text-center">
               <span data-purecounter-start="0" id="CalifficacionPorInmueble" data-purecounter-end="<?php echo $resenasRecibidas; ?>" data-purecounter-duration="1" class="purecounter"></span>
-              <p id="p">Reseñas Recibidas</p>
+              <p id="p">Calificaciones Recibidas</p>
             </div>
             
             <div class="col-lg-3 col-6 text-center">
