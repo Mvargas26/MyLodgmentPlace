@@ -1,12 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Merriweather:wght@900&family=Sumana:wght@700&display=swap");
 
-body{
-    background: 
-    -webkit-linear-gradient(rgba(56, 57, 76, 0.9), rgba(63, 55, 77, 0) 80%),
-    -webkit-linear-gradient(-45deg, rgba(56, 57, 76, 0.9) 25%, rgba(255, 160, 65, 0.9) 76%);
-
-}
-
 .cuerpo {
   align-items: center;
   background-color: transparent;
@@ -92,14 +85,14 @@ body{
   width: 160px;
 }
 .name {
-  color: #ffffff;
+  color: #000000;
   font-size: 20px;
   font-weight: 600;
   margin-top: 16px;
   text-align: center;
 }
 .title {
-  color: #ffffff;
+  color: #000000;
   font-family: arial;
   font-size: 14px;
   font-style: italic;
