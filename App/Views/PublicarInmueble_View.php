@@ -435,7 +435,7 @@ if (isset($_SESSION["Identificacion"])) {
         <form action="" method="post" role="form" enctype="multipart/form-data">
 
             <div class="section-title">
-                <input type="text" id="ArrayServicios" value="[{}]">
+                <input type="text" id="ArrayServicios" value="">
                 <h2>Servicios</h2>
                 <p>¡Los servicios mejorarán la calidad de tu espacio!</p>
 
@@ -454,48 +454,11 @@ if (isset($_SESSION["Identificacion"])) {
                 
             </div>
             
-        </form>
-        
+        </form>       
             <hr/>
-            <script>          
-                // var hiddenInputs = document.querySelectorAll('.hiddenInput');
-                
-                // console.log(hiddenInputs);
-                // var valoresSeleccionados = [];
-                
-                // // Función para manejar el cambio en los checkboxes
-                // function handleCheckboxChange(event) {
-                    
-                //     // Encuentra el input hidden asociado al checkbox
-                //     var hiddenInput = event.target.parentElement.querySelector('.hiddenInput');
-                    
-                    
-                //     // Verifica si el checkbox está marcado o desmarcado
-                //     if (event.target.checked) {
-                //                 // Si está marcado, agrega el valor al array
-                //                 valoresSeleccionados.push(hiddenInput.value);
-                //             } else {
-                //                 // Si está desmarcado, elimina el valor del array
-                //                 var index = valoresSeleccionados.indexOf(hiddenInput.value);
-                //                 if (index !== -1) {
-                //                     valoresSeleccionados.splice(index, 1);
-                //                 }
-                //             }
-                            
-                //             var ArrayServicios = document.getElementById("ArrayServicios");
-                            
-                //             // ArrayServicios.value = JSON.stringify(valoresSeleccionados);
-                //             console.log(valoresSeleccionados);
-                // }
-                        
-                        
-                // hiddenInputs.forEach(function (hiddenInput) {
-                //     var checkbox = hiddenInput.parentElement.querySelector('input[type="checkbox"]');
-                //     checkbox.addEventListener('change', handleCheckboxChange);
-                // }); 
-        </script>
     </section><!-- End Services Section -->
             
+
     <section id="Amenidades" class="form-section">
     <img src="../assets/img/publicarinmueble/PASOS5.png" alt="">
     <div style="display: flex; justify-content: center; align-content: center;">
@@ -504,10 +467,10 @@ if (isset($_SESSION["Identificacion"])) {
 
     <br>
     <br>
-    <a class="bar-anchor" href="../../" >
+    <!-- <a class="bar-anchor" href="../../" >
         <span>Finalizar</span>
         <div class="transition-bar"></div>
-    </a>
+    </a> -->
     
     
     </section>

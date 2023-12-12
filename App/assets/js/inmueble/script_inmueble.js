@@ -3,52 +3,8 @@ const sections = document.querySelectorAll('.form-section');
 const nextButton = document.getElementById('nextButton');
 
 document.addEventListener('DOMContentLoaded', function () {
-    // Oculta la página al principio
-    // document.body.style.display = 'none';
     window.addEventListener('load', function () {
-        // document.body.style.display = 'block';
-
-        // Espera a que la ventana se cargue completamente
-        // Muestra la página después de que todo se haya cargado
-        // var hiddenInputs = document.querySelectorAll('.hiddenInput');
-
-        // console.log(hiddenInputs);
-        // var valoresSeleccionados = [];
-
-        // // Función para manejar el cambio en los checkboxes
-        // function handleCheckboxChange(event) {
-
-        //     // Encuentra el input hidden asociado al checkbox
-        //     var hiddenInput = event.target.parentElement.querySelector('.hiddenInput');
-
-
-        //     // Verifica si el checkbox está marcado o desmarcado
-        //     if (event.target.checked) {
-        //                 // Si está marcado, agrega el valor al array
-        //                 valoresSeleccionados.push(hiddenInput.value);
-        //             } else {
-        //                 // Si está desmarcado, elimina el valor del array
-        //                 var index = valoresSeleccionados.indexOf(hiddenInput.value);
-        //                 if (index !== -1) {
-        //                     valoresSeleccionados.splice(index, 1);
-        //                 }
-        //             }
-
-        //             var ArrayServicios = document.getElementById("ArrayServicios");
-
-        //             // ArrayServicios.value = JSON.stringify(valoresSeleccionados);
-        //             console.log(valoresSeleccionados);
-        // }
-
-
-        // hiddenInputs.forEach(function (hiddenInput) {
-        //     var checkbox = hiddenInput.parentElement.querySelector('input[type="checkbox"]');
-        //     checkbox.addEventListener('change', handleCheckboxChange);
-        // });
-
-
-
-
+     
     });
 });
 
@@ -154,9 +110,8 @@ function InsertarInmueble() {
 function Insertar_ServicioInmueble() {
 
     // TENDRA LOS SERVICIOS SELECCIONADOS
-
-
     var ArrayServicios = document.getElementById('ArrayServicios').value;
+
 
     if (ArrayServicios && ArrayServicios.length > 0) {
 
@@ -593,36 +548,36 @@ function sendDataToServer(nombreEspacioU, disponibilidad, valorDiarioU, estadoLu
     });
 
 
-    // if (ArrayServicios && ArrayServicios.length > 0) {
-    //     $.ajax({
-    //         url: "../../App/Modules/inmueble/insertarservicios_Negocios.php",
-    //         type: "POST",
-    //         data: {
-    //             ArrayServicios: ArrayServicios
-    //         },
-    //         success: function (response) {
-    //             try {
-    //                 console.log(response);
-    //                 console.log("Si entra en el succes")
-    //                 var x = JSON.parse(response);
-    //                 if (x.exito == true) {
-    //                     Swal.fire("Éxito", x.mensaje, "success");
-    //                 } else {
-    //                     console.log(x.mensaje);
-    //                     Swal.fire("Error", "Lo sentimos, ocurrió un error. " + x.mensaje, "error");
-    //                 }
-    //             } catch (error) {
-    //                 Swal.fire("Error", "Lo sentimos, ocurrió un error. " + error, "error");
-    //             }
-    //         },
-    //         error: function (xhr, status, error) {
-    //             console.log("Error en la solicitud AJAX servicios:", error);
-    //             Swal.fire("Error", "Ocurrió un error en la comunicación con el servidor.", "error");
-    //         }
-    //     });
-    // } else {
-    //     Swal.fire("Error", "Por favor, completa todos los campos antes de continuar.", "error");//mensaje bonito
-    // }
+    if (ArrayServicios && ArrayServicios.length > 0) {
+        $.ajax({
+            url: "../../App/Modules/inmueble/insertarservicios_Negocios.php",
+            type: "POST",
+            data: {
+                ArrayServicios: ArrayServicios
+            },
+            success: function (response) {
+                try {
+                    console.log(response);
+                    console.log("Si entra en el succes")
+                    var x = JSON.parse(response);
+                    if (x.exito == true) {
+                        Swal.fire("Éxito", x.mensaje, "success");
+                    } else {
+                        console.log(x.mensaje);
+                        Swal.fire("Error", "Lo sentimos, ocurrió un error. " + x.mensaje, "error");
+                    }
+                } catch (error) {
+                    Swal.fire("Error", "Lo sentimos, ocurrió un error. " + error, "error");
+                }
+            },
+            error: function (xhr, status, error) {
+                console.log("Error en la solicitud AJAX servicios:", error);
+                Swal.fire("Error", "Ocurrió un error en la comunicación con el servidor.", "error");
+            }
+        });
+    } else {
+        Swal.fire("Error", "Por favor, completa todos los campos antes de continuar.", "error");//mensaje bonito
+    }
 
 
     if (Cancelacion !== "" && reembolso !== "" &&
