@@ -487,7 +487,7 @@ if (isset($_GET['id'])) {
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <form name="formEvento" id="formEvento" action="nuevoEvento.php" class="form-horizontal" method="POST">
+            <form name="formEvento" id="formEvento" class="form-horizontal" method="POST">
               <div class="form-group">
                 <div class="col-sm-10">
                   <h3>Valor por dia del inmueble: <span id="valorColones">
