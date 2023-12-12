@@ -16,6 +16,17 @@ document.addEventListener('DOMContentLoaded', function () {
         //----oculta el boton reservar
         crearReserva2.style.display = 'none';  // Ocultar el botón
 
+        //escuchar si cambian los datos de entrada
+        cantidadPersonasInput.addEventListener('input', ejecutarValidaciones);
+        cantidadPersonasExtraInput.addEventListener('input', ejecutarValidaciones);
+        cantidadPersonasInput.addEventListener('change', ejecutarValidaciones);
+        cantidadPersonasExtraInput.addEventListener('change', ejecutarValidaciones);
+
+        fechaInicioBC.addEventListener('change', ejecutarValidaciones);
+        fechaFinBC.addEventListener('change', ejecutarValidaciones);
+
+        
+
         //EVENTOS
          ////aqui capturamos la fecha inicio y fecha fin
         //  fechaInicioBC.addEventListener('change', function () {
@@ -37,12 +48,24 @@ document.addEventListener('DOMContentLoaded', function () {
         btnCalcularReserva.addEventListener('click', function () {
             var bol_fechaInicioEsMenor = fechaEsMenorAHoy(fechaInicioBC.value);
             var bol_fechaFinEsMenor = fechaEsMenorAHoy(fechaFinBC.value);
+            var bol_fechafinEsMayor = fechaFinEsMenor(fechaInicioBC.value, fechaFinBC.value);
+
+            if(bol_fechafinEsMayor){
+                Swal.fire("Error", "La fecha de fin no puede ser menor o igual que la fecha de inicio", "error");
+                return;
+            }
 
             if (bol_fechaInicioEsMenor || bol_fechaFinEsMenor) {
                 Swal.fire("Error", "la fecha no puede ser menor a la fecha actual.", "error");
                 return; // Utiliza el mensaje decodificado
             }else{
-            calcularValorTotal(valorDiarioElement,cantidadPersonasInput,cantidadPersonasExtraInput,
+                if (parseInt(cantidadPersonasInput.value) < 1){
+                    Swal.fire("Error", "Debe de ingresar la cantidad de personas primero.", "error");
+                    return;
+                }
+
+        
+                calcularValorTotal(valorDiarioElement,cantidadPersonasInput,cantidadPersonasExtraInput,
                 valorTotalElement,valorTotalImpuestosElement,costoPersonaExtra,fechaInicioBC,fechaFinBC);
 
                 muestraOcultaBtnReservar2(valorTotalElement,valorTotalImpuestosElement);
@@ -59,8 +82,14 @@ document.addEventListener('DOMContentLoaded', function () {
             const fechaInicio = document.getElementById("fechaInicioBC").value;
             const fechaFin = document.getElementById("fechaFinBC").value;
             const Cupon = document.getElementById("Cupon").value;
-            const valorTotal =  parseInt(valorTotalElement.textContent)*1000;
-            const valorTotalImpuestos = parseInt(valorTotalImpuestosElement.textContent)*1000;
+            // se cambia el valor a texto remplazando los signos que dan conflicto
+            const valorTotalTexto = valorTotalElement.textContent.replace(/\./g, '');
+            //se parsea a tipo float
+            const valorTotal =  parseFloat(valorTotalTexto);
+            // se cambia el valor a texto remplazando los signos que dan conflicto
+            const valorTotalImpuestostexto = valorTotalImpuestosElement.textContent.replace(/\./g, '');
+            //se parsea a tipo float
+            const valorTotalImpuestos = parseFloat(valorTotalImpuestostexto);
 
 
             const data = {
@@ -150,6 +179,17 @@ function fechaEsMenorAHoy(fechaStr){
     return false;
 };
 
+//verifica que la fecha fin no sea menor que la de inicio
+function fechaFinEsMenor(fechaInicioStr, fechaFinStr) {
+    const fechaInicio = new Date(fechaInicioStr);
+    const fechaFin = new Date(fechaFinStr);
+
+    if (fechaFin <= fechaInicio) {
+        return true;
+    }
+    return false;
+}
+
 //realiza los calculos por cada botonazo a calcular
 function calcularValorTotal(valorDiarioElement,cantidadPersonasInput,cantidadPersonasExtraInput,valorTotalElement,
     valorTotalImpuestosElement,costoPersonaExtra,fechaInicioBC,fechaFinBC) {
@@ -193,4 +233,52 @@ function buscadorPalabra(cadena, palabra) {
     return estaPresente;
 }//fin buscadorPalabra
 
+//Ejecuta todas las validaciones
+function ejecutarValidaciones() {
+    ocultarBotonReserva();
+    validarCapacidadMaxima();
+    validarPersonasExtra();
+}//fin ocultarBotonReserva
 
+
+//esconde el boton de reservar al cambiarse algun dato de entrada
+function ocultarBotonReserva() {
+    crearReserva2.style.display = 'none';
+}//fin ocultarBotonReserva
+
+function validarCapacidadMaxima() {
+    var capacidadMaxima = parseInt(document.getElementById("capacidadPersonas").value);
+    var cantidadPersonas = document.getElementById("cantidadPersonas");
+    
+    if(cantidadPersonas.value == ""){
+        cantidadPersonas = 0;
+    }
+    else{
+        cantidadPersonas = parseInt(document.getElementById("cantidadPersonas").value);
+    }
+
+    // Verificar si la cantidad total de personas supera la capacidad máxima permitida menos 4
+    if (cantidadPersonas > capacidadMaxima) {
+
+        // Aquí puedes mostrar un mensaje de error o realizar alguna acción específica
+        Swal.fire("Error", "La cantidad de personas excede la capacidad máxima permitida del inmueble (" + capacidadMaxima + ")", "error");
+        cantidadPersonasInput.value = 1;
+        return true;
+    }
+}
+
+function validarPersonasExtra() {
+    var cantidadPersonasExtra = parseInt(document.getElementById("cantidadPersonasExtra").value);
+    
+    if(cantidadPersonasExtra.value == ""){
+        cantidadPersonasExtra = 0;
+    }
+
+    // Verificar si la cantidad total de personas supera la capacidad máxima permitida menos 4
+    if (cantidadPersonasExtra > 4) {
+        // Aquí puedes mostrar un mensaje de error o realizar alguna acción específica
+        Swal.fire("Error", "La cantidad de personas extra excede la capacidad máxima permitida del inmueble (4)", "error");
+        cantidadPersonasExtraInput.value = 0;
+        return true;
+    }
+}
