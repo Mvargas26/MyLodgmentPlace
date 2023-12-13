@@ -23,11 +23,35 @@
                 // Array para almacenar los nombres de las imágenes
                 $nombresImagenes = array();
 
+                // ruta a carpeta de imagenes
+                $directorioDestino = '../../assets/img/ImagenesInmuebles/';
+
                 for ($i = 0; $i < count($inputImagen['name']); $i++) {
                     $nombreArchivo = $inputImagen['name'][$i];
-        
-                    $nombresImagenes[] = $nombreArchivo;
+                    $rutaTemporal = $inputImagen['tmp_name'][$i];
+                    
+                    // Crear un nombre único para la imagen para evitar conflictos
+                    $nombreUnico = uniqid() . '_' . $nombreArchivo;
+                    
+                    // Ruta armada con el nombre
+                    $rutaCompleta = $directorioDestino . trim($nombreUnico);
+                
+                    // Mover la imagen al directorio de destino
+                    if (move_uploaded_file($rutaTemporal, $rutaCompleta)) {
+                        // Agregar el nombre único al array de nombres de imágenes
+                        $nombresImagenes[] = $nombreUnico;
+                    } else {
+                        // Manejar el error si la carga de la imagen falla
+                        echo json_encode(array('exito' => false, 'mensaje' => 'Error al subir la imagen'));
+                        // Puedes agregar un return o un exit aquí si deseas salir del script en caso de error
+                    }
                 }
+
+                // for ($i = 0; $i < count($inputImagen['name']); $i++) {
+                //     $nombreArchivo = $inputImagen['name'][$i];
+        
+                //     $nombresImagenes[] = $nombreArchivo;
+                // }
         
                 // Llamar a la función Insertar_Inmueble con los valores recuperados
                 $resultadoConsulta = $ObjMaster->Insertar_Inmueble(
