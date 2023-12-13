@@ -2616,9 +2616,10 @@ function InsertarMensajes($idEmisor, $idReceptor, $mensaje)
         $idAnfitrion = $this->GetConexion()->real_escape_string($arry_Datos[0]);
 
         try {
-            $query = " SELECT descripcion, fecha
-                    FROM tbnotificaciones
-                    WHERE idUser = $idAnfitrion;";
+            $query = "SELECT descripcion, fecha
+            FROM tbnotificaciones
+            WHERE idUser = $idAnfitrion
+            ORDER BY fecha DESC;";
 
             $this->conn->set_charset("utf8");
             $result = $this->getConexion()->query($query);
