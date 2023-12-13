@@ -1,22 +1,26 @@
 document.addEventListener("DOMContentLoaded", function () {
-    var formValidarInmueble = document.getElementById("formValidarInmueble");
+    var formsValidarInmueble = document.querySelectorAll("[id^='formValidarInmueble']");
 
-    formValidarInmueble.addEventListener("submit", function (event) {
-        event.preventDefault(); 
+    formsValidarInmueble.forEach(function (formValidarInmueble) {
+        formValidarInmueble.addEventListener("submit", function (event) {
+            event.preventDefault();
 
-        var idValidacionimueble = formValidarInmueble.querySelector('input[name="idValidacionimueble"]').value;
-        var nuevoEstadoSelect = formValidarInmueble.querySelector('#nuevoEstado');
-        var nuevoEstado = nuevoEstadoSelect.options[nuevoEstadoSelect.selectedIndex].value;
+            var idValidacionimueble = formValidarInmueble.querySelector('input[name="idValidacionimueble"]').value;
+            var nuevoEstadoSelect = formValidarInmueble.querySelector('#nuevoEstado');
+            var nuevoEstado = nuevoEstadoSelect.options[nuevoEstadoSelect.selectedIndex].value;
 
-        console.log("ID de Validación de Inmueble:", idValidacionimueble);
-        console.log("Nuevo Estado:", nuevoEstado);
+            console.log("ID de Validación de Inmueble:", idValidacionimueble);
+            console.log("Nuevo Estado:", nuevoEstado);
 
-        // Enviar la solicitud al servidor
-        enviarSolicitudAlServidorI(idValidacionimueble, nuevoEstado);
+            // Enviar la solicitud al servidor
+            enviarSolicitudAlServidorI(idValidacionimueble, nuevoEstado);
+        });
     });
 });
 
+
 function enviarSolicitudAlServidorI(idValidacionimueble, nuevoEstado) {
+
     var xhr = new XMLHttpRequest();
 
     xhr.open("POST", "../actualizarestado/actualizar_estado_Negocios.php", true);
@@ -34,4 +38,7 @@ function enviarSolicitudAlServidorI(idValidacionimueble, nuevoEstado) {
     var datos = "idValidacionimueble=" + encodeURIComponent(idValidacionimueble) + "&nuevoEstado=" + encodeURIComponent(nuevoEstado);
 
     xhr.send(datos);
+
+    console.log(xhr);
+    console.log(xhr);
 }

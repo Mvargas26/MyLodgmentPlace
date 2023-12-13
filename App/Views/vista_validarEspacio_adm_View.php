@@ -68,14 +68,14 @@ $inmuebles = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 <!-- <button class="btn btn--block card__btn" onclick="validarInmueble(<?php echo $inmueble['id']; ?>)">Validar Inmueble</button> -->
                                 <!-- Agrega un identificador único al formulario para poder seleccionarlo fácilmente -->
 
-                                <form id="formValidarInmueble" method="post" action="">
+                                <form id="formValidarInmueble<?php echo $inmueble['id']; ?>" method="post" action="">
                                     <input type="hidden" name="idValidacionimueble" value="<?php echo $inmueble['id']; ?>">
                                     <label for="nuevoEstado">Nuevo Estado:</label>
                                     <br>
                                     <div class="box">
                                         <select id="nuevoEstado" name="nuevoEstado">
-                                            <option value="Aprobado">Aprobado</option>
-                                            <option value="Pendiente">Pendiente</option>
+                                            <option value="1">Aprobado</option>
+                                            <option value="2">Pendiente</option>
                                             <!-- <option value="Bloqueado">Bloqueado</option> -->
                                         </select>
                                     </div>
