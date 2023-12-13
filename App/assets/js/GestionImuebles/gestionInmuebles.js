@@ -1,44 +1,52 @@
-document.addEventListener("DOMContentLoaded", function () {
-    var formsValidarInmueble = document.querySelectorAll("[id^='formValidarInmueble']");
+$(document).ready(function () {
+    var formsValidarInmueble = $("[id^='formValidarInmueble']");
 
-    formsValidarInmueble.forEach(function (formValidarInmueble) {
-        formValidarInmueble.addEventListener("submit", function (event) {
+    formsValidarInmueble.each(function () {
+        $(this).submit(function (event) {
             event.preventDefault();
 
-            var idValidacionimueble = formValidarInmueble.querySelector('input[name="idValidacionimueble"]').value;
-            var nuevoEstadoSelect = formValidarInmueble.querySelector('#nuevoEstado');
-            var nuevoEstado = nuevoEstadoSelect.options[nuevoEstadoSelect.selectedIndex].value;
+            var idValidacionimueble = $(this).find('input[name="idValidacionimueble"]').val();
+            var nuevoEstadoSelect = $(this).find('#nuevoEstado');
+            var nuevoEstado = nuevoEstadoSelect.val();
 
             console.log("ID de Validación de Inmueble:", idValidacionimueble);
             console.log("Nuevo Estado:", nuevoEstado);
 
-            // Enviar la solicitud al servidor
             enviarSolicitudAlServidorI(idValidacionimueble, nuevoEstado);
         });
     });
 });
 
-
 function enviarSolicitudAlServidorI(idValidacionimueble, nuevoEstado) {
+    
+    var datos = {
+        idValidacionimueble: idValidacionimueble,
+        nuevoEstado: nuevoEstado
 
-    var xhr = new XMLHttpRequest();
-
-    xhr.open("POST", "../actualizarestado/actualizar_estado_Negocios.php", true);
-
-    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-
-    xhr.onload = function () {
-        if (xhr.status >= 200 && xhr.status < 300) {
-            console.log(xhr.responseText);
-        } else {
-            console.error("Error en la solicitud al servidor");
-        }
     };
 
-    var datos = "idValidacionimueble=" + encodeURIComponent(idValidacionimueble) + "&nuevoEstado=" + encodeURIComponent(nuevoEstado);
+    $.ajax({
+        type: "POST",
+        url: "../../App/Modules/actualizarestado/actualizar_estado_Negocios.php",
+        data:{
 
-    xhr.send(datos);
+            estados: true,
+            idValidacionimueble: idValidacionimueble,
+            nuevoEstado: nuevoEstado
+           
+        },
 
-    console.log(xhr);
-    console.log(xhr);
+        success: function (response) {
+            
+            location.reload();
+            
+        },
+
+        error: function (xhr, status, error) {
+            console.error("Error en la solicitud al servidor:", error);
+            console.log(xhr);
+            console.log(status);
+            
+        }
+    });
 }
