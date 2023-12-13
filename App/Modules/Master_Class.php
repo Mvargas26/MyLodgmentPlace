@@ -1405,7 +1405,8 @@ public function eliminarCupon($idInmueble, $idCupon) {
                     FROM tbfotoinmueble
                     GROUP BY idInmueble
                     LIMIT 1
-                ) AS ft ON mu.id = ft.idInmueble;";
+                ) AS ft ON mu.id = ft.idInmueble
+                where mu.estadoLugar=1;";
 
             $this->conn->set_charset("utf8");
             $result = $this->getConexion()->query($query);
