@@ -11,6 +11,9 @@ document.addEventListener('DOMContentLoaded', function () {
         var btnCalcularReserva = document.getElementById("calcularReserva");
         var crearReserva2 = document.getElementById("crearReserva2");
         var costoPersonaExtra = parseFloat(document.getElementById("costoPersonaExtra").value);
+        var CuponIngresado = document.getElementById("Cupon");
+        var nombreCuponInmueble = document.getElementById("nombreCupon");
+        var descuentoCupon = document.getElementById("descuentoCupon");
 
         //VALIDACIONES
         //----oculta el boton reservar
@@ -19,16 +22,18 @@ document.addEventListener('DOMContentLoaded', function () {
         //escuchar si cambian los datos de entrada
         cantidadPersonasInput.addEventListener('input', ejecutarValidaciones);
         cantidadPersonasExtraInput.addEventListener('input', ejecutarValidaciones);
+        CuponIngresado.addEventListener('input', ocultarBotonReserva);
         cantidadPersonasInput.addEventListener('change', ejecutarValidaciones);
         cantidadPersonasExtraInput.addEventListener('change', ejecutarValidaciones);
+        CuponIngresado.addEventListener('change', ocultarBotonReserva);
 
         fechaInicioBC.addEventListener('change', ejecutarValidaciones);
         fechaFinBC.addEventListener('change', ejecutarValidaciones);
 
-        
+
 
         //EVENTOS
-         ////aqui capturamos la fecha inicio y fecha fin
+        ////aqui capturamos la fecha inicio y fecha fin
         //  fechaInicioBC.addEventListener('change', function () {
         //     var fechaMenor = fechaEsMenorAHoy(fechaInicioBC.value);
         //     if (fechaMenor) {
@@ -49,8 +54,11 @@ document.addEventListener('DOMContentLoaded', function () {
             var bol_fechaInicioEsMenor = fechaEsMenorAHoy(fechaInicioBC.value);
             var bol_fechaFinEsMenor = fechaEsMenorAHoy(fechaFinBC.value);
             var bol_fechafinEsMayor = fechaFinEsMenor(fechaInicioBC.value, fechaFinBC.value);
+            var descuentoCero = 0;
 
-            if(bol_fechafinEsMayor){
+            //validar cupon
+
+            if (bol_fechafinEsMayor) {
                 Swal.fire("Error", "La fecha de fin no puede ser menor o igual que la fecha de inicio", "error");
                 return;
             }
@@ -58,17 +66,28 @@ document.addEventListener('DOMContentLoaded', function () {
             if (bol_fechaInicioEsMenor || bol_fechaFinEsMenor) {
                 Swal.fire("Error", "la fecha no puede ser menor a la fecha actual.", "error");
                 return; // Utiliza el mensaje decodificado
-            }else{
-                if (parseInt(cantidadPersonasInput.value) < 1){
+            } else {
+                if (parseInt(cantidadPersonasInput.value) < 1) {
                     Swal.fire("Error", "Debe de ingresar la cantidad de personas primero.", "error");
                     return;
+                } else if (CuponIngresado.value != "") {
+                    if ((CuponIngresado.value).trim() != (nombreCuponInmueble.value).trim()) {
+                        Swal.fire("Aviso", "El cupon ingresado no es valido.", "error");
+                        
+                        calcularValorTotal(valorDiarioElement, cantidadPersonasInput, cantidadPersonasExtraInput,
+                            valorTotalElement, valorTotalImpuestosElement, costoPersonaExtra, fechaInicioBC, fechaFinBC, descuentoCero);
+                    } else {
+                        calcularValorTotal(valorDiarioElement, cantidadPersonasInput, cantidadPersonasExtraInput,
+                            valorTotalElement, valorTotalImpuestosElement, costoPersonaExtra, fechaInicioBC, fechaFinBC, descuentoCupon.value);
+    
+                        muestraOcultaBtnReservar2(valorTotalElement, valorTotalImpuestosElement);
+                    }
+                } else {
+                    calcularValorTotal(valorDiarioElement, cantidadPersonasInput, cantidadPersonasExtraInput,
+                        valorTotalElement, valorTotalImpuestosElement, costoPersonaExtra, fechaInicioBC, fechaFinBC, descuentoCero);
+
+                    muestraOcultaBtnReservar2(valorTotalElement, valorTotalImpuestosElement);
                 }
-
-        
-                calcularValorTotal(valorDiarioElement,cantidadPersonasInput,cantidadPersonasExtraInput,
-                valorTotalElement,valorTotalImpuestosElement,costoPersonaExtra,fechaInicioBC,fechaFinBC);
-
-                muestraOcultaBtnReservar2(valorTotalElement,valorTotalImpuestosElement);
             };
         });
 
@@ -85,7 +104,7 @@ document.addEventListener('DOMContentLoaded', function () {
             // se cambia el valor a texto remplazando los signos que dan conflicto
             const valorTotalTexto = valorTotalElement.textContent.replace(/\./g, '');
             //se parsea a tipo float
-            const valorTotal =  parseFloat(valorTotalTexto);
+            const valorTotal = parseFloat(valorTotalTexto);
             // se cambia el valor a texto remplazando los signos que dan conflicto
             const valorTotalImpuestostexto = valorTotalImpuestosElement.textContent.replace(/\./g, '');
             //se parsea a tipo float
@@ -108,38 +127,37 @@ document.addEventListener('DOMContentLoaded', function () {
             $.ajax({
                 url: "../../App/Modules/ReservaLugar/ReservaLugar_Negocios.php",
                 type: "POST",
-                data: data,              
-                success: function(response) 
-                {
-                     if (response!="") {
+                data: data,
+                success: function (response) {
+                    if (response != "") {
 
                         //si la cadena trae esta palabra, no tiene cuenta o el saldo era menor al total
-                         if (buscadorPalabra(response, "saldoEsMenor")) {
-                             Swal.fire("Error", "Lo sentimos, no cuenta con saldo suficiente en su cuenta.", "error");
-                             setTimeout(function () {
-                                 location.reload(true);
-                             }, 2000);
-                         }else{
+                        if (buscadorPalabra(response, "saldoEsMenor")) {
+                            Swal.fire("Error", "Lo sentimos, no cuenta con saldo suficiente en su cuenta.", "error");
+                            setTimeout(function () {
+                                location.reload(true);
+                            }, 2000);
+                        } else {
 
                             Swal.fire("Éxito", "Reserva creada exitosamente", "success"); // Utiliza el mensaje decodificado
-                        setTimeout(function () {
-                            location.reload(true);
-                        }, 2000);
+                            setTimeout(function () {
+                                location.reload(true);
+                            }, 2000);
 
-                         }
-                        
+                        }
 
-                     } else {
-                         console.log(x.response);
+
+                    } else {
+                        console.log(x.response);
                         Swal.fire("Error", "Lo sentimos, ocurrió un error.", "error");
-                     }
-                   
+                    }
+
                 },
-                error: function(textStatus, errorThrown) {
+                error: function (textStatus, errorThrown) {
                     console.error('Error en la solicitud AJAX:', textStatus, errorThrown);
-                 }
+                }
             });
-           
+
         });
 
 
@@ -165,13 +183,13 @@ function calcularDiferenciaDias(fechaInicioStr, fechaFinStr) {
 };//fn calcularDiferenciaDias
 //----------------------------------------
 //valida si la fecha ingresada es menor a la de hoy
-function fechaEsMenorAHoy(fechaStr){
+function fechaEsMenorAHoy(fechaStr) {
 
     const fechaIngresada = new Date(fechaStr);
     const fechaActual = new Date();
 
     if (fechaIngresada <= fechaActual) {
-        
+
         Swal.fire("Error", "La fecha Inicial no puede ser menor a la fecha actual", "error");//mensaje bonito
         return true;
     }
@@ -191,21 +209,25 @@ function fechaFinEsMenor(fechaInicioStr, fechaFinStr) {
 }
 
 //realiza los calculos por cada botonazo a calcular
-function calcularValorTotal(valorDiarioElement,cantidadPersonasInput,cantidadPersonasExtraInput,valorTotalElement,
-    valorTotalImpuestosElement,costoPersonaExtra,fechaInicioBC,fechaFinBC) {
+function calcularValorTotal(valorDiarioElement, cantidadPersonasInput, cantidadPersonasExtraInput, valorTotalElement,
+    valorTotalImpuestosElement, costoPersonaExtra, fechaInicioBC, fechaFinBC, descuentoCupon) {
     var valorDiario = parseFloat(valorDiarioElement.textContent.replace(/\D/g, ''));
-    var cantidadDias = calcularDiferenciaDias(fechaInicioBC.value,fechaFinBC.value);
+    var cantidadDias = calcularDiferenciaDias(fechaInicioBC.value, fechaFinBC.value);
     var cantidadPersonasExtra = parseInt(cantidadPersonasExtraInput.value);
 
     if (cantidadPersonasExtra == 0 || cantidadPersonasInput.value == 0) {
-        var valorTotal = ((valorDiario+(valorDiario*0.05))/100) * cantidadDias;
+        var valorTotal = ((valorDiario - (valorDiario * (0.05 + (descuentoCupon / 100)))) / 100) * cantidadDias;
         var totalImpuestos = (valorTotal + (valorTotal * 0.13));
 
         valorTotalElement.textContent = valorTotal.toLocaleString();
         valorTotalImpuestosElement.textContent = totalImpuestos.toLocaleString();
     }
     else {
-        var valorTotal = (((costoPersonaExtra * cantidadPersonasExtra) + ((valorDiario+(valorDiario*0.05)) / 100)) * cantidadDias);
+
+        var CostoExtraTotal = costoPersonaExtra * cantidadPersonasExtra;
+        var CostoSinDescuentos = CostoExtraTotal + (valorDiario/100);
+
+        var valorTotal = ((CostoSinDescuentos - (CostoSinDescuentos * (0.05 + (descuentoCupon / 100))))) * cantidadDias;
         var totalImpuestos = valorTotal + (valorTotal * 0.13)
         // if (cantidadDias > 0) {
         valorTotalElement.textContent = valorTotal.toLocaleString();
@@ -213,16 +235,16 @@ function calcularValorTotal(valorDiarioElement,cantidadPersonasInput,cantidadPer
     }
 }//fin calcularValorTotal
 
-function muestraOcultaBtnReservar2(valorTotalElement,valorTotalImpuestosElement) {
+function muestraOcultaBtnReservar2(valorTotalElement, valorTotalImpuestosElement) {
     // Verificar si ambos valores son 0 y ocultar o mostrar el botón
     if (valorTotalElement.innerText === '0' && valorTotalImpuestosElement.innerText === '0') {
-      crearReserva2.style.display = 'none';  // Ocultar el botón
+        crearReserva2.style.display = 'none';  // Ocultar el botón
     } else {
         crearReserva2.style.display = 'block'; // Mostrar el botón
     }
-  }
+}
 
-  //buscara si hay una palabra x en el response
+//buscara si hay una palabra x en el response
 function buscadorPalabra(cadena, palabra) {
     const cadenaEnMinusculas = cadena.toLowerCase();
     const palabraEnMinusculas = palabra.toLowerCase();
@@ -249,11 +271,11 @@ function ocultarBotonReserva() {
 function validarCapacidadMaxima() {
     var capacidadMaxima = parseInt(document.getElementById("capacidadPersonas").value);
     var cantidadPersonas = document.getElementById("cantidadPersonas");
-    
-    if(cantidadPersonas.value == ""){
+
+    if (cantidadPersonas.value == "") {
         cantidadPersonas = 0;
     }
-    else{
+    else {
         cantidadPersonas = parseInt(document.getElementById("cantidadPersonas").value);
     }
 
@@ -269,8 +291,8 @@ function validarCapacidadMaxima() {
 
 function validarPersonasExtra() {
     var cantidadPersonasExtra = parseInt(document.getElementById("cantidadPersonasExtra").value);
-    
-    if(cantidadPersonasExtra.value == ""){
+
+    if (cantidadPersonasExtra.value == "") {
         cantidadPersonasExtra = 0;
     }
 

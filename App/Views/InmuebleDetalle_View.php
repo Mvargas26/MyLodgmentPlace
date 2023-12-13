@@ -8,30 +8,54 @@ session_start();
 
 if (isset($_GET['id'])) {
   $idInmueble = $_GET['id'];
-  
-  
+
+
   $idUsuario = $_SESSION['Identificacion'];
 
   $SqlEventos = "SELECT * FROM tbreserva WHERE idInmueble = $idInmueble";
 
-$resulEventos = mysqli_query($con, $SqlEventos);
+  $resulEventos = mysqli_query($con, $SqlEventos);
 
-$fechaInicio = date('Y-m-d');
-$fechaFin = date('Y-m-d');
-
+  $fechaInicio = date('Y-m-d');
+  $fechaFin = date('Y-m-d');
 }
 
-if(1===1){
+if (1 === 1) {
   $query = "SELECT `Propietario` FROM `tbinmueble` WHERE id = $idInmueble";
 
   $resultadoConsulta = mysqli_query($con, $query);
-  
+
   if ($resultadoConsulta) {
-      $fila = mysqli_fetch_assoc($resultadoConsulta);
-      $propietario = $fila['Propietario'];
-      // Usar $propietario según sea necesario
+    $fila = mysqli_fetch_assoc($resultadoConsulta);
+    $propietario = $fila['Propietario'];
+    // Usar $propietario según sea necesario
   } else {
-      // Manejar el caso en que la consulta falle
+    // Manejar el caso en que la consulta falle
+  }
+}
+
+if (isset($_GET['id'])) {
+  $idInmueble = $_GET['id'];
+  
+  // Obtener la fecha actual en el formato de MySQL (YYYY-MM-DD)
+  $fechaActual = date('Y-m-d');
+
+  $consultaCupon = "SELECT tbdescuento.idCupon, tbdescuento.Monto 
+                    FROM tbinmueblecupon 
+                    INNER JOIN tbdescuento ON tbinmueblecupon.idCupon = tbdescuento.idCupon 
+                    WHERE tbinmueblecupon.idInmueble = $idInmueble 
+                    AND tbinmueblecupon.fechaVencimiento > '$fechaActual' 
+                    LIMIT 1";
+
+  $resultadoConsulta = mysqli_query($con, $consultaCupon);
+
+  if ($resultadoConsulta && mysqli_num_rows($resultadoConsulta) > 0) {
+    $fila = mysqli_fetch_assoc($resultadoConsulta);
+    $nombreCupon = $fila['idCupon'];
+    $descuentoCupon = $fila['Monto'];
+    // Usar $nombreCupon y $descuentoCupon según sea necesario
+  } else {
+    // Manejar el caso en que la consulta no devuelve datos
   }
 }
 
@@ -56,10 +80,13 @@ if (isset($_GET['id'])) {
     <h1 hidden>
       <?php echo $idInmuebleDetalle ?>
     </h1>
-    <input id='saldo' type="text" value="<?php echo $saldo ?>"  hidden></input>
+    <!-- <input id='saldo' type="text" value="<?php echo $saldo ?>" hidden></input> -->
     <input id='idUsuario' type="text" value="<?php echo $idUsuario ?>" hidden></input>
     <input id='cedulaDuenno' type="text" value="<?php echo $propietario ?>" hidden></input>
-    
+
+    <input id='nombreCupon' type="text" value="<?php echo isset($nombreCupon) ? $nombreCupon : ''; ?>" hidden></input>
+    <input id='descuentoCupon' type="text" value="<?php echo isset($descuentoCupon) ? $descuentoCupon : ''; ?>" hidden></input>
+
     <!-- ----------------------------------------------------- -->
     <!-- PRIMERO HACE LA CONSULTA DE LOS DATOS DEL INMUEBLE -->
     <!-- SEGUN EL ID QUE RECIBIO POR URL -->
@@ -84,7 +111,7 @@ if (isset($_GET['id'])) {
 
 
 
-        <h1>Informacion del espacio</h1>
+      <h1>Informacion del espacio</h1>
 
 
       </div>
@@ -217,13 +244,13 @@ if (isset($_GET['id'])) {
                   foreach ($datos as $dato) {
                     $nuevoValor = $dato['capacidadPersonas'] - 4;
 
-                    echo $nuevoValor;?>
-                      <input id='capacidadPersonas' type="text" value="<?php echo $nuevoValor ?>"  hidden></input>
-                    <?php
+                    echo $nuevoValor; ?>
+                    <input id='capacidadPersonas' type="text" value="<?php echo $nuevoValor ?>" hidden></input>
+                  <?php
                     break;
                   }
                   ?><br>
-                  
+
                   <!-- ----------------------------------------------------- -->
 
                   <strong>Capacidad de Personas Extra: 4</strong>
@@ -388,7 +415,7 @@ if (isset($_GET['id'])) {
     <!-- ================================================================================== -->
     <!-- CALENDARIO -->
     <!-- ================================================================================== -->
-    
+
     <div id="CalendarioDiv">
       <section>
         <div class="container">
@@ -478,111 +505,116 @@ if (isset($_GET['id'])) {
         </div>
     </div>
 
-    
+
     <div class="container">
-        <div id="CardTarifaEspecial">
-          <h4><i class="fas fa-tree" style="color: #045400"></i> Tarifa Especial: Descuento del 5% por fecha navideña</h4>
-        </div>
+      <div id="CardTarifaEspecial">
+        <h4><i class="fas fa-tree" style="color: #045400"></i> Tarifa Especial: Descuento del 5% por fecha navideña</h4>
+      </div>
 
 
       <div class="container">
-      <div class="" id="" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">Reservar espacio</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
+        <div class="" id="" tabindex="-1" role="dialog">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Reservar espacio</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <form name="formEvento" id="formEvento" class="form-horizontal" method="POST">
+                <div class="form-group">
+                  <div class="col-sm-10">
+                    <h3>Valor por dia del inmueble: <span id="valorColones">
+                        <?php echo $dato['valorDiario'] ?>
+                      </span> colones</h1>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="cantidadPersonas" class="col-sm-12 control-label">Cantidad de personas</label>
+                  <div class="col-sm-10">
+                    <input type="number" class="form-control" name="cantidadPersonas" id="cantidadPersonas" min="0" value="0" placeholder="Cantidad de Personas">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="cantidadPersonasExtra" class="col-sm-12 control-label">Cantidad de personas extra</label>
+                  <div class="col-sm-10">
+                    <input type="number" class="form-control" name="cantidadPersonasExtra" id="cantidadPersonasExtra" min="0" value="0" max="5" placeholder="Cantidad de Personas">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="fechaInicio" class="col-sm-12 control-label">Fecha Ingreso</label>
+                  <div class="col-sm-10">
+                    <?php
+                    // Obtener la fecha actual y sumarle 4 días
+                    $fechaMas1Dia = date('Y-m-d', strtotime('+1 days'));
+                    ?>
+                    <!-- <input type="date" class="form-control" name="fechaInicio" id="fechaInicio" placeholder="Fecha Inicio"> -->
+                    <input type="date" id="fechaInicio" name="fechaInicio" value="<?php echo $fechaMas1Dia; ?>" hidden>
+                    <input type="date" id="fechaInicioBC" name="fechaInicioBC" value="<?php echo $fechaMas1Dia; ?>">
+
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="fechaFin" class="col-sm-12 control-label">Fecha Salida</label>
+                  <div class="col-sm-10">
+                    <?php
+                    // Obtener la fecha actual y sumarle 4 días
+                    $fechaMas4Dias = date('Y-m-d', strtotime('+4 days'));
+                    ?>
+                    <input type="date" id="fechaFin" name="fechaFin" value="<?php echo $fechaMas4Dias; ?>" hidden>
+                    <input type="date" id="fechaFinBC" name="fechaFinBC" value="<?php echo $fechaMas4Dias; ?>">
+                    <!-- <input type="date" class="form-control" name="fechaFin" id="fechaFin" placeholder="Fecha Final"> -->
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="Cupon" class="col-sm-12 control-label">Cupon de descuento</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" name="Cupon" id="Cupon" placeholder="Cupon de descuento">
+                  </div>
+                  <?php if (isset($nombreCupon) && isset($descuentoCupon) && $nombreCupon !== '' && $descuentoCupon !== '') { ?>
+                    <div class="col-sm-12">
+                      <?php echo "Ingresa  " . $nombreCupon . " para obtener un descuento del " . intval($descuentoCupon) . "% en tu reserva."; ?>
+                    </div>
+                  <?php } ?>
+                </div>
+
+                <div class="form-group">
+                  <div class="col-sm-10">
+                    <!-- inicio campos hidden para el calculo previo -->
+                    <input type="hidden" id="idInmueble" value="<?php echo $dato['id']; ?>">
+                    <input type="hidden" id="valorDiario" value="<?php echo $dato['valorDiario']; ?>">
+                    <input type="hidden" id="capacidadMaxima" value="<?php echo $dato['capacidadPersonas']; ?>">
+                    <input type="hidden" id="costoPersonaExtra" value="<?php echo $dato['costoPersonaExtra']; ?>">
+                    <input type="hidden" id="idUsuario" value="<?php echo $Session['Identificacion']; ?>">
+                    <!-- fin campos hidden para el calculo previo -->
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-sm-10">
+                    <h5>Total sin impuestos: <span id="valorTotal">0</span> colones</h5>
+                    <h5>Total con impuestos: <span id="valorTotalImpuestos">0</span> colones</h5>
+                  </div>
+                </div>
+
+
+
+                <!-- Nuevo contenedor para mostrar el valor total -->
+
+                <div class="modal-footer">
+                  <button type="submit" id="crearReserva" class="btn btn-success" hidden>Reservar lugar</button>
+                  <button type="button" id="calcularReserva" name="calcularReserva" class="btn btn-info">Calcular <i class="fa-solid fa-calculator"></i> </button>
+                  <button type="button" id="crearReserva2" class="btn btn-success">Reservar <i class="fa-solid fa-check"></i> </button>
+                </div>
+              </form>
             </div>
-            <form name="formEvento" id="formEvento" class="form-horizontal" method="POST">
-              <div class="form-group">
-                <div class="col-sm-10">
-                  <h3>Valor por dia del inmueble: <span id="valorColones">
-                      <?php echo $dato['valorDiario'] ?>
-                    </span> colones</h1>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="cantidadPersonas" class="col-sm-12 control-label">Cantidad de personas</label>
-                <div class="col-sm-10">
-                  <input type="number" class="form-control" name="cantidadPersonas" id="cantidadPersonas" min="0" value="0" placeholder="Cantidad de Personas">
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="cantidadPersonasExtra" class="col-sm-12 control-label">Cantidad de personas extra</label>
-                <div class="col-sm-10">
-                  <input type="number" class="form-control" name="cantidadPersonasExtra" id="cantidadPersonasExtra" min="0" value="0" max="5" placeholder="Cantidad de Personas">
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label for="fechaInicio" class="col-sm-12 control-label">Fecha Ingreso</label>
-                <div class="col-sm-10">
-                <?php 
-                // Obtener la fecha actual y sumarle 4 días
-                $fechaMas1Dia = date('Y-m-d', strtotime('+1 days'));         
-                ?> 
-                  <!-- <input type="date" class="form-control" name="fechaInicio" id="fechaInicio" placeholder="Fecha Inicio"> -->
-                  <input type="date" id="fechaInicio" name="fechaInicio" value="<?php echo $fechaMas1Dia; ?>" hidden>
-                  <input type="date" id="fechaInicioBC" name="fechaInicioBC" value="<?php echo $fechaMas1Dia; ?>" >
-
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="fechaFin" class="col-sm-12 control-label">Fecha Salida</label>
-                <div class="col-sm-10">
-                <?php 
-                // Obtener la fecha actual y sumarle 4 días
-                $fechaMas4Dias = date('Y-m-d', strtotime('+4 days'));
-                ?> 
-                <input type="date" id="fechaFin" name="fechaFin" value="<?php echo $fechaMas4Dias; ?>" hidden>
-                <input type="date" id="fechaFinBC" name="fechaFinBC" value="<?php echo $fechaMas4Dias; ?>" >
-                  <!-- <input type="date" class="form-control" name="fechaFin" id="fechaFin" placeholder="Fecha Final"> -->
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label for="Cupon" class="col-sm-12 control-label">Cupon de descuento</label>
-                <div class="col-sm-10">
-                  <input type="text" class="form-control" name="Cupon" id="Cupon" placeholder="Cupon de descuento">
-                </div>
-              </div>
-
-              <div class="form-group">
-                <div class="col-sm-10">
-                  <!-- inicio campos hidden para el calculo previo -->
-                  <input type="hidden" id="idInmueble" value="<?php echo $dato['id']; ?>">
-                  <input type="hidden" id="valorDiario" value="<?php echo $dato['valorDiario']; ?>">
-                  <input type="hidden" id="capacidadMaxima" value="<?php echo $dato['capacidadPersonas']; ?>">
-                  <input type="hidden" id="costoPersonaExtra" value="<?php echo $dato['costoPersonaExtra']; ?>">
-                  <input type="hidden" id="idUsuario" value="<?php echo $Session['Identificacion']; ?>">
-                  <!-- fin campos hidden para el calculo previo -->
-                </div>
-              </div>
-              <div class="form-group">
-                <div class="col-sm-10">
-                  <h5>Total sin impuestos: <span id="valorTotal">0</span> colones</h5>
-                  <h5>Total con impuestos: <span id="valorTotalImpuestos">0</span> colones</h5>
-                </div>
-              </div>
-
-
-
-              <!-- Nuevo contenedor para mostrar el valor total -->
-
-              <div class="modal-footer">
-                <button type="submit" id="crearReserva" class="btn btn-success" hidden>Reservar lugar</button>
-                <button type="button" id="calcularReserva" name="calcularReserva"  class="btn btn-info">Calcular <i class="fa-solid fa-calculator"></i> </button>
-                <button type="button" id="crearReserva2" class="btn btn-success" >Reservar <i class="fa-solid fa-check"></i> </button>
-              </div>
-            </form>
           </div>
         </div>
       </div>
-    </div>
 
-    </section>
+      </section>
     </div>
 
     <!-- colores -->
@@ -630,27 +662,27 @@ if (isset($_GET['id'])) {
 
             <textarea id="resenaTextarea" name="resena" rows="3" placeholder="Escribe tu reseña aquí..." maxlength="100"></textarea> -->
 
-            <!--  -->
-            <?php
-            // if (isset($_SESSION["nombre"])) {
-            ?>
-              <!-- <button class="custom-button" type="button">Publicar Reseña</button> -->
-            <?php
+      <!--  -->
+      <?php
+      // if (isset($_SESSION["nombre"])) {
+      ?>
+      <!-- <button class="custom-button" type="button">Publicar Reseña</button> -->
+      <?php
 
-            // } else {
-            ?>
-              <!-- <p style="font-family: inherit;">Debes tener una cuenta para comentar!
+      // } else {
+      ?>
+      <!-- <p style="font-family: inherit;">Debes tener una cuenta para comentar!
                 <a class="nav-link scrollto" style="color: #f4572c;" href="Login_View.php">Iniciar Sesion</a>
                 <a class="nav-link scrollto" style="color: #f4572c;" href="registro_View.php">Registrarse</a>
               </p> -->
-            <?php
+      <?php
 
-            // }
-            ?>
+      // }
+      ?>
 
 
 
-          <!-- </form>
+      <!-- </form>
         </div>
         <input type="hidden" id="estrellasSeleccionadas" value="1">
       </section> end section deja tu resena -->
@@ -728,19 +760,19 @@ if (isset($_GET['id'])) {
 
     </div>
 
-<!-- consumo de api -->
+    <!-- consumo de api -->
 
 
-<!-- //ASD -->
+    <!-- //ASD -->
 
 
-<!-- <script>alert(<?php echo $saldo ?>);</script> -->
+    <!-- <script>alert(<?php echo $saldo ?>);</script> -->
 
 
-<!-- //ASD -->
+    <!-- //ASD -->
 
 
-<!-- -->
+    <!-- -->
 
     <!-- <script>
     document.addEventListener("DOMContentLoaded", function () {
@@ -851,7 +883,7 @@ if (isset($_GET['id'])) {
   <!-- <script src="../assets/js/calculoPrevioReserva/script.js"></script> -->
   <!-- <script src="../assets/js/calculoPrevioReserva/calculoPrevioJS.js"></script> -->
 
-   
+
 
 <?php
 } else {
