@@ -1514,6 +1514,40 @@ public function eliminarCupon($idInmueble, $idCupon) {
         }
     } //fn ConsultarInmueble POR ID
 
+    function ConsultarInmueblesSinValidar(){
+        try {
+            $query = "SELECT id,i.nombre AS nombreInm,Propietario,  CONCAT(u.nombre, ' ', u.apellido1) AS nombrePropietario
+            FROM tbinmueble i
+            inner Join tbusuario u ON
+            i.Propietario = u.idUser 
+            WHERE estadoLugar =2;";
+
+            $this->conn->set_charset("utf8");
+            $result = $this->getConexion()->query($query);
+
+            if ($result) {
+                $data = array();
+
+                while ($row = $result->fetch_assoc()) {
+                    $item = array(
+                        "id" => $row['id'],
+                        "nombreInm" => $row["nombreInm"],
+                        "Propietario" => $row["Propietario"],
+                        "nombrePropietario" => $row["nombrePropietario"],
+                    );
+                    $data[] = $item;
+                }
+
+                return json_encode($data);
+            } else {
+                throw new Exception("Error en la consulta: " . $this->getConexion()->error);
+            }
+        } catch (Exception $e) {
+            error_log($e->getMessage());
+            return null; // Retorna null en caso de error
+        } 
+    }
+
     // =========================================================================================================
 // ============RESEÑAS============RESEÑAS=============RESEÑAS==============RESEÑAS==========================
 // =========================================================================================================
