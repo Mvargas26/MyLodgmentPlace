@@ -31,6 +31,9 @@
                     return;
                 }        
 
+                //metodo para validar el cupon
+                
+
                 //rebaja la plata
                 $resultado = consumirEndpointPOST($propietario, $usuario, $monto);
                 $resultadoApiDecodificado =json_encode( $resultado);
