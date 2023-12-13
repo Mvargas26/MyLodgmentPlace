@@ -21,7 +21,7 @@ $sql = "SELECT tbinmueble.*, tbfotoinmueble.nombreImagen, tbestadolugar.Estado a
         FROM tbinmueble
         LEFT JOIN tbfotoinmueble ON tbinmueble.id = tbfotoinmueble.idFotoInmueble
         LEFT JOIN tbestadolugar ON tbinmueble.estadoLugar = tbestadolugar.idEstado
-        WHERE tbinmueble.Propietario = :idUser";
+        WHERE tbinmueble.Propietario = :idUser and tbinmueble.estadoLugar = 2" ;
 
 $stmt = $pdo->prepare($sql);
 $stmt->bindParam(':idUser', $idUser, PDO::PARAM_INT);
@@ -93,5 +93,5 @@ $inmuebles = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </main>
 
 <script src="../assets/js/GestionImuebles/gestionInmuebles.js"></script>
-
+ 
 <?php include './templates/Footer.php'; ?>
