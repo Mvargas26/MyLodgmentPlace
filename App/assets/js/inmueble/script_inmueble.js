@@ -521,97 +521,97 @@ function sendDataToServer(nombreEspacioU, disponibilidad, valorDiarioU, estadoLu
         }
     });
 
-    $.ajax({
-        url: "../../App/Modules/inmueble/insertarCaracteristicas_Negocios.php",
-        type: "POST",
-        data: Caracteristicas,
-        contentType: false, // No establecer contentType
-        processData: false, // No procesar datos
-        success: function (response) {
-            console.log(response);
-            console.log("Si entra en el succes")
-            var x = JSON.parse(response);
-            if (x.exito == true) {
+    // $.ajax({
+    //     url: "../../App/Modules/inmueble/insertarCaracteristicas_Negocios.php",
+    //     type: "POST",
+    //     data: Caracteristicas,
+    //     contentType: false, // No establecer contentType
+    //     processData: false, // No procesar datos
+    //     success: function (response) {
+    //         console.log(response);
+    //         console.log("Si entra en el succes")
+    //         var x = JSON.parse(response);
+    //         if (x.exito == true) {
                 
-                Swal.fire("Éxito", x.mensaje, "success");
+    //             // Swal.fire("Éxito", x.mensaje, "success");
 
 
-            } else {
-                console.log(x.mensaje);
-                Swal.fire("Error", "Lo sentimos, ocurrió un error. " + x.mensaje, "error");
-            }
-        },
-        error: function (xhr, status, error) {
-            console.log("Error en la solicitud AJAX inmueble:", error);
-            Swal.fire("Error", "Ocurrió un error en la comunicación con el servidor.", "error");
-        }
-    });
+    //         } else {
+    //             console.log(x.mensaje);
+    //             // Swal.fire("Error", "Lo sentimos, ocurrió un error. " + x.mensaje, "error");
+    //         }
+    //     },
+    //     error: function (xhr, status, error) {
+    //         // console.log("Error en la solicitud AJAX inmueble:", error);
+    //         // Swal.fire("Error", "Ocurrió un error en la comunicación con el servidor.", "error");
+    //     }
+    // });
 
 
-    if (ArrayServicios && ArrayServicios.length > 0) {
-        $.ajax({
-            url: "../../App/Modules/inmueble/insertarservicios_Negocios.php",
-            type: "POST",
-            data: {
-                ArrayServicios: ArrayServicios
-            },
-            success: function (response) {
-                try {
-                    console.log(response);
-                    console.log("Si entra en el succes")
-                    var x = JSON.parse(response);
-                    if (x.exito == true) {
-                        Swal.fire("Éxito", x.mensaje, "success");
-                    } else {
-                        console.log(x.mensaje);
-                        Swal.fire("Error", "Lo sentimos, ocurrió un error. " + x.mensaje, "error");
-                    }
-                } catch (error) {
-                    Swal.fire("Error", "Lo sentimos, ocurrió un error. " + error, "error");
-                }
-            },
-            error: function (xhr, status, error) {
-                console.log("Error en la solicitud AJAX servicios:", error);
-                Swal.fire("Error", "Ocurrió un error en la comunicación con el servidor.", "error");
-            }
-        });
-    } else {
-        Swal.fire("Error", "Por favor, completa todos los campos antes de continuar.", "error");//mensaje bonito
-    }
+    // if (ArrayServicios && ArrayServicios.length > 0) {
+    //     $.ajax({
+    //         url: "../../App/Modules/inmueble/insertarservicios_Negocios.php",
+    //         type: "POST",
+    //         data: {
+    //             ArrayServicios: ArrayServicios
+    //         },
+    //         success: function (response) {
+    //             try {
+    //                 console.log(response);
+    //                 console.log("Si entra en el succes")
+    //                 var x = JSON.parse(response);
+    //                 if (x.exito == true) {
+    //                     Swal.fire("Éxito", x.mensaje, "success");
+    //                 } else {
+    //                     console.log(x.mensaje);
+    //                     Swal.fire("Error", "Lo sentimos, ocurrió un error. " + x.mensaje, "error");
+    //                 }
+    //             } catch (error) {
+    //                 Swal.fire("Error", "Lo sentimos, ocurrió un error. " + error, "error");
+    //             }
+    //         },
+    //         error: function (xhr, status, error) {
+    //             console.log("Error en la solicitud AJAX servicios:", error);
+    //             Swal.fire("Error", "Ocurrió un error en la comunicación con el servidor.", "error");
+    //         }
+    //     });
+    // } else {
+    //     Swal.fire("Error", "Por favor, completa todos los campos antes de continuar.", "error");//mensaje bonito
+    // }
 
 
-    if (Cancelacion !== "" && reembolso !== "" &&
-        horario !== "" && cargos !== "") {
-        $.ajax({
-            url: "../../App/Modules/inmueble/insertarpoliticas_Negocios.php",
-            type: "POST",
-            data: {
-                Cancelacion: Cancelacion,
-                reembolso: reembolso,
-                horario: horarioU,
-                cargos: cargosU
-            },
-            success: function (response) {
-                try {
-                    console.log(response);
-                    console.log("Si entra en el succes politicas")
-                    var x = JSON.parse(response);
-                    if (x.exito == true) {
-                        Swal.fire("Éxito", x.mensaje, "success");
-                    } else {
-                        console.log(x.mensaje);
-                        Swal.fire("Error", "Lo sentimos, ocurrió un error. " + x.mensaje, "error");
-                    }
-                } catch (error) {
-                    Swal.fire("Error", "Lo sentimos, ocurrió un error. " + error, "error");
-                }
-            },
-            error: function (xhr, status, error) {
-                console.log("Error en la solicitud AJAX politicas:", error);
-                Swal.fire("Error", "Ocurrió un error en la comunicación con el servidor.", "error");
-            }
-        });
-    } else {
-        Swal.fire("Error", "Vuelve a seleccionar tus politicas", "error");//mensaje bonito
-    }
+    // if (Cancelacion !== "" && reembolso !== "" &&
+    //     horario !== "" && cargos !== "") {
+    //     $.ajax({
+    //         url: "../../App/Modules/inmueble/insertarpoliticas_Negocios.php",
+    //         type: "POST",
+    //         data: {
+    //             Cancelacion: Cancelacion,
+    //             reembolso: reembolso,
+    //             horario: horarioU,
+    //             cargos: cargosU
+    //         },
+    //         success: function (response) {
+    //             try {
+    //                 console.log(response);
+    //                 console.log("Si entra en el succes politicas")
+    //                 var x = JSON.parse(response);
+    //                 if (x.exito == true) {
+    //                     Swal.fire("Éxito", x.mensaje, "success");
+    //                 } else {
+    //                     console.log(x.mensaje);
+    //                     Swal.fire("Error", "Lo sentimos, ocurrió un error. " + x.mensaje, "error");
+    //                 }
+    //             } catch (error) {
+    //                 Swal.fire("Error", "Lo sentimos, ocurrió un error. " + error, "error");
+    //             }
+    //         },
+    //         error: function (xhr, status, error) {
+    //             console.log("Error en la solicitud AJAX politicas:", error);
+    //             Swal.fire("Error", "Ocurrió un error en la comunicación con el servidor.", "error");
+    //         }
+    //     });
+    // } else {
+    //     Swal.fire("Error", "Vuelve a seleccionar tus politicas", "error");//mensaje bonito
+    // }
 }

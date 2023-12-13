@@ -276,7 +276,6 @@ if (isset($_SESSION["Identificacion"])) {
     
     <section id="politicas" class="form-section">
 
-        <img src="../assets/img/publicarinmueble/PASOS.png" alt="">
         <img src="../assets/img/publicarinmueble/PASOS3.png" alt="">
         
         
@@ -435,7 +434,7 @@ if (isset($_SESSION["Identificacion"])) {
         <form action="" method="post" role="form" enctype="multipart/form-data">
 
             <div class="section-title">
-                <input type="text" id="ArrayServicios" value="">
+                <input type="hidden" id="ArrayServicios" value="">
                 <h2>Servicios</h2>
                 <p>¡Los servicios mejorarán la calidad de tu espacio!</p>
 
@@ -467,10 +466,10 @@ if (isset($_SESSION["Identificacion"])) {
 
     <br>
     <br>
-    <!-- <a class="bar-anchor" href="../../" >
+    <a class="bar-anchor" href="../../" >
         <span>Finalizar</span>
         <div class="transition-bar"></div>
-    </a> -->
+    </a>
     
     
     </section>
