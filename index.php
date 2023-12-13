@@ -107,7 +107,7 @@ try {
           <li><a class="nav-link scrollto active" href="#">Inicio</a></li>
           <?php
           if (isset($_SESSION["Rol"])) {
-            if(!$_SESSION["Rol"] == 1){
+            if($_SESSION["Rol"] != 1){
               ?>
               <li><a class="nav-link scrollto active" href="#counts">Estadísticas</a></li>
               <li><a class="nav-link scrollto" href="#portfolio">Inmuebles</a></li>
