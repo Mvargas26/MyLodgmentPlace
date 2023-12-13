@@ -105,8 +105,16 @@ try {
       <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>
           <li><a class="nav-link scrollto active" href="#">Inicio</a></li>
-          <li><a class="nav-link scrollto active" href="#counts">Estadísticas</a></li>
-          <li><a class="nav-link scrollto" href="#portfolio">Inmuebles</a></li>
+          <?php
+          if (isset($_SESSION["Rol"])) {
+            if(!$_SESSION["Rol"] == 1){
+              ?>
+              <li><a class="nav-link scrollto active" href="#counts">Estadísticas</a></li>
+              <li><a class="nav-link scrollto" href="#portfolio">Inmuebles</a></li>
+              <?php
+            };
+          }
+          ?>
           <!-- <li><a class="nav-link scrollto" href="#contact">Contactenos</a></li> -->
           <li><a class="nav-link scrollto" href="./App/Views/acerca_de_View.php">Acerca de</a></li>
           <?php

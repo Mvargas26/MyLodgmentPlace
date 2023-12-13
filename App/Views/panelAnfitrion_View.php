@@ -20,9 +20,9 @@ include './templates/Header.php';
             <div class="card">
                 <a href="notificacionesAnfitrion_View.php">Notificaciones</a>
             </div>
-            <div class="card">
+            <!-- <div class="card">
                 <a href="mis_resenasAnfitrion_View.php">Historial de Reseñas</a>
-            </div>
+            </div> -->
             <div class="card">
                 <a href="Administracion_View.php">Administracion</a>
             </div>
