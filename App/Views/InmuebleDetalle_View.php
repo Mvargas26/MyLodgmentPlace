@@ -6,11 +6,12 @@ include('../Modules/fullCalendar/config.php');
 
 session_start();
 
+if (isset($_SESSION['Identificacion'])) {
+  $idUsuario = $_SESSION['Identificacion'];
+}
+
 if (isset($_GET['id'])) {
   $idInmueble = $_GET['id'];
-
-
-  $idUsuario = $_SESSION['Identificacion'];
 
   $SqlEventos = "SELECT * FROM tbreserva WHERE idInmueble = $idInmueble";
 
@@ -36,7 +37,7 @@ if (1 === 1) {
 
 if (isset($_GET['id'])) {
   $idInmueble = $_GET['id'];
-  
+
   // Obtener la fecha actual en el formato de MySQL (YYYY-MM-DD)
   $fechaActual = date('Y-m-d');
 
@@ -58,7 +59,6 @@ if (isset($_GET['id'])) {
     // Manejar el caso en que la consulta no devuelve datos
   }
 }
-
 
 
 // Verificar si se proporcionó un nombre de inmueble en la URL
@@ -505,117 +505,119 @@ if (isset($_GET['id'])) {
         </div>
     </div>
 
-
-    <div class="container">
-      <div id="CardTarifaEspecial">
-        <h4><i class="fas fa-tree" style="color: #045400"></i> Tarifa Especial: Descuento del 5% por fecha navideña</h4>
-      </div>
-
-
+    <?php if (isset($_SESSION["Rol"])) {  ?>
       <div class="container">
-        <div class="" id="" tabindex="-1" role="dialog">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title">Reservar espacio</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <form name="formEvento" id="formEvento" class="form-horizontal" method="POST">
-                <div class="form-group">
-                  <div class="col-sm-10">
-                    <h3>Valor por dia del inmueble: <span id="valorColones">
-                        <?php echo $dato['valorDiario'] ?>
-                      </span> colones</h1>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="cantidadPersonas" class="col-sm-12 control-label">Cantidad de personas</label>
-                  <div class="col-sm-10">
-                    <input type="number" class="form-control" name="cantidadPersonas" id="cantidadPersonas" min="0" value="0" placeholder="Cantidad de Personas">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="cantidadPersonasExtra" class="col-sm-12 control-label">Cantidad de personas extra</label>
-                  <div class="col-sm-10">
-                    <input type="number" class="form-control" name="cantidadPersonasExtra" id="cantidadPersonasExtra" min="0" value="0" max="5" placeholder="Cantidad de Personas">
-                  </div>
-                </div>
+        <div id="CardTarifaEspecial">
+          <h4><i class="fas fa-tree" style="color: #045400"></i> Tarifa Especial: Descuento del 5% por fecha navideña</h4>
+        </div>
 
-                <div class="form-group">
-                  <label for="fechaInicio" class="col-sm-12 control-label">Fecha Ingreso</label>
-                  <div class="col-sm-10">
-                    <?php
-                    // Obtener la fecha actual y sumarle 4 días
-                    $fechaMas1Dia = date('Y-m-d', strtotime('+1 days'));
-                    ?>
-                    <!-- <input type="date" class="form-control" name="fechaInicio" id="fechaInicio" placeholder="Fecha Inicio"> -->
-                    <input type="date" id="fechaInicio" name="fechaInicio" value="<?php echo $fechaMas1Dia; ?>" hidden>
-                    <input type="date" id="fechaInicioBC" name="fechaInicioBC" value="<?php echo $fechaMas1Dia; ?>">
 
-                  </div>
+        <div class="container">
+          <div class="" id="" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Reservar espacio</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
                 </div>
-                <div class="form-group">
-                  <label for="fechaFin" class="col-sm-12 control-label">Fecha Salida</label>
-                  <div class="col-sm-10">
-                    <?php
-                    // Obtener la fecha actual y sumarle 4 días
-                    $fechaMas4Dias = date('Y-m-d', strtotime('+4 days'));
-                    ?>
-                    <input type="date" id="fechaFin" name="fechaFin" value="<?php echo $fechaMas4Dias; ?>" hidden>
-                    <input type="date" id="fechaFinBC" name="fechaFinBC" value="<?php echo $fechaMas4Dias; ?>">
-                    <!-- <input type="date" class="form-control" name="fechaFin" id="fechaFin" placeholder="Fecha Final"> -->
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <label for="Cupon" class="col-sm-12 control-label">Cupon de descuento</label>
-                  <div class="col-sm-10">
-                    <input type="text" class="form-control" name="Cupon" id="Cupon" placeholder="Cupon de descuento">
-                  </div>
-                  <?php if (isset($nombreCupon) && isset($descuentoCupon) && $nombreCupon !== '' && $descuentoCupon !== '') { ?>
-                    <div class="col-sm-12">
-                      <?php echo "Ingresa  " . $nombreCupon . " para obtener un descuento del " . intval($descuentoCupon) . "% en tu reserva."; ?>
+                <form name="formEvento" id="formEvento" class="form-horizontal" method="POST">
+                  <div class="form-group">
+                    <div class="col-sm-10">
+                      <h3>Valor por dia del inmueble: <span id="valorColones">
+                          <?php echo $dato['valorDiario'] ?>
+                        </span> colones</h1>
                     </div>
-                  <?php } ?>
-                </div>
-
-                <div class="form-group">
-                  <div class="col-sm-10">
-                    <!-- inicio campos hidden para el calculo previo -->
-                    <input type="hidden" id="idInmueble" value="<?php echo $dato['id']; ?>">
-                    <input type="hidden" id="valorDiario" value="<?php echo $dato['valorDiario']; ?>">
-                    <input type="hidden" id="capacidadMaxima" value="<?php echo $dato['capacidadPersonas']; ?>">
-                    <input type="hidden" id="costoPersonaExtra" value="<?php echo $dato['costoPersonaExtra']; ?>">
-                    <input type="hidden" id="idUsuario" value="<?php echo $Session['Identificacion']; ?>">
-                    <!-- fin campos hidden para el calculo previo -->
                   </div>
-                </div>
-                <div class="form-group">
-                  <div class="col-sm-10">
-                    <h5>Total sin impuestos: <span id="valorTotal">0</span> colones</h5>
-                    <h5>Total con impuestos: <span id="valorTotalImpuestos">0</span> colones</h5>
+                  <div class="form-group">
+                    <label for="cantidadPersonas" class="col-sm-12 control-label">Cantidad de personas</label>
+                    <div class="col-sm-10">
+                      <input type="number" class="form-control" name="cantidadPersonas" id="cantidadPersonas" min="0" value="0" placeholder="Cantidad de Personas">
+                    </div>
                   </div>
-                </div>
+                  <div class="form-group">
+                    <label for="cantidadPersonasExtra" class="col-sm-12 control-label">Cantidad de personas extra</label>
+                    <div class="col-sm-10">
+                      <input type="number" class="form-control" name="cantidadPersonasExtra" id="cantidadPersonasExtra" min="0" value="0" max="5" placeholder="Cantidad de Personas">
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="fechaInicio" class="col-sm-12 control-label">Fecha Ingreso</label>
+                    <div class="col-sm-10">
+                      <?php
+                      // Obtener la fecha actual y sumarle 4 días
+                      $fechaMas1Dia = date('Y-m-d', strtotime('+1 days'));
+                      ?>
+                      <!-- <input type="date" class="form-control" name="fechaInicio" id="fechaInicio" placeholder="Fecha Inicio"> -->
+                      <input type="date" id="fechaInicio" name="fechaInicio" value="<?php echo $fechaMas1Dia; ?>" hidden>
+                      <input type="date" id="fechaInicioBC" name="fechaInicioBC" value="<?php echo $fechaMas1Dia; ?>">
+
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="fechaFin" class="col-sm-12 control-label">Fecha Salida</label>
+                    <div class="col-sm-10">
+                      <?php
+                      // Obtener la fecha actual y sumarle 4 días
+                      $fechaMas4Dias = date('Y-m-d', strtotime('+4 days'));
+                      ?>
+                      <input type="date" id="fechaFin" name="fechaFin" value="<?php echo $fechaMas4Dias; ?>" hidden>
+                      <input type="date" id="fechaFinBC" name="fechaFinBC" value="<?php echo $fechaMas4Dias; ?>">
+                      <!-- <input type="date" class="form-control" name="fechaFin" id="fechaFin" placeholder="Fecha Final"> -->
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="Cupon" class="col-sm-12 control-label">Cupon de descuento</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" name="Cupon" id="Cupon" placeholder="Cupon de descuento">
+                    </div>
+                    <?php if (isset($nombreCupon) && isset($descuentoCupon) && $nombreCupon !== '' && $descuentoCupon !== '') { ?>
+                      <div class="col-sm-12">
+                        <?php echo "Ingresa  " . $nombreCupon . " para obtener un descuento del " . intval($descuentoCupon) . "% en tu reserva."; ?>
+                      </div>
+                    <?php } ?>
+                  </div>
+
+                  <div class="form-group">
+                    <div class="col-sm-10">
+                      <!-- inicio campos hidden para el calculo previo -->
+                      <input type="hidden" id="idInmueble" value="<?php echo $dato['id']; ?>">
+                      <input type="hidden" id="valorDiario" value="<?php echo $dato['valorDiario']; ?>">
+                      <input type="hidden" id="capacidadMaxima" value="<?php echo $dato['capacidadPersonas']; ?>">
+                      <input type="hidden" id="costoPersonaExtra" value="<?php echo $dato['costoPersonaExtra']; ?>">
+                      <input type="hidden" id="idUsuario" value="<?php echo $Session['Identificacion']; ?>">
+                      <!-- fin campos hidden para el calculo previo -->
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-sm-10">
+                      <h5>Total sin impuestos: <span id="valorTotal">0</span> colones</h5>
+                      <h5>Total con impuestos: <span id="valorTotalImpuestos">0</span> colones</h5>
+                    </div>
+                  </div>
 
 
 
-                <!-- Nuevo contenedor para mostrar el valor total -->
+                  <!-- Nuevo contenedor para mostrar el valor total -->
 
-                <div class="modal-footer">
-                  <button type="submit" id="crearReserva" class="btn btn-success" hidden>Reservar lugar</button>
-                  <button type="button" id="calcularReserva" name="calcularReserva" class="btn btn-info">Calcular <i class="fa-solid fa-calculator"></i> </button>
-                  <button type="button" id="crearReserva2" class="btn btn-success">Reservar <i class="fa-solid fa-check"></i> </button>
-                </div>
-              </form>
+                  <div class="modal-footer">
+                    <button type="submit" id="crearReserva" class="btn btn-success" hidden>Reservar lugar</button>
+                    <button type="button" id="calcularReserva" name="calcularReserva" class="btn btn-info">Calcular <i class="fa-solid fa-calculator"></i> </button>
+                    <button type="button" id="crearReserva2" class="btn btn-success">Reservar <i class="fa-solid fa-check"></i> </button>
+                  </div>
+                </form>
+              </div>
             </div>
           </div>
         </div>
+
+        </section>
       </div>
 
-      </section>
-    </div>
+    <?php } ?>
 
     <!-- colores -->
     <!-- <div class="col-md-12" id="grupoRadio">
