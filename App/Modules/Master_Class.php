@@ -3205,7 +3205,7 @@ function InsertarMensajes($idEmisor, $idReceptor, $mensaje)
             $idValidacionimueble = $conn->real_escape_string($idValidacionimueble);
             $nuevoEstado = $conn->real_escape_string($nuevoEstado);
 
-            $sql = "UPDATE tbestadolugar SET Estado = '$nuevoEstado' WHERE nombreImagenUsuario = '$idValidacionimueble'";
+            $sql = "UPDATE tbinmueble SET estadoLugar = '$nuevoEstado' WHERE id = '$idValidacionimueble'";
 
             if ($conn->query($sql) === TRUE) {
                 return true;
@@ -3219,44 +3219,44 @@ function InsertarMensajes($idEmisor, $idReceptor, $mensaje)
     }
 
     // función para validar el inmueble
-    function validarInmueble($idValidacionimueble)
-    {
-        try {
-            return $this->actualizarEstadoimueble($idValidacionimueble, 'Aprobado');
-        } catch (Exception $e) {
-            echo "Error al validar el inmueble: " . $e->getMessage();
-            return false; // Error general
-        }
-    }
+    // function validarInmueble($idValidacionimueble)
+    // {
+    //     try {
+    //         return $this->actualizarEstadoimueble($idValidacionimueble, 'Aprobado');
+    //     } catch (Exception $e) {
+    //         echo "Error al validar el inmueble: " . $e->getMessage();
+    //         return false; // Error general
+    //     }
+    // }
 
 
     // función para obtener el estado del usuario
-    function obtenerEstadoUsuario($idUser)
-    {
-        try {
-            $conn = $this->GetConexion();
+    // function obtenerEstadoUsuario($idUser)
+    // {
+    //     try {
+    //         $conn = $this->GetConexion();
 
-            // Escapar los datos para prevenir inyecciones SQL
-            $idUser = $conn->real_escape_string($idUser);
+    //         // Escapar los datos para prevenir inyecciones SQL
+    //         $idUser = $conn->real_escape_string($idUser);
 
-            // Consulta SQL para obtener el estado del usuario
-            $sql = "SELECT estadoValidacion FROM tbvalidacionperfil WHERE nombreImagenUsuario = '$idUser' limit 1";
+    //         // Consulta SQL para obtener el estado del usuario
+    //         $sql = "SELECT estadoValidacion FROM tbvalidacionperfil WHERE nombreImagenUsuario = '$idUser' limit 1";
 
-            // Ejecutar la consulta
-            $resultado = $conn->query($sql);
+    //         // Ejecutar la consulta
+    //         $resultado = $conn->query($sql);
 
-            // Verificar si se obtuvieron resultados
-            if ($resultado->num_rows > 0) {
-                $fila = $resultado->fetch_assoc();
-                return $fila['estadoValidacion'];
-            } else {
-                return "El usuario no se encuentra validado";
-            }
-        } catch (Exception $e) {
-            echo "Error al obtener el estado del usuario: " . $e->getMessage();
-            return "Error"; // Puedes manejar el error de la manera que prefieras
-        }
-    }
+    //         // Verificar si se obtuvieron resultados
+    //         if ($resultado->num_rows > 0) {
+    //             $fila = $resultado->fetch_assoc();
+    //             return $fila['estadoValidacion'];
+    //         } else {
+    //             return "El usuario no se encuentra validado";
+    //         }
+    //     } catch (Exception $e) {
+    //         echo "Error al obtener el estado del usuario: " . $e->getMessage();
+    //         return "Error"; // Puedes manejar el error de la manera que prefieras
+    //     }
+    // }
 
 
 
