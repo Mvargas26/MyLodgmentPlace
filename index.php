@@ -72,7 +72,7 @@ try {
   </div>
 </section><!-- End Hero -->
 
-<script>
+<!-- <script>
 
   var audio = document.getElementById("hidden-audio");
 
@@ -89,7 +89,7 @@ try {
       audio.pause();
     }
   });
-</script>
+</script> -->
 
 
 

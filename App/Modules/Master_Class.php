@@ -22,10 +22,10 @@ class Master_Class
     // private $db = "mylodgmentplace";
     private $conn;
     ////Plesk 
-    private $server = "185.211.7.52";
-    private $username = "u538860919_sitios";
+    private $server = "193.203.166.107";
+    private $username = "u187115269_sa";
     private $password = "Sitios2023*";
-    private $db = "u538860919_mylodgmentplac";
+    private $db = "u187115269_mylodgmentplac";
 
     function __construct()
     {
@@ -653,14 +653,14 @@ class Master_Class
             $mail->SMTPOptions = array('ssl' => array('verify_peer' => false, 'verify_peer_name' => false, 'allow_self_signed' => true));
             try {
                 $mail->isSMTP();
-                $mail->Host = 'smtp.titan.email';
+                $mail->Host = 'smtp.hostinger.com';
                 $mail->SMTPAuth = true;
-                $mail->Username = 'pruebas@tritechno.net';
+                $mail->Username = 'noreply@varsot.com';
                 $mail->Password = 'Pruebas1234*';
                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
                 $mail->Port = 587;
 
-                $mail->setFrom('pruebas@tritechno.net', 'My Lodgment Place');
+                $mail->setFrom('noreply@varsot.com', 'My Lodgment Place');
                 $mail->addAddress($destinatario);
                 $mail->isHTML(true);
                 $mail->Subject = 'Codigo de autenticacion para el inicio de sesion';
