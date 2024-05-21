@@ -2,8 +2,6 @@
 require("App/Modules/Master_Class.php");
 session_start();
 
-// inicio de elementos de prueba para la vista de indicadores
-
 try {
   $ObjMaster = new Master_Class(); // Crear una instancia de la clase Master_Class
 
@@ -15,8 +13,6 @@ try {
 } catch (Exception $e) {
   echo 'Error: ' . $e->getMessage();
 }
-
-// fin de elementos de prueba para la vista de indicadores
 ?>
 
 

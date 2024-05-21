@@ -1,5 +1,5 @@
 <?php
-require_once(__DIR__ . '/../../app//libs/PHPMAILER/autoload.php');
+require_once(__DIR__ . '/../libs/PHPMAILER/autoload.php');
 
 date_default_timezone_set("America/Costa_Rica");
 
