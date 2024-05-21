@@ -4,7 +4,7 @@ session_start();
 
 $idUser = isset($_GET['idUser']) ? $_GET['idUser'] : null;
 
-$server = "185.211.7.52";
+$server = "localhost";
 $username = "u538860919_sitios";
 $password = "Sitios2023*";
 $db = "u538860919_mylodgmentplac";

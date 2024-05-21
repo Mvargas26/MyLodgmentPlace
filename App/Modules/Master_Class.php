@@ -22,7 +22,7 @@ class Master_Class
     // private $db = "mylodgmentplace";
     private $conn;
     ////Plesk 
-    private $server = "193.203.166.107";
+    private $server = "localhost";
     private $username = "u187115269_sa";
     private $password = "Sitios2023*";
     private $db = "u187115269_mylodgmentplac";
