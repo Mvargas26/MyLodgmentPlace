@@ -1,0 +1,87 @@
+/* Estilos para la tabla de reservas del usuario */
+.container th, .container td {
+    padding-bottom: 2%;
+    padding-top: 2%;
+    padding-left: 2%;
+    border-radius: 2px;
+}
+
+/* Background-color de las filas impares */
+.container tr:nth-child(odd) {
+    background-color: #ffa790;
+}
+
+/* Background-color de las filas pares */
+.container tr:nth-child(even) {
+    background-color: #ff7f5d;
+}
+
+.container th {
+    background-color: #524156;
+}
+
+.container td:first-child {
+    color: #ff7f5d;
+}
+
+h2{
+    text-align: center;
+}
+
+.container tr:hover {
+    background-color: #524156;
+    -webkit-box-shadow: 0 6px 6px -6px #19130e;
+    -moz-box-shadow: 0 6px 6px -6px #0E1119;
+    box-shadow: 0 6px 6px -6px #0E1119;
+}
+
+.container th, .container td {
+    color: #ffffff;
+}
+
+.container td:hover {
+    background-color: rgb(187, 84, 28);
+    color: #ffffff;
+    font-weight: bold;
+    box-shadow: #7F7C21 -1px 1px, #7F7C21 -2px 2px, #7F7C21 -3px 3px, #7F7C21 -4px 4px, #7F7C21 -5px 5px, #7F7C21 -6px 6px;
+    transform: translate3d(6px, -6px, 0);
+    transition-delay: 0s;
+    transition-duration: 0.4s;
+    transition-property: all;
+    transition-timing-function: line;
+}
+
+@media (max-width: 800px) {
+    .container td:nth-child(3),
+    .container th:nth-child(3) {
+        display: none;
+    }
+
+    .container tr th,
+    .container tr td {
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+        text-align: center;
+    }
+
+    .container .col-usuario,
+    .container .col-denunciado,
+    .container .col-tipodenuncia {
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+        text-align: center;
+    }
+
+    .container .col-usuario,
+    .container .col-denunciado {
+        background-color: #444444;
+        color: #ffffff;
+    }
+
+    .container .col-tipodenuncia {
+        background-color: #ffa790; 
+        color: #444444;
+    }
+}

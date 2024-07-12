@@ -1,0 +1,115 @@
+
+
+
+h2 {
+    text-align: center;
+    color: #f45f41;
+}
+
+.user-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;   
+}
+
+.user {
+    margin: 10px;
+    width: calc(30% - 20px);
+    box-sizing: border-box; 
+    /* background: rgba(68, 55, 69, 0.9); */
+    border-radius: 15px;
+   
+}
+
+.user img {
+    width: 50%;
+    height: 40%;
+    object-fit: cover;
+    border-radius: 8px;
+    display: block; 
+    margin: 0 auto;
+}
+
+.user-details {
+    text-align: center;
+    display: flex;
+    color: black;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 50%; 
+}
+
+
+.button-view-profile {
+    position: relative;
+    height: 120%;
+    top: -10%;
+    box-sizing: border-box;
+    border: 0.08em solid;
+    background-color: #f45f41;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: sans-serif;
+    text-transform: capitalize;
+    transform: translateX(calc(-0.15em * 3 - 0.08em * 2));
+    transition: 0.3s;
+}
+
+.button-view-profile:hover {
+    transform: translateX(0.15em);
+    background-color: #f45f41; 
+}
+
+@media screen and (max-width: 600px) {
+    .user {
+        width: calc(50% - 20px); 
+    }
+
+    .user-details div {
+        max-width: 50%; 
+    }
+}
+
+
+.contiene {
+    max-width: 800px;
+    margin: 20px auto;
+    /* background-color: #524156; */
+    border-radius: 8px;
+    /* box-shadow: 0 0 10px rgba(234, 119, 18, 6.9); */
+    padding: 20px;
+    text-align: center; 
+}
+
+/* Estilos para los detalles del usuario */
+#userProfileImage {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-right: 20px;
+}
+
+#userDetails {
+    flex: 1;
+    color: black;
+}
+
+ul {
+    padding: 0;
+    list-style-type: none;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+}
+
+h2 {
+    color: #f45f41;
+    text-align: center;
+}
+
+

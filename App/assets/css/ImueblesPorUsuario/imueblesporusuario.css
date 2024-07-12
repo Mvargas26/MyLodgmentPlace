@@ -1,0 +1,123 @@
+.contiene {
+  max-width: 600px;
+  margin: 20px auto;
+  /* background-color: #524156; */
+  border-radius: 8px;
+  /* box-shadow: 0 0 10px rgba(234, 119, 18, 6.9); */
+  padding: 20px;
+  text-align: center; /* Center the buttons within the div */
+}
+
+.contiene2 {
+  max-width: 400px;
+  margin: 20px auto;
+  /* background-color: #524156; */
+  border-radius: 8px;
+  /* box-shadow: 0 0 10px rgba(234, 119, 18, 6.9); */
+  padding: 20px;
+  text-align: center; /* Center the buttons within the div */
+}
+h2{
+  text-align: center;
+}
+
+p{
+
+  text-align: center;
+}
+
+.card {
+  width: 300px; /* Ancho fijo de la tarjeta */
+  background-color: #ffffff;
+  border-radius: 0.25rem;
+  box-shadow: 0 20px 40px -14px rgb(0, 0, 0);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  margin: 10px; /* Espacio entre las tarjetas */
+}
+
+.card__content {
+  display: flex;
+  flex-direction: column;
+  flex: 1; /* Ajuste de flexibilidad */
+  padding: 1rem;
+}
+
+.inmueble-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Cambiado a 3 columnas */
+  gap: 1rem; /* Espaciado entre las tarjetas */
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+
+.card__image {
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-top-left-radius: 0.25rem;
+  border-top-right-radius: 0.25rem;
+  filter: contrast(70%);
+  overflow: hidden;
+  position: relative;
+  transition: filter 0.5s cubic-bezier(.43, .41, .22, .91);
+  height: 150px; /* Altura fija de la imagen */
+}
+
+.card__title {
+  color: var(--gray-dark);
+  font-size: 1.25rem;
+  font-weight: 300;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 10px; /* Espacio entre el título y otros elementos */
+}
+
+.btn {
+  background-color: #f45f41;
+  border: 1px solid var(--gray-light);
+  color: var(--gray-lightest);
+  padding: 0.5rem;
+  text-transform: capitalize;
+  align-items: center;
+  justify-content: center;
+  font-family: sans-serif;
+  transform: translateX(calc(-0.15em * 3 - 0.08em * 2));
+  transition: 0.3s;
+  margin-top: auto; /* Alinea el botón en la parte inferior */
+}
+
+@media (max-width: 768px) {
+  .inmueble-list {
+    grid-template-columns: repeat(1, 1fr); /* Cambiado a 1 columna para pantallas más estrechas */
+  }
+}
+
+
+
+/**/
+
+#formValidarInmueble {
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para etiquetas y elementos de formulario */
+label {
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+select, button {
+  padding: 10px;
+  margin-bottom: 16px;
+}

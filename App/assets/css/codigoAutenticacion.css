@@ -1,0 +1,47 @@
+
+/* Estilos para la caja de código de autenticación */
+#CajaCodigoAutenticacion {
+    text-align: center;
+    margin: 50px auto; /* Centra la caja horizontalmente */
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff;
+    width: 70%; /* Ancho del contenedor */
+    max-width: 400px; /* Ancho máximo para mantener el diseño en dispositivos grandes */
+  }
+  
+  #CajaCodigoAutenticacion h2 {
+    color: #ff7f5d; /* Color del título */
+    font-weight: bold; /* Texto en negrita */
+  }
+  
+  #CajaCodigoAutenticacion form {
+    margin-top: 20px; /* Espacio arriba del formulario */
+  }
+  
+  #CajaCodigoAutenticacion label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  #CajaCodigoAutenticacion input[type="text"],
+  #CajaCodigoAutenticacion input[type="submit"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+  }
+  
+  #CajaCodigoAutenticacion input[type="submit"] {
+    background-color: #ff7f5d; /* Color de fondo del botón */
+    color: white; /* Color del texto del botón */
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Transición suave al pasar el mouse */
+  }
+  
+  #CajaCodigoAutenticacion input[type="submit"]:hover {
+    background-color: #ff6347; /* Cambio de color al pasar el mouse por encima del botón */
+  }

@@ -1,0 +1,83 @@
+#calendar {
+  max-width: 1000px;
+  margin: auto;
+}
+
+#title{
+  color: #9c27b0;
+  font-weight: 800;
+  border-bottom: 3px solid coral;
+  background: #813e3e;
+  padding: 5px 15px;
+  font-size: 18px;
+}
+
+/****************/
+/* input {
+  display: none;
+} */
+
+
+.fc-content{
+  color: #fff !important;
+}
+
+
+
+#btnCerrar{
+  color:crimson;
+  padding: 3px;
+  background: #8888;
+  border-radius: 25px;
+  font-size: 14px;
+  font-weight: 600;
+}
+#btnCerrar:hover{
+  cursor: pointer;
+  background-color: #333;
+}
+
+
+
+.circu{
+  padding: 25px;
+  background: #ccc;
+  border-radius: 50px;
+}
+
+#grupoRadio label:hover{
+  cursor: pointer;
+}
+
+#grupoRadio input[type="radio"]:checked + label {
+  border: 3px solid #ccc !important;  
+}
+
+
+.activado input[type=radio]:checked + label {
+  border: 3px solid #555 !important;  
+}
+
+.fc-day {
+  padding: 5px;
+}
+
+.modal-content {
+  padding: 10px;
+}
+
+.fc-prev-button,
+.fc-next-button,
+.fc-today-button {
+  padding: 5px;
+  font-size: 14px;
+}
+
+.portfolio-description{
+  position: fixed; 
+  width: 400px;
+  background-color: #f8debd; /* Color de fondo */
+  padding: 20px;
+  border-bottom: 1px solid #ffffff; /* Borde inferior */
+  border-radius: 10px;
+} 

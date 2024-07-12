@@ -1,0 +1,114 @@
+
+
+#CardTarifaEspecial{
+    background-color: #ffffff; /* Fondo de la tarjeta */
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    margin: 20px;
+    padding: 20px;
+    width: 80%;
+    font-size: medium;
+}
+
+#h2TarifaEspecial{
+    color: #333333;
+}
+
+
+
+
+
+
+
+
+#DejaTuResenia{
+    position: sticky;
+    flex:35%;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    width: 200px;
+    height: 70%;
+    background-color: #ff7f5d;
+    /* background: rgba(255, 127, 93, 0.7); */
+}
+
+
+#ContenedorResenias {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    background-color: #ff7f5d;
+}
+
+@media (max-width: 1400px) {
+    #ContenedorResenias {
+        flex-direction: column; /* Cambia la dirección de los elementos a columna */
+        align-items: stretch; /* Ajusta la alineación de los elementos a estirarlos para llenar la columna */
+    }
+}
+
+#iconoR{
+    font-size: 4.5em;
+    line-height: 1;
+}
+
+#iconoR:hover{
+    content: "\2605";
+
+}
+
+#iconoContenedor{
+    position: absolute;
+    margin-left: 10%;
+    height: fit-content;
+    display: flex;
+    align-items: flex-end; /* o ajusta según sea necesario */
+    justify-content: center;
+}
+
+
+.estrellas{
+    font-size: 4em;
+    color:#f4572c;
+    /* color: #ff7f5d; */
+    cursor: pointer;
+}
+
+#resenaForm {
+    flex: 1;
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    background-color: white;;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  #resenaForm textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    resize: none;
+  }
+
+#testimonials{
+    flex: 85%;
+}
+
+
+#p{
+    font-weight: bold;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: large;
+}
+
+.naranja,
+.naranja i {
+  color: #e33a0b;
+}
+
+#h3{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}

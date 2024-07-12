@@ -1,0 +1,49 @@
+/* Estilos generales */
+#main {
+  font-family: Arial, sans-serif;
+  background-color: #ffffff;
+  padding: 20px;
+}
+
+/* Estilos para el contenedor de historial de reservas */
+#reservas-historial {
+  margin-top: 20px;
+}
+
+/* Estilos para la tabla de historial */
+#reservas-historial .historial-table {
+  width: 100%;
+  border-collapse: collapse;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Agregar sombra */
+  background-color: rgba(255, 127, 93, 0.3); /* Color suave con opacidad */
+}
+
+#reservas-historial .historial-table th,
+#reservas-historial .historial-table td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: left;
+}
+
+#reservas-historial .historial-table th {
+  background-color: #ff7f5d; /* Color similar al botón */
+  color: white;
+}
+
+#reservas-historial .historial-table tbody tr:hover {
+  background-color: #ff805d8a; /* Color de resaltado al pasar el mouse */
+}
+
+/* Estilos para el botón de volver */
+#reservas-historial button {
+  padding: 10px 20px;
+  background-color: #ff7f5d;
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+#reservas-historial button:hover {
+  background-color: #fc3700;
+}

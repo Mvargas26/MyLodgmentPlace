@@ -1,0 +1,40 @@
+.calificar-anfitrion-container {
+    text-align: center;
+    margin: 20px;
+}
+
+.star-ratingA {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.star-ratingA input {
+    display: none; /* Oculta los botones de radio */
+}
+
+.star-ratingA label {
+    width: 30px; /* Ancho de la imagen de la estrella */
+    height: 30px; /* Altura de la imagen de la estrella */
+    background-image: url('../img/logo/estrella.png'); /* Ruta a tu imagen de estrella */
+    background-size: cover;
+    cursor: pointer;
+    margin-right: 5px; /* Agrega un margen derecho entre las estrellas */
+}
+
+textarea {
+    width: 100%;
+    margin-top: 10px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #524156; /* Color de fondo del botón */
+    color: #fff; /* Color del texto del botón */
+    border: none;
+    border-radius: 5px;
+}

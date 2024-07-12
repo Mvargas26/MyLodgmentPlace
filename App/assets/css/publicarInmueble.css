@@ -1,0 +1,165 @@
+
+.form-container {
+    display: flex;
+    height: auto;
+}
+
+.form-section {
+    flex: 1;
+    padding: 20px;
+    box-sizing: border-box;
+    display: none;
+  }
+
+  .form-section img{
+    width: 600px;
+    height: auto;
+    margin-left: 60%;
+
+  }
+
+  .form-section.active {
+    display: block;
+  }
+
+  #nextButton {
+    
+    color: white;
+    
+  }
+  .bar-anchor{
+    padding: 20px 10px;
+    margin:10px 4px;
+    color: #ffffff;
+    font-family: inherit;
+    text-align: right;
+    position: relative;
+    text-decoration: none;
+    display:inline-block;
+     overflow:hidden;
+  /*    border:1px solid #6098FF; */
+  }
+  .bar-anchor span{
+    background: rgba(21, 5, 23, 0.8);
+    width:100%;
+    position:relative;
+    padding:10px 70px;
+     -moz-transition: all .65s cubic-bezier(0.77, 0, 0.175, 1);
+    -o-transition: all .65s cubic-bezier(0.77, 0, 0.175, 1);
+    -webkit-transition: all .65s cubic-bezier(0.77, 0, 0.175, 1);
+    transition: all .65s cubic-bezier(0.77, 0, 0.175, 1);
+  /*   border:1px solid #6098FF;  */
+  }
+  .transition-bar{
+      position: absolute;
+      top: 0;
+      left: 0%;
+      width: 0;
+      height: 100%;
+      background: #FF914D;
+      z-index:-1;
+      /* -ms-transform: skewX(-20deg); 
+      -webkit-transform: skewX(-20deg); 
+      transform: skewX(-20deg); */
+  }
+  .bar-anchor:hover span{
+    color: #f4572c!important;
+    cursor: pointer;
+    background:white;
+    border-radius: 15px;
+  }
+
+
+  .bar-anchor:hover .transition-bar{
+    width:120%;
+    right:110%;
+    -moz-transition: all .65s cubic-bezier(0.77, 0, 0.175, 1);
+    -o-transition: all .65s cubic-bezier(0.77, 0, 0.175, 1);
+    -webkit-transition: all .65s cubic-bezier(0.77, 0, 0.175, 1);
+
+    transition: all .65s cubic-bezier(0.77, 0, 0.175, 1);
+     animation: slide-in-out 0.65s infinite cubic-bezier(0.77, 0, 0.175, 1);
+  }
+  @keyframes slide-in-out {
+    0% {
+        right: 0%;
+    }
+    100% {
+        right: 100%;
+    }
+  }
+
+  #img-area {
+    border: 2px dashed #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    width: 200%;
+    height: 100px;
+  }
+
+  /* #drop-area:hover{
+    background-color: #828282;
+    cursor: pointer;
+  } */
+
+
+
+
+
+
+
+#contenedorInputs{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    /* margin: auto; */
+
+}
+
+#divForm{
+    background-color: #f4f4f4;
+    padding: 20px;
+    border: 1px solid #ccc;
+    margin-top: 30px; /* Espacio en blanco superior personalizado */
+    margin-bottom: 30px; /* Espacio en blanco inferior personalizado */
+    max-width: 800px;
+
+}
+
+.form-control{
+    width: 70%;
+}
+
+#tituloPublicarInmueble{
+    font-family: inherit;
+    /* margin-top: 1%; */
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    width: 100%;
+}
+
+#subtituloPoliticas{
+    font-family: inherit;
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    width: 550px;
+}
+
+#iconoInfo{
+    font-size: 2.3em;
+}
+
+#horasCancelacion{
+    cursor: pointer;
+}
+
+#horasCancelacion:hover{
+    background-color:#ca4f2d ;
+    color: white;
+
+}

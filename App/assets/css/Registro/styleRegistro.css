@@ -1,0 +1,131 @@
+.divImagen{
+    display: flex;
+justify-content: center;}
+
+#idRol{
+    background-color: orange;
+    font-family: Raleway;
+}
+/* ######################################################################## */
+#bodyRegistro {
+    background: #eee
+    
+}
+
+#formRegistro {
+    background-color: #ffffff;
+    margin: 10% auto;
+    font-family: Raleway;
+    font-weight: bold;
+    font-size: 30px;
+    color: orangered;
+    border-radius: 5px
+}
+
+#register{
+    text-align: center;
+  color:  #ff7f5d;
+}
+
+
+.inputformRegistro {
+    padding: 10px;
+    width: 100%;
+    font-size: 17px;
+    font-family: Raleway;
+    border: 1px solid #aaaaaa;
+    border-radius: 10px;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+
+
+.tab input:focus{
+
+  border:1px solid  #ff7f5d !important;
+  outline: none;
+}
+
+input.invalid {
+ 
+    border:1px solid #e03a0666;
+}
+
+.tab {
+    display: none
+}
+
+button {
+    background-color:  #ff7f5d;
+    color: #ffffff;
+    border: none;
+    border-radius: 50%;
+    padding: 10px 20px;
+    font-size: 17px;
+    font-family: Raleway;
+    cursor: pointer
+}
+
+button:hover {
+    opacity: 0.8
+}
+
+button:focus{
+
+  outline: none !important;
+}
+
+#prevBtn {
+    background-color: #bbbbbb
+}
+
+
+.all-steps{
+      text-align: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    width: 100%;
+    display: inline-flex;
+    justify-content: center;
+}
+
+.step {
+       height: 40px;
+    width: 40px;
+    margin: 0 2px;
+    background-color: #bbbbbb;
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 15px;
+    color:  #631b08;
+    opacity: 0.5;
+}
+
+.step.active {
+    opacity: 1
+}
+
+
+.step.finish {
+   color: #fff;
+   background: #6a1b9a;
+   opacity: 1;
+
+}
+
+
+
+.all-steps {
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 30px
+}
+
+.thanks-message {
+    display: none
+}
+

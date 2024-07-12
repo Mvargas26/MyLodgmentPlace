@@ -1,0 +1,112 @@
+/* @import url('https://fonts.googleapis.com/css?family=Mukta'); */
+#bodyLogin {
+    font-family: 'Mukta', sans-serif;
+    height: 100vh;
+    min-height: 550px;
+    /* background-image: url(http://www.planwallpaper.com/static/images/Free-Wallpaper-Nature-Scenes.jpg); */
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    overflow-y: hidden;
+    margin: 50px 0;
+  }
+  
+  .login-reg-panel {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: center;
+    width: 70%;
+    right: 0;
+    left: 0;
+    margin: auto;
+    height: 400px;
+    background-color: rgba(236, 48, 20, 0.9);
+    margin: 300px 250px;
+  }
+  
+  .white-panel {
+    background-color: rgba(255, 255, 255, 1);
+    height: 500px;
+    position: absolute;
+    top: -50px;
+    width: 50%;
+    right: calc(50% - 50px);
+    transition: .3s ease-in-out;
+    z-index: 0;
+    box-shadow: 0 0 15px 9px #00000096;
+  }
+  
+  /* Estilos para el formulario de inicio de sesión */
+  .login-show {
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centrar verticalmente */
+    align-items: center; /* Centrar horizontalmente */
+    opacity: 1;
+    color: #242424;
+    text-align: left;
+    padding: 50px;
+    margin: 50px 0; /* Añadido margen de 50px en la parte superior e inferior */
+  }
+  
+  .login-show input[type="number"],
+  .login-show input[type="password"] {
+    width: 100%;
+    display: block;
+    margin: 20px 0;
+    padding: 15px;
+    border: 1px solid #b5b5b5;
+    outline: none;
+    border-radius: 5px;
+  }
+  
+  .login-show input[type="submit"] {
+    width: 100%;
+    background-color: #ff7f5d;
+    color: white;
+    border: none;
+    padding: 10px;
+    text-transform: uppercase;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .login-show a {
+    display: inline-block;
+    padding: 10px 0;
+    color: #ff7f5d;
+    text-decoration: none;
+  }
+  
+  .login-show input[type="submit"] {
+    width: 100%;
+    background-color: #ff7f5d;
+    color: white;
+    border: none;
+    padding: 10px;
+    text-transform: uppercase;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Transición suave al cambiar el color */
+  }
+  
+  /* Estilo al pasar el mouse por encima */
+  .login-show input[type="submit"]:hover {
+    background-color: #ff6347; /* Cambia el color al pasar el mouse */
+  }
+  
+  /* Estilo al hacer clic */
+  .login-show input[type="submit"]:active {
+    transform: translateY(1px); /* Ajuste de posición al hacer clic */
+  }
+    
+#divImagen{
+position: absolute;
+margin-top: 100px;
+margin-left: 575px;
+}
+    
+    

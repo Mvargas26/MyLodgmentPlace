@@ -1,0 +1,537 @@
+html {
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    line-height: 1.4;
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+
+#bodyMensaje {
+    color: #404040;
+    font-family: "Arial", Segoe UI, Tahoma, sans-serifl, Helvetica Neue, Helvetica;
+    background-color: #EAEAEA;
+    padding: 1rem;
+    position: sticky;
+    height: 1000px;
+    margin-bottom: 500px;
+}
+
+/*=====================================
+estilos de la utilidad
+Copiar esto
+=====================================*/
+.body-chat img {
+    width: 100%;
+}
+.body-chat .avatar img {
+    height: 47px;
+    border-radius: 50%;
+    align-items: center;
+}
+.body-chat {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px;
+    background-color: #fff;
+    /* margin-left: auto;
+    margin-right: auto; */
+    max-width: 1480px;
+    border-radius: 8px;
+}
+.seccion-titulo {
+    display: block;
+    width: 100%;
+    margin-bottom: 1.5rem;
+    color: #7E7E7E;
+    font-weight: bold;
+}
+.seccion-titulo h3 {
+    font-size: 1.75em;
+    font-weight: normal;
+}
+.seccion-titulo i {
+    margin-right: .5rem;
+}
+.seccion-usuarios {
+    width: 320px;
+    /* margin-right: 1.5rem; */
+    border-right: 1px solid #E7E7E7;
+    padding-right: 15px;
+    margin-top: 5px;
+}
+
+/* seccion usuarios */
+.input-buscar {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+.seccion-buscar input[type="search"] {
+    display: block;
+    width: 100%;
+    background-color: #F3F3F3;
+    border: 0;
+    padding: 8px 15px;
+    border-radius: 2rem;
+}
+.seccion-buscar i {
+    position: absolute;
+    right: 15px;
+}
+
+.seccion-lista-usuarios {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.usuario {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+.usuario:hover,
+.usuario:hover span{
+    cursor: pointer;
+    background-color: #fc643a;
+    color: white;
+    font-weight: bold;
+    border-radius: 25px 0 0 25px ;
+}
+
+
+.usuario-seleccionado .avatar{
+    margin-left: 15px;
+    margin-top: 10px;
+}
+
+
+#avatarEspecial:hover img {
+    transform: scale(5.2); /* Ajusta el factor de escala según tus preferencias */
+    transition: transform 0.3s ease; /* Agrega una transición suave */
+    z-index: 1;
+    margin-top: 50px;
+    margin-left: 40px;
+    border-width: 2px;
+    border-color: #fc643a;
+}
+
+
+#Especial2:hover img {
+    transform: scale(1.3); /* Ajusta el factor de escala según tus preferencias */
+    transition: transform 0.3s ease; /* Agrega una transición suave */
+    z-index: 1;
+    border-width: 1px;
+    border-color: #000000;
+}
+
+.mensaje .avatar,
+.usuario-seleccionado .avatar,
+.usuario .avatar {
+    /* display: block; */
+    display: flex;
+    width: 50px;
+    height: 50px;
+    margin-right: 1rem;
+    position: relative;
+    background-color:transparent;
+    border-radius: 50%;
+}
+.mensaje .avatar {
+    width: 45px;
+    height: 45px;
+    margin-right: 1rem;
+}
+.mensaje.left .avatar {
+    margin-right: 0;
+    margin-left: 1rem;
+}
+.usuario .cuerpo {
+    flex-grow: 1;
+    flex-basis: 0;
+}
+.usuario .cuerpo span {
+    display: block;
+}
+.usuario-seleccionado .cuerpo span:nth-child(2),
+.usuario .cuerpo span:nth-child(2) {
+    font-size: .8em;
+    color: #000000;
+}
+.usuario .estado-usuario {
+    position: absolute;
+    display: block;
+    width: 15px;
+    height: 15px;
+    background-color: #ADADAD;
+    bottom: 0;
+    right: 0;
+    border-radius: 50%;
+    border: 2px solid #fff;
+}
+.usuario .estado-usuario.enlinea {
+    background-color: #49DD45;
+}
+.usuario .estado-usuario.ocupado {
+    background-color: #5160F0;
+}
+
+.usuario .estado-usuario.desconectado {
+    background-color: #ADADAD;
+}
+
+.notificacion {
+    display: block;
+    width: auto;
+    float: right;
+    background-color: #4981D5;
+    color: #fff;
+    padding: 0 8px;
+    border-radius: 8px;
+    /* vertical-align: center; */
+}
+
+/* seccion chat */
+.seccion-chat {
+    flex-basis: 0;
+    flex-grow: 1;
+    border-width: 1px;
+    border-style: groove;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 5px;
+    width: max-content;
+    height: max-content;
+
+}
+
+.usuario-seleccionado {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 1.25rem;
+    border-bottom: 1px solid #E7E7E7;
+    padding-bottom: 15px;
+}
+.panel-escritura .textarea textarea,
+.usuario-seleccionado .cuerpo {
+    flex-grow: 1;
+    flex-basis: 0;
+}
+.usuario-seleccionado .cuerpo span {
+    display: block;
+}
+
+.usuario-seleccionado .opciones {
+    display: block;
+    width: auto;
+    margin-left: 1rem;
+}
+
+.usuario-seleccionado .opciones ul {
+    list-style: none;
+    display: flex;
+}
+.usuario-seleccionado .opciones ul li + li {
+    margin-left: .5rem;
+}
+.usuario-seleccionado .opciones button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    border: 0;
+    cursor: pointer;
+    box-shadow: 0 0 12px rgba(0, 0, 0, .05);
+}
+
+/* mensaje */
+.panel-chat {
+    display: block;
+    overflow-y: auto;
+    overflow-y: auto; 
+    max-height: 400px;
+    padding-right: 15px;
+    margin-bottom: 1rem;
+    height: auto;
+    justify-content: center;
+}
+
+.mensaje {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 2.5rem;
+    justify-content: flex-start;
+    max-width: auto;
+}
+.mensaje.left {
+    justify-content: flex-end;
+}
+.mensaje  img {
+    margin-bottom: .5rem;
+}
+.mensaje .cuerpo {
+    font-size: 0.85em;
+    padding: 10px;
+    background-color: #e3e1e1;
+    border-radius: 8px;
+    position: relative;
+    width: calc(100% - 35px - 1rem - 5rem);
+    word-wrap: break-word;
+    max-width: 500px;
+}
+
+.mensaje .cuerpo::before {
+    content: '';
+    width: 0;
+    height: 0;
+    position: absolute;
+    border-width: 9px;
+    border-color: transparent #EEEEEE transparent transparent;
+    border-style: solid;
+    left: -18px;
+    top: 7px;
+}
+.mensaje.left .cuerpo::before {
+    border-color: transparent transparent transparent #9f9f9f;
+    left: initial;
+    right: -18px;
+    
+
+}
+.mensaje .texto {
+    display: block;
+    position: relative;
+}
+.mensaje .cuerpo .tiempo {
+    position: absolute;
+    display: block;
+    bottom: -2.1rem;
+    color: #919191;
+    width: 100%;
+}
+.mensaje.left .tiempo {
+    text-align: right;
+}
+
+.hidden-span,
+.other-span {
+    display: none;
+    /* position: absolute; */
+    transition: opacity 0.3s ease-in-out;
+    font-weight: bold;
+}
+
+.cuerpo:hover .hidden-span,
+.cuerpo:not(:hover) .other-span {
+    opacity: 1;
+    display: block;
+}
+
+.cuerpo:hover .other-span,
+.cuerpo:not(:hover) .hidden-span {
+    opacity: 0;
+    display: none;
+}
+
+.mensaje .cuerpo:hover{
+    background-color: #989898 ;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.mensaje.left .cuerpo:hover .tiempo {
+    font-weight: bold;
+    color: #fc643a;
+}
+.mensaje .cuerpo:hover .tiempo {
+    font-weight: bold;
+    color: #fc643a;
+}
+
+
+
+
+
+
+
+
+.mensaje .opciones-msj {
+    position: absolute;
+    right: -35px;
+    top: 0;
+    list-style: none;
+    opacity: 0;
+    visibility: hidden;
+}
+.mensaje.left .opciones-msj {
+    right: initial;
+    left: -35px;
+}
+.mensaje:hover .opciones-msj {
+    opacity: 1;
+    visibility: visible;
+}
+.mensaje .opciones-msj button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 0;
+    background-color: #F1F1F1;
+    margin-bottom: .2rem;
+    cursor: pointer;
+    color: #757575;
+}
+.panel-escritura button:active,
+.usuario-seleccionado .opciones button:active,
+.mensaje .opciones-msj button:active {
+    background-color: #D7D7D7;
+}
+
+/* panel escritura */
+.panel-escritura {
+    display: block;
+}
+.panel-escritura .textarea {
+    display: flex;
+    flex-wrap: wrap;
+    border-top: 1px solid #E7E7E7;
+    padding-top: 1rem;
+}
+.panel-escritura .textarea textarea,
+.panel-escritura .opcines {
+    margin-right: .5rem;
+}
+.panel-escritura button {
+    border: 0;
+    background-color: #E3E3E3;
+    display: inline-flex;
+    width: 55px;
+    height: 55px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    cursor: pointer;
+    position: relative;
+}
+.panel-escritura button label {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+.panel-escritura button input {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 600px;
+}
+.panel-escritura button.enviar {
+    background-color: #4580F7;
+    color: #fff;
+}
+.panel-escritura .textarea textarea {
+    border: 0;
+    background-color: #F2F2F2;
+    border-radius: 12px;
+    padding: 10px;
+}
+@media (max-width: 880px) {
+    .seccion-usuarios {
+        width: 300px;
+    }
+
+    .panel-escritura{
+        width: 90%;
+    }
+}
+
+
+/* boton RECARGAR MENSAJES */
+.transparent-button {
+    display: flex;
+    align-items: center;
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    outline: none;
+    margin-right: 30px;
+    margin-top: 20px;
+    height: 30px;
+    border-radius: 5px;
+}
+
+.transparent-button:hover .bi-arrow-clockwise{
+    /* display: flex;
+    align-items: center; */
+    color: white;
+    background-color: #fc643a;
+    /* transform: scale(1.1); */
+    height: fit-content;
+    border-radius: 5px;
+}
+
+
+.bi-arrow-clockwise {
+    margin-top: 2px;
+    font-size: 35px; 
+    color: #000000; 
+}
+
+
+
+
+
+/* ANIMACION DE CARGANDO  */
+
+
+.contenedorSpinner{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 20px ;
+    margin-top: 70px;
+}
+
+
+.spinner{
+    border: 4px solid rgba(252, 100, 58, 1);
+    width:66px ;
+    height: 66px;
+    border-radius: 50%;
+    border-left-color: transparent;
+
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0%{
+        transform: rotate(0deg);
+    }
+
+    100%{
+        transform: rotate(360deg)
+    }
+    
+}
+

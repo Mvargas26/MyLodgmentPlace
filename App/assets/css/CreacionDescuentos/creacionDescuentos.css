@@ -1,0 +1,71 @@
+/* Estilos para el formulario */
+#crear-cupon {
+    margin: 5px;
+    padding: 5px;
+    background-color: #ff7f5d;
+    border-radius: 10px;
+  }
+  
+  #crear-cupon h2 {
+    color: #fff;
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: bold; /* Texto en negrita */
+  }
+  
+  #crear-cupon form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#crear-cupon .form-group {
+    margin-bottom: 15px;
+    width: 100%; /* Ancho completo */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#crear-cupon label {
+    color: #fff;
+    margin-bottom: 5px;
+    display: block;
+    font-weight: bold;
+    text-align: center; /* Alineación central del texto */
+}
+  
+  #crear-cupon input,
+  #crear-cupon select {
+    width: 100%;
+    padding: 8px;
+    border-radius: 5px;
+    border: none;
+    box-sizing: border-box;
+  }
+  
+  #crear-cupon button {
+    padding: 10px 20px;
+    background-color: #fff;
+    color: #ff7f5d;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  #crear-cupon button:hover {
+    background-color: #ffbea4;
+  }
+
+#crear-cupon input[type="text"],
+#crear-cupon input[type="number"],
+#crear-cupon input[type="date"],
+#crear-cupon select {
+    width: 20%; /* Reducir el ancho a 70% */
+    padding: 8px;
+    border-radius: 5px;
+    border: none;
+    box-sizing: border-box;
+    margin-top: 5px;
+}

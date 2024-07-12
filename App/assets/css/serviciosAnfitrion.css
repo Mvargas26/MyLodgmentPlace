@@ -1,0 +1,278 @@
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Puedes ajustar el número de columnas según tus necesidades */
+    gap: 10px; /* Espacio entre elementos */
+    margin: 15px;
+}
+
+@media (max-width: 900px) {
+    .grid {
+        grid-template-columns: repeat(2, 1fr); /* Cambia a dos columnas */
+    }
+}
+
+.description{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-content: flex-start;
+
+}
+
+.description label{
+  font-size: large;
+  margin: 20px;
+}
+
+.description h5{
+  margin-right: 20%;
+}
+
+.description label:hover{
+  color: goldenrod;
+  cursor: pointer;
+}
+
+
+
+#politicasgrid {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  /* flex-wrap: wrap; */
+}
+
+@media (max-width: 900px) {
+  #politicasgrid {
+     display: flex;
+     flex-direction: column;
+  }
+}
+
+/* .politicas .icon-box {
+  width: fit-content;
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 10px 29px 0 rgba(68, 88, 144, 0.1);
+  transition: all 0.3s ease-in-out;
+  height: 220px;
+}
+
+.politicas .icon-box:hover {
+  transform: translateY(-5px);
+  cursor:pointer;
+}
+
+.politicas .title,
+.politicas .icon {
+  transition: all 0.3s ease-in-out;
+}
+
+.politicas .icon-box:hover .title,
+.politicas .icon-box:hover .icon {
+  opacity: 0; 
+  visibility: hidden;
+}
+
+.politicas .info {
+  display: none;
+}
+
+.politicas .icon-box:hover .info {
+  display: block; 
+}
+
+.politicas .title {
+  font-weight: 700;
+  margin-bottom: 15px;
+  font-size: 24px;
+  text-align: center;
+}
+
+.politicas .icon {
+  position: absolute;
+  left: calc(35% - 5px);
+  top: calc(40% - 5px);
+}
+
+.politicas .info {
+  text-align: center;
+}
+
+
+.politicas .icon i {
+  font-size: 100px;
+  line-height: 1;
+  transition: 0.5s;
+}
+
+
+.politicas .title a {
+  color: #111;
+}
+
+.politicas .icon-box:hover .title a {
+  color: #ff7f5d;
+}
+
+.politicas .description {
+  font-size: 14px;
+  line-height: 24px;
+  margin-bottom: 0;
+  font-weight: bold;
+}
+ */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  .containerServicios {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 300px;
+    position: relative;
+    border-radius: 15px;
+    margin: 10px; /* Modificado para un espaciado uniforme */
+    padding: 15px; /* Añadido un espacio alrededor de los elementos */
+    cursor: pointer;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 10px 29px 0 rgba(68, 88, 144, 0.1); /* Añadido un borde para separar visualmente las tarjetas */
+}
+
+
+
+/* Estilo específico para el span (texto) */
+/* .containerServicios span {
+    font-size: 18px; 
+    margin-right: 10px; 
+} */
+
+/* Estilo específico para el checkbox */
+/* .containerServicios input[type="checkbox"] {
+    margin-left: auto;
+} */
+
+/* On mouse-over, add a grey background color */
+.containerServicios:hover .checkmark {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.containerServicios input:checked ~ .checkmark {
+  background-color: #ff7f5d;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: relative;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.containerServicios input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.containerServicios .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+
+
+
+
+
+  .containerServicios:hover{
+    color: goldenrod;
+  }
+  
+  /* Hide the browser's default checkbox */
+  .containerServicios input {
+    /* position: relative; */
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+  
+  /* Create a custom checkbox */
+  .checkmark {
+    position: relative;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+  }
+
+  #icon {
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+  }
+  
+  /* On mouse-over, add a grey background color */
+  .containerServicios:hover input ~ .checkmark {
+    background-color: #ccc;
+    
+  }
+  
+  /* When the checkbox is checked, add a blue background */
+  .containerServicios input:checked ~ .checkmark {
+    background-color: #ff7f5d;
+  }
+  
+  /* Create the checkmark/indicator (hidden when not checked) */
+  .checkmark:after {
+    content: "";
+    position: relative;
+    display: none;
+  }
+  
+  /* Show the checkmark when checked */
+  .containerServicios input:checked ~ .checkmark:after {
+    display: block;
+  }
+  
+  /* Style the checkmark/indicator */
+  .containerServicios .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
